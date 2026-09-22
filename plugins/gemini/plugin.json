@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "https://gemini.google.com/schemas/plugin.json",
+  "name": "devweave",
+  "version": "1.0.0",
+  "description": "DevWeave AI-DLC software engineering workflow for Gemini CLI",
+  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "rules": "./GEMINI.md",
+  "commands": "./commands"
+}

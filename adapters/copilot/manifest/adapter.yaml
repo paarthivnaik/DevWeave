@@ -1,0 +1,19 @@
+id: "devweave-copilot"
+name: "DevWeave Host Adapter for GitHub Copilot"
+version: "1.0.0"
+spec_version: "1.0.0"
+host: "github-copilot"
+description: "Implements DevWeave AI-DLC Host Contract for GitHub Copilot Workspace, Chat & CLI."
+
+capability_mapping:
+  fast-analysis: "gpt-4o-mini"
+  reasoning: "gpt-4o"
+  deep-reasoning: "o3-mini"
+  coding: "gpt-4o"
+  coding-and-analysis: "claude-3.5-sonnet"
+  independent-reasoning: "o1"
+  independent-review: "claude-3.5-sonnet"
+
+plugin_directory: "plugins/copilot"
+prompts_directory: "plugins/copilot/prompts"
+instructions_file: "plugins/copilot/copilot-instructions.md"

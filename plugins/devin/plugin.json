@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "https://cognition-labs.com/schemas/devin-playbook.json",
+  "name": "devweave",
+  "version": "1.0.0",
+  "description": "DevWeave AI-DLC software engineering workflow playbook for Cognition Devin",
+  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "playbook": "./DEVIN.md",
+  "commands": "./commands"
+}

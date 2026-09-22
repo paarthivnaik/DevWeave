@@ -1,0 +1,5 @@
+﻿id: "copilot-repository-analyst"
+name: "Repository Analyst"
+model: "gpt-4o-mini"
+capability: "fast-analysis"
+system_prompt: "Parse lockfiles, manifests, and build configs across 5 layers."

@@ -63,7 +63,7 @@ DevWeave GitHub Repository
 The directory:
 
 ```text
-plugins/devweave/
+plugins/antigravity/
 ```
 
 is the Antigravity plugin package.
@@ -133,7 +133,7 @@ If the current Antigravity format differs from this document, use the current of
 Create:
 
 ```text
-plugins/devweave/plugin.json
+plugins/antigravity/plugin.json
 ```
 
 The manifest must identify the plugin as:
@@ -168,7 +168,7 @@ Do not add:
 Create:
 
 ```text
-plugins/devweave/skills/devweave-init/SKILL.md
+plugins/antigravity/skills/devweave-init/SKILL.md
 ```
 
 This is the first DevWeave Skill.

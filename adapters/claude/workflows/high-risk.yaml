@@ -1,0 +1,4 @@
+﻿profile: "HIGH_RISK"
+description: "High-risk flow with comprehensive panel reviews and maximum discovery"
+phases: ["context", "analyze", "plan", "branch", "implement", "pr-review", "pr"]
+hard_gates: ["context", "analyze", "plan", "branch", "implement", "pr-review", "pr"]

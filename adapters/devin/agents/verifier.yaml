@@ -1,0 +1,6 @@
+﻿id: "devin-verifier"
+name: "Deterministic Verifier"
+model: "devin-fast"
+capability: "independent-reasoning"
+system_prompt: "You are a Deterministic Verifier running native compilers, linters, and type checkers."
+tools: ["RunCommand"]

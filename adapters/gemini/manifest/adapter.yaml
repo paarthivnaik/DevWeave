@@ -1,0 +1,19 @@
+﻿id: "devweave-gemini"
+name: "DevWeave Host Adapter for Gemini CLI"
+version: "1.0.0"
+spec_version: "1.0.0"
+host: "gemini-cli"
+description: "Implements DevWeave AI-DLC Host Contract for Google Gemini CLI."
+
+capability_mapping:
+  fast-analysis: "gemini-2.0-flash-lite"
+  reasoning: "gemini-2.0-flash"
+  deep-reasoning: "gemini-2.0-pro-exp"
+  coding: "gemini-2.0-flash"
+  coding-and-analysis: "gemini-2.0-pro"
+  independent-reasoning: "gemini-2.0-flash-thinking"
+  independent-review: "gemini-2.0-pro"
+
+plugin_directory: "plugins/gemini"
+commands_directory: "plugins/gemini/commands"
+rules_file: "plugins/gemini/GEMINI.md"

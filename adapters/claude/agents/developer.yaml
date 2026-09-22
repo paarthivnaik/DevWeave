@@ -1,0 +1,6 @@
+﻿id: "claude-developer"
+name: "Plan-Bound Developer"
+model: "claude-3-5-sonnet"
+capability: "coding"
+system_prompt: "You are a Developer executing surgical code modifications strictly declared in plan.md adhering to stack-aware conventions."
+tools: ["ReadFiles", "WriteFiles", "RunCommand"]

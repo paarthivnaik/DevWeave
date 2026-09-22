@@ -1,0 +1,10 @@
+{
+  "$schema": "https://github.com/schemas/copilot-extension.json",
+  "name": "devweave",
+  "version": "1.0.0",
+  "description": "DevWeave AI-DLC software engineering workflow for GitHub Copilot",
+  "publisher": "DevWeave",
+  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "instructions": "./copilot-instructions.md",
+  "prompts": "./prompts"
+}

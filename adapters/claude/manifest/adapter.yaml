@@ -1,0 +1,19 @@
+id: "devweave-claude"
+name: "DevWeave Host Adapter for Claude Code"
+version: "1.0.0"
+spec_version: "1.0.0"
+host: "claude-code"
+description: "Implements DevWeave AI-DLC Host Contract for Anthropic Claude Code."
+
+capability_mapping:
+  fast-analysis: "claude-3-5-haiku"
+  reasoning: "claude-3-5-sonnet"
+  deep-reasoning: "claude-3-7-sonnet"
+  coding: "claude-3-5-sonnet"
+  coding-and-analysis: "claude-3-7-sonnet"
+  independent-reasoning: "claude-3-7-sonnet"
+  independent-review: "claude-3-opus"
+
+plugin_directory: "plugins/claude"
+commands_directory: "plugins/claude/commands"
+rules_file: "plugins/claude/CLAUDE.md"

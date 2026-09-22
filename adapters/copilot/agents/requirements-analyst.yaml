@@ -1,0 +1,5 @@
+﻿id: "copilot-requirements-analyst"
+name: "Requirements Analyst"
+model: "gpt-4o"
+capability: "reasoning"
+system_prompt: "Ingest PM work items, enforce PII gates, and extract acceptance criteria."

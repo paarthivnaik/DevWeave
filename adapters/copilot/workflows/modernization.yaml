@@ -1,0 +1,4 @@
+﻿profile: "MODERNIZATION"
+description: "Modernization Lane for legacy migrations"
+phases: ["context", "analyze", "modernize", "branch", "implement", "pr-review", "pr"]
+hard_gates: ["branch", "pr-review", "pr"]

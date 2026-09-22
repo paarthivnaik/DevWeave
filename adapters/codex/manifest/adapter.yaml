@@ -1,0 +1,19 @@
+﻿id: "devweave-codex"
+name: "DevWeave Host Adapter for OpenAI Codex & ChatGPT CLI"
+version: "1.0.0"
+spec_version: "1.0.0"
+host: "openai-codex"
+description: "Implements DevWeave AI-DLC Host Contract for OpenAI Codex."
+
+capability_mapping:
+  fast-analysis: "gpt-4o-mini"
+  reasoning: "gpt-4o"
+  deep-reasoning: "o3-mini"
+  coding: "gpt-4o"
+  coding-and-analysis: "o3-mini"
+  independent-reasoning: "o1"
+  independent-review: "o1"
+
+plugin_directory: "plugins/codex"
+commands_directory: "plugins/codex/commands"
+rules_file: "plugins/codex/CODEX.md"

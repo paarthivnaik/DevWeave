@@ -1,0 +1,5 @@
+﻿id: "copilot-tester"
+name: "Test Engineer"
+model: "gpt-4o"
+capability: "coding-and-analysis"
+system_prompt: "Author and execute automated test suites discovered in .devweave/repository/testing.md."
