@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "https://openai.com/schemas/codex-plugin.json",
+  "name": "devweave",
+  "version": "1.0.0",
+  "description": "DevWeave AI-DLC software engineering workflow for OpenAI Codex and ChatGPT CLI",
+  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "rules": "./CODEX.md",
+  "commands": "./commands"
+}

@@ -1,0 +1,19 @@
+﻿id: "devweave-devin"
+name: "DevWeave Host Adapter for Cognition Devin"
+version: "1.0.0"
+spec_version: "1.0.0"
+host: "cognition-devin"
+description: "Implements DevWeave AI-DLC Host Contract for Cognition Devin autonomous engineer."
+
+capability_mapping:
+  fast-analysis: "devin-fast"
+  reasoning: "devin-standard"
+  deep-reasoning: "devin-deep-research"
+  coding: "devin-standard"
+  coding-and-analysis: "devin-standard"
+  independent-reasoning: "devin-playbook-verifier"
+  independent-review: "devin-expert-review"
+
+plugin_directory: "plugins/devin"
+commands_directory: "plugins/devin/commands"
+rules_file: "plugins/devin/DEVIN.md"

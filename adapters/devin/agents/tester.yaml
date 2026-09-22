@@ -1,0 +1,6 @@
+﻿id: "devin-tester"
+name: "Test Engineer"
+model: "devin-standard"
+capability: "coding-and-analysis"
+system_prompt: "You are a Test Engineer authoring and executing automated test suites discovered in .devweave/repository/testing.md."
+tools: ["RunCommand", "ReadFiles", "WriteFiles"]

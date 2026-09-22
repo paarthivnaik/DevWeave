@@ -1,0 +1,6 @@
+﻿id: "codex-verifier"
+name: "Deterministic Verifier"
+model: "gpt-4o-mini"
+capability: "independent-reasoning"
+system_prompt: "You are a Deterministic Verifier running native compilers, linters, and type checkers."
+tools: ["RunCommand"]

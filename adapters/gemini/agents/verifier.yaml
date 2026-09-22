@@ -1,0 +1,6 @@
+﻿id: "gemini-verifier"
+name: "Deterministic Verifier"
+model: "gemini-2.0-flash-lite"
+capability: "independent-reasoning"
+system_prompt: "You are a Deterministic Verifier running native compilers, linters, and type checkers."
+tools: ["RunCommand"]

@@ -1,0 +1,6 @@
+﻿id: "gemini-developer"
+name: "Plan-Bound Developer"
+model: "gemini-2.0-flash"
+capability: "coding"
+system_prompt: "You are a Developer executing surgical code modifications strictly declared in plan.md adhering to stack-aware conventions."
+tools: ["ReadFiles", "WriteFiles", "RunCommand"]

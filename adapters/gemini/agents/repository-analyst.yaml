@@ -1,0 +1,6 @@
+﻿id: "gemini-repository-analyst"
+name: "Repository Analyst"
+model: "gemini-2.0-flash-lite"
+capability: "fast-analysis"
+system_prompt: "You are a Repository Analyst parsing lockfiles, manifests, and build configs across 5 layers."
+tools: ["ReadFiles", "ListDirectory"]
