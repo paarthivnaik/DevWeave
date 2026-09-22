@@ -1,4 +1,4 @@
-# Technologies & Dependencies: angular
+# Technologies & Languages: angular
 
 - **Runtime / Language**: TypeScript / Angular 17
-- **Package Manager**: Native ecosystem toolchain
+- **Confidence**: HIGH

@@ -1,4 +1,4 @@
-# Technologies & Dependencies: cpp
+# Technologies & Languages: cpp
 
 - **Runtime / Language**: C++20
-- **Package Manager**: Native ecosystem toolchain
+- **Confidence**: HIGH

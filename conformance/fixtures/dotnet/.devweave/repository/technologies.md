@@ -1,4 +1,4 @@
-# Technologies & Dependencies: dotnet
+# Technologies & Languages: dotnet
 
-- **Runtime / Language**: C# / .NET 8
-- **Package Manager**: Native ecosystem toolchain
+- **Runtime / Language**: C# 12 / .NET 8
+- **Confidence**: HIGH

@@ -1,4 +1,4 @@
-# Technologies & Dependencies: complex-monorepo
+# Technologies & Languages: complex-monorepo
 
-- **Runtime / Language**: Polyglot (TS, Python, Java, React)
-- **Package Manager**: Native ecosystem toolchain
+- **Runtime / Language**: Polyglot (TypeScript, Python, Java, React)
+- **Confidence**: HIGH

@@ -1,4 +1,4 @@
-# Technologies & Dependencies: legacy
+# Technologies & Languages: legacy
 
 - **Runtime / Language**: Python / Raw SQL
-- **Package Manager**: Native ecosystem toolchain
+- **Confidence**: HIGH

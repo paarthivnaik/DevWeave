@@ -1,4 +1,4 @@
-# Technologies & Dependencies: python
+# Technologies & Languages: python
 
-- **Runtime / Language**: Python 3.11 / FastAPI
-- **Package Manager**: Native ecosystem toolchain
+- **Runtime / Language**: Python 3.11
+- **Confidence**: HIGH

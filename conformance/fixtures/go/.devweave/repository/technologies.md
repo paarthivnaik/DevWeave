@@ -1,4 +1,4 @@
-# Technologies & Dependencies: go
+# Technologies & Languages: go
 
 - **Runtime / Language**: Go 1.22
-- **Package Manager**: Native ecosystem toolchain
+- **Confidence**: HIGH
