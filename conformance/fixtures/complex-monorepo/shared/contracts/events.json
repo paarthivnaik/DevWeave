@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BookingConfirmedEvent",
+  "type": "object",
+  "required": ["eventId", "bookingId", "timestamp", "amount"],
+  "properties": {
+    "eventId": { "type": "string" },
+    "bookingId": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "amount": { "type": "number" }
+  }
+}

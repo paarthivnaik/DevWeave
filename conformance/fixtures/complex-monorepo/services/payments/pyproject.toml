@@ -1,0 +1,7 @@
+[project]
+name = "payments-service"
+version = "1.8.0"
+dependencies = [
+    "stripe>=8.0.0",
+    "pydantic>=2.6.0"
+]
