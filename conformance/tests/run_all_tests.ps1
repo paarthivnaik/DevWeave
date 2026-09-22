@@ -17,6 +17,7 @@ $tests = @(
     @{ Name = "AI-DLC State Machine Transition Suite"; Script = "conformance/tests/validate_state_transitions.ps1" },
     @{ Name = "18 Conformance Scenarios Suite"; Script = "conformance/tests/run_scenarios.ps1" },
     @{ Name = "12-Ecosystem Technology Neutrality Suite"; Script = "conformance/tests/validate_tech_neutrality.ps1" },
+    @{ Name = "Multi-Repository .devweave Initialization Suite"; Script = "conformance/tests/init_all_fixtures.ps1" },
     @{ Name = "Token & Cost Efficiency Benchmark Suite"; Script = "conformance/tests/measure_efficiency.ps1" }
 )
 

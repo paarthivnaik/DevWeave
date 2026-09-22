@@ -1,0 +1,16 @@
+{
+  "work_item_id": "WI-GO-001",
+  "current_state": "DISCOVERED",
+  "profile": "FEATURE",
+  "effort": "MEDIUM",
+  "history": [
+    {
+      "from_state": "INIT",
+      "to_state": "DISCOVERED",
+      "timestamp": "2026-09-22T12:00:00Z",
+      "actor": "agent-repository-analyst",
+      "reason": "Repository intelligence discovered"
+    }
+  ],
+  "updated_at": "2026-09-22T12:00:00Z"
+}
