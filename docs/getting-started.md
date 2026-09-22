@@ -62,7 +62,85 @@ flowchart TD
 
 ---
 
-## 2. Official Antigravity Command & Skill Contract
+## 2. Installation & Setup in Antigravity (`agy`)
+
+You can install DevWeave in your target project using the Antigravity CLI (`agy`) or via Git clone.
+
+### Option A: Install via Antigravity CLI (`agy`) — (Recommended)
+
+In your target project directory (e.g., `D:\DatingAPP`):
+
+#### 1. If you have the DevWeave repository locally:
+```powershell
+agy plugin install D:\DevWeave\plugins\devweave
+```
+
+#### 2. If cloning directly from GitHub:
+```powershell
+# Clone the plugin repository
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
+
+# Install the plugin via agy CLI
+agy plugin install .\temp-devweave\plugins\devweave
+
+# Clean up the temporary folder
+Remove-Item -Recurse -Force temp-devweave
+```
+
+#### 3. Verify Installation:
+```powershell
+agy plugin list
+```
+**Output:**
+```json
+{
+  "imports": [
+    {
+      "name": "devweave",
+      "source": "antigravity",
+      "components": [
+        "skills"
+      ]
+    }
+  ]
+}
+```
+
+---
+
+### Option B: Global Machine-Wide Installation (One-Time Setup)
+
+To make DevWeave automatically available in **all** repositories on your computer without installing per-project:
+
+Add DevWeave to your global configuration file:
+- **Windows:** `%USERPROFILE%\.gemini\config\plugins.json` (e.g., `C:\Users\<user>\.gemini\config\plugins.json`)
+- **macOS / Linux:** `~/.gemini/config/plugins.json`
+
+```json
+{
+  "plugins": {
+    "devweave": {
+      "path": "D:/DevWeave/plugins/devweave",
+      "enabled": true
+    }
+  }
+}
+```
+
+---
+
+### Option C: Manual Workspace Copy (Direct Folder)
+
+Copy the `plugins/devweave` directory into your project's `.agents/plugins/` directory:
+
+```powershell
+New-Item -ItemType Directory -Force -Path ".agents\plugins"
+Copy-Item -Recurse -Force "D:\DevWeave\plugins\devweave" ".agents\plugins\"
+```
+
+---
+
+## 3. Official Antigravity Command & Skill Contract
 
 DevWeave provides a deterministic CLI command surface mapped directly to Antigravity skills and specialized subagents:
 
@@ -96,7 +174,7 @@ flowchart LR
 
 ---
 
-## 3. Quick Start: 3 Steps to Your First Task
+## 4. Quick Start: 3 Steps to Your First Task
 
 ```mermaid
 flowchart LR
@@ -105,9 +183,9 @@ flowchart LR
 ```
 
 ### Step 1: Initialize Your Repository (`DevWeave init`)
-Run in your project root or trigger via Antigravity:
-```bash
-DevWeave init
+Launch `agy` or Antigravity in your project root and trigger:
+```text
+/devweave-init
 ```
 DevWeave inspects project manifests, lockfiles, build configurations, and test runners using **5-Layer Autonomous Detection** without requiring manual configuration.
 
@@ -134,7 +212,7 @@ DevWeave-pr PROJ-1042
 
 ---
 
-## 4. The 9-Phase AI-DLC Lifecycle & State Transitions
+## 5. The 9-Phase AI-DLC Lifecycle & State Transitions
 
 DevWeave organizes work into a deterministic state machine with explicit validation gates and feedback loops:
 
@@ -203,7 +281,7 @@ flowchart LR
 
 ---
 
-## 5. Autonomous 5-Layer Technology Detection Flow
+## 6. Autonomous 5-Layer Technology Detection Flow
 
 When `DevWeave init` runs, it traverses repository manifests and builds evidence-backed intelligence without guessing:
 
@@ -242,7 +320,7 @@ Practices loaded into context are tiered to prevent ambiguity:
 
 ---
 
-## 6. Work Item Ingestion & Blast-Radius Scoping
+## 7. Work Item Ingestion & Blast-Radius Scoping
 
 DevWeave ensures **84%–93% token savings** by converting raw inputs into structured contexts and scoping LLM access:
 
@@ -268,7 +346,7 @@ flowchart TD
 
 ---
 
-## 7. Workflow Profiles (Matching Rigor to Task Complexity)
+## 8. Workflow Profiles (Matching Rigor to Task Complexity)
 
 DevWeave dynamically routes work items to the most efficient lifecycle profile:
 
@@ -284,7 +362,7 @@ flowchart TD
 
 ---
 
-## 8. Durable State & Resuming Interrupted Sessions
+## 9. Durable State & Resuming Interrupted Sessions
 
 Every task maintains durable state in `.devweave/state/current.json` and `.devweave/work-items/<ID>/state.md`.
 
@@ -308,7 +386,7 @@ sequenceDiagram
 
 ---
 
-## 9. Multi-Perspective Code Review Architecture
+## 10. Multi-Perspective Code Review Architecture
 
 Before generating the pull request package, DevWeave evaluates changes across four independent review lenses:
 
@@ -329,7 +407,7 @@ flowchart TD
 
 ---
 
-## 10. Security & Governance Boundaries
+## 11. Security & Governance Boundaries
 
 DevWeave enforces hard security boundaries to protect production environments:
 
@@ -345,7 +423,7 @@ flowchart LR
 
 ---
 
-## 11. Customizing Conventions for Your Team
+## 12. Customizing Conventions for Your Team
 
 To customize how DevWeave generates code and reviews PRs for your repository:
 - Edit [`.devweave/knowledge/conventions.md`](file:///D:/DevWeave/spec/specification/best-practices.md) for naming conventions, folder patterns, and architectural rules.

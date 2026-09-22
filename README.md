@@ -58,6 +58,26 @@ DevWeave/
 
 ---
 
+## Quick Install (Antigravity CLI)
+
+In your target project directory:
+```bash
+# Option 1: Install from GitHub
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
+agy plugin install .\temp-devweave\plugins\devweave
+rm -rf temp-devweave
+
+# Option 2: Local Install (if DevWeave is already cloned)
+agy plugin install path/to/DevWeave/plugins/devweave
+```
+
+Verify installation:
+```bash
+agy plugin list
+```
+
+---
+
 ## Getting Started
 
 Refer to [`docs/getting-started.md`](docs/getting-started.md) for detailed onboarding and workflow execution guides.
