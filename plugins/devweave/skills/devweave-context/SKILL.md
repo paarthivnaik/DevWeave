@@ -3,7 +3,7 @@ name: devweave-context
 description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, Azure DevOps, GitHub, Linear, Manual) with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md."
 ---
 
-# DevWeave Context Skill (`devweave-context`)
+# Antigravity Context Skill (`devweave-context`)
 
 ## Execution Invariants
 1. **Single-Phase Execution**: Execute ONLY the CONTEXT phase. Do NOT automatically advance to ANALYZE.
@@ -32,7 +32,7 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 ### Step 2: PM Tool Selection & Work Item Retrieval
 - Present Project Management source selector:
   ```text
-  [DevWeave Context Intake]
+  [Antigravity Context Intake]
   Work Item: <ID>
 
   Select Project Management Source:
@@ -72,9 +72,9 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 
   Human Decision: [Approve Context] [Request Changes] [Provide Info] [Stop]
   Suggested Next Phase: ANALYZE
-  Run: devweave-analyze <ID>
+  Run: agy run devweave-analyze <ID>
 
-  DevWeave is waiting for your instruction.
+  Antigravity is waiting for your instruction.
   ```
 
 ### Step 6: Terminate Execution
