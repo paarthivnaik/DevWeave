@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/verification.schema.json",
+  "title": "DeterministicVerification",
+  "type": "object",
+  "required": ["work_item_id", "timestamp", "checks", "overall_status"],
+  "properties": {
+    "work_item_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "command", "exit_code", "status"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["BUILD", "LINT", "TYPECHECK", "SECURITY", "FORMAT", "CUSTOM"]
+          },
+          "command": { "type": "string" },
+          "exit_code": { "type": "integer" },
+          "output_summary": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["PASSED", "FAILED", "SKIPPED"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": ["PASSED", "FAILED"]
+    }
+  },
+  "additionalProperties": false
+}

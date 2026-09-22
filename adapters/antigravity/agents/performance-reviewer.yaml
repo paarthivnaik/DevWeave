@@ -1,0 +1,9 @@
+id: "performance-reviewer"
+name: "Performance Reviewer"
+description: "Audits diffs for algorithmic bottlenecks, N+1 query patterns, and resource efficiency."
+model_capability: "independent-review"
+model: "pro"
+skills:
+  - "devweave-review"
+tools:
+  - "view_file"

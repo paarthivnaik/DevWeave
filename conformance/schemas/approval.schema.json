@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/approval.schema.json",
+  "title": "ApprovalGate",
+  "type": "object",
+  "required": ["gate_name", "target_phase", "approver", "decision", "timestamp"],
+  "properties": {
+    "gate_name": { "type": "string" },
+    "target_phase": { "type": "string" },
+    "approver": { "type": "string" },
+    "decision": {
+      "type": "string",
+      "enum": ["APPROVED", "REJECTED", "CONDITIONALLY_APPROVED"]
+    },
+    "comments": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

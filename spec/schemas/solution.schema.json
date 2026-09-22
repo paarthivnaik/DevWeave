@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/solution.schema.json",
+  "title": "Solution",
+  "type": "object",
+  "required": ["id", "work_item_id", "title", "summary", "architecture_impact", "components_affected", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SOL-[0-9]{3,}$"
+    },
+    "work_item_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "architecture_impact": {
+      "type": "string",
+      "enum": ["NONE", "LOCAL", "MODERATE", "SIGNIFICANT", "BREAKING"]
+    },
+    "components_affected": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "trade_offs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PROPOSED", "UNDER_REVIEW", "APPROVED", "REJECTED", "SUPERSEDED"]
+    }
+  },
+  "additionalProperties": false
+}

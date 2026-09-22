@@ -1,0 +1,12 @@
+id: "architect"
+name: "Architect"
+description: "Architects technical solutions, designs component interfaces, and creates implementation plans."
+model_capability: "deep-reasoning"
+model: "pro"
+skills:
+  - "devweave-solution"
+  - "devweave-plan"
+tools:
+  - "view_file"
+  - "write_to_file"
+  - "replace_file_content"

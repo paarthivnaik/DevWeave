@@ -1,0 +1,11 @@
+id: "repository-analyst"
+name: "Repository Analyst"
+description: "Scans, profiles, and documents repository architecture and technical capabilities."
+model_capability: "fast-analysis"
+model: "flash_lite"
+skills:
+  - "devweave-discovery"
+  - "devweave-init"
+tools:
+  - "view_file"
+  - "run_command"

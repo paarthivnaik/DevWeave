@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/task.schema.json",
+  "title": "PlanTask",
+  "type": "object",
+  "required": ["step", "id", "description", "target_files", "verification_command", "status"],
+  "properties": {
+    "step": { "type": "integer", "minimum": 1 },
+    "id": { "type": "string" },
+    "description": { "type": "string" },
+    "target_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "verification_command": { "type": "string" },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "SKIPPED"]
+    }
+  },
+  "additionalProperties": false
+}

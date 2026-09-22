@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/test-result.schema.json",
+  "title": "TestResult",
+  "type": "object",
+  "required": ["timestamp", "framework", "command", "total", "passed", "failed", "skipped", "duration_ms", "status"],
+  "properties": {
+    "timestamp": { "type": "string", "format": "date-time" },
+    "framework": { "type": "string" },
+    "command": { "type": "string" },
+    "total": { "type": "integer", "minimum": 0 },
+    "passed": { "type": "integer", "minimum": 0 },
+    "failed": { "type": "integer", "minimum": 0 },
+    "skipped": { "type": "integer", "minimum": 0 },
+    "duration_ms": { "type": "number", "minimum": 0 },
+    "status": {
+      "type": "string",
+      "enum": ["PASSED", "FAILED", "ERRORED"]
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["test_name", "error_message"],
+        "properties": {
+          "test_name": { "type": "string" },
+          "error_message": { "type": "string" },
+          "stack_trace": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

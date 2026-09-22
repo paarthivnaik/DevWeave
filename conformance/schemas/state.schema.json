@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/state.schema.json",
+  "title": "WorkItemState",
+  "type": "object",
+  "required": ["work_item_id", "current_state", "profile", "effort", "history", "updated_at"],
+  "properties": {
+    "work_item_id": { "type": "string" },
+    "current_state": {
+      "type": "string",
+      "enum": [
+        "INIT",
+        "DISCOVERED",
+        "REQUIREMENTS_READY",
+        "SOLUTION_READY",
+        "APPROVED",
+        "PLANNED",
+        "IMPLEMENTING",
+        "IMPLEMENTED",
+        "TESTED",
+        "VERIFIED",
+        "REVIEWING",
+        "REVIEWED",
+        "PR_READY",
+        "APPROVAL_REJECTED",
+        "TEST_FAILED",
+        "VERIFY_FAILED",
+        "REVIEW_FAILED",
+        "FIX_REQUIRED"
+      ]
+    },
+    "profile": {
+      "type": "string",
+      "enum": ["EXPRESS", "BUG", "FEATURE", "REFACTOR", "MODERNIZATION", "SECURITY", "DATABASE", "HIGH_RISK"]
+    },
+    "effort": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from_state", "to_state", "timestamp"],
+        "properties": {
+          "from_state": { "type": "string" },
+          "to_state": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "actor": { "type": "string" },
+          "reason": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

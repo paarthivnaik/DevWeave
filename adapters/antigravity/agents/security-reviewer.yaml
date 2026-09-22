@@ -1,0 +1,10 @@
+id: "security-reviewer"
+name: "Security Reviewer"
+description: "Audits diffs for security vulnerabilities, exposed secrets, and unsafe commands."
+model_capability: "independent-review"
+model: "pro"
+skills:
+  - "devweave-review"
+tools:
+  - "view_file"
+  - "run_command"

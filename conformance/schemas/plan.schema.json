@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/plan.schema.json",
+  "title": "ImplementationPlan",
+  "type": "object",
+  "required": ["id", "work_item_id", "version", "tasks", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^PLAN-[0-9]{3,}$"
+    },
+    "work_item_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "tasks": {
+      "type": "array",
+      "items": { "$ref": "task.schema.json" },
+      "minItems": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "APPROVED", "IN_PROGRESS", "COMPLETED", "ABANDONED"]
+    }
+  },
+  "additionalProperties": false
+}

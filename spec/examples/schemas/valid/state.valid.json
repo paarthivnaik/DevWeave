@@ -1,0 +1,45 @@
+{
+  "work_item_id": "WI-104",
+  "current_state": "IMPLEMENTING",
+  "profile": "FEATURE",
+  "effort": "MEDIUM",
+  "history": [
+    {
+      "from_state": "INIT",
+      "to_state": "DISCOVERED",
+      "timestamp": "2026-09-22T10:00:00Z",
+      "actor": "agent-repository-analyst"
+    },
+    {
+      "from_state": "DISCOVERED",
+      "to_state": "REQUIREMENTS_READY",
+      "timestamp": "2026-09-22T10:05:00Z",
+      "actor": "agent-requirements-analyst"
+    },
+    {
+      "from_state": "REQUIREMENTS_READY",
+      "to_state": "SOLUTION_READY",
+      "timestamp": "2026-09-22T10:15:00Z",
+      "actor": "agent-architect"
+    },
+    {
+      "from_state": "SOLUTION_READY",
+      "to_state": "APPROVED",
+      "timestamp": "2026-09-22T10:20:00Z",
+      "actor": "human-reviewer"
+    },
+    {
+      "from_state": "APPROVED",
+      "to_state": "PLANNED",
+      "timestamp": "2026-09-22T10:25:00Z",
+      "actor": "agent-architect"
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IMPLEMENTING",
+      "timestamp": "2026-09-22T10:30:00Z",
+      "actor": "agent-developer"
+    }
+  ],
+  "updated_at": "2026-09-22T10:30:00Z"
+}

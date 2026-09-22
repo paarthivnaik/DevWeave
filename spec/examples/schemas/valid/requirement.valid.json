@@ -1,0 +1,14 @@
+{
+  "id": "REQ-001",
+  "title": "Add User Cancellation Endpoint",
+  "type": "functional",
+  "description": "Expose REST endpoint allowing authenticated users to cancel pending bookings.",
+  "acceptance_criteria": [
+    "Returns HTTP 200 on successful cancellation",
+    "Returns HTTP 403 when cancelling another user's booking",
+    "Records audit log event"
+  ],
+  "status": "APPROVED",
+  "source": "US-102",
+  "priority": "HIGH"
+}

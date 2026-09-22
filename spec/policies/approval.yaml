@@ -1,0 +1,23 @@
+version: "1.0.0"
+approval_gates:
+  - name: "solution-approval"
+    phase: "SOLUTION"
+    profiles:
+      - "FEATURE"
+      - "HIGH_RISK"
+      - "DATABASE"
+      - "SECURITY"
+    approver: "HUMAN_OR_LEAD_POLICY"
+    required: true
+
+  - name: "database-staging-mutation"
+    phase: "IMPLEMENTING"
+    environment: "STAGING"
+    approver: "HUMAN"
+    required: true
+
+  - name: "security-exception"
+    phase: "VERIFY"
+    trigger: "SECURITY_FINDING_OVERRIDE"
+    approver: "SECURITY_OFFICER"
+    required: true

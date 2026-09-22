@@ -1,0 +1,41 @@
+version: "1.0.0"
+security:
+  secrets_scanning:
+    enabled: true
+    block_commit_on_match: true
+    patterns:
+      - "(?i)password\\s*=\\s*['\"][^'\"]+['\"]"
+      - "(?i)api[_-]?key\\s*=\\s*['\"][^'\"]+['\"]"
+      - "(?i)bearer\\s+[a-zA-Z0-9_\\-\\.]+"
+      - "(?i)private[_-]?key"
+
+  filesystem:
+    enforce_workspace_boundary: true
+    prohibited_paths:
+      - "/etc"
+      - "/root"
+      - "C:\\Windows"
+      - "C:\\Program Files"
+      - "~/.ssh"
+      - "~/.aws"
+
+  database:
+    allowed_environments:
+      - "LOCAL"
+      - "DEVELOPMENT"
+      - "TEST"
+    blocked_environments:
+      - "PRODUCTION"
+    require_approval_for:
+      - "STAGING"
+      - "DROP TABLE"
+      - "TRUNCATE"
+
+  commands:
+    blocked_commands:
+      - "rm -rf /"
+      - "rm -rf *"
+      - "rmdir /s /q C:\\"
+      - "format"
+      - "mkfs"
+      - "dd if="

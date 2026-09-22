@@ -1,0 +1,11 @@
+id: "requirements-analyst"
+name: "Requirements Analyst"
+description: "Transforms user goals and issue descriptions into structured, testable acceptance criteria."
+model_capability: "reasoning"
+model: "flash"
+skills:
+  - "devweave-requirements"
+tools:
+  - "view_file"
+  - "ask_question"
+  - "write_to_file"

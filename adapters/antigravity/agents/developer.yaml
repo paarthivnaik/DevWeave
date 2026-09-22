@@ -1,0 +1,12 @@
+id: "developer"
+name: "Developer"
+description: "Applies precise, incremental source code changes adhering to plan and project conventions."
+model_capability: "coding"
+model: "flash"
+skills:
+  - "devweave-implement"
+tools:
+  - "view_file"
+  - "write_to_file"
+  - "replace_file_content"
+  - "run_command"

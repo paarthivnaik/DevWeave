@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/requirement.schema.json",
+  "title": "Requirement",
+  "type": "object",
+  "required": ["id", "title", "type", "description", "acceptance_criteria", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-[0-9]{3,}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "type": {
+      "type": "string",
+      "enum": ["functional", "non-functional", "security", "performance", "interface"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "PROPOSED", "APPROVED", "REJECTED", "IMPLEMENTED", "VERIFIED"]
+    },
+    "source": { "type": "string" },
+    "priority": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    }
+  },
+  "additionalProperties": false
+}

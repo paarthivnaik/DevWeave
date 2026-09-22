@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/decision.schema.json",
+  "title": "ArchitecturalDecision",
+  "type": "object",
+  "required": ["id", "title", "status", "context", "decision", "consequences"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ADR-[0-9]{3,}$"
+    },
+    "title": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["PROPOSED", "ACCEPTED", "REJECTED", "DEPRECATED", "SUPERSEDED"]
+    },
+    "date": { "type": "string", "format": "date" },
+    "context": { "type": "string" },
+    "decision": { "type": "string" },
+    "consequences": {
+      "type": "object",
+      "required": ["positive", "negative"],
+      "properties": {
+        "positive": { "type": "array", "items": { "type": "string" } },
+        "negative": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

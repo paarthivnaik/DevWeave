@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/context.schema.json",
+  "title": "Context",
+  "type": "object",
+  "required": ["work_item_id", "phase", "timestamp", "token_budget", "included_sources"],
+  "properties": {
+    "work_item_id": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "token_budget": {
+      "type": "object",
+      "required": ["allocated", "estimated_used"],
+      "properties": {
+        "allocated": { "type": "integer", "minimum": 1 },
+        "estimated_used": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "included_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "reason": { "type": "string" },
+          "line_range": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "knowledge_items": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

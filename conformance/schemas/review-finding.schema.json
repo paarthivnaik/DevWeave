@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/review-finding.schema.json",
+  "title": "ReviewFinding",
+  "type": "object",
+  "required": ["id", "reviewer", "perspective", "severity", "file", "message", "action_required"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REV-[0-9]{3,}$"
+    },
+    "reviewer": { "type": "string" },
+    "perspective": {
+      "type": "string",
+      "enum": ["CORRECTNESS", "SECURITY", "PERFORMANCE", "ARCHITECTURE", "MAINTAINABILITY", "TOKEN_EFFICIENCY"]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["INFO", "SUGGESTION", "WARNING", "BLOCKING"]
+    },
+    "file": { "type": "string" },
+    "line": { "type": "integer" },
+    "message": { "type": "string" },
+    "action_required": { "type": "boolean" },
+    "resolved": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

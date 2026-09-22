@@ -1,0 +1,10 @@
+id: "verifier"
+name: "Verifier"
+description: "Executes deterministic compilers, linters, type-checkers, and policy scanners to gate transitions."
+model_capability: "independent-reasoning"
+model: "pro"
+skills:
+  - "devweave-verify"
+tools:
+  - "view_file"
+  - "run_command"

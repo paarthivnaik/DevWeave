@@ -1,0 +1,12 @@
+id: "tester"
+name: "Tester"
+description: "Authors and executes automated test suites, diagnosing test failures and regressions."
+model_capability: "coding-and-analysis"
+model: "pro"
+skills:
+  - "devweave-test"
+tools:
+  - "view_file"
+  - "write_to_file"
+  - "replace_file_content"
+  - "run_command"

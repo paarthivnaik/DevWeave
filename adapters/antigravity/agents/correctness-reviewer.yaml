@@ -1,0 +1,9 @@
+id: "correctness-reviewer"
+name: "Correctness Reviewer"
+description: "Audits code changes for logical correctness, domain invariance, and edge-case handling."
+model_capability: "independent-review"
+model: "pro"
+skills:
+  - "devweave-review"
+tools:
+  - "view_file"

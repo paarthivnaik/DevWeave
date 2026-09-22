@@ -1,0 +1,21 @@
+id: "devweave-antigravity"
+name: "DevWeave Reference Host Adapter for Google Antigravity"
+version: "1.0.0"
+spec_version: "1.0.0"
+host: "google-antigravity"
+description: "Implements DevWeave AI-DLC Host Contract for Google Antigravity IDE and CLI."
+
+capability_mapping:
+  fast-analysis: "flash_lite"
+  reasoning: "flash"
+  deep-reasoning: "pro"
+  coding: "flash"
+  coding-and-analysis: "pro"
+  independent-reasoning: "pro"
+  independent-review: "pro"
+
+skills_directory: "skills"
+agents_directory: "agents"
+rules_directory: "rules"
+workflows_directory: "workflows"
+templates_directory: "templates"
