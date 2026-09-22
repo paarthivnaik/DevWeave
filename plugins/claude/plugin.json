@@ -1,0 +1,9 @@
+{
+  "$schema": "https://claude.ai/schemas/plugin.json",
+  "name": "devweave",
+  "version": "1.0.0",
+  "description": "DevWeave AI-DLC software engineering workflow for Claude Code",
+  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "rules": "./CLAUDE.md",
+  "commands": "./commands"
+}
