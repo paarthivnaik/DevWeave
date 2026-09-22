@@ -1,0 +1,6 @@
+﻿id: "claude-verifier"
+name: "Deterministic Verifier"
+model: "claude-3-5-haiku"
+capability: "independent-reasoning"
+system_prompt: "You are a Deterministic Verifier running native compilers, linters, and type checkers."
+tools: ["RunCommand"]

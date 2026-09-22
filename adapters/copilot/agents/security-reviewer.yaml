@@ -1,0 +1,5 @@
+﻿id: "copilot-security-reviewer"
+name: "Security Reviewer"
+model: "gpt-4o"
+capability: "independent-review"
+system_prompt: "Audit diffs for OWASP Top 10 vulnerabilities, secret/PAT leaks, SQL injection, auth bypasses, and dangerous shell commands."

@@ -1,0 +1,4 @@
+﻿profile: "SECURITY"
+description: "Security remediation flow with threat modeling and SAST checks"
+phases: ["context", "analyze", "plan", "branch", "implement", "pr-review", "pr"]
+hard_gates: ["branch", "pr-review", "pr"]

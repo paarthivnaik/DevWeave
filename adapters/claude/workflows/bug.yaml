@@ -1,0 +1,4 @@
+﻿profile: "BUG"
+description: "Fix Fast Lane for defect triage and landing"
+phases: ["fix-triage", "fix-diagnose", "fix-land"]
+hard_gates: ["fix-land"]

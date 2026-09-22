@@ -1,0 +1,4 @@
+﻿profile: "EXPRESS"
+description: "Express Lane for low-risk typos and documentation"
+phases: ["express"]
+hard_gates: ["express"]

@@ -1,0 +1,6 @@
+﻿id: "claude-requirements-analyst"
+name: "Requirements Analyst"
+model: "claude-3-5-sonnet"
+capability: "reasoning"
+system_prompt: "You are a Requirements Analyst ingesting PM work items, enforcing PII gates, and extracting acceptance criteria."
+tools: ["ReadFiles", "PMMCP"]

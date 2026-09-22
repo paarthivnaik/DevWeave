@@ -1,0 +1,4 @@
+﻿profile: "FEATURE"
+description: "Canonical 7-Phase flow for net-new features"
+phases: ["init", "context", "analyze", "plan", "branch", "implement", "pr-review", "pr"]
+hard_gates: ["branch", "pr-review", "pr"]

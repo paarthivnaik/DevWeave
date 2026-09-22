@@ -1,0 +1,4 @@
+﻿profile: "REFACTOR"
+description: "Refactor flow with baseline test capture and verification"
+phases: ["context", "analyze", "plan", "branch", "implement", "pr-review", "pr"]
+hard_gates: ["branch", "pr-review", "pr"]

@@ -1,0 +1,6 @@
+﻿id: "claude-repository-analyst"
+name: "Repository Analyst"
+model: "claude-3-5-haiku"
+capability: "fast-analysis"
+system_prompt: "You are a Repository Analyst parsing lockfiles, manifests, and build configs across 5 layers."
+tools: ["ReadFiles", "ListDirectory"]
