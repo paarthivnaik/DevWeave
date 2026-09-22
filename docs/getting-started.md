@@ -4,13 +4,13 @@ Welcome to **DevWeave** — the declarative, evidence-based, and technology-neut
 
 > **Core Mission:** *Less Tokens. More Work. Lower Bill.*
 
-DevWeave guides developers and autonomous AI coding agents from initial work item requirements through solution design, implementation, testing, independent verification, multi-perspective code review, and pull request readiness.
+DevWeave guides developers and autonomous AI coding agents from initial work item requirements through analysis, planning, branch governance, implementation, deterministic testing, independent verification, and pull request readiness.
 
 ---
 
 ## 1. What is DevWeave?
 
-DevWeave is **not** another raw prompt wrapper or ad-hoc chatbot. It gives AI coding models a **disciplined, structured engineering process**:
+DevWeave gives AI coding assistants a **disciplined, structured engineering process**:
 
 ```mermaid
 flowchart TD
@@ -22,10 +22,10 @@ flowchart TD
     end
 
     subgraph DevWeave["✅ DevWeave AI-DLC Framework"]
-        D1["Work Item / Ticket"] --> D2["Autonomous Detection & Focused Context"]
-        D2 --> D3["Traceable Requirements & Solution Trade-offs"]
-        D3 --> D4["Human Approval Governance Gate"]
-        D4 --> D5["Plan-Bound Incremental Coding"]
+        D1["Work Item / Ticket"] --> D2["Autonomous Detection & Scoped Context"]
+        D2 --> D3["Deep Analysis & Solution Trade-offs"]
+        D3 --> D4["File-Anchored Plan & Branch Governance"]
+        D4 --> D5["Plan-Bound Incremental Implementation"]
         D5 --> D6["Deterministic Testing & Verification"]
         D6 --> D7["Multi-Perspective Review & PR Ready"]
     end
@@ -38,7 +38,7 @@ DevWeave separates host interactions from core engineering lifecycle rules:
 flowchart TD
     subgraph HostLayer["Host AI Layer (e.g., Google Antigravity / CLI / IDE)"]
         Agent["Autonomous AI Agent / Pair Programmer"]
-        Skills["DevWeave Skills & Rules (`.agent/skills/`)"]
+        Skills["DevWeave Skills & Rules (`.agent/skills/` or `plugins/devweave/`)"]
     end
 
     subgraph CoreLayer["DevWeave Core Engine (Declarative & Technology-Neutral)"]
@@ -64,222 +64,110 @@ flowchart TD
 
 ## 2. Installation & Setup in Antigravity (`agy`)
 
-> 📖 **Looking for full step-by-step instructions for all skill levels?** See the complete [**Installation Guide**](installation-guide.md) with 5 installation options, team check-in procedures, and troubleshooting.
+> 📖 **Looking for step-by-step instructions for all skill levels?** See the complete [**Installation Guide**](installation-guide.md) with 5 installation options, team check-in procedures, and troubleshooting.
 
 You can install DevWeave in your target project using the Antigravity CLI (`agy`) or via Git clone.
 
 ### Option A: Install via Antigravity CLI (`agy`) — (Recommended)
-
 In your target project directory (e.g., `D:\DatingAPP`):
-
-#### 1. If you have the DevWeave repository locally:
 ```powershell
+# From local DevWeave directory:
 agy plugin install D:\DevWeave\plugins\devweave
-```
 
-#### 2. If cloning directly from GitHub:
-```powershell
-# Clone the plugin repository
+# Or direct from GitHub:
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
-
-# Install the plugin via agy CLI
 agy plugin install .\temp-devweave\plugins\devweave
-
-# Clean up the temporary folder
 Remove-Item -Recurse -Force temp-devweave
 ```
 
-#### 3. Verify Installation:
+Verify installation:
 ```powershell
 agy plugin list
 ```
-**Output:**
-```json
-{
-  "imports": [
-    {
-      "name": "devweave",
-      "source": "antigravity",
-      "components": [
-        "skills"
-      ]
-    }
-  ]
-}
-```
 
 ---
 
-### Option B: Global Machine-Wide Installation (One-Time Setup)
+## 3. Official Antigravity Command & Skill Surface
 
-To make DevWeave automatically available in **all** repositories on your computer without installing per-project:
-
-Add DevWeave to your global configuration file:
-- **Windows:** `%USERPROFILE%\.gemini\config\plugins.json` (e.g., `C:\Users\<user>\.gemini\config\plugins.json`)
-- **macOS / Linux:** `~/.gemini/config/plugins.json`
-
-```json
-{
-  "plugins": {
-    "devweave": {
-      "path": "D:/DevWeave/plugins/devweave",
-      "enabled": true
-    }
-  }
-}
-```
-
----
-
-### Option C: Manual Workspace Copy (Direct Folder)
-
-Copy the `plugins/devweave` directory into your project's `.agents/plugins/` directory:
-
-```powershell
-New-Item -ItemType Directory -Force -Path ".agents\plugins"
-Copy-Item -Recurse -Force "D:\DevWeave\plugins\devweave" ".agents\plugins\"
-```
-
----
-
-## 3. Official Antigravity Command & Skill Contract
-
-DevWeave provides a deterministic CLI command surface mapped directly to Antigravity skills and specialized subagents:
+DevWeave provides a deterministic CLI command surface mapped directly to Antigravity skills with **mandatory human checkpoints** and **phase isolation**:
 
 ```mermaid
 flowchart LR
-    CLI["Developer CLI Command<br><code>DevWeave-xxx &lt;ID&gt;</code>"] --> Router["Antigravity Host Adapter"]
-    Router --> Skill["DevWeave Skill<br><code>devweave-xxx</code>"]
-    Skill --> Agent["Specialized Subagent<br><i>(Lead, Architect, Developer, etc.)</i>"]
-    Agent --> Storage["Durable Artifact<br><code>.devweave/work-items/&lt;ID&gt;/*</code>"]
+    INIT["0. DevWeave init<br><i>(Repo Onboarding)</i>"] --> P1["1. CONTEXT<br><code>DevWeave-context &lt;ID&gt;</code>"]
+    P1 --> P2["2. ANALYZE<br><code>DevWeave-analyze &lt;ID&gt;</code>"]
+    P2 --> P3["3. PLAN<br><code>DevWeave-plan &lt;ID&gt;</code>"]
+    P3 --> P4["4. BRANCH<br><code>DevWeave-branch &lt;ID&gt;</code><br><b>(HARD GATE)</b>"]
+    P4 --> P5["5. IMPLEMENT<br><code>DevWeave-implement &lt;ID&gt;</code>"]
+    P5 --> P6["6. PR<br><code>DevWeave-pr &lt;ID&gt;</code><br><b>(HARD GATE)</b>"]
 ```
 
 ### Command & Skill Surface Reference
 
-| CLI Command | Antigravity Skill | Assigned Subagent | AI-DLC Phase | Primary Artifact |
+| CLI Command | Antigravity Skill | AI-DLC Phase | Purpose | Primary Artifact |
 | :--- | :--- | :--- | :--- | :--- |
-| `DevWeave init` | `devweave-init` | `devweave-lead` | `INIT` | `.devweave/repository/*` |
-| `DevWeave-context <ID>` | `devweave-discovery` | `devweave-architect` | `DISCOVERY` | `.devweave/work-items/<ID>/context.md` |
-| `DevWeave-requirements <ID>` | `devweave-requirements` | `devweave-lead` | `REQUIREMENTS` | `.devweave/work-items/<ID>/requirements.md` |
-| `DevWeave-solution <ID>` | `devweave-solution` | `devweave-architect` | `SOLUTION` | `.devweave/work-items/<ID>/solution.md` |
-| `DevWeave-approve <ID>` | `devweave-approval` | `devweave-gatekeeper` | `APPROVAL` | `.devweave/work-items/<ID>/approval.json` |
-| `DevWeave-plan <ID>` | `devweave-plan` | `devweave-lead` | `PLAN` | `.devweave/work-items/<ID>/plan.md` |
-| `DevWeave-implement <ID>` | `devweave-implement` | `devweave-developer` | `IMPLEMENT` | Modified source files |
-| `DevWeave-test <ID>` | `devweave-test` | `devweave-tester` | `TEST` | `.devweave/work-items/<ID>/test-results.json` |
-| `DevWeave-verify <ID>` | `devweave-verify` | `devweave-gatekeeper` | `VERIFY` | `.devweave/work-items/<ID>/verification.md` |
-| `DevWeave-review <ID>` | `devweave-review` | `devweave-reviewer` | `REVIEW` | `.devweave/work-items/<ID>/review.md` |
-| `DevWeave-pr <ID>` | `devweave-pr` | `devweave-lead` | `PR_READY` | `.devweave/work-items/<ID>/pr-description.md` |
-| `DevWeave-status <ID>` | — | — | Cross-phase | `.devweave/state/current.json` |
-| `DevWeave-knowledge capture` | `devweave-knowledge` | `devweave-curator` | Cross-phase | `.devweave/knowledge/*.md` |
-
-> **Explicit `<ID>` Invariant**: All work-item commands require the `<ID>` parameter explicitly to guarantee isolation in multi-task and multi-branch environments.
+| `DevWeave init` | `devweave-init` | `INIT` | 5-Layer autonomous repo onboarding | `.devweave/repository/*` |
+| `DevWeave-context <ID>` | `devweave-context` | `CONTEXT` | Ingest ticket & scope blast radius | `.devweave/work-items/<ID>/context.md` |
+| `DevWeave-analyze <ID>` | `devweave-analyze` | `ANALYZE` | Code investigation & approach design | `.devweave/work-items/<ID>/analysis.md` |
+| `DevWeave-plan <ID>` | `devweave-plan` | `PLAN` | File-anchored task decomposition | `.devweave/work-items/<ID>/plan.md` |
+| `DevWeave-branch <ID>` | `devweave-branch` | `BRANCH` | **Hard Gate**: Isolated branch creation | Git branch record |
+| `DevWeave-implement <ID>` | `devweave-implement` | `IMPLEMENT` | Plan-bound code changes & tests | Source diffs, `test-results.json` |
+| `DevWeave-pr <ID>` | `devweave-pr` | `PR` | **Hard Gate**: Review & PR assembly | `verification.md`, `pr-description.md` |
+| `DevWeave-status <ID>` | `devweave-status` | Cross-Phase | Inspect real-time phase progression | `.devweave/state/current.json` |
+| `DevWeave-handoff <ID>` | `devweave-handoff` | Cross-Phase | Generate handoff package for team | `.devweave/work-items/<ID>/handoff.md` |
+| `DevWeave-archive <ID>` | `devweave-archive` | Post-Merge | Archive workspace to `.devweave/archive/` | Archived artifacts & audit log |
 
 ---
 
-## 4. Quick Start: 3 Steps to Your First Task
+## 4. Specialized Workflow Lanes
 
-```mermaid
-flowchart LR
-    S1["1. DevWeave init<br><b>Inspect Repository</b><br>5-Layer Tech Detection"] --> S2["2. DevWeave-context &lt;ID&gt;<br><b>Ingest Work Item</b><br>MCP or Manual Input"]
-    S2 --> S3["3. Run AI-DLC Lifecycle<br><b>Deliver Feature</b><br>Plan → Code → Verify → PR"]
-```
+DevWeave provides three specialized lanes sharing the same underlying state machine:
 
-### Step 1: Initialize Your Repository (`DevWeave init`)
-Launch `agy` or Antigravity in your project root and trigger:
-```text
-/devweave-init
-```
-DevWeave inspects project manifests, lockfiles, build configurations, and test runners using **5-Layer Autonomous Detection** without requiring manual configuration.
-
-### Step 2: Ingest a Work Item (`DevWeave-context <ID>`)
-Ingest tasks from Jira, Azure DevOps, GitHub Issues, Linear, or manual paste:
+### 1. General / Feature Lane (6 Phases)
 ```bash
 DevWeave-context PROJ-1042
-```
-*If no MCP server is configured, DevWeave prompts you to paste the title, description, and acceptance criteria.*
-
-### Step 3: Progress Through the AI-DLC Flow
-Progress smoothly through the phases using explicit commands or let the lead agent coordinate:
-```bash
-DevWeave-requirements PROJ-1042
-DevWeave-solution PROJ-1042
-DevWeave-approve PROJ-1042
+DevWeave-analyze PROJ-1042
 DevWeave-plan PROJ-1042
+DevWeave-branch PROJ-1042
 DevWeave-implement PROJ-1042
-DevWeave-test PROJ-1042
-DevWeave-verify PROJ-1042
-DevWeave-review PROJ-1042
 DevWeave-pr PROJ-1042
 ```
 
----
+### 2. Fix Lane — Defect Remediation (3 Phases)
+```bash
+DevWeave-fix-triage BUG-201
+DevWeave-fix-diagnose BUG-201
+DevWeave-fix-land BUG-201
+```
 
-## 5. The 9-Phase AI-DLC Lifecycle & State Transitions
-
-DevWeave organizes work into a deterministic state machine with explicit validation gates and feedback loops:
-
-```mermaid
-flowchart TD
-    INIT["INIT & DISCOVERY<br><i>(Scoped Blast-Radius)</i>"] --> REQ["REQUIREMENTS<br><i>(Acceptance Criteria)</i>"]
-    REQ --> SOL["SOLUTION DESIGN<br><i>(Options & Best Practices)</i>"]
-    
-    SOL --> GATE{"APPROVAL GATE<br><i>(Human Sign-Off)</i>"}
-    GATE -- "Approved" --> PLAN["PLAN<br><i>(Atomic Tasks)</i>"]
-    GATE -- "Changes Requested" --> SOL
-    GATE -- "Rejected" --> REQ
-    
-    PLAN --> IMP["IMPLEMENT<br><i>(Surgical Edits)</i>"]
-    IMP --> TEST["TEST<br><i>(Automated Suites)</i>"]
-    
-    TEST -- "Tests Pass" --> VER["VERIFY<br><i>(Acceptance & Schema Checks)</i>"]
-    TEST -- "Tests Fail (Fix Loop)" --> IMP
-    
-    VER -- "Verified Clean" --> REV["CODE REVIEW<br><i>(Multi-Perspective)</i>"]
-    VER -- "Verification Failed" --> IMP
-    
-    REV --> PR["PR READY<br><i>(Traceable PR Package)</i>"]
+### 3. Modernization Lane — Stepwise Framework Upgrades
+```bash
+DevWeave-modernize-context MOD-301
+DevWeave-modernize-analyze MOD-301
+DevWeave-modernize-plan MOD-301      # Generates migration_manifest.md with 100% parity contract
+DevWeave-modernize-branch MOD-301
+DevWeave-modernize-implement MOD-301 # Lockstep status updates (🔴 → 🟡 → 🟢)
+DevWeave-modernize-pr MOD-301
 ```
 
 ---
 
-### Lifecycle Phase Breakdown & Produced Artifacts
+## 5. Non-Negotiable Human-in-the-Loop Governance
 
-```mermaid
-flowchart LR
-    subgraph Analysis["1. Analysis & Design"]
-        A1["Discovery<br><code>context.md</code>"]
-        A2["Requirements<br><code>requirements.md</code>"]
-        A3["Solution<br><code>solution.md</code>"]
-    end
+DevWeave enforces four strict engineering invariants:
 
-    subgraph Governance["2. Governance & Plan"]
-        G1["Approval Gate<br><code>approval.json</code>"]
-        G2["Planning<br><code>plan.md</code>"]
-    end
-
-    subgraph Execution["3. Execution & Verification"]
-        E1["Implementation<br><i>Source Diffs</i>"]
-        E2["Testing<br><code>test-results.json</code>"]
-        E3["Verification<br><code>verification.md</code>"]
-    end
-
-    subgraph Delivery["4. Review & PR"]
-        D1["Review<br><code>review.md</code>"]
-        D2["PR Package<br><code>pr-description.md</code>"]
-    end
-
-    Analysis --> Governance --> Execution --> Delivery
-```
-
-1. **Discovery (`devweave-discovery`)**: Identifies affected components, dependencies, and schema migrations, establishing an initial token budget (e.g., 32,000 tokens).
-2. **Requirements (`devweave-requirements`)**: Normalizes requirements into testable acceptance criteria in `.devweave/work-items/<ID>/requirements.md`.
-3. **Solution Design (`devweave-solution`)**: Evaluates architectural trade-offs, selects tiered best practices, and creates `.devweave/work-items/<ID>/solution.md`.
-4. **Approval Gate (`devweave-approval`)**: Pauses execution for human authorization on high-impact architectural or schema changes.
-5. **Planning (`devweave-plan`)**: Decomposes the approved solution into atomic, ordered tasks in `.devweave/work-items/<ID>/plan.md`.
-6. **Implementation (`devweave-implement`)**: Executes surgical, bounded file edits strictly constrained to the approved plan.
-7. **Testing (`devweave-test`)**: Runs deterministic project test runners and records outcomes in `.devweave/work-items/<ID>/test-results.json`.
-8. **Verification (`devweave-verify`)**: Verifies 100% acceptance criteria fulfillment and zero schema violations in `.devweave/work-items/<ID>/verification.md`.
-9. **Review & PR Ready (`devweave-review`, `devweave-pr`)**: Conducts multi-perspective code review and generates `.devweave/work-items/<ID>/pr-description.md`.
+1. **Phase Isolation**: Every command executes **only its own phase**, outputs its artifact, and halts.
+2. **Mandatory Human Checkpoints**: Every phase ends with an explicit decision:
+   ```text
+   PHASE COMPLETE: PLAN
+   Artifact: .devweave/work-items/PROJ-1042/plan.md
+   
+   Human Decision: [Approve Plan] [Request Changes] [Stop]
+   Suggested Next Phase: BRANCH (Run: DevWeave-branch PROJ-1042)
+   
+   DevWeave is waiting for your instruction.
+   ```
+3. **Zero Automatic Chaining**: The AI never self-approves or triggers the next command automatically.
+4. **Durable State Persistence**: All state transitions and human decisions are saved to `.devweave/work-items/<ID>/state.md`.
 
 ---
 
@@ -322,49 +210,16 @@ Practices loaded into context are tiered to prevent ambiguity:
 
 ---
 
-## 7. Work Item Ingestion & Blast-Radius Scoping
+## 7. Dynamic Technology Revalidation
 
-DevWeave ensures **84%–93% token savings** by converting raw inputs into structured contexts and scoping LLM access:
-
-```mermaid
-flowchart TD
-    subgraph Ingestion["Work Item Ingestion Flow"]
-        MCP["MCP Provider<br><i>(Jira / ADO / GitHub / Linear)</i>"] --> Norm["Generic Work Item Normalization"]
-        Manual["Manual / Pasted Input<br><i>(Zero-MCP Fallback)</i>"] --> Norm
-        Norm --> Ctx["Focused Context (.devweave/work-items/<ID>/context.md)"]
-    end
-
-    subgraph Scoping["Blast-Radius Context Scoping"]
-        Ctx --> ScopeCheck{"Component Scoping"}
-        ScopeCheck -->|"Affected Files Only"| AgentContext["Agent Context Budget (e.g. 8k tokens)"]
-        ScopeCheck -. "Skip Unaffected 95% of Repo" .-> Excluded["Excluded Codebase Files"]
-    end
-```
-
-### Ingestion Commands
-- **Via MCP**: `DevWeave-context PROJ-1234`
-- **Manual Fallback**: `DevWeave-context PROJ-1234` (prompts for title, description, criteria)
-- **Context Refresh**: `DevWeave-context --refresh PROJ-1234` (safely resets lifecycle if ticket changed)
+When target technology changes (e.g., migrating from .NET Core 3.1 $\to$ .NET 9):
+- **Skills are never recreated**: Skills remain stable and permanent.
+- **Knowledge is refreshed**: Affected knowledge items are flagged as `NEEDS_REVALIDATION` in `ANALYZE`.
+- **Practices update dynamically**: Version-specific idiomatic patterns (e.g., EF Core 9, Angular Standalone Components) are loaded automatically.
 
 ---
 
-## 8. Workflow Profiles (Matching Rigor to Task Complexity)
-
-DevWeave dynamically routes work items to the most efficient lifecycle profile:
-
-```mermaid
-flowchart TD
-    Task["Work Item Input"] --> Router{"Classify Complexity"}
-
-    Router -- "Minor Bug / Typo / Docs" --> EXP["<b>EXPRESS Profile</b><br>Discovery → Plan → Implement → Test → PR<br><i>Model: flash / flash_lite</i>"]
-    Router -- "New Feature / API" --> FEAT["<b>FEATURE Profile</b><br>Full 9-Phase AI-DLC + Human Approval Gate<br><i>Model: flash + pro</i>"]
-    Router -- "Framework / DB Migration" --> MOD["<b>MODERNIZATION Profile</b><br>Discovery → Solution → Approval → Stepwise Plan<br><i>Model: pro</i>"]
-    Router -- "Security / CVE Fix" --> SEC["<b>SECURITY Profile</b><br>Strict Discovery → Security Review → Verify → Approval<br><i>Model: pro</i>"]
-```
-
----
-
-## 9. Durable State & Resuming Interrupted Sessions
+## 8. Durable State & Resuming Work
 
 Every task maintains durable state in `.devweave/state/current.json` and `.devweave/work-items/<ID>/state.md`.
 
@@ -376,40 +231,19 @@ sequenceDiagram
     participant Filesystem as .devweave/state/
     
     Developer->>DevWeave: DevWeave-context PROJ-101
-    DevWeave->>Filesystem: Complete DISCOVERY, REQ, SOLUTION, PLAN
+    DevWeave->>Filesystem: Complete CONTEXT, ANALYZE, PLAN, BRANCH
     DevWeave->>Filesystem: Record Phase: IMPLEMENT (In Progress)
     Note over Developer,DevWeave: Developer session closes / Agent disconnects
     
     Developer->>DevWeave: DevWeave-status PROJ-101
     DevWeave->>Filesystem: Read current.json & load existing artifacts
-    Note over DevWeave: Reuses completed PLAN & SOLUTION (Zero token re-spend)
+    Note over DevWeave: Reuses completed PLAN & BRANCH (Zero token re-spend)
     DevWeave->>Developer: Resumed cleanly at IMPLEMENT phase
 ```
 
 ---
 
-## 10. Multi-Perspective Code Review Architecture
-
-Before generating the pull request package, DevWeave evaluates changes across four independent review lenses:
-
-```mermaid
-flowchart TD
-    Diff["Implementation Diffs & Verification Evidence"] --> R1 & R2 & R3 & R4
-
-    subgraph Perspectives["Multi-Perspective Review Lenses"]
-        R1["<b>1. Correctness</b><br>Acceptance criteria verified & logic sound"]
-        R2["<b>2. Security</b><br>Zero secrets, input validated, safe queries"]
-        R3["<b>3. Performance</b><br>No N+1 queries, async concurrency preserved"]
-        R4["<b>4. Maintainability</b><br>Conforms to repository conventions & style"]
-    end
-
-    R1 & R2 & R3 & R4 --> Synthesis["Review Findings Synthesis (review.md)"]
-    Synthesis --> PRPkg["Traceable PR Package (pr-description.md)"]
-```
-
----
-
-## 11. Security & Governance Boundaries
+## 9. Security & Governance Boundaries
 
 DevWeave enforces hard security boundaries to protect production environments:
 
@@ -425,7 +259,7 @@ flowchart LR
 
 ---
 
-## 12. Customizing Conventions for Your Team
+## 10. Customizing Conventions for Your Team
 
 To customize how DevWeave generates code and reviews PRs for your repository:
 - Edit [`.devweave/knowledge/conventions.md`](file:///D:/DevWeave/spec/specification/best-practices.md) for naming conventions, folder patterns, and architectural rules.
