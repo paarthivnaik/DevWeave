@@ -80,7 +80,8 @@ agy plugin list
 
 ## Getting Started
 
-Refer to [`docs/getting-started.md`](docs/getting-started.md) for detailed onboarding and workflow execution guides.
+- **Installation Guide**: Refer to [`docs/installation-guide.md`](docs/installation-guide.md) for 5 step-by-step installation methods (CLI, Git, Global, Team, Submodule).
+- **User & Workflow Guide**: Refer to [`docs/getting-started.md`](docs/getting-started.md) for detailed onboarding, the 9-phase AI-DLC lifecycle, and command reference.
 
 ---
 

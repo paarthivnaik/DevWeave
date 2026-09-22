@@ -64,6 +64,8 @@ flowchart TD
 
 ## 2. Installation & Setup in Antigravity (`agy`)
 
+> 📖 **Looking for full step-by-step instructions for all skill levels?** See the complete [**Installation Guide**](installation-guide.md) with 5 installation options, team check-in procedures, and troubleshooting.
+
 You can install DevWeave in your target project using the Antigravity CLI (`agy`) or via Git clone.
 
 ### Option A: Install via Antigravity CLI (`agy`) — (Recommended)
