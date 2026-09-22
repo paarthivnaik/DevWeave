@@ -1,201 +1,246 @@
-# Getting Started with DevWeave V1.0
+# DevWeave V1.0 — Developer & User Guide
 
 Welcome to **DevWeave** — the declarative, evidence-based, and technology-neutral **AI-Driven Development Lifecycle (AI-DLC)** framework.
 
 > **Core Mission:** *Less Tokens. More Work. Lower Bill.*
 
-DevWeave orchestrates autonomous AI agents to deliver reliable, production-ready code with complete traceability, deterministic verification, and up to **90%+ token and cost reduction** compared to raw unstructured LLM prompts.
+DevWeave guides developers and autonomous AI coding agents from initial work item requirements through solution design, implementation, testing, independent verification, multi-perspective code review, and pull request readiness.
 
 ---
 
-## 1. Core Principles & Philosophy
+## 1. What is DevWeave?
 
-1. **Declarative & File-Driven**: DevWeave has no background daemons or mandatory runtimes. Everything is tracked in clean Markdown, JSON, and JSON Schema files inside your repository's `.devweave/` directory.
-2. **Technology-Neutral, Runtime-Aware**: DevWeave works identically across any language or framework (e.g., .NET, Python, TypeScript, Java, Go, Rust, C++, PHP, Ruby) by autonomously detecting project tools and selecting applicable best practices.
-3. **Structured 9-Phase AI-DLC**: Moves systematically from work item ingestion to PR readiness, preventing hallucinations and ad-hoc scope drift.
-4. **Zero-Token Waste**: By maintaining persistent repository intelligence under `.devweave/`, agents do not repeatedly re-read the entire repository on every prompt.
+DevWeave is **not** another raw prompt wrapper or ad-hoc chatbot. It gives AI coding models a **disciplined, structured engineering process**:
 
----
-
-## 2. Quick Setup & Prerequisites
-
-DevWeave integrates natively with **Google Antigravity** as its first reference host, and is designed to operate seamlessly with any AI coding assistant or MCP-enabled environment.
-
-### Prerequisites
-- **Git** repository initialized for your project.
-- **Antigravity CLI** or **Antigravity IDE** (or any compatible AI agent host).
-- *Optional:* Model Context Protocol (MCP) server for Jira, Azure DevOps, or GitHub Issues.
-
-### Installation in Your Workspace
-Ensure the DevWeave rules and skills are present in your workspace or global Antigravity configuration:
 ```text
-.agent/skills/
-  ├── devweave-init/
-  ├── devweave-discovery/
-  ├── devweave-requirements/
-  ├── devweave-solution/
-  ├── devweave-approval/
-  ├── devweave-plan/
-  ├── devweave-implement/
-  ├── devweave-test/
-  ├── devweave-verify/
-  ├── devweave-review/
-  ├── devweave-pr/
-  └── devweave-knowledge/
+              Traditional AI Coding               DevWeave AI-DLC Framework
+        ┌───────────────────────────────┐     ┌───────────────────────────────┐
+        │  "Write this feature for me"  │     │ 1. Autonomous Tech Discovery  │
+        │               │               │     │ 2. Normalized Requirements    │
+        │               ▼               │     │ 3. Solution Design & Options  │
+        │   Hallucinated Architecture   │     │ 4. Human Approval Gate        │
+        │   Scope Creep / Broken Tests  │     │ 5. Atomic Task Plan           │
+        │   Runaway Token Costs ($$$)   │     │ 6. Bounded Implementation     │
+        │                               │     │ 7. Automated Test Suite       │
+        │                               │     │ 8. Deterministic Verification │
+        │                               │     │ 9. Multi-Perspective Review   │
+        └───────────────────────────────┘     └───────────────────────────────┘
 ```
 
+### Key Architectural Invariants
+- **Declarative-First**: Zero background daemons, zero mandatory runtimes. All metadata is tracked in clean Markdown, JSON, and JSON Schema files inside `.devweave/`.
+- **Technology-Neutral, Runtime-Aware**: Works out-of-the-box across **C#/.NET, Python, TypeScript/JavaScript, Java, Go, Rust, C++, PHP, and Ruby**.
+- **Context Scoping & Knowledge Reuse**: Slashes token consumption and LLM bills by **84% to 93%** by caching repository intelligence and scoping file access to the task's exact blast radius.
+
 ---
 
-## 3. Step 1: Autonomous Repository Onboarding (`devweave-init`)
+## 2. Quick Start: 3 Steps to Your First Task
 
-Before working on tasks, onboard your repository. DevWeave autonomously inspects project manifests, builds, and dependencies to generate structured intelligence.
-
-### Trigger Initialization
-Ask your AI assistant:
-```text
-Run devweave-init on current repository
+```mermaid
+flowchart LR
+    S1["Step 1: DevWeave Init<br><i>(Autonomous Tech Detection)</i>"] --> S2["Step 2: DevWeave-context<br><i>(Ingest Ticket / Input)</i>"]
+    S2 --> S3["Step 3: AI-DLC Flow<br><i>(Design → Plan → Build → PR)</i>"]
 ```
 
-### What Happens Under the Hood (5-Layer Autonomous Detection)
+### Step 1: Initialize Your Repository (`DevWeave init`)
+Run in your project root or ask your AI assistant:
+```bash
+DevWeave init
+```
+DevWeave inspects project manifests, lockfiles, build configurations, and test runners using **5-Layer Autonomous Detection** without requiring you to manually configure stack settings.
+
+### Step 2: Ingest a Work Item (`DevWeave-context`)
+Ingest tasks from Jira, Azure DevOps, GitHub Issues, Linear, or manual paste:
+```bash
+DevWeave-context PROJ-1042
+```
+*If no MCP server is configured, DevWeave prompts you to paste the title, description, and acceptance criteria.*
+
+### Step 3: Run the Guided AI-DLC Flow
+DevWeave guides the agent systematically through requirements normalization, solution trade-offs, human approval, task execution, testing, and PR creation.
+
+---
+
+## 3. The 9-Phase AI-DLC Lifecycle
+
+DevWeave organizes work into a deterministic state machine. Each phase produces structured artifacts under `.devweave/work-items/<ID>/`:
+
 ```mermaid
 flowchart TD
-    L1["Layer 1: Repo Structure (Monorepo, Services, Migrations)"]
-    L2["Layer 2: Languages (C#, Python, TypeScript, Go, Java, Rust, etc.)"]
-    L3["Layer 3: Frameworks (ASP.NET Core, FastAPI, Angular, Spring Boot, etc.)"]
-    L4["Layer 4: Tooling (xUnit, pytest, Jest, Cargo, Maven, etc.)"]
-    L5["Layer 5: Versions & Capabilities (Exact versions from lockfiles)"]
-
-    L1 --> L2 --> L3 --> L4 --> L5
+    P1["1. INIT & DISCOVERY<br><i>(Blast-Radius & Architecture Scoping)</i>"] --> P2["2. REQUIREMENTS<br><i>(Acceptance Criteria Normalization)</i>"]
+    P2 --> P3["3. SOLUTION<br><i>(Architectural Options & Best Practices)</i>"]
+    P3 --> P4{"4. APPROVAL GATE<br><i>(Human Sign-off on High-Impact Changes)</i>"}
+    P4 -- Approved --> P5["5. PLAN<br><i>(Atomic Task Decomposition)</i>"]
+    P4 -- Rejected / Changes Requested --> P3
+    P5 --> P6["6. IMPLEMENT<br><i>(Surgical, Bounded Code Edits)</i>"]
+    P6 --> P7["7. TEST<br><i>(Deterministic Test Suite Runs)</i>"]
+    P7 -- Tests Pass --> P8["8. VERIFY<br><i>(Acceptance & Schema Verification)</i>"]
+    P7 -- Tests Fail --> P6
+    P8 --> P9["9. REVIEW & PR READY<br><i>(Multi-Perspective Code Review & PR Assembly)</i>"]
 ```
 
-### Generated `.devweave/` Directory Structure
-Upon completion, your repository contains a standardized `.devweave/` directory:
+---
+
+### Phase 1 — Discovery & Impact Analysis (`devweave-discovery`)
+- Analyzes existing source files, imports, and dependencies relevant to the task.
+- Scopes the task blast-radius to affected components (avoids whole-repo scanning).
+- Allocates an initial context token budget (e.g., 32,000 tokens).
+
+### Phase 2 — Requirements Engineering (`devweave-requirements`)
+- Normalizes external tickets or user requests into explicit acceptance criteria.
+- Separates functional requirements, non-functional constraints, and out-of-scope items.
+- Produces: `.devweave/work-items/<ID>/requirements.md`
+
+### Phase 3 — Solution Design (`devweave-solution`)
+- Evaluates architectural options and trade-offs before writing code.
+- Automatically selects applicable best practices and flags anti-patterns.
+- Identifies database migrations, API changes, and backward-compatibility risks.
+- Produces: `.devweave/work-items/<ID>/solution.md`
+
+### Phase 4 — Human Approval Gate (`devweave-approval`)
+- **Hard Governance Boundary**: Mandatory sign-off required for high-impact decisions (database schema changes, breaking API contracts, security modifications).
+- Execution is safely paused until the human developer approves.
+
+### Phase 5 — Implementation Planning (`devweave-plan`)
+- Decomposes the approved solution into atomic, ordered tasks with specific file paths and verification commands.
+- Produces: `.devweave/work-items/<ID>/plan.md`
+
+### Phase 6 — Incremental Implementation (`devweave-implement`)
+- Agents perform surgical, localized file edits strictly bound to the approved plan.
+- If unexpected architectural conflicts arise, DevWeave returns to Solution Design rather than making unauthorized assumptions.
+
+### Phase 7 — Automated Testing (`devweave-test`)
+- Runs test suites using deterministic commands discovered during initialization (e.g., `dotnet test`, `pytest`, `npm test`, `cargo test`).
+- Captures test results, coverage, and failures in `.devweave/work-items/<ID>/test-results.json`.
+
+### Phase 8 — Deterministic Verification (`devweave-verify`)
+- Independently checks that all acceptance criteria from Phase 2 are met.
+- Validates clean compilation, zero schema violations, and zero unintended file modifications.
+- Produces: `.devweave/work-items/<ID>/verification.md`
+
+### Phase 9 — Multi-Perspective Review & PR (`devweave-review`, `devweave-pr`)
+- Evaluates code across four perspectives: **Correctness**, **Security**, **Performance**, and **Maintainability**.
+- Assembles an evidence-backed pull request package with full traceability links: `.devweave/work-items/<ID>/pr-description.md`.
+
+---
+
+## 4. Autonomous 5-Layer Technology Detection
+
+When `DevWeave init` runs, it builds a complete repository intelligence profile under `.devweave/repository/`:
 
 ```text
 .devweave/
 ├── repository/
-│   ├── profile.md          # 5-layer classification & architecture overview
+│   ├── profile.md          # 5-Layer classification & repository overview
 │   ├── technologies.md     # Primary & secondary runtimes with evidence citations
-│   ├── frameworks.md       # Detected web, ORM, and API frameworks
-│   ├── dependencies.md     # Package manager & dependency lockfile status
+│   ├── frameworks.md       # Detected web, ORM, and UI frameworks
+│   ├── dependencies.md     # Package managers, lockfiles, and key libraries
 │   ├── build.md            # Deterministic build commands and targets
 │   ├── testing.md          # Test runners, single-test syntax, coverage flags
-│   ├── architecture.md     # Component boundaries, entry points, and data flows
+│   ├── architecture.md     # Component layout, entry points, and module boundaries
 │   └── practices.md        # Applicable best practices and anti-patterns
 ├── knowledge/
-│   └── conventions.md      # Repository coding conventions, style guides & lint rules
-├── work-items/             # Active and historical AI-DLC work item artifacts
+│   └── conventions.md      # Team coding styles, naming conventions, and lint rules
+├── work-items/             # Active and historical task artifacts
 └── state/
-    └── current.json        # Schema-validated AI-DLC lifecycle state & token budget
+    └── current.json        # AI-DLC lifecycle state, token usage, and gate status
 ```
+
+### Best-Practice Tiering
+Practices loaded into context are tiered to prevent ambiguity:
+- **`MANDATORY`**: Security, data safety, and compliance requirements. Violations block PR progression.
+- **`RECOMMENDED`**: Strong idiomatic guidance. Departure requires recorded technical rationale.
+- **`ADVISORY`**: Optional optimizations and code clarity improvements.
+- **`ANTI_PATTERN`**: Harmful habits (e.g., sync-over-async, raw SQL in UI, unindexed joins) explicitly blocked during review.
 
 ---
 
-## 4. Step 2: Ingesting Work Items (`DevWeave-context`)
+## 5. Work Item Ingestion & Context Management
 
-DevWeave initiates tasks from either external issue trackers or local manual descriptions.
+### Ingestion via Model Context Protocol (MCP)
+DevWeave supports integration with Jira, Azure DevOps, GitHub, GitLab, and Linear via MCP:
+```bash
+DevWeave-context PROJ-1234
+```
+- Retrieves ticket metadata, acceptance criteria, priority, and parent Epics.
+- Normalizes ticket contents into a vendor-neutral schema.
+- **Security Guarantee**: Personal Access Tokens (PATs) and OAuth tokens are **never stored** in `.devweave/` files, Git history, or LLM prompts.
 
-### Option A: Via Project Management MCP (Jira / Azure DevOps / GitHub / Linear)
+### Local & Manual Fallback (Zero Setup)
+If no MCP is configured, DevWeave prompts you to paste the requirements:
 ```text
-DevWeave-context PROJ-1042
+No project-management MCP integration is configured.
+Please paste the requirements (Title, Description, Acceptance Criteria):
+> 
 ```
-DevWeave queries the MCP server, extracts the title, description, acceptance criteria, and priority, and normalizes them into a vendor-neutral work item.
+Pasted input is normalized into the exact same structured format as MCP tickets.
 
-### Option B: Local / Manual Input (No MCP Required)
-```text
-DevWeave-context "Add customer cancellation endpoint for pending bookings"
+### Context Refresh & Invalidation
+If requirements in Jira/ADO change while a task is in progress, refresh context:
+```bash
+DevWeave-context --refresh PROJ-1234
 ```
-Or paste your ticket requirements directly when prompted. DevWeave never fabricates missing acceptance criteria and prompts for necessary clarifications.
-
----
-
-## 5. Step 3: The 9-Phase AI-DLC Lifecycle Walkthrough
-
-Once a work item is loaded, DevWeave progresses through the structured engineering lifecycle:
-
-```mermaid
-flowchart LR
-    P1["1. Discovery"] --> P2["2. Requirements"]
-    P2 --> P3["3. Solution"]
-    P3 --> P4["4. Approval Gate"]
-    P4 --> P5["5. Plan"]
-    P5 --> P6["6. Implement"]
-    P6 --> P7["7. Test"]
-    P7 --> P8["8. Verify"]
-    P8 --> P9["9. Review & PR"]
-```
-
-### 1. Discovery & Impact Analysis (`devweave-discovery`)
-- Scopes the task blast-radius to affected files only.
-- Identifies dependencies, schema migrations, and impacted endpoints.
-- Allocates an initial context token budget (e.g., 32,000 tokens).
-
-### 2. Requirements Engineering (`devweave-requirements`)
-- Normalizes functional & non-functional requirements.
-- Generates unambiguous acceptance criteria in `.devweave/work-items/<ID>/requirements.md`.
-
-### 3. Solution Design (`devweave-solution`)
-- Evaluates architectural options and trade-offs.
-- Selects tiered engineering practices (`MANDATORY`, `RECOMMENDED`, `ADVISORY`, `ANTI_PATTERN`).
-- Produces `.devweave/work-items/<ID>/solution.md`.
-
-### 4. Human Approval Gate (`devweave-approval`)
-- **Hard Governance Boundary:** High-impact changes (database schema mutations, breaking API changes, security modifications) require explicit user sign-off.
-- The state machine blocks progression until approved by a human developer.
-
-### 5. Implementation Planning (`devweave-plan`)
-- Decomposes the approved solution into atomic, ordered tasks with specific file paths and verification criteria.
-- Produces `.devweave/work-items/<ID>/plan.md`.
-
-### 6. Incremental Implementation (`devweave-implement`)
-- Agents perform surgical, localized file edits strictly bound to the approved plan.
-- Bounded edits avoid unwanted regressions and prevent runaway token consumption.
-
-### 7. Automated Testing (`devweave-test`)
-- Runs project test suites using deterministic commands discovered in `.devweave/repository/testing.md`.
-- Records test pass/fail results in `.devweave/work-items/<ID>/test-results.json`.
-
-### 8. Deterministic Verification (`devweave-verify`)
-- Validates that all acceptance criteria from Phase 2 are satisfied.
-- Verifies zero schema violations and confirms build return codes exit with `0`.
-- Produces `.devweave/work-items/<ID>/verification.md`.
-
-### 9. Multi-Perspective Code Review & PR (`devweave-review`, `devweave-pr`)
-- Performs independent reviews across **Correctness**, **Security**, **Performance**, and **Maintainability**.
-- Assembles the complete pull request description with traceability links and verification evidence in `.devweave/work-items/<ID>/pr-description.md`.
+If material acceptance criteria have changed, DevWeave safely resets the state to `REQUIREMENTS` to prevent outdated implementations.
 
 ---
 
 ## 6. Workflow Profiles (Matching Rigor to Task Complexity)
 
-DevWeave adjusts its lifecycle path according to the scope of the task:
+DevWeave dynamically routes work items to the most efficient lifecycle profile:
 
-| Profile | Typical Workload | Lifecycle Path | Model Routing |
+| Profile | Target Workload | Lifecycle Path | Model Routing |
 | :--- | :--- | :--- | :--- |
-| **`EXPRESS`** | Simple bug fixes, documentation, minor UI tweaks | Discovery → Plan → Implement → Test → PR | `flash` / `flash_lite` |
-| **`FEATURE`** | Standard feature implementation, new APIs | Full 9-Phase AI-DLC with Approval Gate | `flash` + `pro` (Design/Review) |
-| **`MODERNIZATION`** | Framework upgrades, large refactorings | Discovery → Solution → Approval → Plan → Stepwise Migrations | `pro` |
-| **`SECURITY`** | Vulnerability patches, auth/credential fixes | Strict Discovery → Security Review → Verify → Approval | `pro` |
+| **`EXPRESS`** | Simple bug fixes, typos, minor doc updates | Discovery $\to$ Plan $\to$ Implement $\to$ Test $\to$ PR | `flash` / `flash_lite` |
+| **`FEATURE`** | Standard features, new APIs, domain logic | Full 9-Phase AI-DLC with Approval Gate | `flash` + `pro` (Design/Review) |
+| **`MODERNIZATION`** | Framework migrations, runtime upgrades | Discovery $\to$ Solution $\to$ Approval $\to$ Plan $\to$ Stepwise Migrations | `pro` |
+| **`SECURITY`** | Vulnerability patches, auth/credential fixes | Strict Discovery $\to$ Security Review $\to$ Verify $\to$ Approval | `pro` |
 
 ---
 
-## 7. Developer Cheat Sheet & Common Commands
+## 7. Durable State & Resuming Work
 
-| Command / Trigger | Description | Output Artifact |
-| :--- | :--- | :--- |
-| `Run devweave-init` | Onboard repository & perform 5-layer tech detection | `.devweave/repository/*` |
-| `DevWeave-context <ID>` | Ingest work item & initialize context budget | `.devweave/work-items/<ID>/context.md` |
-| `DevWeave-status` | Inspect current AI-DLC state and open gates | `.devweave/state/current.json` |
-| `DevWeave-approve <ID>` | Authorize progression past the human approval gate | `.devweave/work-items/<ID>/approval.json` |
-| `DevWeave-verify` | Execute acceptance checks and verification matrix | `.devweave/work-items/<ID>/verification.md` |
-| `DevWeave-knowledge capture` | Curate reusable domain knowledge & conventions | `.devweave/knowledge/*.md` |
+Every work item maintains a persistent state record in `.devweave/state/current.json` and `.devweave/work-items/<ID>/state.md`.
+
+If a developer's session ends or an agent is interrupted mid-way:
+1. Re-open the workspace and run `DevWeave-status` or trigger your agent.
+2. DevWeave reads the completed phase records.
+3. Work seamlessly resumes from the exact interruption point (e.g., resuming halfway through `IMPLEMENT` without re-running `DISCOVERY` or `SOLUTION`).
 
 ---
 
-## 8. Customizing Conventions & Best Practices
+## 8. Security & Governance Boundaries
 
-You can customize how DevWeave writes code for your repository by editing:
-- [`.devweave/knowledge/conventions.md`](file:///D:/DevWeave/spec/specification/best-practices.md) — Team coding style, naming conventions, architectural boundaries, and formatting rules.
-- [`.devweave/repository/practices.md`](file:///D:/DevWeave/spec/specification/best-practices.md) — Custom repository-specific rules and anti-patterns.
+DevWeave enforces strict safety boundaries to protect your codebase:
+1. **Production Database Mutation Guard**: Raw `DROP TABLE`, `TRUNCATE`, or manual schema modifications outside approved migration scripts are blocked.
+2. **Secret Redaction**: Automated pattern scanning prevents API keys, private keys, and passwords from being committed or logged.
+3. **Destructive Command Gating**: Destructive shell operations (e.g., `rm -rf`, `git push --force`) require explicit developer confirmation.
 
-DevWeave always prioritizes your **local repository conventions** over generic language defaults.
+---
+
+## 9. Developer Command & Skill Reference
+
+| Command / Trigger | Skill Name | Purpose | Output Artifact |
+| :--- | :--- | :--- | :--- |
+| `DevWeave init` | `devweave-init` | 5-Layer autonomous repo onboarding | `.devweave/repository/*` |
+| `DevWeave-context <ID>` | `devweave-discovery` | Ingest ticket & initialize context budget | `.devweave/work-items/<ID>/context.md` |
+| `DevWeave-requirements` | `devweave-requirements` | Normalize acceptance criteria | `requirements.md` |
+| `DevWeave-solution` | `devweave-solution` | Architectural design & trade-offs | `solution.md` |
+| `DevWeave-approve <ID>` | `devweave-approval` | Authorize progression past approval gate | `approval.json` |
+| `DevWeave-plan` | `devweave-plan` | Decompose into atomic tasks | `plan.md` |
+| `DevWeave-implement` | `devweave-implement` | Surgical, plan-bound code execution | Modified source files |
+| `DevWeave-test` | `devweave-test` | Run test runners & capture results | `test-results.json` |
+| `DevWeave-verify` | `devweave-verify` | Validate criteria & build integrity | `verification.md` |
+| `DevWeave-review` | `devweave-review` | Multi-perspective code review | `review.md` |
+| `DevWeave-pr` | `devweave-pr` | Assemble pull request package | `pr-description.md` |
+| `DevWeave-status` | — | Inspect current AI-DLC state & open gates | `current.json` |
+| `DevWeave-knowledge capture`| `devweave-knowledge` | Save reusable domain rules & conventions | `.devweave/knowledge/*.md` |
+
+---
+
+## 10. Customizing Conventions for Your Team
+
+To customize how DevWeave generates code and reviews PRs for your repository:
+- Edit [`.devweave/knowledge/conventions.md`](file:///D:/DevWeave/spec/specification/best-practices.md) for naming conventions, folder patterns, and architectural rules.
+- Edit [`.devweave/repository/practices.md`](file:///D:/DevWeave/spec/specification/best-practices.md) for custom team practices or prohibited patterns.
+
+DevWeave always gives **local repository conventions highest priority**, ensuring AI agents adhere strictly to your team's existing codebase style.
