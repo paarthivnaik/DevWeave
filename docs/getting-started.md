@@ -62,34 +62,79 @@ flowchart TD
 
 ---
 
-## 2. Quick Start: 3 Steps to Your First Task
+## 2. Official Antigravity Command & Skill Contract
+
+DevWeave provides a deterministic CLI command surface mapped directly to Antigravity skills and specialized subagents:
 
 ```mermaid
 flowchart LR
-    S1["1. DevWeave Init<br><b>Inspect Repository</b><br>5-Layer Tech Detection"] --> S2["2. DevWeave-context<br><b>Ingest Work Item</b><br>MCP or Manual Input"]
-    S2 --> S3["3. Run AI-DLC<br><b>Deliver Feature</b><br>Plan → Code → Verify → PR"]
+    CLI["Developer CLI Command<br><code>DevWeave-xxx &lt;ID&gt;</code>"] --> Router["Antigravity Host Adapter"]
+    Router --> Skill["DevWeave Skill<br><code>devweave-xxx</code>"]
+    Skill --> Agent["Specialized Subagent<br><i>(Lead, Architect, Developer, etc.)</i>"]
+    Agent --> Storage["Durable Artifact<br><code>.devweave/work-items/&lt;ID&gt;/*</code>"]
+```
+
+### Command & Skill Surface Reference
+
+| CLI Command | Antigravity Skill | Assigned Subagent | AI-DLC Phase | Primary Artifact |
+| :--- | :--- | :--- | :--- | :--- |
+| `DevWeave init` | `devweave-init` | `devweave-lead` | `INIT` | `.devweave/repository/*` |
+| `DevWeave-context <ID>` | `devweave-discovery` | `devweave-architect` | `DISCOVERY` | `.devweave/work-items/<ID>/context.md` |
+| `DevWeave-requirements <ID>` | `devweave-requirements` | `devweave-lead` | `REQUIREMENTS` | `.devweave/work-items/<ID>/requirements.md` |
+| `DevWeave-solution <ID>` | `devweave-solution` | `devweave-architect` | `SOLUTION` | `.devweave/work-items/<ID>/solution.md` |
+| `DevWeave-approve <ID>` | `devweave-approval` | `devweave-gatekeeper` | `APPROVAL` | `.devweave/work-items/<ID>/approval.json` |
+| `DevWeave-plan <ID>` | `devweave-plan` | `devweave-lead` | `PLAN` | `.devweave/work-items/<ID>/plan.md` |
+| `DevWeave-implement <ID>` | `devweave-implement` | `devweave-developer` | `IMPLEMENT` | Modified source files |
+| `DevWeave-test <ID>` | `devweave-test` | `devweave-tester` | `TEST` | `.devweave/work-items/<ID>/test-results.json` |
+| `DevWeave-verify <ID>` | `devweave-verify` | `devweave-gatekeeper` | `VERIFY` | `.devweave/work-items/<ID>/verification.md` |
+| `DevWeave-review <ID>` | `devweave-review` | `devweave-reviewer` | `REVIEW` | `.devweave/work-items/<ID>/review.md` |
+| `DevWeave-pr <ID>` | `devweave-pr` | `devweave-lead` | `PR_READY` | `.devweave/work-items/<ID>/pr-description.md` |
+| `DevWeave-status <ID>` | — | — | Cross-phase | `.devweave/state/current.json` |
+| `DevWeave-knowledge capture` | `devweave-knowledge` | `devweave-curator` | Cross-phase | `.devweave/knowledge/*.md` |
+
+> **Explicit `<ID>` Invariant**: All work-item commands require the `<ID>` parameter explicitly to guarantee isolation in multi-task and multi-branch environments.
+
+---
+
+## 3. Quick Start: 3 Steps to Your First Task
+
+```mermaid
+flowchart LR
+    S1["1. DevWeave init<br><b>Inspect Repository</b><br>5-Layer Tech Detection"] --> S2["2. DevWeave-context &lt;ID&gt;<br><b>Ingest Work Item</b><br>MCP or Manual Input"]
+    S2 --> S3["3. Run AI-DLC Lifecycle<br><b>Deliver Feature</b><br>Plan → Code → Verify → PR"]
 ```
 
 ### Step 1: Initialize Your Repository (`DevWeave init`)
-Run in your project root or ask your AI assistant:
+Run in your project root or trigger via Antigravity:
 ```bash
 DevWeave init
 ```
-DevWeave automatically inspects project manifests, lockfiles, build configurations, and test runners using **5-Layer Autonomous Detection** without requiring you to manually configure stack settings.
+DevWeave inspects project manifests, lockfiles, build configurations, and test runners using **5-Layer Autonomous Detection** without requiring manual configuration.
 
-### Step 2: Ingest a Work Item (`DevWeave-context`)
+### Step 2: Ingest a Work Item (`DevWeave-context <ID>`)
 Ingest tasks from Jira, Azure DevOps, GitHub Issues, Linear, or manual paste:
 ```bash
 DevWeave-context PROJ-1042
 ```
 *If no MCP server is configured, DevWeave prompts you to paste the title, description, and acceptance criteria.*
 
-### Step 3: Run the Guided AI-DLC Flow
-DevWeave guides the agent systematically through requirements normalization, solution trade-offs, human approval, task execution, testing, and PR creation.
+### Step 3: Progress Through the AI-DLC Flow
+Progress smoothly through the phases using explicit commands or let the lead agent coordinate:
+```bash
+DevWeave-requirements PROJ-1042
+DevWeave-solution PROJ-1042
+DevWeave-approve PROJ-1042
+DevWeave-plan PROJ-1042
+DevWeave-implement PROJ-1042
+DevWeave-test PROJ-1042
+DevWeave-verify PROJ-1042
+DevWeave-review PROJ-1042
+DevWeave-pr PROJ-1042
+```
 
 ---
 
-## 3. The 9-Phase AI-DLC Lifecycle & State Transitions
+## 4. The 9-Phase AI-DLC Lifecycle & State Transitions
 
 DevWeave organizes work into a deterministic state machine with explicit validation gates and feedback loops:
 
@@ -146,7 +191,7 @@ flowchart LR
     Analysis --> Governance --> Execution --> Delivery
 ```
 
-1. **Discovery (`devweave-discovery`)**: Identifies affected components, dependencies, schema migrations, and sets an active context token budget (e.g., 32,000 tokens).
+1. **Discovery (`devweave-discovery`)**: Identifies affected components, dependencies, and schema migrations, establishing an initial token budget (e.g., 32,000 tokens).
 2. **Requirements (`devweave-requirements`)**: Normalizes requirements into testable acceptance criteria in `.devweave/work-items/<ID>/requirements.md`.
 3. **Solution Design (`devweave-solution`)**: Evaluates architectural trade-offs, selects tiered best practices, and creates `.devweave/work-items/<ID>/solution.md`.
 4. **Approval Gate (`devweave-approval`)**: Pauses execution for human authorization on high-impact architectural or schema changes.
@@ -158,7 +203,7 @@ flowchart LR
 
 ---
 
-## 4. Autonomous 5-Layer Technology Detection Flow
+## 5. Autonomous 5-Layer Technology Detection Flow
 
 When `DevWeave init` runs, it traverses repository manifests and builds evidence-backed intelligence without guessing:
 
@@ -197,7 +242,7 @@ Practices loaded into context are tiered to prevent ambiguity:
 
 ---
 
-## 5. Work Item Ingestion & Blast-Radius Scoping
+## 6. Work Item Ingestion & Blast-Radius Scoping
 
 DevWeave ensures **84%–93% token savings** by converting raw inputs into structured contexts and scoping LLM access:
 
@@ -218,12 +263,12 @@ flowchart TD
 
 ### Ingestion Commands
 - **Via MCP**: `DevWeave-context PROJ-1234`
-- **Manual Fallback**: `DevWeave-context` (prompts for title, description, criteria)
+- **Manual Fallback**: `DevWeave-context PROJ-1234` (prompts for title, description, criteria)
 - **Context Refresh**: `DevWeave-context --refresh PROJ-1234` (safely resets lifecycle if ticket changed)
 
 ---
 
-## 6. Workflow Profiles (Matching Rigor to Task Complexity)
+## 7. Workflow Profiles (Matching Rigor to Task Complexity)
 
 DevWeave dynamically routes work items to the most efficient lifecycle profile:
 
@@ -239,7 +284,7 @@ flowchart TD
 
 ---
 
-## 7. Durable State & Interrupted Workflows
+## 8. Durable State & Resuming Interrupted Sessions
 
 Every task maintains durable state in `.devweave/state/current.json` and `.devweave/work-items/<ID>/state.md`.
 
@@ -250,20 +295,20 @@ sequenceDiagram
     participant DevWeave
     participant Filesystem as .devweave/state/
     
-    Developer->>DevWeave: Start work on PROJ-101
+    Developer->>DevWeave: DevWeave-context PROJ-101
     DevWeave->>Filesystem: Complete DISCOVERY, REQ, SOLUTION, PLAN
     DevWeave->>Filesystem: Record Phase: IMPLEMENT (In Progress)
     Note over Developer,DevWeave: Developer session closes / Agent disconnects
     
-    Developer->>DevWeave: Resume work (DevWeave-status)
+    Developer->>DevWeave: DevWeave-status PROJ-101
     DevWeave->>Filesystem: Read current.json & load existing artifacts
     Note over DevWeave: Reuses completed PLAN & SOLUTION (Zero token re-spend)
-    DevWeave->>Developer: Resumed at IMPLEMENT phase
+    DevWeave->>Developer: Resumed cleanly at IMPLEMENT phase
 ```
 
 ---
 
-## 8. Multi-Perspective Code Review Architecture
+## 9. Multi-Perspective Code Review Architecture
 
 Before generating the pull request package, DevWeave evaluates changes across four independent review lenses:
 
@@ -284,7 +329,7 @@ flowchart TD
 
 ---
 
-## 9. Security & Governance Boundaries
+## 10. Security & Governance Boundaries
 
 DevWeave enforces hard security boundaries to protect production environments:
 
@@ -297,26 +342,6 @@ flowchart LR
     Guard -- "Destructive Shell (rm -rf, git push -f)" --> Gated["⚠️ Gated (Explicit Approval Required)"]
     Guard -- "Standard Local File Edits & Tests" --> Allowed["✅ Allowed Execution"]
 ```
-
----
-
-## 10. Developer Command & Skill Reference
-
-| Command / Trigger | Antigravity Skill | Purpose & Role | Output Artifact |
-| :--- | :--- | :--- | :--- |
-| `DevWeave init` | `devweave-init` | 5-Layer autonomous repo onboarding | `.devweave/repository/*` |
-| `DevWeave-context <ID>` | `devweave-discovery` | Ingest ticket & initialize context budget | `.devweave/work-items/<ID>/context.md` |
-| `DevWeave-requirements` | `devweave-requirements` | Normalize acceptance criteria | `requirements.md` |
-| `DevWeave-solution` | `devweave-solution` | Architectural design & trade-offs | `solution.md` |
-| `DevWeave-approve <ID>` | `devweave-approval` | Authorize progression past approval gate | `approval.json` |
-| `DevWeave-plan` | `devweave-plan` | Decompose into atomic tasks | `plan.md` |
-| `DevWeave-implement` | `devweave-implement` | Surgical, plan-bound code execution | Modified source files |
-| `DevWeave-test` | `devweave-test` | Run test runners & capture results | `test-results.json` |
-| `DevWeave-verify` | `devweave-verify` | Validate criteria & build integrity | `verification.md` |
-| `DevWeave-review` | `devweave-review` | Multi-perspective code review | `review.md` |
-| `DevWeave-pr` | `devweave-pr` | Assemble pull request package | `pr-description.md` |
-| `DevWeave-status` | — | Inspect current AI-DLC state & open gates | `current.json` |
-| `DevWeave-knowledge capture`| `devweave-knowledge` | Save reusable domain rules & conventions | `.devweave/knowledge/*.md` |
 
 ---
 
