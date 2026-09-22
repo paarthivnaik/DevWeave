@@ -1,0 +1,6 @@
+{
+  "id": "KB-INVALID",
+  "type": "random_type",
+  "confidence": 1.5,
+  "status": "NOT_A_STATUS"
+}

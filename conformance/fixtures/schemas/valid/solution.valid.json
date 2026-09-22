@@ -1,0 +1,10 @@
+{
+  "id": "SOL-001",
+  "work_item_id": "WI-001",
+  "title": "Pure Function Greeting Formatter",
+  "summary": "Introduce pure utility function formatUserGreeting and export via module entrypoint.",
+  "architecture_impact": "LOCAL",
+  "components_affected": ["src/index.ts"],
+  "trade_offs": ["Minimal footprint, requires unit test coverage"],
+  "status": "APPROVED"
+}

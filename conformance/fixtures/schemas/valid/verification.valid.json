@@ -1,0 +1,23 @@
+{
+  "work_item_id": "WI-001",
+  "timestamp": "2026-09-22T10:22:00Z",
+  "checks": [
+    {
+      "name": "TypeScript Typecheck",
+      "type": "TYPECHECK",
+      "command": "npm run build",
+      "exit_code": 0,
+      "output_summary": "0 errors reported",
+      "status": "PASSED"
+    },
+    {
+      "name": "Jest Test Suite",
+      "type": "CUSTOM",
+      "command": "npm test",
+      "exit_code": 0,
+      "output_summary": "4 passed",
+      "status": "PASSED"
+    }
+  ],
+  "overall_status": "PASSED"
+}

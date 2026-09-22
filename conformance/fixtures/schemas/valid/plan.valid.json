@@ -1,0 +1,16 @@
+{
+  "id": "PLAN-001",
+  "work_item_id": "WI-001",
+  "version": 1,
+  "tasks": [
+    {
+      "step": 1,
+      "id": "TASK-001",
+      "description": "Implement formatUserGreeting utility",
+      "target_files": ["src/index.ts"],
+      "verification_command": "npm test",
+      "status": "COMPLETED"
+    }
+  ],
+  "status": "APPROVED"
+}

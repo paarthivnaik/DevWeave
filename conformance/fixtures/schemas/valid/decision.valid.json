@@ -1,0 +1,12 @@
+{
+  "id": "ADR-001",
+  "title": "Adopt In-Memory Event Dispatcher for Testing",
+  "status": "ACCEPTED",
+  "date": "2026-09-22",
+  "context": "Need deterministic integration testing without external RabbitMQ dependency.",
+  "decision": "Use an in-memory event bus implementation in conformance testing mode.",
+  "consequences": {
+    "positive": ["Fast execution", "Zero external broker dependency"],
+    "negative": ["Does not test network serialization errors"]
+  }
+}

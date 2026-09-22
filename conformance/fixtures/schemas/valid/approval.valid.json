@@ -1,0 +1,8 @@
+{
+  "gate_name": "solution-approval",
+  "target_phase": "SOLUTION",
+  "approver": "team-lead",
+  "decision": "APPROVED",
+  "timestamp": "2026-09-22T10:00:00Z",
+  "comments": "Approved with architectural invariance intact."
+}

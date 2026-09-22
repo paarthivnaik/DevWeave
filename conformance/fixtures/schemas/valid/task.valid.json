@@ -1,0 +1,8 @@
+{
+  "step": 1,
+  "id": "TASK-001",
+  "description": "Implement formatUserGreeting method",
+  "target_files": ["src/index.ts"],
+  "verification_command": "npm test",
+  "status": "COMPLETED"
+}

@@ -1,0 +1,16 @@
+{
+  "work_item_id": "WI-001",
+  "phase": "IMPLEMENTING",
+  "timestamp": "2026-09-22T10:05:00Z",
+  "token_budget": {
+    "allocated": 32000,
+    "estimated_used": 4200
+  },
+  "included_sources": [
+    {
+      "path": "src/index.ts",
+      "reason": "Target modification file"
+    }
+  ],
+  "knowledge_items": ["KB-DOM-001"]
+}

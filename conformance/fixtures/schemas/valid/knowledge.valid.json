@@ -1,0 +1,16 @@
+{
+  "id": "KB-DOM-001",
+  "type": "domain",
+  "title": "Booking Expiration Timeframe",
+  "description": "Unconfirmed bookings must automatically transition to EXPIRED after 15 minutes.",
+  "domain": "reservations",
+  "source": "src/reservations/booking_timer.ts#L20-L40",
+  "evidence": [
+    "src/reservations/config.ts: BOOKING_TTL_MINUTES = 15",
+    "tests/reservations/booking_timer_test.ts: verifies auto-expiration"
+  ],
+  "confidence": 0.95,
+  "status": "APPROVED",
+  "last_verified": "2026-09-22",
+  "approved_by": "lead-architect"
+}
