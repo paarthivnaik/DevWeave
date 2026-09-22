@@ -2,7 +2,13 @@
 
 > **Less Tokens. More Work. Lower Bill.**
 
-DevWeave is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
+[![GitHub Pages](https://img.shields.io/badge/Live_Site-GitHub_Pages-6366f1?style=flat&logo=github)](https://paarthivnaik.github.io/DevWeave/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Conformance](https://img.shields.io/badge/Conformance-100%25_Verified-success)](conformance/)
+
+**DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
+
+🌐 **Public Documentation & Interactive Showcase**: [https://paarthivnaik.github.io/DevWeave/](https://paarthivnaik.github.io/DevWeave/)
 
 ---
 
