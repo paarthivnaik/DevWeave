@@ -2,13 +2,13 @@
 
 > **Less Tokens. More Work. Lower Bill.**
 
-[![GitHub Pages](https://img.shields.io/badge/Live_Site-GitHub_Pages-6366f1?style=flat&logo=github)](https://paarthivnaik.github.io/DevWeave/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Conformance](https://img.shields.io/badge/Conformance-100%25_Verified-success)](conformance/)
+[![Platform Symmetry](https://img.shields.io/badge/Hosts-6_Platforms_Certified-6366f1)](#-multi-host-plugins--adapters)
 
 **DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
 
-🌐 **Public Documentation & Interactive Showcase**: [https://paarthivnaik.github.io/DevWeave/](https://paarthivnaik.github.io/DevWeave/)
+🌐 **Interactive Showcase & Client Portal**: Open [`site/index.html`](file:///D:/DevWeave/site/index.html) or deploy via **Cloudflare Pages / Vercel** (100% Free for Private Repos).
 
 ---
 
