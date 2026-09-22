@@ -1,6 +1,6 @@
 ﻿---
 name: devweave-context
-description: [Phase 1: Context] Ingests work item via PM MCP or manual input with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md.
+description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, Azure DevOps, GitHub, Linear, Manual) with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md."
 ---
 
 # DevWeave Context Skill (`devweave-context`)
@@ -8,8 +8,9 @@ description: [Phase 1: Context] Ingests work item via PM MCP or manual input wit
 ## Execution Invariants
 1. **Single-Phase Execution**: Execute ONLY the CONTEXT phase. Do NOT automatically advance to ANALYZE.
 2. **PII / Privacy Hard Gate**: Prompt user to confirm ticket contains no unredacted PII/PHI or sensitive data before fetching.
-3. **Resume Detection**: If `.devweave/work-items/<ID>/` exists, check for `handoff.md` and display before continuing.
-4. **Zero Secret Storage**: Never write Personal Access Tokens (PATs) or raw secrets into artifacts.
+3. **PM Tool Selection**: Prompt developer to select the active Project Management source (Jira, Azure DevOps, GitHub, Linear, Manual Paste).
+4. **Resume Detection**: If `.devweave/work-items/<ID>/` exists, check for `handoff.md` and display before continuing.
+5. **Zero Secret Storage**: Never write Personal Access Tokens (PATs) or raw secrets into artifacts.
 
 ---
 
@@ -28,8 +29,23 @@ description: [Phase 1: Context] Ingests work item via PM MCP or manual input wit
   [Confirm & Proceed] [Cancel]
   ```
 
-### Step 2: Work Item Retrieval & Normalization
-- Retrieve ticket via configured PM MCP (Jira, Azure DevOps, GitHub, Linear) or prompt for manual paste input.
+### Step 2: PM Tool Selection & Work Item Retrieval
+- Present Project Management source selector:
+  ```text
+  [DevWeave Context Intake]
+  Work Item: <ID>
+
+  Select Project Management Source:
+    [1] Atlassian Jira (Jira MCP / API)
+    [2] Azure DevOps Boards (ADO MCP / API)
+    [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
+    [4] Linear (Linear MCP)
+    [5] Manual Paste / Offline Markdown Input
+
+  Selection: [1 | 2 | 3 | 4 | 5]
+  ```
+- If Options **[1â€“4]** selected: Query connected PM MCP tool and fetch ticket metadata.
+- If Option **[5]** selected: Provide a structured Markdown template for the developer to paste ticket details.
 - Classify work item type: `BUG` vs `FEATURE` (Story/Task/Epic).
 - For **Features**: Extract acceptance criteria, parent Epic, sibling stories, and Figma design references.
 - For **Bugs**: Extract environment, reproduction sequence, error logs, and runtime stack traces.
@@ -49,13 +65,14 @@ description: [Phase 1: Context] Ingests work item via PM MCP or manual input wit
   ```text
   CONTEXT COMPLETE
   Work Item: <ID> (Type: <BUG | FEATURE>)
+  PM Source: <Jira | Azure DevOps | GitHub | Linear | Manual>
   Loaded Domains: <list>
   Compliance Regimes: <list>
   Artifact: .devweave/work-items/<ID>/context.md
 
   Human Decision: [Approve Context] [Request Changes] [Provide Info] [Stop]
   Suggested Next Phase: ANALYZE
-  Run: DevWeave-analyze <ID>
+  Run: devweave-analyze <ID>
 
   DevWeave is waiting for your instruction.
   ```
