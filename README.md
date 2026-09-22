@@ -122,25 +122,80 @@ DevWeave/
 
 ---
 
-## ⚡ Quick Start & Installation
+## ⚡ Quick Start & Installation Across All Adapters
 
-### Option 1: One-Liner Install (Antigravity CLI)
+DevWeave provides native plugins and host adapters for all 6 major AI coding environments:
+
+### 1. 🔵 Google Antigravity
 ```powershell
+# Direct install from local repository:
 agy plugin install D:\DevWeave\plugins\antigravity
+
+# Or one-liner install from GitHub:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave; agy plugin install .\temp-devweave\plugins\antigravity; Remove-Item -Recurse -Force temp-devweave
+
+# Verify:
+agy plugin list   # Output: devweave (plugins/antigravity) - Status: active, Skills: 20 available
 ```
 
-### Option 2: Clone & Register from GitHub
-```powershell
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
-agy plugin install .\temp-devweave\plugins\antigravity
-Remove-Item -Recurse -Force temp-devweave
+### 2. 🟠 Anthropic Claude Code
+```bash
+# Register native Claude Code plugin:
+claude plugin add path/to/DevWeave/plugins/claude
+
+# Or copy repository rules & slash commands:
+mkdir -p .claude/commands && cp path/to/DevWeave/plugins/claude/CLAUDE.md ./CLAUDE.md && cp path/to/DevWeave/plugins/claude/commands/* .claude/commands/
+
+# Verify:
+claude /devweave-init
 ```
 
-### Verify Installation:
-```powershell
-agy plugin list
-# Output: devweave (plugins/antigravity) - Status: active, Skills: 20 available
+### 3. 🟣 GitHub Copilot (VS Code, Visual Studio, CLI)
+```bash
+# Option A: GitHub CLI Extension
+gh extension install path/to/DevWeave/plugins/copilot
+
+# Option B: Team Repository Setup (.github/prompts)
+mkdir -p .github/prompts && cp path/to/DevWeave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md && cp path/to/DevWeave/plugins/copilot/prompts/* .github/prompts/
+
+# Verify in Copilot Chat:
+@devweave /init
 ```
+
+### 4. 🔴 Google Gemini CLI
+```bash
+# Register Gemini CLI plugin:
+gemini plugin add path/to/DevWeave/plugins/gemini
+
+# Or copy configuration:
+mkdir -p .gemini/commands && cp path/to/DevWeave/plugins/gemini/GEMINI.md .gemini/GEMINI.md && cp path/to/DevWeave/plugins/gemini/commands/* .gemini/commands/
+
+# Verify:
+gemini devweave-init
+```
+
+### 5. 🟢 OpenAI Codex & ChatGPT CLI
+```bash
+# Register Codex plugin:
+codex plugin install path/to/DevWeave/plugins/codex
+
+# Or copy commands:
+mkdir -p .codex/commands && cp path/to/DevWeave/plugins/codex/CODEX.md .codex/CODEX.md && cp path/to/DevWeave/plugins/codex/commands/* .codex/commands/
+
+# Verify:
+codex run devweave-init
+```
+
+### 6. ⚪ Cognition Devin
+```bash
+# Load Devin Playbook in your workspace:
+devin playbook load path/to/DevWeave/plugins/devin
+
+# Verify:
+Run /devweave-init in the Devin console
+```
+
+For complete step-by-step setup, see [Master Installation Guide](file:///D:/DevWeave/docs/installation-guide.md).
 
 ---
 

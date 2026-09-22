@@ -182,7 +182,7 @@ Simply pull the latest changes from Git and re-run the install command:
 ```powershell
 cd path/to/DevWeave
 git pull origin develop
-agy plugin install .\plugins\devweave
+agy plugin install .\plugins\antigravity
 ```
 
 ### Q3: How do I remove the plugin?
