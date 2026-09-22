@@ -111,6 +111,7 @@ DevWeave/
 │
 └── docs/                              # Multi-Tier Documentation
     ├── getting-started.md             # End-to-end workflow walkthrough with Mermaid diagrams
+    ├── v1-benchmarks.md               # Empirical benchmarks across 12 repos & token/cost stats
     ├── installation-guide.md          # 5 installation methods (Junior to Senior/DevOps)
     ├── lifecycle.md                   # Normative AI-DLC lifecycle and execution contracts
     ├── workflow-profiles.md           # 8 risk-calibrated profiles and execution lanes

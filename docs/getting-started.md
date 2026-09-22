@@ -126,3 +126,5 @@ DevWeave continuously builds domain memory under [`.devweave/domains/`](file:///
 - **First Story in Domain**: Discovers architecture and builds domain scorecard.
 - **Subsequent Stories**: Reads existing domain file at **0 token rediscovery cost** (**93.3% token savings**).
 - **PR Phase**: Promotes newly discovered patterns back to central storage, compounding intelligence with every merged PR.
+
+For full empirical benchmarks across 12 polyglot repositories and cost calculations, see [V1.0 Benchmarks & Performance Guide](file:///D:/DevWeave/docs/v1-benchmarks.md).
