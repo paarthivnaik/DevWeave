@@ -126,6 +126,38 @@ Both paths become the same generic DevWeave Work Item.
 
 ---
 
+# 3.1 Installation & Setup in Antigravity (`agy`)
+
+You can install DevWeave in your target project using the Antigravity CLI (`agy`) or via Git clone:
+
+### Option A: Install via Antigravity CLI (`agy`) — Recommended
+
+In your target project directory (e.g., `D:\DatingAPP`):
+
+#### 1. From local DevWeave directory:
+```powershell
+agy plugin install D:\DevWeave\plugins\devweave
+```
+
+#### 2. From GitHub directly:
+```powershell
+# Clone the repository
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
+
+# Install the plugin via agy CLI
+agy plugin install .\temp-devweave\plugins\devweave
+
+# Clean up the temporary folder
+Remove-Item -Recurse -Force temp-devweave
+```
+
+#### 3. Verify Installation:
+```powershell
+agy plugin list
+```
+
+---
+
 # 4. First step — Initialize a repository
 
 Run DevWeave in the repository:
