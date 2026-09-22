@@ -253,6 +253,28 @@ try {
     Record-Scenario "SCENARIO-18" "Capability Negotiation" $false $_.Message
 }
 
+# ---------------------------------------------------------
+# Scenario 19: Human-in-the-Loop Phase Isolation & Checkpoints
+# ---------------------------------------------------------
+try {
+    $hitlSpec = "D:\DevWeave\spec\specification\human-in-the-loop.md"
+    $hasHitl = (Test-Path $hitlSpec) -and ((Get-Content $hitlSpec -Raw) -match "Zero Automatic Chaining")
+    Record-Scenario "SCENARIO-19" "Human-in-the-Loop Phase Isolation" $hasHitl "Verified mandatory human checkpoints, phase isolation, and zero auto-chaining"
+} catch {
+    Record-Scenario "SCENARIO-19" "Human-in-the-Loop Phase Isolation" $false $_.Message
+}
+
+# ---------------------------------------------------------
+# Scenario 20: Technology Revalidation & Dynamic Evolution
+# ---------------------------------------------------------
+try {
+    $revalSpec = "D:\DevWeave\spec\specification\technology-revalidation.md"
+    $hasReval = (Test-Path $revalSpec) -and ((Get-Content $revalSpec -Raw) -match "NEEDS_REVALIDATION")
+    Record-Scenario "SCENARIO-20" "Dynamic Technology Revalidation" $hasReval "Verified targeted knowledge invalidation and version-aware practice updates"
+} catch {
+    Record-Scenario "SCENARIO-20" "Dynamic Technology Revalidation" $false $_.Message
+}
+
 Write-Host "----------------------------------------------------------"
 $passedTotal = ($script:scenarioResults | Where-Object { $_.Status -eq "PASS" }).Count
 $failedTotal = ($script:scenarioResults | Where-Object { $_.Status -eq "FAIL" }).Count
