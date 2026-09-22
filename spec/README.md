@@ -1,4 +1,4 @@
-# DevWeave Specification (`devweave-spec`)
+# DevWeave Specification (`spec/`)
 
 Canonical AI-DLC (AI-Driven Development Lifecycle) declarative specification, schemas, agent archetypes, skills, policies, and contract definitions.
 
@@ -6,7 +6,7 @@ Canonical AI-DLC (AI-Driven Development Lifecycle) declarative specification, sc
 **Less Tokens. More Work. Lower Bill.**
 
 ## Overview
-`devweave-spec` provides the host-neutral, language-agnostic specification of DevWeave. It defines how AI coding assistants and autonomous agents systematically discover repositories, structure knowledge, enforce engineering policies, and drive development work items through a deterministic state machine.
+The `spec/` module provides the host-neutral, language-agnostic specification of DevWeave. It defines how AI coding assistants and autonomous agents systematically discover repositories, structure knowledge, enforce engineering policies, and drive development work items through a deterministic state machine.
 
 ## Structure
 - `specification/`: Core AI-DLC conceptual and lifecycle specifications
@@ -18,4 +18,4 @@ Canonical AI-DLC (AI-Driven Development Lifecycle) declarative specification, sc
 - `examples/`: Canonical reference configurations and workflows
 
 ## License
-Apache License 2.0. See [LICENSE](LICENSE) for details.
+Apache License 2.0. See [../LICENSE](../LICENSE) for details.
