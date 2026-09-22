@@ -15,10 +15,10 @@ flowchart TD
         H2["<b>🌐 100% Universal & Tech-Neutral</b><br>Autonomous 5-layer detection across 12 polyglot ecosystems with zero hardcoding"]
         H3["<b>🧠 Stage-Based Model Routing</b><br>Fast scanning on lightweight models (flash_lite), deep reasoning on flagship models (pro)"]
         H4["<b>🔄 Dynamic Technology Revalidation</b><br>Auto-detects framework upgrades (e.g. .NET 8 → 9) and hot-swaps active best practices"]
-        H5["<b>🛡️ Human-in-the-Loop Governance</b><br>Phase isolation, zero auto-chaining, zero self-approval, and 3 mandatory hard gates"]
-        H6["<b>⚡ Specialized Execution Lanes</b><br>Canonical 6-Phase Flow, Fix Lane (Triage/Diagnose/Land), Modernization Lane, Express Mode"]
+        H5["<b>🛡️ Human-in-the-Loop Governance</b><br>Phase isolation, zero auto-chaining, zero self-approval, and 4 mandatory hard gates"]
+        H6["<b>👥 Dual-Model Review (Architect + DBA)</b><br>Dedicated pre-PR review command (devweave-pr-review) evaluating impact, side effects & SQL"]
         H7["<b>📦 Zero Mandatory Daemons</b><br>100% declarative Git-native state (.devweave/), no background server or daemon needed"]
-        H8["<b>🧩 Marketplace-Ready Plugin</b><br>19 validated Antigravity skills with explicit [Phase X] tagging and AI-DLC rules"]
+        H8["<b>🧩 Marketplace-Ready Plugin</b><br>20 validated Antigravity skills with explicit [Phase X] tagging and AI-DLC rules"]
     end
 ```
 
@@ -27,15 +27,15 @@ flowchart TD
 | **Token & Cost Efficiency** | Caches discovered codebase patterns into `.devweave/domains/` and `.devweave/products/` and scopes execution to precise blast radiuses. | **84.1%–93.4% Token Savings** ($0.0018–$0.0039 vs $0.50–$1.16 on repeat tasks). |
 | **Stage-Based Model Routing** | Routes abstract capabilities (`fast-analysis`, `deep-reasoning`, `coding`, `independent-review`) to calibrated model tiers (`flash_lite`, `flash`, `pro`). | Eliminates paying flagship model prices for routine file scanning and git checks. |
 | **5-Layer Autonomous Tech Detection** | Progressively parses lockfiles and manifests across Language, Framework, Persistence, Testing, and Build layers. | Works out-of-the-box on **C#, Python, TypeScript, Java, Go, Rust, PHP, Ruby, C++**, monorepos, and legacy codebases. |
+| **Dual-Model Code & SQL Review** | Separate `devweave-pr-review` command executing concurrently as **Principal Software Architect** (code/impact) and **Senior DBA** (SQL/locks/indexes). | Uncovers architectural design flaws, table locks, and cascading failure risks before PR creation. |
 | **Dynamic Revalidation Engine** | Flags affected domain practices as `NEEDS_REVALIDATION` when dependency or runtime version bumps occur. | Permanent skills remain stable while version-specific idioms and conventions update dynamically. |
 | **HITL Phase Isolation** | Enforces that each command executes **only its single phase**, writes its artifact, and halts with a human decision prompt. | Eliminates runaway autonomous loops, hallucinations, and unreviewed code modifications. |
-| **Three Mandatory Hard Gates** | 1. **PII/Privacy Gate** (sanitizes secrets), 2. **Branch Gate** (blocks edits on main), 3. **PR Gate** (verifies passing tests & review). | Strict enterprise safety and zero secret storage in Git history. |
-| **Dual Pathways & Fast Lanes** | 1. **Canonical 6-Phase Flow** (Features/Refactors), 2. **Fix Lane** (Triage $\to$ Diagnose $\to$ Land), 3. **Modernization Lane** (`migration_manifest.md`), 4. **Express Mode**. | Right-sized workflow tailored to task risk and scope. |
+| **Mandatory Hard Gates** | 1. **PII/Privacy Gate** (sanitizes secrets), 2. **Branch Gate** (blocks edits on main), 3. **Review Gate** (human sign-off on review), 4. **PR Gate**. | Strict enterprise safety and zero secret storage in Git history. |
 | **Declarative & Git-Native** | Stores all lifecycle state, audit logs, and metrics as Markdown, YAML frontmatter, and JSON in `.devweave/`. | 100% transparent, auditable, and reproducible with zero background server dependencies. |
 
 ---
 
-## 📐 Canonical 6-Phase User Workflow
+## 📐 Canonical 7-Phase User Workflow
 
 ```mermaid
 flowchart LR
@@ -44,7 +44,8 @@ flowchart LR
     P2 --> P3["<b>Phase 3: Plan</b><br><code>devweave-plan &lt;ID&gt;</code>"]
     P3 --> P4["<b>Phase 4: Branch</b><br><code>devweave-branch &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
     P4 --> P5["<b>Phase 5: Implement</b><br><code>devweave-implement &lt;ID&gt;</code>"]
-    P5 --> P6["<b>Phase 6: PR</b><br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
+    P5 --> P6["<b>Phase 6: Review</b><br><code>devweave-pr-review &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
+    P6 --> P7["<b>Phase 7: PR</b><br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
 ```
 
 ---
@@ -59,7 +60,7 @@ devweave-fix-triage <ID>  ──►  devweave-fix-diagnose <ID>  ──►  devw
 
 ### 2. Modernization Lane (Legacy Migration & Upgrades)
 ```text
-devweave-context <ID>  ──►  devweave-analyze <ID>  ──►  devweave-modernize <ID>  ──►  devweave-branch  ──►  devweave-implement  ──►  devweave-pr
+devweave-context <ID>  ──►  devweave-analyze <ID>  ──►  devweave-modernize <ID>  ──►  devweave-branch  ──►  devweave-implement  ──►  devweave-pr-review  ──►  devweave-pr
                                                     (migration_manifest.md)
 ```
 
@@ -77,14 +78,15 @@ DevWeave/
 ├── plugins/devweave/                  # Google Antigravity Native Plugin Package
 │   ├── plugin.json                    # Plugin manifest ($schema, version 1.0.0)
 │   ├── rules/AGENTS.md                # AI-DLC core rules & phase boundary constraints
-│   └── skills/                        # 19 validated workflow skills (with [Phase X] tags)
+│   └── skills/                        # 20 validated workflow skills (with [Phase X] tags)
 │       ├── devweave-init/             # [Phase 0: Init] Autonomous 5-layer repo setup
 │       ├── devweave-context/          # [Phase 1: Context] Intake, PII gate, blast radius
 │       ├── devweave-analyze/          # [Phase 2: Analyze] Deep archaeology & root-cause
 │       ├── devweave-plan/             # [Phase 3: Plan] Atomic task breakdown & test anchors
 │       ├── devweave-branch/           # [Phase 4: Branch] Isolated Git branch hard gate
 │       ├── devweave-implement/        # [Phase 5: Implement] Surgical, plan-bound coding
-│       ├── devweave-pr/               # [Phase 6: PR] Deterministic verify, review, PR assembly
+│       ├── devweave-pr-review/        # [Phase 6: Review] Dual-model review (Architect + DBA)
+│       ├── devweave-pr/               # [Phase 7: PR] Final PR package & human approval gate
 │       ├── devweave-fix-triage/       # [Fix Lane - Phase 1] Error logs & severity triage
 │       ├── devweave-fix-diagnose/     # [Fix Lane - Phase 2] Hypotheses & minimal fix plan
 │       ├── devweave-fix-land/         # [Fix Lane - Phase 3] Patch, regression test, PR
@@ -136,14 +138,12 @@ Remove-Item -Recurse -Force temp-devweave
 ### Verify Installation:
 ```powershell
 agy plugin list
-# Output: devweave (plugins/devweave) - Status: active, Skills: 19 available
+# Output: devweave (plugins/devweave) - Status: active, Skills: 20 available
 ```
 
 ---
 
 ## 🧪 Master Conformance Verification
-
-DevWeave includes an automated test runner validating the specification across all polyglot targets:
 
 ```powershell
 .\conformance\tests\run_all_tests.ps1
@@ -151,28 +151,16 @@ DevWeave includes an automated test runner validating the specification across a
 
 ```text
 =================================================================
-  [PASSED] JSON Schema Validation Suite                  (3.11s)
-  [PASSED] AI-DLC State Machine Transition Suite         (1.00s)
-  [PASSED] 18 Conformance Scenarios Suite (20 Scenarios) (1.41s)
-  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.72s)
-  [PASSED] Multi-Repository .devweave Initialization Suite (1.93s)
-  [PASSED] Token & Cost Efficiency Benchmark Suite       (1.10s)
+  [PASSED] JSON Schema Validation Suite                  (2.44s)
+  [PASSED] AI-DLC State Machine Transition Suite         (0.90s)
+  [PASSED] 18 Conformance Scenarios Suite (20 Scenarios) (1.53s)
+  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.07s)
+  [PASSED] Multi-Repository .devweave Initialization Suite (2.64s)
+  [PASSED] Token & Cost Efficiency Benchmark Suite       (0.96s)
 -----------------------------------------------------------------
 RELEASE CANDIDATE STATUS: 100% CONFORMANCE VERIFIED (ALL SUITES PASSED)
 =================================================================
 ```
-
----
-
-## 📖 Complete Documentation Links
-
-- [**Getting Started & Workflow Guide**](docs/getting-started.md) — Comprehensive user walkthrough.
-- [**Installation Guide**](docs/installation-guide.md) — 5 step-by-step setup methods for all developer tiers.
-- [**Lifecycle Guide**](docs/lifecycle.md) — The formal 6-phase lifecycle and execution contracts.
-- [**Workflow Profiles**](docs/workflow-profiles.md) — Profile matrix and specialized fast lanes.
-- [**System Architecture**](docs/architecture.md) — 5-layer detection and dynamic revalidation mechanics.
-- [**Antigravity Host Adapter**](docs/antigravity.md) — Plugin architecture and skill CLI invocations.
-- [**Conformance Testing**](docs/conformance.md) — 20-scenario compliance verification matrix.
 
 ---
 

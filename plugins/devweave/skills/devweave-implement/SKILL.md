@@ -25,6 +25,6 @@ description: "[Phase 5: Implement] Executes surgical, plan-bound code modificati
    Tests: <X passed, 0 failed>
    
    Human decision: [Approve] [Request Changes] [Stop]
-   Suggested next phase: PR (Run: DevWeave-pr <ID>)
+   Suggested next phase: Review (Run: devweave-pr-review <ID>)
    ```
 7. **Terminate Execution**: Stop and wait for user instruction.
