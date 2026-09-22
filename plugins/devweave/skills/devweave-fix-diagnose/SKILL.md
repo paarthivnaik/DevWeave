@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-fix-diagnose
-description: Fix Lane Phase 2 - Adversarial root-cause investigation, competing hypotheses evaluation, and minimal-change fix plan.
+description: [Fix Lane - Phase 2: Diagnose] Adversarial root-cause investigation, competing hypotheses evaluation, and minimal-change fix plan.
 ---
 
 # DevWeave Fix Diagnose Skill (`devweave-fix-diagnose`)

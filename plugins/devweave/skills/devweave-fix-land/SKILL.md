@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-fix-land
-description: Fix Lane Phase 3 - Branch from verified base, apply minimal fix, execute regression test suite, and assemble fix PR.
+description: [Fix Lane - Phase 3: Land] Branch from verified base, apply minimal fix, execute regression test suite, and assemble fix PR.
 ---
 
 # DevWeave Fix Land Skill (`devweave-fix-land`)

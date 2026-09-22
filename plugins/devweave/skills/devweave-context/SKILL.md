@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-context
-description: Ingests work item via PM MCP or manual input with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md.
+description: [Phase 1: Context] Ingests work item via PM MCP or manual input with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md.
 ---
 
 # DevWeave Context Skill (`devweave-context`)

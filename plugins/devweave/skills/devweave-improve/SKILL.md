@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-improve
-description: Maintainer-facing analysis tool that reads survey friction logs and phase abort rates to propose specific improvements to plugin skills and rules.
+description: [Utility - Continuous Improvement] Maintainer-facing analysis tool that reads survey friction logs and phase abort rates to propose specific improvements to plugin skills and rules.
 ---
 
 # DevWeave Improvement Proposer Skill (`devweave-improve`)

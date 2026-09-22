@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-document-product
-description: Captures durable, long-lived product-level context (architecture, installers, middleware, frontend shell) into .devweave/products/<name>.md.
+description: [Knowledge - Product Documentation] Captures durable, long-lived product-level context (architecture, installers, middleware, frontend shell) into .devweave/products/<name>.md.
 ---
 
 # DevWeave Document Product Skill (`devweave-document-product`)

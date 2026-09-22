@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-report
-description: Generates an executive/engineering process metrics report aggregating utilization, cycle time, token spend, compliance, and effectiveness surveys.
+description: [Utility - Metrics & Reporting] Generates an executive/engineering process metrics report aggregating utilization, cycle time, token spend, compliance, and effectiveness surveys.
 ---
 
 # DevWeave Metrics Report Skill (`devweave-report`)

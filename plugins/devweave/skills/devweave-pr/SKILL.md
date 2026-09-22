@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-pr
-description: Executes deterministic verification, multi-perspective code review, fix/retest loop, and assembles the final PR package under a hard human approval gate.
+description: [Phase 6: PR] Executes deterministic verification, multi-perspective code review, fix/retest loop, and assembles final PR package under a hard human approval gate.
 ---
 
 # DevWeave PR Skill (`devweave-pr`)

@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-express
-description: Express Lane - Runs Context → Analyze → Plan → Branch → Implement → PR for one or more work items with a one-time batch bypass confirmation, sibling-coupling check, and test gate.
+description: [Express Lane - Fast Track] Runs Context -> Analyze -> Plan -> Branch -> Implement -> PR for one or more low-risk work items with batch confirmation and test gate.
 ---
 
 # DevWeave Express Skill (`devweave-express`)

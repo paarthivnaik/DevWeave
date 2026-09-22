@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-document-domain
-description: Captures durable, subsystem-level domain knowledge and scorecards with YAML frontmatter (criticality, compliance, owners, on-call) into .devweave/domains/<name>.md.
+description: [Knowledge - Domain Documentation] Captures durable, subsystem-level domain knowledge and scorecards with YAML frontmatter into .devweave/domains/<name>.md.
 ---
 
 # DevWeave Document Domain Skill (`devweave-document-domain`)

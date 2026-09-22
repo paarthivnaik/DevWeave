@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-plan
-description: Decomposes approved analysis into concrete, file-anchored implementation tasks with test commands and verification gates.
+description: [Phase 3: Plan] Decomposes approved analysis into concrete, file-anchored implementation tasks with test commands and verification gates.
 ---
 
 # DevWeave Plan Skill (`devweave-plan`)

@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-analyze
-description: Performs deep codebase archaeology, root-cause defect diagnosis or feature approach evaluation, and selects applicable best practices.
+description: [Phase 2: Analyze] Performs deep codebase archaeology, root-cause defect diagnosis or feature approach evaluation, and selects applicable best practices.
 ---
 
 # DevWeave Analysis Skill (`devweave-analyze`)

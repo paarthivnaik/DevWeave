@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-branch
-description: Enforces hard governance gate to create an isolated Git branch from verified base before implementation begins.
+description: [Phase 4: Branch] Enforces hard governance gate to create an isolated Git branch from verified base before implementation begins.
 ---
 
 # DevWeave Branch Skill (`devweave-branch`)

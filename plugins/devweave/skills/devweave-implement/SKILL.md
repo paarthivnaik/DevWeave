@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-implement
-description: Executes surgical, plan-bound code modifications, runs automated tests, and captures execution evidence.
+description: [Phase 5: Implement] Executes surgical, plan-bound code modifications, runs automated tests, and captures execution evidence.
 ---
 
 # DevWeave Implement Skill (`devweave-implement`)

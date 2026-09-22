@@ -1,6 +1,6 @@
----
+﻿---
 name: devweave-handoff
-description: Generates a durable handoff.md package capturing decisions, test results, open issues, and implementation summaries for teammates.
+description: [Utility - Team Handoff] Generates a durable handoff.md package capturing decisions, test results, open issues, and implementation summaries for teammates.
 ---
 
 # DevWeave Handoff Skill (`devweave-handoff`)
