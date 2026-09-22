@@ -110,10 +110,10 @@ DevWeave enforces strict governance invariants:
 
 ## 5. Antigravity Reference Host Adapter
 
-DevWeave is packaged natively as an Antigravity Plugin located at `plugins/devweave/`:
+DevWeave is packaged natively as an Antigravity Plugin located at `plugins/antigravity/`:
 
 ```
-plugins/devweave/
+plugins/antigravity/
 ├── plugin.json               # Plugin manifest (name, version, description)
 ├── rules/
 │   └── AGENTS.md             # AI-DLC core rules loaded into agent context

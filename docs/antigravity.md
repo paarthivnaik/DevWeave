@@ -6,10 +6,10 @@ Google Antigravity serves as the primary reference AI coding host for DevWeave.
 
 ## 1. Plugin Integration Structure
 
-DevWeave packages a full marketplace-ready plugin at `plugins/devweave/`:
+DevWeave packages a full marketplace-ready plugin at `plugins/antigravity/`:
 
 ```text
-plugins/devweave/
+plugins/antigravity/
 ├── plugin.json               # Marketplace manifest ($schema, name: "devweave", version: "1.0.0")
 ├── rules/
 │   └── AGENTS.md             # AI-DLC lifecycle rules, phase boundaries, zero secret storage
@@ -44,12 +44,12 @@ plugins/devweave/
 To register the DevWeave plugin in Google Antigravity:
 
 ```powershell
-agy plugin install D:\DevWeave\plugins\devweave
+agy plugin install D:\DevWeave\plugins\antigravity
 ```
 
 ### Validate Plugin Structure
 ```powershell
-agy plugin validate plugins/devweave
+agy plugin validate plugins/antigravity
 ```
 *Output: All 20 skills validated with `[ok]`.*
 
@@ -60,7 +60,7 @@ agy plugin list
 *Output:*
 ```text
 Available plugins:
-  devweave (plugins/devweave)
+  devweave (plugins/antigravity)
     Status: active
     Skills: 20 available
 ```

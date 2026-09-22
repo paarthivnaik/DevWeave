@@ -29,21 +29,21 @@ If DevWeave is already cloned on your machine:
 
 ```powershell
 # In your target project directory:
-agy plugin install D:\DevWeave\plugins\devweave
+agy plugin install D:\DevWeave\plugins\antigravity
 ```
-*(On macOS / Linux: `agy plugin install /path/to/DevWeave/plugins/devweave`)*
+*(On macOS / Linux: `agy plugin install /path/to/DevWeave/plugins/antigravity`)*
 
 ### Option B: One-Liner Install from GitHub
 ```powershell
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
-agy plugin install .\temp-devweave\plugins\devweave
+agy plugin install .\temp-devweave\plugins\antigravity
 Remove-Item -Recurse -Force temp-devweave
 ```
 
 ### Verification:
 ```powershell
 agy plugin list
-# Expected output: devweave (plugins/devweave) - Status: active, Skills: 20 available
+# Expected output: devweave (plugins/antigravity) - Status: active, Skills: 20 available
 ```
 
 ---

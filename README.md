@@ -75,7 +75,7 @@ devweave-express <ID> ──► Unified Context + Plan + Patch + Test + PR (Bypa
 
 ```text
 DevWeave/
-├── plugins/devweave/                  # Google Antigravity Native Plugin Package
+├── plugins/antigravity/               # Google Antigravity Native Plugin Package
 │   ├── plugin.json                    # Plugin manifest ($schema, version 1.0.0)
 │   ├── rules/AGENTS.md                # AI-DLC core rules & phase boundary constraints
 │   └── skills/                        # 20 validated workflow skills (with [Phase X] tags)
@@ -125,20 +125,20 @@ DevWeave/
 
 ### Option 1: One-Liner Install (Antigravity CLI)
 ```powershell
-agy plugin install D:\DevWeave\plugins\devweave
+agy plugin install D:\DevWeave\plugins\antigravity
 ```
 
 ### Option 2: Clone & Register from GitHub
 ```powershell
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave
-agy plugin install .\temp-devweave\plugins\devweave
+agy plugin install .\temp-devweave\plugins\antigravity
 Remove-Item -Recurse -Force temp-devweave
 ```
 
 ### Verify Installation:
 ```powershell
 agy plugin list
-# Output: devweave (plugins/devweave) - Status: active, Skills: 20 available
+# Output: devweave (plugins/antigravity) - Status: active, Skills: 20 available
 ```
 
 ---

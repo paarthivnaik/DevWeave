@@ -40,7 +40,7 @@ DevWeave runs natively across **6 AI coding hosts**:
 
 | Host Platform | Native Plugin Directory | Primary Command Style | Supported Models |
 |---|---|---|---|
-| **Google Antigravity** | [`plugins/devweave/`](file:///D:/DevWeave/plugins/devweave/) | `agy run devweave-<phase>` | `flash_lite`, `flash`, `pro` |
+| **Google Antigravity** | [`plugins/antigravity/`](file:///D:/DevWeave/plugins/antigravity/) | `agy run devweave-<phase>` | `flash_lite`, `flash`, `pro` |
 | **Anthropic Claude Code** | [`plugins/claude/`](file:///D:/DevWeave/plugins/claude/) | `claude /devweave-<phase>` | `Claude 3.5 Haiku`, `Sonnet`, `Opus` |
 | **GitHub Copilot** | [`plugins/copilot/`](file:///D:/DevWeave/plugins/copilot/) | `@devweave /<phase>` | `GPT-4o-mini`, `GPT-4o`, `o3-mini`, `o1` |
 | **Google Gemini CLI** | [`plugins/gemini/`](file:///D:/DevWeave/plugins/gemini/) | `gemini devweave-<phase>` | `Gemini 2.0 Flash Lite`, `Flash`, `Pro` |
