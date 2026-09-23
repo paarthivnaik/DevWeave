@@ -10,7 +10,7 @@ DevWeave integrates natively with **Anthropic Claude Code** via the [`plugins/cl
 plugins/claude/
 ├── plugin.json               # Claude Code plugin manifest
 ├── CLAUDE.md                 # Core AI-DLC lifecycle rules, phase boundaries & secret policies
-└── commands/                 # 20 Claude Code custom slash commands
+└── commands/                 # 31 Claude Code custom slash commands
     ├── devweave-init.md
     ├── devweave-context.md
     ├── devweave-analyze.md
@@ -19,11 +19,22 @@ plugins/claude/
     ├── devweave-implement.md
     ├── devweave-pr-review.md
     ├── devweave-pr.md
+    ├── devweave-modernization-init.md
+    ├── devweave-modernization-context.md
+    ├── devweave-modernization-analyze.md
+    ├── devweave-modernization-plan.md
+    ├── devweave-modernization-branch.md
+    ├── devweave-modernization-implement.md
+    ├── devweave-modernization-verify.md
+    ├── devweave-modernization-pr.md
+    ├── devweave-modernization-status.md
+    ├── devweave-modernization-report.md
     ├── devweave-fix-triage.md
     ├── devweave-fix-diagnose.md
     ├── devweave-fix-land.md
     ├── devweave-modernize.md
     ├── devweave-express.md
+    ├── devweave-update.md
     ├── devweave-status.md
     ├── devweave-handoff.md
     ├── devweave-archive.md
@@ -63,6 +74,18 @@ claude /devweave-branch "JIRA-101"      # [HARD GATE]
 claude /devweave-implement "JIRA-101"
 claude /devweave-pr-review "JIRA-101"   # Dual-Model Review (Architect + DBA) [HARD GATE]
 claude /devweave-pr "JIRA-101"          # Final PR Packaging [HARD GATE]
+```
+
+### V1.1 Modernization Workflow:
+```bash
+claude /devweave-modernization-init "Angular signals frontend with CQRS backend and PostgreSQL"
+claude /devweave-modernization-context "MOD-101"
+claude /devweave-modernization-analyze "MOD-101"   # [HARD GATE #1]
+claude /devweave-modernization-plan "MOD-101"      # [HARD GATE #2]
+claude /devweave-modernization-branch "MOD-101"
+claude /devweave-modernization-implement "MOD-101"
+claude /devweave-modernization-verify "MOD-101"    # [HARD GATE #3]
+claude /devweave-modernization-pr "MOD-101"
 ```
 
 ### Fix Lane:

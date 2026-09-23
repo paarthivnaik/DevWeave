@@ -1,0 +1,97 @@
+# DevWeave V1.1 Modernization Guide
+
+The DevWeave V1.1 Modernization Lifecycle enables teams to incrementally and deterministically modernize legacy systems (monoliths, older frameworks, legacy UI/API/databases) to modern target architectures (e.g. Angular signals, CQRS microservices, clean architecture) with strict Human-in-the-Loop governance.
+
+---
+
+## 1. Modernization Command Workflow
+
+DevWeave strictly uses **hyphen-separated CLI commands** for modernization:
+
+```mermaid
+flowchart TD
+    INIT["0. devweave-modernization-init<br><i>Natural Language Intent + Stack Profile</i>"] --> CONTEXT["1. devweave-modernization-context &lt;ID&gt;<br><i>Bounded Legacy Slice + Source Memory</i>"]
+    CONTEXT --> ANALYZE["2. devweave-modernization-analyze &lt;ID&gt;<br><i>Legacy Rules + Mappings.json</i>"]
+    ANALYZE --> GATE1{"HARD GATE #1<br><b>Human Approval</b>"}
+    GATE1 -- Approved --> PLAN["3. devweave-modernization-plan &lt;ID&gt;<br><i>File Actions + Test Specs + DB Migrations</i>"]
+    GATE1 -- Changes Requested --> ANALYZE
+    PLAN --> GATE2{"HARD GATE #2<br><b>Human Approval</b>"}
+    GATE2 -- Approved --> BRANCH["4. devweave-modernization-branch &lt;ID&gt;<br><i>Isolated Branch Creation</i>"]
+    GATE2 -- Changes Requested --> PLAN
+    BRANCH --> IMPLEMENT["5. devweave-modernization-implement &lt;ID&gt;<br><i>Surgical Edits + Build & Tests</i>"]
+    IMPLEMENT --> VERIFY["6. devweave-modernization-verify &lt;ID&gt;<br><i>Dual Verification + Parity Checks</i>"]
+    VERIFY --> GATE3{"HARD GATE #3<br><b>Human Approval</b>"}
+    GATE3 -- Approved --> PR["7. devweave-modernization-pr &lt;ID&gt;<br><i>PR Package + Graph Delta Promotion</i>"]
+    GATE3 -- Changes Requested --> IMPLEMENT
+```
+
+---
+
+## 2. Mandatory Hyphenated CLI Reference
+
+| Command | Phase | Description |
+| :--- | :--- | :--- |
+| `devweave-modernization-init` | `INIT` | Captures natural language architecture intent without tedious questionnaires. |
+| `devweave-modernization-context <ID>` | `CONTEXT` | Ingests legacy slice, scopes graph neighborhood, loads targeted practices. |
+| `devweave-modernization-analyze <ID>` | `ANALYZE` | Analyzes legacy behavior and produces `analysis.md` + `mappings.json`. |
+| `devweave-modernization-plan <ID>` | `PLAN` | Constructs file-anchored plan, tests, and DB migrations in `plan.md`. |
+| `devweave-modernization-branch <ID>` | `BRANCH` | Creates isolated branch `devweave/modernization/<ID>`. |
+| `devweave-modernization-implement <ID>`| `IMPLEMENT` | Executes surgical, plan-bound code changes and local tests. |
+| `devweave-modernization-verify <ID>` | `VERIFY` | Executes behavioral parity, architecture, and security checks. |
+| `devweave-modernization-pr <ID>` | `PR` | Assembles PR package (`report.md`, `pr-description.md`) and promotes graph memory. |
+| `devweave-modernization-status <ID>` | `STATUS` | Inspects and displays durable state, completed milestones, and blockers. |
+| `devweave-modernization-report <ID>` | `REPORT` | Synthesizes comprehensive markdown report for stakeholders. |
+
+---
+
+## 3. Human-in-the-Loop Hard Governance Gates
+
+Modernization enforces three mandatory Human-in-the-Loop checkpoints where execution automatically pauses:
+
+1. **Hard Gate #1 (Post-ANALYZE)**: Human architect authorizes target architecture and component mappings before planning begins.
+2. **Hard Gate #2 (Post-PLAN)**: Human team lead approves file changes, database migrations, and testing strategies before branch creation and code editing.
+3. **Hard Gate #3 (Post-VERIFY)**: Human reviewer confirms behavioral parity and test execution before PR assembly.
+
+Supported human decisions: `APPROVE`, `REQUEST_CHANGES`, `PROVIDE_INFORMATION`, `REJECT`, `STOP`, `RETRY`.
+
+## 4. Key Architectural Safeguards
+
+- **Zero Legacy Pollution**: Legacy source code is configured strictly as `READ_ONLY` in `source-memory.json`.
+- **Zero Fact Fabrication**: In empty or new target repositories, unstated details remain `UNKNOWN` and unspecified options are marked `AI_DETERMINED`.
+- **Version-Aware Practice Intelligence**: Framework changes (e.g. .NET 3 &rarr; 9) dynamically flag affected knowledge as `NEEDS_REVALIDATION`.
+- **Generic Migration Units**: Supports `PAGE`, `SCREEN`, `FEATURE`, `MODULE`, `SERVICE`, `DOMAIN`, `WORKFLOW`, `API`, `TRANSACTION`, `COMPONENT`, and `CAPABILITY`.
+- **Durable Knowledge Integration**: Reconciles `MIGRATED_TO` and `REPLACED_BY` edges into `graph/knowledge-graph.json` without destroying legacy history.
+
+---
+
+## 5. Hierarchical Workspace Architecture (Zero Duplication)
+
+DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchical Structure**, ensuring project-level decisions are declared once and inherited by every migration story:
+
+```text
+.devweave/modernization/
+│
+├── [TIER 1: CENTRAL PROJECT CONFIGURATION] (Created once via devweave-modernization-init)
+│   ├── workspace.json              <-- Target solution metadata & PM tool preference
+│   ├── architecture-intent.json    <-- Declared target architecture (e.g. Angular 22, CQRS, SQLite)
+│   ├── technology-profile.json     <-- Combined engineering practices (SOLID, Clean Code, CQRS)
+│   ├── source-memory.json          <-- Legacy repository pointer (READ_ONLY access mode)
+│   └── state.json                  <-- Central modernization project registry
+│
+└── [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created per work item via devweave-modernization-context <ID>)
+    ├── 98/                         <-- Story #98 (e.g. User Login)
+    │   ├── state.json              <-- Story lifecycle phase & hard gate tracker
+    │   ├── context.md              <-- Bounded legacy slice context
+    │   ├── migration-unit.json     <-- Targeted legacy components & DTOs
+    │   ├── analysis.md             <-- Behavioral rules & dependency analysis
+    │   ├── mappings.json           <-- Legacy-to-target component mappings
+    │   ├── plan.md                 <-- File-anchored tasks & DB migrations
+    │   ├── verification.md         <-- Behavioral parity & test evidence
+    │   └── pr-description.md       <-- Pull request package
+    │
+    └── 99/                         <-- Story #99 (e.g. User Registration)
+        ├── state.json
+        ├── context.md
+        ├── migration-unit.json
+        └── ...
+```

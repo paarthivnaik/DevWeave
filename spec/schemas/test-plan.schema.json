@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/test-plan.schema.json",
+  "title": "TestPlan",
+  "type": "object",
+  "required": ["work_item_id", "executionStrategy", "impactedExistingTests", "newTests", "regressionScope", "updated_at"],
+  "properties": {
+    "work_item_id": { "type": "string" },
+    "executionStrategy": {
+      "type": "object",
+      "required": ["order"],
+      "properties": {
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["FOCUSED_UNIT", "FOCUSED_API", "INTEGRATION", "E2E", "REGRESSION"]
+          }
+        },
+        "e2eFramework": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "impactedExistingTests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "action", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "action": { "type": "string", "enum": ["UPDATE", "RETIRE"] },
+          "reason": { "type": "string" },
+          "symbols": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "newTests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "testLevel", "scenarios"],
+        "properties": {
+          "path": { "type": "string" },
+          "testLevel": { "type": "string", "enum": ["UNIT", "INTEGRATION", "API", "DATABASE", "E2E"] },
+          "scenarios": { "type": "array", "items": { "type": "string" } },
+          "framework": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "migrationTestMapping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sourceBehavior", "targetBehavior", "status"],
+        "properties": {
+          "sourceBehavior": { "type": "string" },
+          "targetBehavior": { "type": "string" },
+          "sourceTests": { "type": "array", "items": { "type": "string" } },
+          "targetTests": { "type": "array", "items": { "type": "string" } },
+          "status": {
+            "type": "string",
+            "enum": ["PRESERVED", "UPDATED", "REPLACED", "NEW", "NOT_APPLICABLE", "UNKNOWN"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "regressionScope": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
