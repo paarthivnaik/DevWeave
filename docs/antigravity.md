@@ -1,5 +1,7 @@
 # DevWeave on Google Antigravity
 
+> **"Less Tokens. More Work. Lower Bill."**
+
 Google Antigravity serves as the primary reference AI coding host for DevWeave.
 
 ---
@@ -13,20 +15,21 @@ plugins/antigravity/
 ├── plugin.json               # Marketplace manifest ($schema, name: "devweave", version: "1.0.0")
 ├── rules/
 │   └── AGENTS.md             # AI-DLC lifecycle rules, phase boundaries, zero secret storage
-└── skills/                   # 20 specialized engineering workflow skills
-    ├── devweave-init/             # [Phase 0: Init] Autonomous repo detection
-    ├── devweave-context/          # [Phase 1: Context] Work item intake & PII gate
+└── skills/                   # 21 specialized engineering workflow skills
+    ├── devweave-init/             # [Phase 0: Init] Autonomous repo detection & JSON knowledge graph
+    ├── devweave-context/          # [Phase 1: Context] Work item intake, PII gate & 1-hop graph scoping
     ├── devweave-analyze/          # [Phase 2: Analyze] Deep archaeology & root cause
     ├── devweave-plan/             # [Phase 3: Plan] Implementation task breakdown
     ├── devweave-branch/           # [Phase 4: Branch] Isolated Git worktree gate
-    ├── devweave-implement/        # [Phase 5: Implement] Plan-bound surgical coding
+    ├── devweave-implement/        # [Phase 5: Implement] Plan-bound surgical coding & graph delta
     ├── devweave-pr-review/        # [Phase 6: Review] Dual-model consensus code review (Architect + DBA)
-    ├── devweave-pr/               # [Phase 7: PR] Final PR packaging & human gate
+    ├── devweave-pr/               # [Phase 7: PR] Final PR packaging, graph merge & human gate
     ├── devweave-fix-triage/       # [Fix Lane - Phase 1] Error triage & repro
     ├── devweave-fix-diagnose/     # [Fix Lane - Phase 2] Hypotheses & fix plan
     ├── devweave-fix-land/         # [Fix Lane - Phase 3] Patch, test & landing
     ├── devweave-modernize/        # [Modernization Lane] migration_manifest.md
     ├── devweave-express/          # [Express Lane] Fast track for low-risk changes
+    ├── devweave-update/           # [Lifecycle] In-place updater & 24h daily auto-sync
     ├── devweave-status/           # [Utility] Lifecycle state inspector
     ├── devweave-handoff/          # [Utility] Team handoff package generator
     ├── devweave-archive/          # [Utility] Workspace archiver post-merge
@@ -38,9 +41,9 @@ plugins/antigravity/
 
 ---
 
-## 2. Installation & Verification
+## 2. 1-Click Installation from GitHub
 
-### One-Liner Install from GitHub
+Install DevWeave directly into your Antigravity environment with zero daemons:
 
 ```powershell
 # Windows (PowerShell):
@@ -52,27 +55,48 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devwe
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && agy plugin install /tmp/devweave/plugins/antigravity && rm -rf /tmp/devweave
 ```
 
-### Validate Plugin Structure
-```powershell
-agy plugin validate plugins/antigravity
-```
-*Output: All 20 skills validated with `[ok]`.*
-
 ### Verify Active Plugin
 ```powershell
 agy plugin list
 ```
-*Output:*
-```text
-Available plugins:
-  devweave (plugins/antigravity)
-    Status: active
-    Skills: 20 available
+*Expected Output:*
+```json
+{
+  "imports": [
+    {
+      "name": "devweave",
+      "source": "antigravity",
+      "components": [
+        "skills"
+      ]
+    }
+  ]
+}
 ```
 
 ---
 
-## 3. Skill Invocation Methods
+## 3. How to Update DevWeave in Antigravity
+
+DevWeave provides 3 ways to stay updated:
+
+### Option A: Using the In-Place Update Skill (Fastest)
+Inside any Antigravity chat or terminal:
+```powershell
+agy run devweave-update
+```
+*(Fetches latest skills and rules from GitHub and updates in-place with zero uninstall friction).*
+
+### Option B: Automatic Daily Sync (24-Hour TTL)
+- On your **first session of each calendar day**, DevWeave checks GitHub in the background and updates silently.
+- Consumes **0 LLM tokens** and adds **0s latency**.
+
+### Option C: 1-Click Terminal Reinstall
+Run the one-liner installation command above at any time to refresh the plugin files directly.
+
+---
+
+## 4. Skill Invocation Methods
 
 1. **CLI Execution (`agy run`)**:
    ```powershell
@@ -93,6 +117,5 @@ Available plugins:
    agy run devweave-fix-land "BUG-567"
    ```
 
-3. **Interactive Antigravity Chat UI**:
-   - Type `/devweave-init` to inspect and initialize the active workspace repository.
-   - Mention `@devweave-context` or run phase commands directly in the conversation.
+3. **Interactive Antigravity Chat**:
+   - Type `/devweave-init` or ask the assistant: *"Initialize this repository with DevWeave"*.
