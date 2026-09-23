@@ -55,6 +55,11 @@ Construct a deterministic, file-level implementation plan that maps target files
     1. Update state: `phases.PLAN` = `APPROVED`.
     2. Log user approval and comments to `audit.md`.
     3. **STOP IMMEDIATELY**. Do NOT create branches or execute code modifications automatically. Prompt user to execute `devweave-modernization-branch <ID>`.
+  - `SKIP`:
+    1. Require mandatory human explanation comment (e.g., "Plan review bypassed by Lead Architect").
+    2. Update state: `phases.PLAN` = `SKIPPED`, `skipReason` = `<comment>`.
+    3. Log user skip decision with comment to `audit.md`.
+    4. **STOP IMMEDIATELY**. Prompt user to execute `devweave-modernization-branch <ID>`.
   - `REQUEST_CHANGES`:
     1. Update state: `phases.PLAN` = `CHANGES_REQUESTED`.
     2. Preserve plan versions (`plan.v1.md`, `plan.v2.md`), log feedback in `audit.md`.

@@ -56,6 +56,11 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
     1. Update state: `phases.ANALYZE` = `APPROVED`.
     2. Log user approval and comments to `audit.md`.
     3. **STOP IMMEDIATELY**. Do NOT execute planning automatically. Prompt user to execute `devweave-modernization-plan <ID>`.
+  - `SKIP`:
+    1. Require mandatory human explanation comment (e.g., "Analysis gate bypassed for direct porting").
+    2. Update state: `phases.ANALYZE` = `SKIPPED`, `skipReason` = `<comment>`.
+    3. Log user skip decision with comment to `audit.md`.
+    4. **STOP IMMEDIATELY**. Prompt user to execute `devweave-modernization-plan <ID>`.
   - `REQUEST_CHANGES`:
     1. Update state: `phases.ANALYZE` = `CHANGES_REQUESTED`.
     2. Preserve `analysis.v1.md`, log feedback in `audit.md`.

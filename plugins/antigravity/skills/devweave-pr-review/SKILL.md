@@ -48,7 +48,9 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    Artifact: .devweave/work-items/<ID>/review.md
    Audit Log: .devweave/work-items/<ID>/audit.md
 
-   Human decision: [Approve Review & Proceed to PR] [Request Changes / Fix] [Stop]
+   Human decision: [Approve Review & Proceed to PR] [Request Changes / Fix] [Skip with Comment] [Stop]
    Suggested next phase: PR (Run: devweave-pr <ID>)
    ```
-7. **Terminate Execution**: Stop and wait for user instruction. Upon human approval, record approval in audit and STOP. Never auto-execute `devweave-pr <ID>`.
+7. **Terminate Execution**: Stop and wait for user instruction.
+   - Upon human approval: Record approval in audit and STOP. Never auto-execute `devweave-pr <ID>`.
+   - Upon human skip: Prompt for mandatory reason comment, record `SKIPPED` with reason in audit and state, and STOP. Never auto-execute `devweave-pr <ID>`.

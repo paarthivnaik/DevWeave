@@ -70,6 +70,11 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
     1. Update state: `phases.VERIFY` = `APPROVED`.
     2. Log user approval and comments to `audit.md`.
     3. **STOP IMMEDIATELY**. Do NOT generate PR artifacts or mark story completed. Prompt user to execute `devweave-modernization-pr <ID>`.
+  - `SKIP`:
+    1. Require mandatory human explanation comment (e.g., "Verification bypassed for emergency patch").
+    2. Update state: `phases.VERIFY` = `SKIPPED`, `skipReason` = `<comment>`.
+    3. Log user skip decision with comment to `audit.md`.
+    4. **STOP IMMEDIATELY**. Prompt user to execute `devweave-modernization-pr <ID>`.
   - `REQUEST_CHANGES`:
     1. Update state: `phases.VERIFY` = `CHANGES_REQUESTED`.
     2. Log user change request comments to `audit.md`.
