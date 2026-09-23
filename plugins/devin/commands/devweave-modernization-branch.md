@@ -29,8 +29,8 @@ The agent must recognize natural developer requests, such as:
 
 ---
 
-## Interactive Branch Configuration Checkpoint
-If `--name` or `--base` are not provided on the command line or via natural phrasing, the agent **MUST** prompt the developer for branch details before executing Git commands:
+## Interactive Branch Configuration Checkpoint (Mandatory Blocking Gate)
+If `--name` or `--base` are not provided on the command line or via natural phrasing, the agent **MUST NOT** make assumptions or silently create a default branch. The agent **MUST IMMEDIATELY STOP AND ASK** the developer for branch details, discovering and listing available repository branches:
 
 ```text
 =======================================================
@@ -39,12 +39,18 @@ If `--name` or `--base` are not provided on the command line or via natural phra
 Work Item ID: <ID>
 Plan Status:  APPROVED
 
-Please specify or confirm your branch configuration:
-1. Target Branch Name: [Default: devweave/modernization/<ID> | e.g., feature/<ID>-<title>]
-2. Base Branch:        [Default: <current_active_branch> | e.g., master, develop, epic/xxx]
+Detected Repository Branches:
+- master / main (Production/Default)
+- develop (Development Integration)
+- release/* (Release Tracks)
+- epic/* (Feature Epics)
 
-Provide your branch name and base branch (or confirm defaults):
-Example: "create feature/99-User-Registration from master"
+Please specify your branch configuration:
+1. Target Branch Name: (e.g., feature/<ID>-User-Registration, fix/<ID>-xxx)
+2. Base / Source Branch: (e.g., master, develop, epic/xxx, release/2.4)
+
+Confirm:
+- Do you want to proceed with creating and checking out this branch? (Yes/No)
 =======================================================
 ```
 
