@@ -99,11 +99,45 @@ DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchic
 
 ---
 
-## 6. Story Audit Trail (`audit.md`)
-Every story maintains an append-only `.devweave/modernization/stories/<ID>/audit.md` file tracking the full history of the work item:
-- **User Prompts & Instructions**: Captures user inputs, custom descriptions, and specific instructions at every phase.
-- **Interactive Choices**: Records PM tool selections, branch names, and base branch configurations.
-- **Hard Gate Decisions**: Logs human approvals, change requests, and feedback for Gates #1, #2, and #3.
-- **Phase Transitions**: Timestamps and status changes from `INIT` through `PR`.
-- **Artifact Modifications**: Precise files created and modified at each step.
+## 6. User Activity Audit Trail (`audit.md`)
+Every story maintains an append-only `.devweave/modernization/stories/<ID>/audit.md` dedicated **EXCLUSIVELY to human developer actions** (internal AI-DLC framework machinery, AST scans, and agent traces are omitted):
+- **Author Attribution**: Every entry records `Author: <User Name> <email@example.com>` (from `git config user.name` and `user.email`).
+- **User Prompts & Instructions**: Captures developer instructions, custom descriptions, and pasted requirements.
+- **Interactive Configurations**: Records PM tool choices, custom branch names, and base branch selections (e.g. `"create feature/99-User-Registration from master"`).
+- **Governance Gate Decisions**: Logs human approvals, change requests, and written feedback at Hard Gates #1, #2, and #3.
+- **Pull Request Sign-off**: Records developer authorization to open the release PR.
+
+#### Example `audit.md`:
+```markdown
+# User Audit Trail: Story 99
+
+**Work Item ID**: 99
+**Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+**Created At**: 2026-09-23T23:45:00+05:30
+
+---
+
+### [2026-09-23T23:45:00+05:30] Command: devweave-modernization-context 99
+- **Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+- **Activity**: Work Item Ingestion & Scope Input
+- **User Prompt**: "Modernize user registration screen from legacy JSP to Angular 22"
+- **Inputs Provided**: PM Source = Manual Paste, PII Confirmed = Yes
+
+---
+
+### [2026-09-23T23:46:00+05:30] Hard Gate #1: Architecture Authorization
+- **Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+- **Activity**: Gate Review Decision
+- **Decision**: APPROVE
+- **User Feedback / Comments**: "Target architecture approved with Signals store"
+
+---
+
+### [2026-09-23T23:47:00+05:30] Command: devweave-modernization-branch 99
+- **Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+- **Activity**: Branch Configuration
+- **User Input**: "create feature/99-User-Registration from master"
+- **Target Branch**: feature/99-User-Registration
+- **Base Branch**: master
+```
 
