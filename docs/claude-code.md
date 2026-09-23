@@ -37,19 +37,16 @@ plugins/claude/
 
 ## 2. Installation in Claude Code
 
-### Project-Level Installation
-Copy or symlink `plugins/claude/CLAUDE.md` and `plugins/claude/commands/` to your project's `.claude/` directory:
+### One-Liner Install from GitHub
 
 ```bash
-# In your target repository:
-mkdir -p .claude/commands
-cp path/to/DevWeave/plugins/claude/CLAUDE.md ./CLAUDE.md
-cp path/to/DevWeave/plugins/claude/commands/* .claude/commands/
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .claude/commands && cp /tmp/devweave/plugins/claude/CLAUDE.md ./CLAUDE.md && cp /tmp/devweave/plugins/claude/commands/* .claude/commands/ && rm -rf /tmp/devweave
 ```
 
-### Global Claude Code Plugin Registration
-```bash
-claude plugin add path/to/DevWeave/plugins/claude
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .claude\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\claude\CLAUDE.md .\CLAUDE.md; Copy-Item $env:TEMP\devweave\plugins\claude\commands\* .claude\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
 ```
 
 ---

@@ -26,11 +26,20 @@ plugins/codex/
 
 ## 2. Installation & CLI Execution
 
-```bash
-# Register plugin in OpenAI / ChatGPT CLI
-codex plugin install path/to/DevWeave/plugins/codex
+### One-Liner Install from GitHub
 
-# Run 7-phase workflow
+```bash
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .codex/commands && cp /tmp/devweave/plugins/codex/CODEX.md .codex/CODEX.md && cp /tmp/devweave/plugins/codex/commands/* .codex/commands/ && rm -rf /tmp/devweave
+```
+
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .codex\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\codex\CODEX.md .codex\CODEX.md; Copy-Item $env:TEMP\devweave\plugins\codex\commands\* .codex\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+
+### Run 7-Phase Workflow
+```bash
 codex run devweave-init
 codex run devweave-context "JIRA-101"
 codex run devweave-analyze "JIRA-101"

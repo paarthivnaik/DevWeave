@@ -128,80 +128,85 @@ DevWeave/
 
 ---
 
-## ⚡ Quick Start & Installation Across All Adapters
+## ⚡ Quick Start & Git-Based Installation Across All Adapters
 
-DevWeave provides native plugins and host adapters for all 6 major AI coding environments:
+Install DevWeave directly from the Git repository into any project:
 
 ### 1. 🔵 Google Antigravity
 ```powershell
-# Direct install from local repository:
-agy plugin install D:\DevWeave\plugins\antigravity
-
-# Or one-liner install from GitHub:
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git temp-devweave; agy plugin install .\temp-devweave\plugins\antigravity; Remove-Item -Recurse -Force temp-devweave
-
-# Verify:
-agy plugin list   # Output: devweave (plugins/antigravity) - Status: active, Skills: 20 available
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; agy plugin install $env:TEMP\devweave\plugins\antigravity; Remove-Item -Recurse -Force $env:TEMP\devweave
 ```
+```bash
+# macOS / Linux (Bash):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && agy plugin install /tmp/devweave/plugins/antigravity && rm -rf /tmp/devweave
+```
+**Verify**: `agy plugin list` &rarr; `devweave (plugins/antigravity) - Status: active, Skills: 20 available`
+
+---
 
 ### 2. 🟠 Anthropic Claude Code
 ```bash
-# Register native Claude Code plugin:
-claude plugin add path/to/DevWeave/plugins/claude
-
-# Or copy repository rules & slash commands:
-mkdir -p .claude/commands && cp path/to/DevWeave/plugins/claude/CLAUDE.md ./CLAUDE.md && cp path/to/DevWeave/plugins/claude/commands/* .claude/commands/
-
-# Verify:
-claude /devweave-init
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .claude/commands && cp /tmp/devweave/plugins/claude/CLAUDE.md ./CLAUDE.md && cp /tmp/devweave/plugins/claude/commands/* .claude/commands/ && rm -rf /tmp/devweave
 ```
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .claude\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\claude\CLAUDE.md .\CLAUDE.md; Copy-Item $env:TEMP\devweave\plugins\claude\commands\* .claude\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+**Verify**: Run `claude /devweave-init`
+
+---
 
 ### 3. 🟣 GitHub Copilot (VS Code, Visual Studio, CLI)
 ```bash
-# Option A: GitHub CLI Extension
-gh extension install path/to/DevWeave/plugins/copilot
-
-# Option B: Team Repository Setup (.github/prompts)
-mkdir -p .github/prompts && cp path/to/DevWeave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md && cp path/to/DevWeave/plugins/copilot/prompts/* .github/prompts/
-
-# Verify in Copilot Chat:
-@devweave /init
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .github/prompts && cp /tmp/devweave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md && cp /tmp/devweave/plugins/copilot/prompts/* .github/prompts/ && rm -rf /tmp/devweave
 ```
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .github\prompts | Out-Null; Copy-Item $env:TEMP\devweave\plugins\copilot\copilot-instructions.md .github\copilot-instructions.md; Copy-Item $env:TEMP\devweave\plugins\copilot\prompts\* .github\prompts\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+**Verify**: Type `@devweave /init` in Copilot Chat.
+
+---
 
 ### 4. 🔴 Google Gemini CLI
 ```bash
-# Register Gemini CLI plugin:
-gemini plugin add path/to/DevWeave/plugins/gemini
-
-# Or copy configuration:
-mkdir -p .gemini/commands && cp path/to/DevWeave/plugins/gemini/GEMINI.md .gemini/GEMINI.md && cp path/to/DevWeave/plugins/gemini/commands/* .gemini/commands/
-
-# Verify:
-gemini devweave-init
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .gemini/commands && cp /tmp/devweave/plugins/gemini/GEMINI.md .gemini/GEMINI.md && cp /tmp/devweave/plugins/gemini/commands/* .gemini/commands/ && rm -rf /tmp/devweave
 ```
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .gemini\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\gemini\GEMINI.md .gemini\GEMINI.md; Copy-Item $env:TEMP\devweave\plugins\gemini\commands\* .gemini\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+**Verify**: Run `gemini devweave-init`
+
+---
 
 ### 5. 🟢 OpenAI Codex & ChatGPT CLI
 ```bash
-# Register Codex plugin:
-codex plugin install path/to/DevWeave/plugins/codex
-
-# Or copy commands:
-mkdir -p .codex/commands && cp path/to/DevWeave/plugins/codex/CODEX.md .codex/CODEX.md && cp path/to/DevWeave/plugins/codex/commands/* .codex/commands/
-
-# Verify:
-codex run devweave-init
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .codex/commands && cp /tmp/devweave/plugins/codex/CODEX.md .codex/CODEX.md && cp /tmp/devweave/plugins/codex/commands/* .codex/commands/ && rm -rf /tmp/devweave
 ```
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .codex\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\codex\CODEX.md .codex\CODEX.md; Copy-Item $env:TEMP\devweave\plugins\codex\commands\* .codex\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+**Verify**: Run `codex run devweave-init`
+
+---
 
 ### 6. ⚪ Cognition Devin
 ```bash
-# Load Devin Playbook in your workspace:
-devin playbook load path/to/DevWeave/plugins/devin
-
-# Verify:
-Run /devweave-init in the Devin console
+# In your Devin workspace:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .devin && cp -r /tmp/devweave/plugins/devin/* .devin/ && rm -rf /tmp/devweave
 ```
+**Verify**: Run `/devweave-init` in the Devin console.
 
-For complete step-by-step setup, see [Master Installation Guide](file:///D:/DevWeave/docs/installation-guide.md).
+---
+
+For complete multi-platform documentation, see the [Master Installation Guide](file:///D:/DevWeave/docs/installation-guide.md).
 
 ---
 
