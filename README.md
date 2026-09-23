@@ -98,6 +98,7 @@ DevWeave/
 │       ├── devweave-fix-land/         # [Fix Lane - Phase 3] Patch, regression test, PR
 │       ├── devweave-modernize/        # [Modernization Lane] migration_manifest.md
 │       ├── devweave-express/          # [Express Lane] Single-pass fast track for low risk
+│       ├── devweave-update/           # [Lifecycle] In-place updater & 24h daily auto-sync
 │       ├── devweave-status/           # [Utility] Lifecycle state inspector
 │       ├── devweave-handoff/          # [Utility] Team handoff package generator
 │       ├── devweave-archive/          # [Utility] Post-merge workspace archiver
@@ -116,9 +117,10 @@ DevWeave/
 │   └── fixtures/                      # 12 polyglot repo fixtures (.NET, Python, Go, etc.)
 │
 └── docs/                              # Multi-Tier Documentation
+    ├── developer-guide.md             # 🌟 Universal Developer Handbook & Command Reference
+    ├── installation-guide.md          # 1-Click Git-based installation across all 6 hosts
     ├── getting-started.md             # End-to-end workflow walkthrough with Mermaid diagrams
     ├── v1-benchmarks.md               # Empirical benchmarks across 12 repos & token/cost stats
-    ├── installation-guide.md          # 5 installation methods (Junior to Senior/DevOps)
     ├── lifecycle.md                   # Normative AI-DLC lifecycle and execution contracts
     ├── workflow-profiles.md           # 8 risk-calibrated profiles and execution lanes
     ├── architecture.md                # 5-layer detection, dynamic reval, and host adapters
@@ -128,7 +130,9 @@ DevWeave/
 
 ---
 
-## ⚡ Quick Start & Git-Based Installation Across All Adapters
+## ⚡ Quick Start & Git-Based Installation Across All Hosts
+
+> 📖 For full command descriptions, parameter options, and beginner tutorials, see the **[Universal Developer Handbook](docs/developer-guide.md)**.
 
 Install DevWeave directly from the Git repository into any project:
 
@@ -141,7 +145,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devwe
 # macOS / Linux (Bash):
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && agy plugin install /tmp/devweave/plugins/antigravity && rm -rf /tmp/devweave
 ```
-**Verify**: `agy plugin list` &rarr; `devweave (plugins/antigravity) - Status: active, Skills: 20 available`
+**Verify**: `agy plugin list` &rarr; `devweave (plugins/antigravity) - Status: active, Skills: 21 available`
 
 ---
 

@@ -1,8 +1,12 @@
 # DevWeave V1.0 — Universal Installation & Setup Guide
 
+> **"Less Tokens. More Work. Lower Bill."**
+
 Welcome to the **DevWeave Multi-Host Installation Guide**.
 
-DevWeave is designed from first principles to be **100% host-neutral**. Whether you use **Google Antigravity**, **Anthropic Claude Code**, **GitHub Copilot**, **Google Gemini CLI**, **OpenAI Codex**, or **Cognition Devin**, this guide provides clear, step-by-step instructions from junior developer onboarding to enterprise DevOps deployment.
+DevWeave is designed from first principles to be **100% host-neutral**. Whether you use **Google Antigravity**, **Anthropic Claude Code**, **GitHub Copilot**, **Google Gemini CLI**, **OpenAI Codex**, or **Cognition Devin**, this guide provides clear, copy-pasteable setup commands from GitHub with automated updates.
+
+> 📖 **Looking for full command breakdowns and tutorials?** See the [DevWeave Developer Handbook](developer-guide.md).
 
 ---
 
@@ -13,11 +17,11 @@ flowchart TD
     DEV["<b>Target Project Repository</b>"] --> HOST{"Select Your AI Coding Host"}
 
     HOST -->|1| AGY["<b>Google Antigravity</b><br><code>agy plugin install</code>"]
-    HOST -->|2| CLAUDE["<b>Anthropic Claude Code</b><br><code>claude plugin add</code>"]
-    HOST -->|3| COPILOT["<b>GitHub Copilot</b><br><code>gh extension install / .github</code>"]
-    HOST -->|4| GEMINI["<b>Google Gemini CLI</b><br><code>gemini plugin add</code>"]
-    HOST -->|5| CODEX["<b>OpenAI Codex / ChatGPT CLI</b><br><code>codex plugin install</code>"]
-    HOST -->|6| DEVIN["<b>Cognition Devin</b><br><code>devin playbook load</code>"]
+    HOST -->|2| CLAUDE["<b>Anthropic Claude Code</b><br><code>claude commands</code>"]
+    HOST -->|3| COPILOT["<b>GitHub Copilot</b><br><code>.github/prompts</code>"]
+    HOST -->|4| GEMINI["<b>Google Gemini CLI</b><br><code>.gemini/commands</code>"]
+    HOST -->|5| CODEX["<b>OpenAI Codex / ChatGPT CLI</b><br><code>.codex/commands</code>"]
+    HOST -->|6| DEVIN["<b>Cognition Devin</b><br><code>.devin/playbooks</code>"]
 ```
 
 ---
@@ -39,14 +43,14 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 ### Verification:
 ```powershell
 agy plugin list
-# Expected output: devweave (plugins/antigravity) - Status: active, Skills: 20 available
+# Expected output: devweave - Components: skills (21 validated skills)
 ```
 
 ---
 
 ## 2. Anthropic Claude Code Installation
 
-Install DevWeave rules and 20 custom slash commands from GitHub into your target project:
+Install DevWeave rules and 21 custom slash commands from GitHub into your target project:
 
 ```bash
 # macOS / Linux / Git Bash:
@@ -122,7 +126,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devwe
 
 ### Verification:
 ```bash
-codex run devweave-init
+$devweave init
 ```
 
 ---
@@ -137,11 +141,30 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 ```
 
 ### Verification:
-Run `/devweave-init` in the Devin interactive console to trigger autonomous 5-layer repository detection.
+Run `devweave:init` in the Devin interactive console to trigger autonomous 5-layer repository detection.
 
 ---
 
-## 7. Canonical Workflow Execution Across All Platforms
+## 7. Automated Updates & In-Place Sync
+
+DevWeave provides two ways to stay updated with zero token waste:
+
+### A. Automatic Daily Sync (24-Hour TTL)
+- On the **first session of each day**, DevWeave automatically checks remote `HEAD` and syncs new plugin files in-place.
+- Subsequent sessions during the day run with **0ms latency and 0 network requests**.
+
+### B. Manual In-Place Update
+Run the update command in your AI assistant without needing to uninstall:
+- **Google Antigravity**: `agy run devweave-update`
+- **Claude Code**: `/devweave-update`
+- **GitHub Copilot**: `@devweave /update`
+- **Gemini CLI**: `gemini devweave-update`
+- **OpenAI Codex**: `$devweave update`
+- **Cognition Devin**: `devweave:update`
+
+---
+
+## 8. Canonical Workflow Execution Across All Platforms
 
 Regardless of which AI coding host you use, the command sequence and state progression remain identical:
 
@@ -158,24 +181,15 @@ Regardless of which AI coding host you use, the command sequence and state progr
 
 ---
 
-## 8. Troubleshooting & FAQ
+## 9. Troubleshooting & FAQ
 
 ### Q1: Does DevWeave require a background server or Node runtime?
 **No.** DevWeave is 100% declarative. It executes statelessly within agent turns and stores its state directly in your Git repository under `.devweave/`.
 
-### Q2: How do I update DevWeave to the latest version?
-Simply pull the latest changes from Git and re-run the install command:
-```powershell
-cd path/to/DevWeave
-git pull origin develop
-agy plugin install .\plugins\antigravity
-```
+### Q2: What happens if I am offline?
+Update checks timeout gracefully in 2 seconds and continue using your locally cached plugin files with zero interruption.
 
 ### Q3: How do I remove the plugin?
-```powershell
-agy plugin uninstall devweave
-# Or for Claude:
-claude plugin remove devweave
-# Or for Copilot:
-gh extension remove devweave
-```
+- **Antigravity**: `agy plugin uninstall devweave`
+- **Claude Code**: Delete `.claude/commands/devweave-*` and `CLAUDE.md`.
+- **Copilot**: Delete `.github/prompts/devweave-*` and `.github/copilot-instructions.md`.
