@@ -44,7 +44,7 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 
   Selection: [1 | 2 | 3 | 4 | 5]
   ```
-- If Options **[1â€“4]** selected: Query connected PM MCP tool and fetch ticket metadata.
+- If Options **[1 – 4]** selected: Query connected PM MCP tool and fetch ticket metadata.
 - If Option **[5]** selected: Provide a structured Markdown template for the developer to paste ticket details.
 - Classify work item type: `BUG` vs `FEATURE` (Story/Task/Epic).
 - For **Features**: Extract acceptance criteria, parent Epic, sibling stories, and Figma design references.
