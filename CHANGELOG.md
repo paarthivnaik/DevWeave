@@ -5,6 +5,13 @@ All notable changes to DevWeave will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2026-09-24
+### Added
+- **Strict Gate Isolation & Command Boundaries**: Approving Hard Gates #1, #2, #3 or PR review checkpoints records the human authorization in `state.json` and `audit.md` and halts immediately. Strictly prohibits auto-progressing to subsequent phase commands without explicit developer CLI invocation.
+- **Controlled Phase & Gate `SKIP` with Mandatory Justification**: Added `SKIP` decision handling to all lifecycle gates and phases across V1.0 and V1.1, requiring a mandatory human justification comment recorded to `audit.md` (with `Author: <User Name> <email@example.com>`).
+- **Interactive Branch Discovery & Confirmation**: Enhanced `devweave-branch` and `devweave-modernization-branch` to automatically discover and list available repository branches (`master`, `develop`, `release/*`, `epic/*`), prompt for target/base branches, and require explicit confirmation.
+- **Strict User-Only Story Audit Trail Refinement**: Sanitized all skills and adapter prompt templates across all 6 AI hosts to ensure `audit.md` contains strictly human actions, eliminating internal build metrics and scorecards.
+
 ## [1.1.2] - 2026-09-23
 ### Added
 - **2-Tier Hierarchical Workspace Architecture**: Separates central project configuration (`.devweave/modernization/` with `workspace.json`, `architecture-intent.json`, `technology-profile.json`, `source-memory.json`) from story-level deliverables (`.devweave/modernization/stories/<ID>/`), eliminating duplicated project questionnaires and configs.

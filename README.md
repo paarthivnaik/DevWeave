@@ -24,6 +24,9 @@ Standard AI coding assistants suffer from **AI Amnesia** and **Context Bloat**: 
 - 🧠 **Graph-Based Memory**: Maps your codebase into a Git-native JSON Knowledge Graph so the AI touches **only the 2–3 connected files** instead of 3,000.
 - 💰 **90%+ Lower Bills**: Caches repository architecture once, saving **84%–93% tokens** and **95%–99% cost** on every task.
 - 🛡️ **Zero Uncontrolled Drift**: Enforces a strict lifecycle (Ticket &rarr; Plan &rarr; Branch &rarr; Code &rarr; Dual-Model Review &rarr; PR) with mandatory Human-in-the-Loop gates.
+- 🪵 **User-Only Story Audit Trail (`audit.md`)**: Maintains append-only audit trails capturing exclusively human developer decisions, prompts, branch selections, and gate approvals with author attribution.
+- 🛑 **Strict Gate Isolation**: Approving governance gates records decisions and halts immediately—forbidding silent auto-progression.
+- ⏭️ **Controlled Phase & Gate `SKIP`**: Supports developer-initiated gate skips with mandatory justification comments logged to `audit.md`.
 - 🧪 **Test Intelligence**: Changes production code and updates/creates corresponding unit, API, and E2E tests atomically with zero test weakening.
 - 🔄 **V1.1 Modernization Lifecycle**: Migrate legacy monoliths to modern architectures with bounded context slicing and 3 hard governance checkpoints.
 - 👥 **Dual-Model Review**: Evaluates pull requests concurrently as a **Principal Software Architect** (code/impact) and **Senior DBA** (SQL/locks/indexes) before shipping.
