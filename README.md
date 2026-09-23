@@ -1,142 +1,116 @@
-# DevWeave — AI-DLC Framework
+# DevWeave — Declarative AI-DLC Framework
 
-> **Less Tokens. More Work. Lower Bill.**
+> **"Less Tokens. More Work. Lower Bill."**
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Conformance](https://img.shields.io/badge/Conformance-100%25_Verified-success)](conformance/)
-[![Platform Symmetry](https://img.shields.io/badge/Hosts-6_Platforms_Certified-6366f1)](#-multi-host-plugins--adapters)
+[![Platform Symmetry](https://img.shields.io/badge/Hosts-6_Platforms_Certified-6366f1)](#-1-click-universal-installation-all-6-hosts)
+[![Skills](https://img.shields.io/badge/Validated_Skills-21_Active-emerald)](#-complete-21-commands--skills-reference)
+[![Knowledge Graph](https://img.shields.io/badge/Architecture-JSON_Knowledge_Graph-orange)](#1-🧠-graph-based-durable-memory-zero-ai-amnesia)
 
-**DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
+**DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable graph knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
 
-📖 **New to DevWeave?** Read the **[Complete Product Overview (Simple English Guide)](docs/product-overview.md)** for a friendly, step-by-step introduction.  
+📖 **First time here?** Read the **[Complete Product Overview (Simple English Guide)](docs/product-overview.md)** for a friendly, step-by-step introduction.  
 🌐 **Interactive Showcase & Client Portal**: Open [`site/index.html`](site/index.html) or deploy via **Cloudflare Pages / Vercel** (100% Free for Private Repos).
 
 ---
 
-## 🚀 Key Highlights & Architectural Strengths
+## ⚡ The 30-Second Elevator Pitch
+
+Standard AI coding assistants suffer from **AI Amnesia** and **Context Bloat**: they re-read hundreds of files on every turn, forget past architectural decisions, hallucinate edits across un-scoped files, and run up massive API token bills.
+
+**DevWeave acts as the Senior Architect and Project Manager sitting right next to your AI.**
+
+- 🧠 **Graph-Based Memory**: Maps your codebase into a Git-native JSON Knowledge Graph so the AI touches **only the 2–3 connected files** instead of 3,000.
+- 💰 **90%+ Lower Bills**: Caches repository architecture once, saving **84%–93% tokens** and **95%–99% cost** on every task.
+- 🛡️ **Zero Uncontrolled Drift**: Enforces a strict 7-phase lifecycle (Ticket &rarr; Plan &rarr; Branch &rarr; Code &rarr; Dual-Model Review &rarr; PR) with mandatory Human-in-the-Loop gates.
+- 👥 **Dual-Model Review**: Evaluates pull requests concurrently as a **Principal Software Architect** (code/impact) and **Senior DBA** (SQL/locks/indexes) before shipping.
+- 🌐 **Zero Daemons & 100% Universal**: Zero background servers, zero cloud lock-in, and 100% symmetrical support across **all 6 major AI coding hosts**.
+
+---
+
+## 🥊 How DevWeave is Different from Other AI Tools
+
+| Dimension | ❌ Unstructured AI (Copilot / Cursor / Raw Claude) | ⚡ DevWeave AI-DLC Framework |
+| :--- | :--- | :--- |
+| **Codebase Memory** | **AI Amnesia**: Re-scans directory trees and lockfiles from scratch on every turn. | **Graph-Based Durable Memory**: Remembers your architecture in `.devweave/graph/knowledge-graph.json`. |
+| **Token Consumption** | **Explosive**: Ingests 80,000–150,000 tokens per prompt ($0.50–$2.80/task). | **Surgical**: Bounded by a 32k budget and 1-hop graph traversal (**9,250 tokens / $0.0018/task**). |
+| **Scope Control** | **Hallucination Drift**: Edits random un-scoped files outside the task. | **Plan-Bound Implementation**: Edits strictly authorized files specified in approved `plan.md`. |
+| **Branch Safety** | **Risky**: Edits directly on `main`/`master` unless manually warned. | **Branch Hard Gate**: Physically blocks code modification until an isolated Git branch is active. |
+| **Code & SQL Review** | **Self-Review Bias**: The agent marks its own buggy code as "verified". | **Dual-Model Review**: Independent **Principal Architect** + **Senior DBA** audit pre-PR. |
+| **Dependencies** | Requires heavy vector DBs, Python daemons, or background containers. | **Zero Daemons**: 100% declarative Markdown & JSON stored right in your Git repository. |
+| **Multi-Host Parity** | Locked into one IDE or proprietary ecosystem. | **100% Symmetrical across all 6 major AI coding assistants**. |
+
+---
+
+## 🌟 Key Specialities & Core Superpowers
 
 ```mermaid
 flowchart TD
-    subgraph HIGHLIGHTS["DevWeave Core Highlights"]
-        H1["<b>💰 Token & Cost Efficiency</b><br>84%–93% token savings, 95%–99% lower API bills via durable knowledge caching"]
-        H2["<b>🌐 100% Universal & Tech-Neutral</b><br>Autonomous 5-layer detection across 12 polyglot ecosystems with zero hardcoding"]
-        H3["<b>🧠 Graph-Based Durable Memory</b><br>Declarative JSON Knowledge Graph (.devweave/graph/) with 1-hop traversal & delta merging"]
-        H4["<b>⚡ Stage-Based Model Routing</b><br>Fast scanning on lightweight models (flash_lite), deep reasoning on flagship models (pro)"]
-        H5["<b>🔄 Dynamic Technology Revalidation</b><br>Auto-detects framework upgrades (e.g. .NET 8 → 9) and hot-swaps active best practices"]
-        H6["<b>🛡️ Human-in-the-Loop Governance</b><br>Phase isolation, zero auto-chaining, zero self-approval, and 4 mandatory hard gates"]
-        H7["<b>👥 Dual-Model Review (Architect + DBA)</b><br>Dedicated pre-PR review command (devweave-pr-review) evaluating impact, side effects & SQL"]
-        H8["<b>📦 Zero Mandatory Daemons</b><br>100% declarative Git-native state (.devweave/), no background server or daemon needed"]
+    subgraph SUPERPOWERS["DevWeave Core Superpowers"]
+        S1["<b>🧠 Graph-Based Durable Memory</b><br>Declarative JSON Knowledge Graph with 1-hop traversal & delta merging"]
+        S2["<b>💰 84%–93% Token Savings</b><br>Durable knowledge caching cuts monthly API bills by 95%–99%"]
+        S3["<b>👥 Dual-Model Review (Architect + DBA)</b><br>Concurrently audits design coherence, downstream impacts & SQL locks"]
+        S4["<b>🛡️ 4 Non-Bypassable Governance Gates</b><br>PII sanitizer, Branch isolation, Deterministic tests, Human review sign-off"]
+        S5["<b>⚡ Stage-Based Model Routing</b><br>Lightweight models (flash_lite) for scanning, flagship models (pro) for design"]
+        S6["<b>🔄 24h Daily Auto-Sync & Updater</b><br>Silently checks GitHub on first morning session with 0 token overhead"]
+        S7["<b>🌐 Universal & Zero Runtime Daemons</b><br>100% Git-native state across 12 polyglot stacks with zero background servers"]
     end
 ```
 
-| Highlight | Description | Realized Benefit |
-|---|---|---|
-| **Graph-Based Durable Memory** | Maintains a Git-native JSON Knowledge Graph (`knowledge-graph.json`) with 1-hop neighborhood recall and automated task delta merging (`graph-delta.json`). | **Eliminates AI amnesia**; loads only the exact 2–3 connected files instead of whole directories. |
-| **Token & Cost Efficiency** | Caches discovered codebase patterns into `.devweave/domains/` and `.devweave/products/` and scopes execution to precise blast radiuses. | **84.1%–93.4% Token Savings** ($0.0018–$0.0039 vs $0.50–$1.16 on repeat tasks). |
-| **Stage-Based Model Routing** | Routes abstract capabilities (`fast-analysis`, `deep-reasoning`, `coding`, `independent-review`) to calibrated model tiers (`flash_lite`, `flash`, `pro`). | Eliminates paying flagship model prices for routine file scanning and git checks. |
-| **5-Layer Autonomous Tech Detection** | Progressively parses lockfiles and manifests across Language, Framework, Persistence, Testing, and Build layers. | Works out-of-the-box on **C#, Python, TypeScript, Java, Go, Rust, PHP, Ruby, C++**, monorepos, and legacy codebases. |
-| **Dual-Model Code & SQL Review** | Separate `devweave-pr-review` command executing concurrently as **Principal Software Architect** (code/impact) and **Senior DBA** (SQL/locks/indexes). | Uncovers architectural design flaws, table locks, and cascading failure risks before PR creation. |
-| **Dynamic Revalidation Engine** | Flags affected domain practices as `NEEDS_REVALIDATION` when dependency or runtime version bumps occur. | Permanent skills remain stable while version-specific idioms and conventions update dynamically. |
-| **HITL Phase Isolation** | Enforces that each command executes **only its single phase**, writes its artifact, and halts with a human decision prompt. | Eliminates runaway autonomous loops, hallucinations, and unreviewed code modifications. |
-| **Mandatory Hard Gates** | 1. **PII/Privacy Gate** (sanitizes secrets), 2. **Branch Gate** (blocks edits on main), 3. **Review Gate** (human sign-off on review), 4. **PR Gate**. | Strict enterprise safety and zero secret storage in Git history. |
-| **Declarative & Git-Native** | Stores all lifecycle state, audit logs, and metrics as Markdown, YAML frontmatter, and JSON in `.devweave/`. | 100% transparent, auditable, and reproducible with zero background server dependencies. |
+### 1. 🧠 Graph-Based Durable Memory (Zero AI Amnesia)
+DevWeave replaces slow, fuzzy vector databases with a **Git-native JSON Knowledge Graph** (`.devweave/graph/knowledge-graph.json`):
+- **1-Hop Neighborhood Recall**: When updating a service, DevWeave instantly recalls who calls it (Controllers) and what it touches (Database Tables, Events). It loads **only 2–3 connected files**, shrinking context from 40,000 tokens to 1,500.
+- **Graph Delta Patching (`graph-delta.json`)**: Code changes draft a local graph patch that is merged into the master knowledge graph on PR creation.
+- **Team Memory Sync**: When a PR merges, teammates pull the updated architecture graph automatically with **0 tokens and 0 latency**.
+
+### 2. 💰 Hard Economic ROI (84%–93% Lower Token Bills)
+From our automated 12-ecosystem benchmark suite (`conformance/tests/token_benchmark.ps1`):
+
+| Task Profile | Unstructured AI Assistants | DevWeave AI-DLC | Realized Savings |
+| :--- | :--- | :--- | :--- |
+| **Quick Bug Fix (`EXPRESS`)** | 141,200 tokens ($0.5026) | **9,250 tokens ($0.0018)** | **93.4% Token Savings \| 99.6% Cheaper** |
+| **Feature Story (`FEATURE`)** | 788,800 tokens ($2.7944) | **125,700 tokens ($0.1450)** | **84.1% Token Savings \| 94.8% Cheaper** |
+| **Repeat Task in Same Domain** | 327,500 tokens ($1.1638) | **21,800 tokens ($0.0039)** | **93.3% Token Savings \| 99.7% Cheaper** |
+| **Complex Monorepo Scoping** | 1,856,500 tokens ($6.5433) | **171,600 tokens ($0.2587)** | **90.8% Token Savings \| 96.0% Cheaper** |
+
+### 3. 👥 Dual-Model Code & SQL Review (The Safety Net)
+Phase 6 (`devweave-pr-review`) executes a multi-perspective review before pull request creation:
+- **Principal Software Architect Lens**: Audits SOLID design, interface contracts, and downstream microservice breaking changes.
+- **Senior DBA Lens**: Scans SQL queries for table locks, missing indexes, N+1 query hazards, and reversible migrations.
+- **Security & Resilience Lenses**: Scans for OWASP Top 10 vulnerabilities, unescaped inputs, and missing timeout boundaries.
+
+### 4. 🛡️ 4 Non-Bypassable Governance Gates
+1. **PII / Privacy Gate**: Sanitizes API keys, passwords, and sensitive customer data before LLM ingestion.
+2. **Branch Hard Gate**: Prevents accidental direct commits to `main`/`master`.
+3. **Test Verification Gate**: Requires 100% deterministic test execution evidence.
+4. **Human Review Gate**: Requires explicit engineer sign-off on dual-model findings before PR creation.
 
 ---
 
-## 📐 Canonical 7-Phase User Workflow
+## 📐 The Canonical 7-Phase Workflow
 
 ```mermaid
 flowchart LR
-    P0["<b>Phase 0: Init</b><br><code>devweave-init</code>"] --> P1["<b>Phase 1: Context</b><br><code>devweave-context &lt;ID&gt;</code>"]
-    P1 --> P2["<b>Phase 2: Analyze</b><br><code>devweave-analyze &lt;ID&gt;</code>"]
-    P2 --> P3["<b>Phase 3: Plan</b><br><code>devweave-plan &lt;ID&gt;</code>"]
+    P0["<b>Phase 0: Init</b><br><code>devweave-init</code><br><i>5-Layer Stack & Graph</i>"] --> P1["<b>Phase 1: Context</b><br><code>devweave-context &lt;ID&gt;</code><br><i>PII Gate & 1-Hop Blast Radius</i>"]
+    P1 --> P2["<b>Phase 2: Analyze</b><br><code>devweave-analyze &lt;ID&gt;</code><br><i>Impact & Contracts</i>"]
+    P2 --> P3["<b>Phase 3: Plan</b><br><code>devweave-plan &lt;ID&gt;</code><br><i>Atomic Blueprint</i>"]
     P3 --> P4["<b>Phase 4: Branch</b><br><code>devweave-branch &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
-    P4 --> P5["<b>Phase 5: Implement</b><br><code>devweave-implement &lt;ID&gt;</code>"]
-    P5 --> P6["<b>Phase 6: Review</b><br><code>devweave-pr-review &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
-    P6 --> P7["<b>Phase 7: PR</b><br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
+    P4 --> P5["<b>Phase 5: Implement</b><br><code>devweave-implement &lt;ID&gt;</code><br><i>Plan-Bound Coding & Tests</i>"]
+    P5 --> P6["<b>Phase 6: Review</b><br><code>devweave-pr-review &lt;ID&gt;</code><br><b>[HARD GATE: Architect + DBA]</b>"]
+    P6 --> P7["<b>Phase 7: PR</b><br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE: Knowledge Merge]</b>"]
 ```
+
+### Specialized Fast Lanes:
+- **⚡ Fix Lane**: `devweave-fix-triage` &rarr; `devweave-fix-diagnose` &rarr; `devweave-fix-land` (Accelerated 3-step hotfix).
+- **🔄 Modernization Lane**: `devweave-modernize` (Generates `migration_manifest.md` for framework upgrades like .NET 8 &rarr; 9).
+- **🚀 Express Lane**: `devweave-express` (Single-pass fast track for low-risk typos and documentation).
 
 ---
 
-## ⚡ Specialized Fast Lanes
+## ⚡ 1-Click Universal Installation (All 6 Hosts)
 
-### 1. Fix Lane (Bug Triage & Accelerated Remediation)
-```text
-devweave-fix-triage <ID>  ──►  devweave-fix-diagnose <ID>  ──►  devweave-fix-land <ID> [HARD GATE]
- (Defect Classification)       (Root-Cause Investigation)        (Patch, Test, Verify & PR)
-```
-
-### 2. Modernization Lane (Legacy Migration & Upgrades)
-```text
-devweave-context <ID>  ──►  devweave-analyze <ID>  ──►  devweave-modernize <ID>  ──►  devweave-branch  ──►  devweave-implement  ──►  devweave-pr-review  ──►  devweave-pr
-                                                    (migration_manifest.md)
-```
-
-### 3. Express Mode (Low-Risk Fast Track)
-```text
-devweave-express <ID> ──► Unified Context + Plan + Patch + Test + PR (Bypasses ceremony for typos & docs)
-```
-
----
-
-## 📦 Repository Structure (Monorepo)
-
-```text
-DevWeave/
-├── plugins/antigravity/               # Google Antigravity Native Plugin Package
-│   ├── plugin.json                    # Plugin manifest ($schema, version 1.0.0)
-│   ├── rules/AGENTS.md                # AI-DLC core rules & phase boundary constraints
-│   └── skills/                        # 20 validated workflow skills (with [Phase X] tags)
-│       ├── devweave-init/             # [Phase 0: Init] Autonomous 5-layer repo setup
-│       ├── devweave-context/          # [Phase 1: Context] Intake, PII gate, blast radius
-│       ├── devweave-analyze/          # [Phase 2: Analyze] Deep archaeology & root-cause
-│       ├── devweave-plan/             # [Phase 3: Plan] Atomic task breakdown & test anchors
-│       ├── devweave-branch/           # [Phase 4: Branch] Isolated Git branch hard gate
-│       ├── devweave-implement/        # [Phase 5: Implement] Surgical, plan-bound coding
-│       ├── devweave-pr-review/        # [Phase 6: Review] Dual-model review (Architect + DBA)
-│       ├── devweave-pr/               # [Phase 7: PR] Final PR package & human approval gate
-│       ├── devweave-fix-triage/       # [Fix Lane - Phase 1] Error logs & severity triage
-│       ├── devweave-fix-diagnose/     # [Fix Lane - Phase 2] Hypotheses & minimal fix plan
-│       ├── devweave-fix-land/         # [Fix Lane - Phase 3] Patch, regression test, PR
-│       ├── devweave-modernize/        # [Modernization Lane] migration_manifest.md
-│       ├── devweave-express/          # [Express Lane] Single-pass fast track for low risk
-│       ├── devweave-update/           # [Lifecycle] In-place updater & 24h daily auto-sync
-│       ├── devweave-status/           # [Utility] Lifecycle state inspector
-│       ├── devweave-handoff/          # [Utility] Team handoff package generator
-│       ├── devweave-archive/          # [Utility] Post-merge workspace archiver
-│       ├── devweave-report/           # [Utility] Executive process & metrics report
-│       ├── devweave-improve/          # [Utility] Friction logs & skill improver
-│       ├── devweave-document-product/ # [Knowledge] Product architecture catalog
-│       └── devweave-document-domain/  # [Knowledge] Domain knowledge & scorecards
-│
-├── spec/                              # Formal Specification, Schemas & Policies
-│   ├── specification/                 # Normative lifecycle, HITL, detection, reval specs
-│   └── schemas/                       # Canonical JSON Schemas for all artifacts
-│
-├── conformance/                       # Master Verification & Test Runner Suites
-│   ├── tests/                         # Automated test runners (run_all_tests.ps1)
-│   ├── scenarios/                     # 20 end-to-end integration test scenarios
-│   └── fixtures/                      # 12 polyglot repo fixtures (.NET, Python, Go, etc.)
-│
-└── docs/                              # Multi-Tier Documentation
-    ├── developer-guide.md             # 🌟 Universal Developer Handbook & Command Reference
-    ├── installation-guide.md          # 1-Click Git-based installation across all 6 hosts
-    ├── getting-started.md             # End-to-end workflow walkthrough with Mermaid diagrams
-    ├── v1-benchmarks.md               # Empirical benchmarks across 12 repos & token/cost stats
-    ├── lifecycle.md                   # Normative AI-DLC lifecycle and execution contracts
-    ├── workflow-profiles.md           # 8 risk-calibrated profiles and execution lanes
-    ├── architecture.md                # 5-layer detection, dynamic reval, and host adapters
-    ├── antigravity.md                 # Antigravity CLI and plugin guide
-    └── conformance.md                 # 20-scenario conformance verification guide
-```
-
----
-
-## ⚡ Quick Start & Git-Based Installation Across All Hosts
-
-> 📖 For full command descriptions, parameter options, and beginner tutorials, see the **[Universal Developer Handbook](docs/developer-guide.md)**.
-
-Install DevWeave directly from the Git repository into any project:
+DevWeave installs with **zero runtime daemons** directly from GitHub:
 
 ### 1. 🔵 Google Antigravity
 ```powershell
@@ -152,63 +126,63 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 ---
 
 ### 2. 🟠 Anthropic Claude Code
-```bash
-# macOS / Linux / Git Bash:
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .claude/commands && cp /tmp/devweave/plugins/claude/CLAUDE.md ./CLAUDE.md && cp /tmp/devweave/plugins/claude/commands/* .claude/commands/ && rm -rf /tmp/devweave
-```
 ```powershell
 # Windows (PowerShell):
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .claude\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\claude\CLAUDE.md .\CLAUDE.md; Copy-Item $env:TEMP\devweave\plugins\claude\commands\* .claude\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+```bash
+# macOS / Linux (Bash):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .claude/commands && cp /tmp/devweave/plugins/claude/CLAUDE.md ./CLAUDE.md && cp /tmp/devweave/plugins/claude/commands/* .claude/commands/ && rm -rf /tmp/devweave
 ```
 **Verify**: Run `claude /devweave-init`
 
 ---
 
-### 3. 🟣 GitHub Copilot (VS Code, Visual Studio, CLI)
-```bash
-# macOS / Linux / Git Bash:
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .github/prompts && cp /tmp/devweave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md && cp /tmp/devweave/plugins/copilot/prompts/* .github/prompts/ && rm -rf /tmp/devweave
-```
+### 3. 🟣 GitHub Copilot (VS Code / Visual Studio / CLI)
 ```powershell
 # Windows (PowerShell):
 git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .github\prompts | Out-Null; Copy-Item $env:TEMP\devweave\plugins\copilot\copilot-instructions.md .github\copilot-instructions.md; Copy-Item $env:TEMP\devweave\plugins\copilot\prompts\* .github\prompts\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+```bash
+# macOS / Linux (Bash):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .github/prompts && cp /tmp/devweave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md && cp /tmp/devweave/plugins/copilot/prompts/* .github/prompts/ && rm -rf /tmp/devweave
 ```
 **Verify**: Type `@devweave /init` in Copilot Chat.
 
 ---
 
-### 4. 🔴 Google Gemini CLI
-```bash
-# macOS / Linux / Git Bash:
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .gemini/commands && cp /tmp/devweave/plugins/gemini/GEMINI.md .gemini/GEMINI.md && cp /tmp/devweave/plugins/gemini/commands/* .gemini/commands/ && rm -rf /tmp/devweave
-```
-```powershell
-# Windows (PowerShell):
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .gemini\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\gemini\GEMINI.md .gemini\GEMINI.md; Copy-Item $env:TEMP\devweave\plugins\gemini\commands\* .gemini\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
-```
-**Verify**: Run `gemini devweave-init`
+### 4. 🔴 Google Gemini CLI, 🟢 OpenAI Codex & ⚪ Cognition Devin
+- **Gemini CLI**: Target folder `.gemini/commands/` &rarr; Run `gemini devweave-init`
+- **OpenAI Codex**: Target folder `.codex/commands/` &rarr; Run `$devweave init`
+- **Cognition Devin**: Target folder `.devin/playbooks/` &rarr; Run `devweave:init`
 
 ---
 
-### 5. 🟢 OpenAI Codex & ChatGPT CLI
-```bash
-# macOS / Linux / Git Bash:
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .codex/commands && cp /tmp/devweave/plugins/codex/CODEX.md .codex/CODEX.md && cp /tmp/devweave/plugins/codex/commands/* .codex/commands/ && rm -rf /tmp/devweave
-```
-```powershell
-# Windows (PowerShell):
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .codex\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\codex\CODEX.md .codex\CODEX.md; Copy-Item $env:TEMP\devweave\plugins\codex\commands\* .codex\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
-```
-**Verify**: Run `codex run devweave-init`
+## 🔄 Automated Daily Updates
+
+- **Automatic Daily Sync (24h TTL)**: Automatically checks GitHub on your **first session of each day** and updates in-place with **0 token cost and 0s latency** for subsequent runs.
+- **On-Demand Manual Update**: Run `agy run devweave-update` or `/devweave-update` in your assistant at any time.
 
 ---
 
-### 6. ⚪ Cognition Devin
-```bash
-# In your Devin workspace:
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .devin && cp -r /tmp/devweave/plugins/devin/* .devin/ && rm -rf /tmp/devweave
-```
-**Verify**: Run `/devweave-init` in the Devin console.
+## 📋 Complete 21 Commands & Skills Reference
+
+| Phase / Lane | Antigravity (`agy run`) | Claude Code (`claude /`) | GitHub Copilot (`@devweave`) | Gemini / Codex / Devin | Plain English Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Phase 0: Init** | `devweave-init` | `/devweave-init` | `/init` | `devweave-init` | Maps 5-layer tech stack, physical layers (`layers.md`), and JSON Knowledge Graph without touching code. |
+| **Phase 1: Context** | `devweave-context <ID>` | `/devweave-context <ID>` | `/context <ID>` | `devweave-context <ID>` | Ingests ticket (Jira/GitHub/ADO/Linear), cleans secrets/PII, and runs 1-hop graph traversal under 32k budget. |
+| **Phase 2: Analyze** | `devweave-analyze <ID>` | `/devweave-analyze <ID>` | `/analyze <ID>` | `devweave-analyze <ID>` | Checks database and API impacts before making changes. |
+| **Phase 3: Plan** | `devweave-plan <ID>` | `/devweave-plan <ID>` | `/plan <ID>` | `devweave-plan <ID>` | Writes an exact step-by-step implementation blueprint with test commands. |
+| **Phase 4: Branch** | `devweave-branch <ID>` | `/devweave-branch <ID>` | `/branch <ID>` | `devweave-branch <ID>` | Creates a safe Git branch; physically blocks editing on `main`. |
+| **Phase 5: Implement**| `devweave-implement <ID>`| `/devweave-implement <ID>`| `/implement <ID>` | `devweave-implement <ID>` | Surgical, plan-bound coding; runs tests and generates `graph-delta.json`. |
+| **Phase 6: PR Review**| `devweave-pr-review <ID>`| `/devweave-pr-review <ID>`| `/pr-review <ID>` | `devweave-pr-review <ID>` | Dual-Model Review: Principal Architect + Senior DBA audit code & SQL. |
+| **Phase 7: PR** | `devweave-pr <ID>` | `/devweave-pr <ID>` | `/pr <ID>` | `devweave-pr <ID>` | Assembles final PR, merges graph delta, and updates durable domain memory. |
+| **Fix Lane** | `devweave-fix-triage`, `devweave-fix-diagnose`, `devweave-fix-land` | `/devweave-fix-*` | `/fix-*` | `devweave-fix-*` | Accelerated 3-step bug triage, root-cause diagnosis, and regression hotfix PR. |
+| **Modernize** | `devweave-modernize <ID>` | `/devweave-modernize <ID>` | `/modernize <ID>` | `devweave-modernize <ID>` | Migration manifests for framework/runtime upgrades (e.g. .NET 8 &rarr; 9). |
+| **Express Mode** | `devweave-express <ID>` | `/devweave-express <ID>` | `/express <ID>` | `devweave-express <ID>` | Single-turn fast track for low-risk changes (typos, docs, small tweaks). |
+| **System** | `devweave-update` | `/devweave-update` | `/update` | `devweave-update` | In-place plugin updater and 24h daily auto-sync. |
+| **Utilities** | `devweave-status`, `devweave-handoff`, `devweave-archive`, `devweave-report`, `devweave-improve` | `/devweave-*` | `/*` | `devweave-*` | Lifecycle inspection, team handoff packages, workspace archiver, and metrics. |
+| **Knowledge** | `devweave-document-product`, `devweave-document-domain` | `/devweave-document-*` | `/document-*` | `devweave-document-*` | Documents product architecture and domain business rules. |
 
 ---
 
@@ -220,7 +194,7 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 | Document | Purpose |
 | :--- | :--- |
 | **[Product Overview (Simple English Guide)](docs/product-overview.md)** | Clear, friendly guide explaining the entire DevWeave system, 7 phases, and benefits in plain English. |
-| **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and token caching. |
+| **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and JSON Knowledge Graphs. |
 | **[Developer Handbook & Command Reference](docs/developer-guide.md)** | Step-by-step tutorial, command parameters, and full reference for all 21 skills across 6 hosts. |
 | **[Universal Installation Guide](docs/installation-guide.md)** | 1-Click copy-pasteable Git installation and automated updates for all 6 AI coding assistants. |
 | **[Getting Started Guide](docs/getting-started.md)** | End-to-end walkthrough of the 7-phase canonical development lifecycle with Mermaid diagrams. |
@@ -242,6 +216,7 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 
 ### 📜 Formal Specifications & Schemas
 - **[Lifecycle State Machine Spec](spec/specification/lifecycle.md)**
+- **[Knowledge Graph & Graph Delta Spec](spec/specification/knowledge-graph.md)**
 - **[Human-in-the-Loop Governance Spec](spec/specification/human-in-the-loop.md)**
 - **[Autonomous Technology Detection Spec](spec/specification/autonomous-detection.md)**
 - **[Dual-Model Consensus Review Spec](spec/specification/dual-model-review.md)**
@@ -252,7 +227,7 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 
 ---
 
-## 🧪 Master Conformance Verification
+## 🧪 Master Conformance Verification (100% PASS)
 
 ```powershell
 .\conformance\tests\run_all_tests.ps1
@@ -260,12 +235,14 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 
 ```text
 =================================================================
-  [PASSED] JSON Schema Validation Suite                  (2.44s)
-  [PASSED] AI-DLC State Machine Transition Suite         (0.90s)
-  [PASSED] 18 Conformance Scenarios Suite (20 Scenarios) (1.53s)
-  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.07s)
-  [PASSED] Multi-Repository .devweave Initialization Suite (2.64s)
-  [PASSED] Token & Cost Efficiency Benchmark Suite       (0.96s)
+                     SUITE EXECUTION SUMMARY                    
+=================================================================
+  [PASSED] JSON Schema Validation Suite                  (2.53s)
+  [PASSED] AI-DLC State Machine Transition Suite         (0.82s)
+  [PASSED] 18 Conformance Scenarios Suite                (1.10s)
+  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.38s)
+  [PASSED] Multi-Repository .devweave Initialization Suite (2.02s)
+  [PASSED] Token & Cost Efficiency Benchmark Suite       (1.51s)
 -----------------------------------------------------------------
 RELEASE CANDIDATE STATUS: 100% CONFORMANCE VERIFIED (ALL SUITES PASSED)
 =================================================================
