@@ -194,6 +194,7 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 | Document | Purpose |
 | :--- | :--- |
 | **[Product Overview (Simple English Guide)](docs/product-overview.md)** | Clear, friendly guide explaining the entire DevWeave system, 7 phases, and benefits in plain English. |
+| **[Release Process & GitHub Actions Runbook](docs/release-process.md)** | Step-by-step automated release guide with GitHub Actions for testing, packaging, and deploying new versions. |
 | **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and JSON Knowledge Graphs. |
 | **[Developer Handbook & Command Reference](docs/developer-guide.md)** | Step-by-step tutorial, command parameters, and full reference for all 21 skills across 6 hosts. |
 | **[Universal Installation Guide](docs/installation-guide.md)** | 1-Click copy-pasteable Git installation and automated updates for all 6 AI coding assistants. |
