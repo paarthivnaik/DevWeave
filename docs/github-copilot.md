@@ -37,19 +37,16 @@ plugins/copilot/
 
 ## 2. Installation in GitHub Repositories
 
-### Repository Setup (`.github/` instructions)
-Copy `copilot-instructions.md` and `prompts/` to `.github/`:
+### One-Liner Install from GitHub
 
 ```bash
-# In your target repository:
-mkdir -p .github/prompts
-cp path/to/DevWeave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md
-cp path/to/DevWeave/plugins/copilot/prompts/* .github/prompts/
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .github/prompts && cp /tmp/devweave/plugins/copilot/copilot-instructions.md .github/copilot-instructions.md && cp /tmp/devweave/plugins/copilot/prompts/* .github/prompts/ && rm -rf /tmp/devweave
 ```
 
-### GitHub Copilot Extension Registration
-```bash
-gh extension install path/to/DevWeave/plugins/copilot
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .github\prompts | Out-Null; Copy-Item $env:TEMP\devweave\plugins\copilot\copilot-instructions.md .github\copilot-instructions.md; Copy-Item $env:TEMP\devweave\plugins\copilot\prompts\* .github\prompts\; Remove-Item -Recurse -Force $env:TEMP\devweave
 ```
 
 ---

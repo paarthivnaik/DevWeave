@@ -26,11 +26,20 @@ plugins/gemini/
 
 ## 2. Installation & CLI Execution
 
-```bash
-# Register plugin in Gemini CLI
-gemini plugin add path/to/DevWeave/plugins/gemini
+### One-Liner Install from GitHub
 
-# Run 7-phase workflow
+```bash
+# macOS / Linux / Git Bash:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .gemini/commands && cp /tmp/devweave/plugins/gemini/GEMINI.md .gemini/GEMINI.md && cp /tmp/devweave/plugins/gemini/commands/* .gemini/commands/ && rm -rf /tmp/devweave
+```
+
+```powershell
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .gemini\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\gemini\GEMINI.md .gemini\GEMINI.md; Copy-Item $env:TEMP\devweave\plugins\gemini\commands\* .gemini\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+
+### Run 7-Phase Workflow
+```bash
 gemini devweave-init
 gemini devweave-context "JIRA-101"
 gemini devweave-analyze "JIRA-101"

@@ -26,11 +26,15 @@ plugins/devin/
 
 ## 2. Installation & Autonomous Execution
 
-```bash
-# Load playbook into Devin project
-devin playbook load path/to/DevWeave/plugins/devin
+### Setup from GitHub
 
-# Execute workflow autonomously with human checkpoints
+```bash
+# In your Devin workspace:
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && mkdir -p .devin && cp -r /tmp/devweave/plugins/devin/* .devin/ && rm -rf /tmp/devweave
+```
+
+### Execute Workflow Autonomously with Human Checkpoints
+```bash
 devin run /devweave-init
 devin run /devweave-context "JIRA-101"
 devin run /devweave-analyze "JIRA-101"

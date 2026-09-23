@@ -40,11 +40,16 @@ plugins/antigravity/
 
 ## 2. Installation & Verification
 
-### Local Directory Installation
-To register the DevWeave plugin in Google Antigravity:
+### One-Liner Install from GitHub
 
 ```powershell
-agy plugin install D:\DevWeave\plugins\antigravity
+# Windows (PowerShell):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; agy plugin install $env:TEMP\devweave\plugins\antigravity; Remove-Item -Recurse -Force $env:TEMP\devweave
+```
+
+```bash
+# macOS / Linux (Bash):
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && agy plugin install /tmp/devweave/plugins/antigravity && rm -rf /tmp/devweave
 ```
 
 ### Validate Plugin Structure
