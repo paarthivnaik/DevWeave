@@ -41,16 +41,22 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 ```
 
 ### Verification:
-```powershell
-agy plugin list
-# Expected output: devweave - Components: skills (31 validated skills)
+Antigravity automatically processes all 31 skills:
+```text
+devweave
+          ✔ skills      : 31 processed
+          - agents      : skipped (not found)
+          - commands    : skipped (not found)
+          - mcpServers  : skipped (not found)
+          - hooks       : skipped (not found)
 ```
+*(All 31 skills and AGENTS.md rules are active. Skipped components are optional plugin modules not used by DevWeave).*
 
 ---
 
 ## 2. Anthropic Claude Code Installation
 
-Install DevWeave rules and 21 custom slash commands from GitHub into your target project:
+Install DevWeave rules and 31 custom slash commands from GitHub into your target project:
 
 ```bash
 # macOS / Linux / Git Bash:

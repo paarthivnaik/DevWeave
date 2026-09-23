@@ -10,7 +10,7 @@ DevWeave integrates natively with **GitHub Copilot Workspace, Copilot Chat, and 
 plugins/copilot/
 ├── plugin.json               # Copilot extension manifest
 ├── copilot-instructions.md   # AI-DLC repository custom instructions
-└── prompts/                  # 20 Copilot prompt files (.prompt.md)
+└── prompts/                  # 31 Copilot prompt files (.prompt.md)
     ├── devweave-init.prompt.md
     ├── devweave-context.prompt.md
     ├── devweave-analyze.prompt.md
@@ -19,11 +19,22 @@ plugins/copilot/
     ├── devweave-implement.prompt.md
     ├── devweave-pr-review.prompt.md
     ├── devweave-pr.prompt.md
+    ├── devweave-modernization-init.prompt.md
+    ├── devweave-modernization-context.prompt.md
+    ├── devweave-modernization-analyze.prompt.md
+    ├── devweave-modernization-plan.prompt.md
+    ├── devweave-modernization-branch.prompt.md
+    ├── devweave-modernization-implement.prompt.md
+    ├── devweave-modernization-verify.prompt.md
+    ├── devweave-modernization-pr.prompt.md
+    ├── devweave-modernization-status.prompt.md
+    ├── devweave-modernization-report.prompt.md
     ├── devweave-fix-triage.prompt.md
     ├── devweave-fix-diagnose.prompt.md
     ├── devweave-fix-land.prompt.md
     ├── devweave-modernize.prompt.md
     ├── devweave-express.prompt.md
+    ├── devweave-update.prompt.md
     ├── devweave-status.prompt.md
     ├── devweave-handoff.prompt.md
     ├── devweave-archive.prompt.md
@@ -53,7 +64,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devwe
 
 ## 3. Workflow Execution in GitHub Copilot
 
-### Copilot Chat Prompts:
+### Canonical Feature Flow:
 ```text
 @devweave /init
 @devweave /context JIRA-101
@@ -63,6 +74,18 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devwe
 @devweave /implement JIRA-101
 @devweave /pr-review JIRA-101   # Dual-Model Review (Architect + DBA) [HARD GATE]
 @devweave /pr JIRA-101          # Final PR Packaging [HARD GATE]
+```
+
+### V1.1 Modernization Flow:
+```text
+@devweave /modernization-init "Angular frontend with CQRS backend and PostgreSQL"
+@devweave /modernization-context MOD-101
+@devweave /modernization-analyze MOD-101   # [HARD GATE #1]
+@devweave /modernization-plan MOD-101      # [HARD GATE #2]
+@devweave /modernization-branch MOD-101
+@devweave /modernization-implement MOD-101
+@devweave /modernization-verify MOD-101    # [HARD GATE #3]
+@devweave /modernization-pr MOD-101
 ```
 
 ### Fix Lane:

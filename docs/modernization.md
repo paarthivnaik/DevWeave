@@ -54,8 +54,6 @@ Modernization enforces three mandatory Human-in-the-Loop checkpoints where execu
 
 Supported human decisions: `APPROVE`, `REQUEST_CHANGES`, `PROVIDE_INFORMATION`, `REJECT`, `STOP`, `RETRY`.
 
----
-
 ## 4. Key Architectural Safeguards
 
 - **Zero Legacy Pollution**: Legacy source code is configured strictly as `READ_ONLY` in `source-memory.json`.
@@ -63,3 +61,37 @@ Supported human decisions: `APPROVE`, `REQUEST_CHANGES`, `PROVIDE_INFORMATION`, 
 - **Version-Aware Practice Intelligence**: Framework changes (e.g. .NET 3 &rarr; 9) dynamically flag affected knowledge as `NEEDS_REVALIDATION`.
 - **Generic Migration Units**: Supports `PAGE`, `SCREEN`, `FEATURE`, `MODULE`, `SERVICE`, `DOMAIN`, `WORKFLOW`, `API`, `TRANSACTION`, `COMPONENT`, and `CAPABILITY`.
 - **Durable Knowledge Integration**: Reconciles `MIGRATED_TO` and `REPLACED_BY` edges into `graph/knowledge-graph.json` without destroying legacy history.
+
+---
+
+## 5. Hierarchical Workspace Architecture (Zero Duplication)
+
+DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchical Structure**, ensuring project-level decisions are declared once and inherited by every migration story:
+
+```text
+.devweave/modernization/
+│
+├── [TIER 1: CENTRAL PROJECT CONFIGURATION] (Created once via devweave-modernization-init)
+│   ├── workspace.json              <-- Target solution metadata & PM tool preference
+│   ├── architecture-intent.json    <-- Declared target architecture (e.g. Angular 22, CQRS, SQLite)
+│   ├── technology-profile.json     <-- Combined engineering practices (SOLID, Clean Code, CQRS)
+│   ├── source-memory.json          <-- Legacy repository pointer (READ_ONLY access mode)
+│   └── state.json                  <-- Central modernization project registry
+│
+└── [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created per work item via devweave-modernization-context <ID>)
+    ├── 98/                         <-- Story #98 (e.g. User Login)
+    │   ├── state.json              <-- Story lifecycle phase & hard gate tracker
+    │   ├── context.md              <-- Bounded legacy slice context
+    │   ├── migration-unit.json     <-- Targeted legacy components & DTOs
+    │   ├── analysis.md             <-- Behavioral rules & dependency analysis
+    │   ├── mappings.json           <-- Legacy-to-target component mappings
+    │   ├── plan.md                 <-- File-anchored tasks & DB migrations
+    │   ├── verification.md         <-- Behavioral parity & test evidence
+    │   └── pr-description.md       <-- Pull request package
+    │
+    └── 99/                         <-- Story #99 (e.g. User Registration)
+        ├── state.json
+        ├── context.md
+        ├── migration-unit.json
+        └── ...
+```
