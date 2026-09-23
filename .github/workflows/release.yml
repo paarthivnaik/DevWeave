@@ -1,0 +1,121 @@
+name: DevWeave Release & Deployment
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag to release (e.g., v1.1.0)'
+        required: true
+        default: 'v1.1.0'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  validate-and-test:
+    name: Conformance Tests & Schema Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate Plugin JSON Manifests
+        run: |
+          for manifest in plugins/*/plugin.json; do
+            echo "Validating $manifest..."
+            node -e "JSON.parse(require('fs').readFileSync('$manifest', 'utf8'))"
+          done
+          echo "All plugin manifests valid."
+
+      - name: Run Conformance Test Suite
+        shell: pwsh
+        run: |
+          ./conformance/tests/run_all_tests.ps1
+
+  package-and-release:
+    name: Package Assets & Publish GitHub Release
+    needs: validate-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Package Plugin Archives
+        run: |
+          mkdir -p dist
+          # Package each host plugin
+          cd plugins
+          zip -r ../dist/devweave-antigravity.zip antigravity/
+          zip -r ../dist/devweave-claude.zip claude/
+          zip -r ../dist/devweave-copilot.zip copilot/
+          zip -r ../dist/devweave-gemini.zip gemini/
+          zip -r ../dist/devweave-codex.zip codex/
+          zip -r ../dist/devweave-devin.zip devin/
+          # Package full bundle
+          zip -r ../dist/devweave-all-plugins.zip .
+          cd ..
+          echo "Generated packages in dist/:"
+          ls -lh dist/
+
+      - name: Extract Tag & Release Notes
+        id: release_info
+        run: |
+          TAG_NAME="${{ github.ref_name }}"
+          if [ -z "$TAG_NAME" ] || [ "$TAG_NAME" = "master" ] || [ "$TAG_NAME" = "develop" ]; then
+            TAG_NAME="${{ github.event.inputs.version }}"
+          fi
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release_info.outputs.tag_name }}
+          name: "DevWeave ${{ steps.release_info.outputs.tag_name }}"
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          files: |
+            dist/devweave-antigravity.zip
+            dist/devweave-claude.zip
+            dist/devweave-copilot.zip
+            dist/devweave-gemini.zip
+            dist/devweave-codex.zip
+            dist/devweave-devin.zip
+            dist/devweave-all-plugins.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-pages:
+    name: Deploy Documentation Portal to GitHub Pages
+    needs: validate-and-test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
