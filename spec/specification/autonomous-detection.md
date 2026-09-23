@@ -1,6 +1,8 @@
 # DevWeave Autonomous Technology Detection Specification
 
-Autonomous Technology Detection enables DevWeave to inspect any unfamiliar repository and infer its technology stack, dependencies, versions, and architectural topology without requiring manual user declaration.
+> **"Less Tokens. More Work. Lower Bill."**
+
+Autonomous Technology Detection enables DevWeave to inspect any unfamiliar repository and infer its technology stack, dependencies, versions, physical-to-logical layers, request flow, and architectural topology without requiring manual user declaration. Operates generically across any codebase.
 
 ---
 
@@ -10,13 +12,13 @@ Detection operates progressively from coarse workspace structure down to fine-gr
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
-│ Layer 1: Repository Structure                           │
-│ (Monorepo, single service, shared libs, DB migrations)  │
+│ Layer 1: Repository Structure & Multi-Repo Topology     │
+│ (Monorepo, single service, multi-repo, DB migrations)   │
 ├─────────────────────────────────────────────────────────┤
 │ Layer 2: Programming Languages                          │
 │ (C#, TypeScript, Java, Python, Go, Rust, PHP, Ruby, etc.)│
 ├─────────────────────────────────────────────────────────┤
-│ Layer 3: Frameworks                                     │
+│ Layer 3: Frameworks & Engines                           │
 │ (ASP.NET Core, Angular, Spring Boot, FastAPI, Rails)    │
 ├─────────────────────────────────────────────────────────┤
 │ Layer 4: Libraries & Toolchains                         │
@@ -36,7 +38,11 @@ Detection operates progressively from coarse workspace structure down to fine-gr
    - `HIGH`: Extracted directly from package manifests, SDK configuration files, or compiler lockfiles.
    - `MEDIUM`: Inferred from naming conventions, import statements, or folder layouts.
    - `LOW`: Deduced from isolated script patterns.
-3. **No Assumptions**: If a version cannot be confirmed with evidence, record as `value: unknown, confidence: low`. Never invent a version or toolchain.
+3. **Pin-to-Pin Architecture Synthesis**:
+   - Map physical source directories to logical architectural tiers (`layers.md`).
+   - Trace end-to-end request journeys from entrypoint down to data store (`request-flow.md`).
+   - Record external integrations, APIs, and message brokers (`integrations.md`).
+4. **No Assumptions**: If a version cannot be confirmed with evidence, record as `value: unknown, confidence: low`. Never invent a version or toolchain.
 
 ---
 
@@ -49,4 +55,8 @@ Autonomous discovery populates the following structured intelligence files under
 - `dependencies.md`: Core package dependencies and lockfiles.
 - `build.md`: Exact build commands and prerequisite toolchains.
 - `testing.md`: Native test runner commands and assertion frameworks.
+- `architecture.md`: Comprehensive system topology and component layout.
+- `layers.md`: Pin-to-pin physical-to-logical layer mapping.
+- `request-flow.md`: End-to-end request trace and Mermaid sequence diagram.
+- `integrations.md`: External APIs, database connections, and event queues.
 - `practices.md`: Applicable engineering best practices bound to the detected stack.
