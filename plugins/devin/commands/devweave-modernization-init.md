@@ -32,26 +32,24 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 4. Inspect target repository if files exist (detect languages, frameworks, ORMs, build tools).
 5. If target repository is empty or has insufficient code, record target architecture intent directly while marking unspecified details as `AI_DETERMINED` and unobserved facts as `UNKNOWN`. Never fabricate facts.
 6. Synthesize technology practice profile across: Best Practices, Design Patterns, SOLID, Clean Code, Security, API, Database, Testing, Performance, and Anti-Patterns.
-7. Initialize `.devweave/modernization/<ID>/` workspace.
+7. Initialize central `.devweave/modernization/` workspace configuration.
 
 ---
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
-├── workspace.json
-├── architecture-intent.json
-├── technology-profile.json
-├── source-memory.json
-└── state.json
+.devweave/modernization/
+├── workspace.json              <-- Target solution metadata & PM tool preference
+├── architecture-intent.json    <-- Declared target architecture
+├── technology-profile.json     <-- Technology & engineering practice profiles
+├── source-memory.json          <-- Legacy source path & READ_ONLY access mode
+└── state.json                  <-- Central modernization project registry
 ```
 
 ---
 
 ## State Updates
-- Sets `currentPhase` = `INIT`
-- Sets `phases.INIT` = `COMPLETED`
-- Sets `phases.CONTEXT` = `PENDING`
+- Sets `projectStatus` = `INITIALIZED`
 - Sets `nextSuggestedPhase` = `CONTEXT`
 - Sets `status` = `WAITING_FOR_HUMAN`
 
