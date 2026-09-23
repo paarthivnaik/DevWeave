@@ -210,7 +210,42 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 
 ---
 
-For complete multi-platform documentation, see the [Master Installation Guide](file:///D:/DevWeave/docs/installation-guide.md).
+## 📚 Complete Documentation Library
+
+DevWeave provides deep documentation across architecture, developer guides, platform integrations, and formal specifications:
+
+### 🌟 Core Guides & Architecture
+| Document | Purpose |
+| :--- | :--- |
+| **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and token caching. |
+| **[Developer Handbook & Command Reference](docs/developer-guide.md)** | Step-by-step tutorial, command parameters, and full reference for all 21 skills across 6 hosts. |
+| **[Universal Installation Guide](docs/installation-guide.md)** | 1-Click copy-pasteable Git installation and automated updates for all 6 AI coding assistants. |
+| **[Getting Started Guide](docs/getting-started.md)** | End-to-end walkthrough of the 7-phase canonical development lifecycle with Mermaid diagrams. |
+| **[Token & Cost Benchmark Report](docs/v1-benchmarks.md)** | Empirical data proving 84%–93% token savings and 95%–99% cost reduction across 12 polyglot repositories. |
+| **[Normative AI-DLC Lifecycle Contract](docs/lifecycle.md)** | Specification of state transitions, phase boundaries, gate conditions, and failure loops. |
+| **[Workflow Profiles & Fast Lanes](docs/workflow-profiles.md)** | Execution guide for `EXPRESS`, `FEATURE`, `FIX`, and `MODERNIZE` workflow lanes. |
+| **[Autonomous Stack & Layer Architecture](docs/architecture.md)** | 5-layer manifest discovery, physical-to-logical layer mapping, and host adapter bridges. |
+| **[Master Conformance Guide](docs/conformance.md)** | Complete breakdown of the 20-scenario automated integration test runner. |
+
+### 🤖 Host Platform Guides
+| Platform | Guide | Installation Target | Validated Skills |
+| :--- | :--- | :--- | :--- |
+| **Google Antigravity** | **[Antigravity Guide](docs/antigravity.md)** | `plugins/antigravity/` | 21 Validated Skills |
+| **Anthropic Claude Code** | **[Claude Code Guide](docs/claude-code.md)** | `plugins/claude/` | 21 Slash Commands |
+| **GitHub Copilot** | **[GitHub Copilot Guide](docs/github-copilot.md)** | `plugins/copilot/` | 21 Prompt Files |
+| **Google Gemini CLI** | **[Gemini CLI Guide](docs/gemini-cli.md)** | `plugins/gemini/` | 21 Command Definitions |
+| **OpenAI Codex** | **[OpenAI Codex Guide](docs/codex.md)** | `plugins/codex/` | 21 System Commands |
+| **Cognition Devin** | **[Cognition Devin Guide](docs/devin.md)** | `plugins/devin/` | 21 Playbook Actions |
+
+### 📜 Formal Specifications & Schemas
+- **[Lifecycle State Machine Spec](spec/specification/lifecycle.md)**
+- **[Human-in-the-Loop Governance Spec](spec/specification/human-in-the-loop.md)**
+- **[Autonomous Technology Detection Spec](spec/specification/autonomous-detection.md)**
+- **[Dual-Model Consensus Review Spec](spec/specification/dual-model-review.md)**
+- **[Dynamic Technology Revalidation Spec](spec/specification/technology-revalidation.md)**
+- **[Plugin Lifecycle & Auto-Update Spec](spec/specification/plugin-lifecycle.md)**
+- **[Security & Secret Protection Spec](spec/specification/security.md)**
+- **[JSON Schema Definitions (`spec/schemas/`)](spec/schemas/)**
 
 ---
 
