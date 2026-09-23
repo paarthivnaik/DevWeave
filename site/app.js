@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCopyButtons();
   initCalculator();
   initRepoFilter();
+  initDocFilter();
 });
 
 // Platform Tab Switcher
@@ -61,15 +62,17 @@ function initCopyButtons() {
 function initCalculator() {
   const devsSlider = document.getElementById("slider-devs");
   const itemsSlider = document.getElementById("slider-items");
+  const rateSlider = document.getElementById("slider-rate");
+
   const devsVal = document.getElementById("val-devs");
   const itemsVal = document.getElementById("val-items");
+  const rateVal = document.getElementById("val-rate");
 
-  const unstrTokensEl = document.getElementById("calc-unstr-tokens");
-  const devweaveTokensEl = document.getElementById("calc-devweave-tokens");
   const tokenSavingsPctEl = document.getElementById("calc-token-savings-pct");
   const unstrCostEl = document.getElementById("calc-unstr-cost");
   const devweaveCostEl = document.getElementById("calc-devweave-cost");
   const netDollarSavingsEl = document.getElementById("calc-net-dollar-savings");
+  const valueRecoveredEl = document.getElementById("calc-value-recovered");
   const hoursSavedEl = document.getElementById("calc-hours-saved");
 
   function updateCalculations() {
@@ -77,15 +80,17 @@ function initCalculator() {
 
     const devs = parseInt(devsSlider.value, 10);
     const itemsPerMonth = parseInt(itemsSlider.value, 10);
+    const hourlyRate = rateSlider ? parseInt(rateSlider.value, 10) : 75;
 
-    devsVal.innerText = devs.toLocaleString();
-    itemsVal.innerText = itemsPerMonth.toLocaleString();
+    if (devsVal) devsVal.innerText = devs.toLocaleString();
+    if (itemsVal) itemsVal.innerText = itemsPerMonth.toLocaleString();
+    if (rateVal) rateVal.innerText = "$" + hourlyRate.toLocaleString();
 
     const annualWorkItems = devs * itemsPerMonth * 12;
 
     // Averages based on weighted blend:
     // Unstructured avg per task: 575,000 tokens ($2.10 cost)
-    // DevWeave avg per task: 64,400 tokens ($0.087 cost)
+    // DevWeave avg per task with Graph Memory: 64,400 tokens ($0.087 cost)
     const unstrTotalTokens = annualWorkItems * 575000;
     const devweaveTotalTokens = annualWorkItems * 64400;
 
@@ -95,19 +100,20 @@ function initCalculator() {
     const netSavings = unstrTotalCost - devweaveTotalCost;
     const tokenSavingsPct = ((1 - (devweaveTotalTokens / unstrTotalTokens)) * 100).toFixed(1);
     const hoursSaved = Math.round(annualWorkItems * 0.35); // 0.35 hrs rework saved per task
+    const valueRecovered = hoursSaved * hourlyRate;
 
-    unstrTokensEl.innerText = formatTokens(unstrTotalTokens);
-    devweaveTokensEl.innerText = formatTokens(devweaveTotalTokens);
-    tokenSavingsPctEl.innerText = `${tokenSavingsPct}% Savings`;
-    unstrCostEl.innerText = formatCurrency(unstrTotalCost);
-    devweaveCostEl.innerText = formatCurrency(devweaveTotalCost);
-    netDollarSavingsEl.innerText = formatCurrency(netSavings);
-    hoursSavedEl.innerText = `${hoursSaved.toLocaleString()} Hours`;
+    if (tokenSavingsPctEl) tokenSavingsPctEl.innerText = `${tokenSavingsPct}% Savings`;
+    if (unstrCostEl) unstrCostEl.innerText = formatCurrency(unstrTotalCost);
+    if (devweaveCostEl) devweaveCostEl.innerText = formatCurrency(devweaveTotalCost);
+    if (netDollarSavingsEl) netDollarSavingsEl.innerText = formatCurrency(netSavings);
+    if (valueRecoveredEl) valueRecoveredEl.innerText = formatCurrency(valueRecovered) + " / yr";
+    if (hoursSavedEl) hoursSavedEl.innerText = `${hoursSaved.toLocaleString()} Hours`;
   }
 
   if (devsSlider && itemsSlider) {
     devsSlider.addEventListener("input", updateCalculations);
     itemsSlider.addEventListener("input", updateCalculations);
+    if (rateSlider) rateSlider.addEventListener("input", updateCalculations);
     updateCalculations();
   }
 }
@@ -141,6 +147,27 @@ function initRepoFilter() {
         row.style.display = "";
       } else {
         row.style.display = "none";
+      }
+    });
+  });
+}
+
+// Interactive Documentation Search Filter
+function initDocFilter() {
+  const docSearch = document.getElementById("doc-filter");
+  const navItems = document.querySelectorAll(".docs-sidebar li");
+
+  if (!docSearch || !navItems.length) return;
+
+  docSearch.addEventListener("input", () => {
+    const query = docSearch.value.toLowerCase();
+
+    navItems.forEach((item) => {
+      const text = item.innerText.toLowerCase();
+      if (text.includes(query)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
       }
     });
   });
