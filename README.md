@@ -8,7 +8,8 @@
 
 **DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
 
-🌐 **Interactive Showcase & Client Portal**: Open [`site/index.html`](file:///D:/DevWeave/site/index.html) or deploy via **Cloudflare Pages / Vercel** (100% Free for Private Repos).
+📖 **New to DevWeave?** Read the **[Complete Product Overview (Simple English Guide)](docs/product-overview.md)** for a friendly, step-by-step introduction.  
+🌐 **Interactive Showcase & Client Portal**: Open [`site/index.html`](site/index.html) or deploy via **Cloudflare Pages / Vercel** (100% Free for Private Repos).
 
 ---
 
@@ -217,6 +218,7 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 ### 🌟 Core Guides & Architecture
 | Document | Purpose |
 | :--- | :--- |
+| **[Product Overview (Simple English Guide)](docs/product-overview.md)** | Clear, friendly guide explaining the entire DevWeave system, 7 phases, and benefits in plain English. |
 | **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and token caching. |
 | **[Developer Handbook & Command Reference](docs/developer-guide.md)** | Step-by-step tutorial, command parameters, and full reference for all 21 skills across 6 hosts. |
 | **[Universal Installation Guide](docs/installation-guide.md)** | 1-Click copy-pasteable Git installation and automated updates for all 6 AI coding assistants. |
