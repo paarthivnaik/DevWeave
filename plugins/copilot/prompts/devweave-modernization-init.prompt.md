@@ -71,7 +71,7 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 
 ## Next Suggested Command
 ```text
-modernization-context <ID>
+devweave-modernization-context <ID>
 ```
 
 ---

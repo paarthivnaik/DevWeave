@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-improve
+name: improve
 description: [Utility - Continuous Improvement] Maintainer-facing analysis tool that reads survey friction logs and phase abort rates to propose specific improvements to plugin skills and rules.
 ---
 

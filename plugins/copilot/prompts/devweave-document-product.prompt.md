@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-document-product
+name: document-product
 description: [Knowledge - Product Documentation] Captures durable, long-lived product-level context (architecture, installers, middleware, frontend shell) into .devweave/products/<name>.md.
 ---
 

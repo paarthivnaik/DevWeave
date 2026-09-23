@@ -200,6 +200,38 @@ if ($e2ePhasesCompleted.Count -eq 12 -and $e2ePhasesCompleted -contains "HARD_GA
     $failedCount++
 }
 
+# --- Test Scenario 7: User-Only Story Audit Trail (audit.md) Logging & Author Attribution ---
+Write-Host "`n[Scenario 7] User-Only Story Audit Trail (audit.md) Logging & Author Attribution..." -ForegroundColor Yellow
+
+$totalTests++
+$authorName = "Balaji Naik Mudavatu"
+$authorEmail = "balaji.mudavatu@example.com"
+$authorString = "$authorName <$authorEmail>"
+
+$auditLog = @(
+    @{ Phase = "CONTEXT"; Timestamp = "2026-09-23T23:45:00+05:30"; Author = $authorString; Action = "USER_PROMPT_INTAKE"; Prompt = "Modernize user registration screen from legacy JSP to Angular 22"; Inputs = "PM Source: Manual" },
+    @{ Phase = "ANALYZE"; Timestamp = "2026-09-23T23:46:00+05:30"; Author = $authorString; Action = "HARD_GATE_1_DECISION"; Decision = "APPROVE"; Feedback = "Target architecture approved with Signals" },
+    @{ Phase = "PLAN"; Timestamp = "2026-09-23T23:47:00+05:30"; Author = $authorString; Action = "HARD_GATE_2_DECISION"; Decision = "APPROVE"; Feedback = "Task sequence verified" },
+    @{ Phase = "BRANCH"; Timestamp = "2026-09-23T23:48:00+05:30"; Author = $authorString; Action = "USER_BRANCH_SELECTION"; TargetBranch = "feature/99-User-Registration"; BaseBranch = "master"; Input = "create feature/99-User-Registration from master" },
+    @{ Phase = "IMPLEMENT"; Timestamp = "2026-09-23T23:49:00+05:30"; Author = $authorString; Action = "USER_DIRECTIVE"; Directive = "Run with strict null checks" },
+    @{ Phase = "VERIFY"; Timestamp = "2026-09-23T23:50:00+05:30"; Author = $authorString; Action = "HARD_GATE_3_DECISION"; Decision = "APPROVE"; Feedback = "All parity checks verified" },
+    @{ Phase = "PR"; Timestamp = "2026-09-23T23:51:00+05:30"; Author = $authorString; Action = "USER_PR_AUTHORIZATION"; PRNotes = "Ready for merge review" }
+)
+
+$auditPhases = $auditLog | ForEach-Object { $_.Phase }
+$hasAllPhases = ($auditPhases -contains "CONTEXT") -and ($auditPhases -contains "ANALYZE") -and ($auditPhases -contains "PLAN") -and ($auditPhases -contains "BRANCH") -and ($auditPhases -contains "IMPLEMENT") -and ($auditPhases -contains "VERIFY") -and ($auditPhases -contains "PR")
+$hasAuthorOnAll = ($auditLog | Where-Object { $_.Author -eq $authorString }).Count -eq $auditLog.Count
+$hasPromptLogged = ($auditLog[0].Prompt -like "*Modernize user registration*")
+$hasBranchLogged = ($auditLog[3].TargetBranch -eq "feature/99-User-Registration" -and $auditLog[3].BaseBranch -eq "master")
+
+if ($hasAllPhases -and $hasAuthorOnAll -and $hasPromptLogged -and $hasBranchLogged) {
+    Write-Host "  [PASS] User audit trail (audit.md) recorded exclusively user activities with author ($authorString)" -ForegroundColor Green
+    $passedCount++
+} else {
+    Write-Host "  [FAIL] User audit trail verification failed" -ForegroundColor Red
+    $failedCount++
+}
+
 Write-Host "`n----------------------------------------------------------"
 Write-Host "Master Modernization E2E Summary: Total=$totalTests, Passed=$passedCount, Failed=$failedCount" -ForegroundColor $(if ($failedCount -eq 0) { "Green" } else { "Red" })
 

@@ -160,3 +160,40 @@ plugins/antigravity/
 
 - **Autonomous Tool Execution**: Leverages host native tools (`run_command`, `view_file`, `write_to_file`, `replace_file_content`) to inspect code and run tests.
 - **Zero Mandatory Daemons**: Entire system operates statelessly inside agent turns using file-based `.devweave/` state persistence.
+
+---
+
+## 6. 2-Tier Hierarchical Workspace Architecture
+
+DevWeave prevents configuration duplication across stories by separating global architectural declarations from individual story migration deliverables:
+
+```text
+.devweave/modernization/
+├── workspace.json              # [Tier 1] Target solution metadata & persisted PM tool selection
+├── architecture-intent.json    # [Tier 1] Declared target architecture intent
+├── technology-profile.json     # [Tier 1] Enforced technology practices & rules
+├── source-memory.json          # [Tier 1] Legacy repository pointer (READ_ONLY access mode)
+└── stories/                    # [Tier 2] Story-Level Deliverables
+    └── <ID>/                   # (e.g., stories/98, stories/99)
+        ├── state.json          # Story lifecycle phase & hard gate tracker
+        ├── audit.md            # Append-only user activity & prompt audit log (Author attribution)
+        ├── context.md          # Bounded legacy slice context
+        ├── migration-unit.json # Targeted legacy components & DTOs
+        ├── analysis.md         # Behavioral rules & dependency analysis
+        ├── mappings.json       # Legacy-to-target component mappings
+        ├── plan.md             # File-anchored tasks & DB migrations
+        ├── evidence.md         # Implementation & test execution evidence
+        ├── verification.md     # Behavioral parity & test scorecards
+        └── pr-description.md   # Pull request release package
+```
+
+---
+
+## 7. User-Only Chronological Story Audit Trail (`audit.md`)
+
+DevWeave maintains strict auditability by generating an append-only `.devweave/modernization/stories/<ID>/audit.md` (and `.devweave/work-items/<ID>/audit.md`) capturing **EXCLUSIVELY developer interactions**:
+- **Author Identity**: Each entry records `Author: <User Name> <email@example.com>` from Git config.
+- **Developer Prompts**: Full text of user instructions, custom descriptions, and pasted requirements.
+- **Interactive Configurations**: PM tool choices and custom branch configurations (`--name`, `--base`, or natural phrasing).
+- **Governance Gate Records**: Explicit human decisions (`APPROVE`, `REQUEST_CHANGES`, `STOP`) and reviewer comments at Hard Gates #1, #2, and #3.
+- **Zero Framework Operations**: AI-DLC internal machinery, AST scans, and agent traces are excluded to maintain clean human governance history.

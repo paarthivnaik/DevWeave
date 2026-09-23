@@ -1,44 +1,58 @@
 ---
 name: devweave-update
-description: "Autonomously update DevWeave Cognition Devin playbooks and adapters in-place from the central repository."
+description: "Autonomously update DevWeave plugins, skills, rules, and adapters in-place from the central repository."
 ---
 
-# Cognition Devin Update Playbook (`devweave:update`)
+# Cognition Devin DevWeave Update Command (`devin run /devweave-update`)
 
 > **"Less Tokens. More Work. Lower Bill."**
 
 ## Purpose
-Autonomously fetch and synchronize the latest DevWeave Devin playbooks, instructions, and schemas in-place without manual file replacement.
+Autonomously fetch and synchronize the latest DevWeave skills, templates, schemas, and adapter rules directly from the central repository in-place without requiring manual uninstall or reinstall steps.
 
 ---
 
 ## Execution Workflow
 
-### Step 1: In-Place Sync
-- **Linux / macOS**:
-  ```bash
-  TEMP_DIR=$(mktemp -d /tmp/devweave-upd-XXXXXX)
-  git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git "$TEMP_DIR"
-  cp -r "$TEMP_DIR/plugins/devin/commands/"* "$HOME/.devin/commands/" 2>/dev/null || true
-  rm -rf "$TEMP_DIR"
-  ```
+### Step 1: Connectivity & Update Verification
+Check remote repository connectivity and compare the local installation against remote `HEAD`:
 - **Windows (PowerShell)**:
+  ```powershell
+  & "$HOME/.gemini/config/plugins/devweave/scripts/devweave-update.ps1" -Force
+  ```
+  *(Fallback if standalone script not found)*:
   ```powershell
   $temp = Join-Path $env:TEMP ("devweave-upd-" + [System.Guid]::NewGuid().ToString("N"))
   git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $temp
-  Copy-Item -Path (Join-Path $temp "plugins\devin\commands\*") -Destination "$HOME\.devin\commands" -Recurse -Force
+  Copy-Item -Path (Join-Path $temp "plugins\antigravity\*") -Destination "$HOME\.gemini\config\plugins\devweave" -Recurse -Force
   Remove-Item -Recurse -Force $temp
+  ```
+
+- **Linux / macOS (Bash)**:
+  ```bash
+  TEMP_DIR=$(mktemp -d /tmp/devweave-upd-XXXXXX)
+  git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git "$TEMP_DIR"
+  cp -r "$TEMP_DIR/plugins/antigravity/"* "$HOME/.gemini/config/plugins/devweave/" 2>/dev/null || true
+  rm -rf "$TEMP_DIR"
   ```
 
 ---
 
-### Step 2: Report Update Summary
+### Step 2: In-Place Cache & State Refresh
+1. Update `~/.devweave/update-cache.json` with current UTC timestamp and commit hash.
+2. Preserve all existing workspace state files in `.devweave/state/` and `.devweave/knowledge/`.
+3. Report the updated version and active capabilities to the developer.
+
+---
+
+### Step 3: Report Update Summary
 ```text
-✨ DevWeave Devin playbooks updated successfully.
+✨ DevWeave Antigravity Plugin updated successfully.
 
 Source: https://github.com/paarthivnaik/DevWeave.git (branch: develop)
+Skills Verified: 21 active skills
 Status: Up to date & ready
 
-Run: devweave:init  (to initialize or re-verify repository stack)
-Run: devweave:context <WorkItemId>  (to begin work item)
+Run: devin run /devweave-init  (to initialize or re-verify repository stack)
+Run: devin run /devweave-context <WorkItemId>  (to begin work item)
 ```

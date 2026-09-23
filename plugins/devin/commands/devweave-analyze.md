@@ -1,6 +1,6 @@
-﻿---
+---
 name: devweave-analyze
-description: [Phase 2: Analyze] Performs deep codebase archaeology, root-cause defect diagnosis or feature approach evaluation, and selects applicable best practices.
+description: [Phase 2: Analyze] Performs deep codebase archaeology, root-cause defect diagnosis or feature approach evaluation, selects applicable best practices, and updates audit.md.
 ---
 
 # DevWeave Analysis Skill (`devweave-analyze`)
@@ -8,6 +8,7 @@ description: [Phase 2: Analyze] Performs deep codebase archaeology, root-cause d
 ## Execution Invariants
 1. **Single-Phase Execution**: Execute ONLY the ANALYZE phase. Do NOT automatically advance to PLAN.
 2. **Prerequisite Guard**: Ensure `CONTEXT` is marked `COMPLETED` and approved.
+3. **Audit Invariance**: Append analysis activity, prompt, and decisions to `.devweave/work-items/<ID>/audit.md`.
 
 ## Step-by-Step Instructions
 1. **Investigate Target Code**: Inspect affected files identified in `context.md`.
@@ -16,12 +17,15 @@ description: [Phase 2: Analyze] Performs deep codebase archaeology, root-cause d
    - **For Features**: Map Requirements $\to$ Existing Architecture $\to$ Component Reuse $\to$ Solution Strategy.
 3. **Technology & Practice Binding**: Select version-aware practices from `.devweave/repository/practices.md`. If runtime versions changed, mark affected knowledge as `NEEDS_REVALIDATION`.
 4. **Assemble Artifact**: Write findings to `.devweave/work-items/<ID>/analysis.md` (and `solution.md`).
-5. **Update State**: Record `ANALYZE` status in `.devweave/work-items/<ID>/state.md`.
+5. **Update State & Audit**:
+   - Record `ANALYZE` status in `.devweave/work-items/<ID>/state.md`.
+   - Append analysis log, findings summary, and human decision to `.devweave/work-items/<ID>/audit.md`.
 6. **Human Checkpoint**: Output the completion summary:
    ```text
    ANALYZE COMPLETE
    Work Item: <ID>
    Artifact: .devweave/work-items/<ID>/analysis.md
+   Audit Log: .devweave/work-items/<ID>/audit.md
    
    Human decision: [Approve] [Request Changes] [Stop]
    Suggested next phase: PLAN (Run: DevWeave-plan <ID>)
