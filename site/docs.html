@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevWeave Documentation — Architecture, Lifecycle & Guides</title>
+  <title>DevWeave Master Documentation — Architecture, Graph Memory & Guides</title>
+  <meta name="description" content="Comprehensive master documentation for DevWeave AI-DLC framework: Graph-Based Durable Memory, 7 Canonical Phases, 21-Skill Parity across 6 AI Hosts, and GitHub Actions Release Pipeline.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <style>
@@ -16,38 +17,43 @@
     }
     .docs-sidebar {
       position: sticky;
-      top: 100px;
+      top: 90px;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 20px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
     }
     .docs-sidebar h4 {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
       color: var(--text-muted);
       margin: 16px 0 8px;
     }
     .docs-sidebar h4:first-child { margin-top: 0; }
     .docs-sidebar ul {
       list-style: none;
+      padding: 0;
+      margin: 0;
     }
     .docs-sidebar li {
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .docs-sidebar a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       display: block;
       padding: 6px 10px;
       border-radius: var(--radius-sm);
       transition: all 0.2s ease;
     }
     .docs-sidebar a:hover, .docs-sidebar a.active {
-      color: var(--text-primary);
-      background: rgba(99, 102, 241, 0.15);
+      color: #ffffff;
+      background: rgba(99, 102, 241, 0.25);
+      border-left: 3px solid var(--accent-indigo);
     }
     .docs-content {
       background: var(--bg-card);
@@ -57,31 +63,65 @@
     }
     .docs-content h2 {
       font-size: 1.8rem;
-      margin: 32px 0 16px;
-      padding-bottom: 8px;
+      margin: 40px 0 16px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border-color);
+      color: #ffffff;
     }
     .docs-content h2:first-child { margin-top: 0; }
     .docs-content h3 {
       font-size: 1.3rem;
-      margin: 24px 0 12px;
+      margin: 28px 0 12px;
+      color: #93c5fd;
+    }
+    .docs-content h4 {
+      font-size: 1.1rem;
+      margin: 20px 0 8px;
       color: #cbd5e1;
     }
     .docs-content p {
       margin-bottom: 16px;
       color: var(--text-secondary);
+      line-height: 1.7;
     }
     .docs-content ul, .docs-content ol {
       margin-bottom: 20px;
       padding-left: 24px;
       color: var(--text-secondary);
+      line-height: 1.7;
     }
     .docs-content li {
       margin-bottom: 6px;
     }
+    .doc-callout {
+      background: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--accent-indigo);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      margin: 20px 0;
+      color: #cbd5e1;
+    }
+    .doc-callout.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-left-color: var(--accent-emerald);
+    }
+    .doc-callout.warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-left-color: var(--accent-amber);
+    }
+    .docs-search {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: #ffffff;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
     @media (max-width: 900px) {
       .docs-layout { grid-template-columns: 1fr; }
-      .docs-sidebar { position: static; }
+      .docs-sidebar { position: static; max-height: none; }
     }
   </style>
 </head>
@@ -92,16 +132,18 @@
     <div class="container nav-wrap">
       <a href="index.html" class="logo-link">
         <span class="logo-badge">⚡ DevWeave</span>
-        <span class="version-tag">Docs</span>
+        <span class="version-tag">Master Docs</span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html#quickstart">Quick Start</a></li>
+        <li><a href="index.html#superpowers">Superpowers</a></li>
+        <li><a href="index.html#graph-memory">Graph Memory</a></li>
         <li><a href="index.html#lifecycle">Lifecycle</a></li>
         <li><a href="index.html#calculator">ROI Calculator</a></li>
-        <li><a href="index.html#benchmarks">Benchmarks</a></li>
-        <li><a href="docs.html" style="color: #a5b4fc;">Documentation</a></li>
+        <li><a href="docs.html" style="color: #a5b4fc; font-weight: 700;">Documentation</a></li>
       </ul>
       <a href="https://github.com/paarthivnaik/DevWeave" target="_blank" rel="noopener noreferrer" class="btn-github">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
     </div>
@@ -112,77 +154,292 @@
       
       <!-- Sidebar -->
       <aside class="docs-sidebar">
-        <h4>Getting Started</h4>
+        <input type="text" id="doc-filter" class="docs-search" placeholder="Search documentation...">
+        
+        <h4>1. Core Product</h4>
         <ul>
-          <li><a href="#overview">Overview & Principles</a></li>
-          <li><a href="#install">Installation Guide</a></li>
-          <li><a href="#hitl">Human-in-the-Loop Gates</a></li>
+          <li><a href="#overview">Product Overview</a></li>
+          <li><a href="#graph-engine">Graph-Based Memory Engine</a></li>
+          <li><a href="#lifecycle">The 7-Phase AI-DLC</a></li>
+          <li><a href="#governance">4 Governance Gates</a></li>
+          <li><a href="#dual-review">Dual-Model Code Review</a></li>
         </ul>
 
-        <h4>Architecture & Specs</h4>
+        <h4>2. Installation & Updates</h4>
         <ul>
-          <li><a href="#detection">Autonomous 5-Layer Detection</a></li>
-          <li><a href="#dual-review">Dual-Model Review (Architect + DBA)</a></li>
-          <li><a href="#knowledge">Central Compounding Knowledge</a></li>
+          <li><a href="#install-guide">1-Click Universal Install</a></li>
+          <li><a href="#auto-updater">Autonomous Daily Auto-Updater</a></li>
+          <li><a href="#marketplace">Antigravity Marketplace</a></li>
         </ul>
 
-        <h4>Host Guides</h4>
+        <h4>3. CI/CD & Releases</h4>
         <ul>
-          <li><a href="#host-antigravity">Google Antigravity</a></li>
-          <li><a href="#host-claude">Anthropic Claude Code</a></li>
-          <li><a href="#host-copilot">GitHub Copilot</a></li>
-          <li><a href="#host-gemini">Google Gemini CLI</a></li>
-          <li><a href="#host-codex">OpenAI Codex</a></li>
-          <li><a href="#host-devin">Cognition Devin</a></li>
+          <li><a href="#release-pipeline">GitHub Actions CI/CD</a></li>
+          <li><a href="#release-runbook">Future Release Runbook</a></li>
+        </ul>
+
+        <h4>4. 21-Skill Parity</h4>
+        <ul>
+          <li><a href="#skills-core">Canonical Lifecycle (P0 - P7)</a></li>
+          <li><a href="#skills-lanes">Fast Lanes (Fix, Modernize, Express)</a></li>
+          <li><a href="#skills-knowledge">Knowledge & System Skills</a></li>
+        </ul>
+
+        <h4>5. Benchmarks & Testing</h4>
+        <ul>
+          <li><a href="#conformance">100% Conformance Tests</a></li>
+          <li><a href="#benchmarks">Empirical Token ROI Math</a></li>
         </ul>
       </aside>
 
       <!-- Content -->
       <main class="docs-content">
-        <h2 id="overview">DevWeave V1.0 Overview</h2>
-        <p>
-          <strong>DevWeave</strong> is the universal AI-DLC (AI-Driven Development Lifecycle) framework. It eliminates the chaos, token waste, and hallucination loops of unstructured AI coding assistants through strict phase boundary enforcement, surgical blast-radius scoping, and compounding domain knowledge.
-        </p>
+        
+        <!-- Overview -->
+        <section id="overview">
+          <h2>🌟 1. Product Overview (Simple English Guide)</h2>
+          <p>
+            <strong>DevWeave</strong> is an open-source software engineering lifecycle framework designed to bring discipline, predictability, and drastic token savings to autonomous AI coding agents.
+          </p>
+          <div class="doc-callout success">
+            <strong>Core Philosophy:</strong> <em>"Less Tokens. More Work. Lower Bill."</em><br>
+            DevWeave eliminates the chaos of unstructured AI chat by enforcing deterministic phase boundaries, 1-hop blast-radius scoping, and durable JSON knowledge graphs.
+          </div>
+          <p>
+            Traditional AI coding assistants scan the whole repository on every prompt, burning 50,000 to 100,000 tokens per interaction. DevWeave replaces full-repo flooding with a declarative knowledge graph, dropping token usage by up to <strong>93.4%</strong>.
+          </p>
+        </section>
 
-        <h3 id="install">Supported Host Platforms</h3>
-        <p>DevWeave is structured with 100% structural parity across 6 host environments with automated daily sync:</p>
-        <ul>
-          <li><strong>Google Antigravity</strong>: <code>plugins/antigravity/</code> (21 validated skills)</li>
-          <li><strong>Anthropic Claude Code</strong>: <code>plugins/claude/</code> (21 slash commands)</li>
-          <li><strong>GitHub Copilot</strong>: <code>plugins/copilot/</code> (21 prompt files & extension)</li>
-          <li><strong>Google Gemini CLI</strong>: <code>plugins/gemini/</code> (21 command definitions)</li>
-          <li><strong>OpenAI Codex / ChatGPT CLI</strong>: <code>plugins/codex/</code> (21 commands)</li>
-          <li><strong>Cognition Devin</strong>: <code>plugins/devin/</code> (21 deterministic playbook actions)</li>
-        </ul>
-        <p><em>👉 See the full <a href="https://github.com/paarthivnaik/DevWeave/blob/develop/docs/developer-guide.md" target="_blank">Universal Developer Handbook</a> for all command parameters and tutorials.</em></p>
+        <!-- Graph Engine -->
+        <section id="graph-engine">
+          <h2>🧠 2. Graph-Based Durable Memory Engine</h2>
+          <p>
+            The foundation of DevWeave is its declarative JSON Knowledge Graph, stored natively in your project repository under <code>.devweave/graph/knowledge-graph.json</code>.
+          </p>
+          
+          <h3>Why Knowledge Graphs Beat Vector Embeddings:</h3>
+          <ul>
+            <li><strong>Deterministic Relationships</strong>: Tracks exact mutations (e.g., <code>OrderService -> MUTATES -> orders_table</code>).</li>
+            <li><strong>1-Hop Scoping</strong>: When working on a task, DevWeave queries only the immediate 1-hop neighbors of affected components.</li>
+            <li><strong>Zero Hallucination</strong>: File touches are bound strictly to graph entities verified during Phase 0 (<code>devweave-init</code>).</li>
+            <li><strong>Graph Deltas</strong>: PR creation automatically generates <code>graph-delta.json</code>, promoting durable domain knowledge on merge.</li>
+          </ul>
 
-        <h2 id="hitl">Human-in-the-Loop Governance Checkpoints</h2>
-        <p>DevWeave enforces 4 non-bypassable governance checkpoints:</p>
-        <ol>
-          <li><strong>Context Approval Gate</strong>: Requires engineer sign-off on work item scope before analysis begins.</li>
-          <li><strong>Branch Hard Gate</strong>: Prevents file touch until an isolated Git branch is created.</li>
-          <li><strong>Test & Verify Gate</strong>: Deterministic verification requiring clean test runs before review.</li>
-          <li><strong>PR Review Consensus Gate</strong>: Dual-model code review (Architect + Senior DBA) requiring human consensus sign-off before pull request creation.</li>
-        </ol>
+          <div class="code-wrapper">
+            <pre><code>// Formal Schema: spec/schemas/graph.json
+{
+  "version": "1.0.0",
+  "nodes": [
+    { "id": "node-auth", "type": "service", "name": "AuthenticationService" },
+    { "id": "node-db", "type": "database", "name": "users_table" }
+  ],
+  "edges": [
+    { "source": "node-auth", "target": "node-db", "relation": "READS_WRITES" }
+  ]
+}</code></pre>
+          </div>
+        </section>
 
-        <h2 id="dual-review">Dual-Model Collective Code Review</h2>
-        <p>
-          Phase 6 (<code>devweave-pr-review</code>) executes an automated, multi-perspective code audit:
-        </p>
-        <ul>
-          <li><strong>Principal Software Architect Lens</strong>: Evaluates interface contracts, downstream service impacts, side effects, and cascading failures.</li>
-          <li><strong>Senior Database Administrator (DBA) Lens</strong>: Audits SQL statements, table lock hazards, index coverage, and reversible migration scripts.</li>
-        </ul>
+        <!-- The 7 Phases -->
+        <section id="lifecycle">
+          <h2>🔄 3. The Canonical 7-Phase AI-DLC Lifecycle</h2>
+          <p>DevWeave organizes engineering work into 7 deterministic phases:</p>
+          <ol>
+            <li><strong>Phase 0: Init (<code>devweave-init</code>)</strong>: Autonomous 5-layer detection across language, framework, dependencies, build, and test + initializes the Knowledge Graph.</li>
+            <li><strong>Phase 1: Context (<code>devweave-context &lt;ID&gt;</code>)</strong>: Ingests work items from Jira/ADO/GitHub/Linear with PII sanitization and 1-hop blast radius scoping.</li>
+            <li><strong>Phase 2: Analyze (<code>devweave-analyze &lt;ID&gt;</code>)</strong>: Deep code investigation, schema contracts, and root-cause analysis.</li>
+            <li><strong>Phase 3: Plan (<code>devweave-plan &lt;ID&gt;</code>)</strong>: Decomposes solution into atomic tasks with verification anchors and automated test commands.</li>
+            <li><strong>Phase 4: Branch (<code>devweave-branch &lt;ID&gt;</code>)</strong>: <em>[HARD GATE]</em> Enforces isolated Git branch creation before source mutations.</li>
+            <li><strong>Phase 5: Implement (<code>devweave-implement &lt;ID&gt;</code>)</strong>: Surgical edits strictly bounded to approved plan. Zero hallucinated file touches.</li>
+            <li><strong>Phase 6: Review (<code>devweave-pr-review &lt;ID&gt;</code>)</strong>: <em>[HARD GATE]</em> Dual-model consensus review (Principal Architect + Senior DBA).</li>
+            <li><strong>Phase 7: PR (<code>devweave-pr &lt;ID&gt;</code>)</strong>: <em>[HARD GATE]</em> Compiles PR package, merges Graph Deltas into durable memory, and awaits human approval.</li>
+          </ol>
+        </section>
 
-        <h2 id="knowledge">Central Compounding Knowledge Base</h2>
-        <p>
-          Rather than re-analyzing repositories from scratch on every turn, DevWeave stores domain knowledge under <code>.devweave/domains/</code> and <code>.devweave/products/</code>. This yields:
-        </p>
-        <ul>
-          <li><strong>93.3% Token Savings</strong> on subsequent tasks in the same domain.</li>
-          <li><strong>0 Rediscovery Latency</strong>.</li>
-          <li>Continuous knowledge promotion as PRs are merged.</li>
-        </ul>
+        <!-- Governance Gates -->
+        <section id="governance">
+          <h2>🛡️ 4. Four Non-Bypassable Governance Gates</h2>
+          <div class="doc-callout warning">
+            <strong>Zero Unchecked Hallucination:</strong> DevWeave strictly forbids autonomous chaining through phase gates without explicit validation.
+          </div>
+          <ul>
+            <li><strong>Gate 1: PII / Privacy Gate</strong>: Scans and scrubs raw credentials, passwords, and sensitive customer data before LLM ingestion.</li>
+            <li><strong>Gate 2: Branch Hard Gate</strong>: Prevents accidental direct commits to <code>main</code> or <code>master</code>.</li>
+            <li><strong>Gate 3: Test Verification Gate</strong>: Requires 100% deterministic test execution evidence before moving to review.</li>
+            <li><strong>Gate 4: Human Review Gate</strong>: Requires explicit engineer sign-off on dual-model findings before pull request creation.</li>
+          </ul>
+        </section>
+
+        <!-- Dual-Model Review -->
+        <section id="dual-review">
+          <h2>👥 5. Dual-Model Collective Code Review</h2>
+          <p>
+            During Phase 6 (<code>devweave-pr-review</code>), DevWeave evaluates code changes through two specialized, independent lenses:
+          </p>
+          <ul>
+            <li><strong>Principal Software Architect Lens</strong>: Evaluates interface contracts, downstream service impacts, side effects, and cascading failures.</li>
+            <li><strong>Senior Database Administrator (DBA) Lens</strong>: Scans SQL statements, table lock hazards, missing indexes, N+1 query hazards, and reversible migration scripts.</li>
+          </ul>
+        </section>
+
+        <!-- Installation & Auto-Updater -->
+        <section id="install-guide">
+          <h2>⚡ 6. Universal 1-Click Installation</h2>
+          <p>Install DevWeave natively across all 6 supported AI coding hosts with zero runtime background daemons:</p>
+
+          <h3>🔵 Google Antigravity</h3>
+          <div class="code-wrapper">
+            <pre><code># Windows PowerShell
+git clone --depth 1 -b v1.0.0 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; agy plugin install $env:TEMP\devweave\plugins\antigravity; Remove-Item -Recurse -Force $env:TEMP\devweave
+
+# macOS / Linux Bash
+git clone --depth 1 -b v1.0.0 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave && agy plugin install /tmp/devweave/plugins/antigravity && rm -rf /tmp/devweave</code></pre>
+          </div>
+
+          <h3 id="auto-updater">Autonomous In-Place Daily Auto-Updater</h3>
+          <p>
+            DevWeave includes an autonomous in-place updater (<code>scripts/devweave-update.ps1</code> & <code>scripts/devweave-update.sh</code>) featuring a 24-hour TTL check.
+          </p>
+          <ul>
+            <li><strong>0 LLM Tokens</strong>: Updates natively via Git shallow fetches in ~1.5s.</li>
+            <li><strong>0ms Latency on Cache Hit</strong>: Runs only once per day; subsequent prompts run with zero delay.</li>
+            <li><strong>Dual-Scope Sync</strong>: Updates both user-global host directories and local project repositories (<code>.agents/plugins/devweave/</code> and <code>.github/prompts/</code>).</li>
+            <li><strong>On-Demand Upgrade</strong>: Type <code>/devweave-update</code> anytime to force an instant sync to the newest release.</li>
+          </ul>
+        </section>
+
+        <!-- GitHub Actions & Release Pipeline -->
+        <section id="release-pipeline">
+          <h2>🤖 7. Automated Release Process with GitHub Actions</h2>
+          <p>
+            DevWeave features a complete CI/CD release workflow in <code>.github/workflows/release.yml</code>. Whenever a version tag (e.g. <code>v1.1.0</code>) is pushed:
+          </p>
+          <ol>
+            <li><strong>Automated Testing</strong>: Runs JSON Schema validation and the complete 6-suite conformance test runner.</li>
+            <li><strong>Packaging</strong>: Builds 6 standalone host plugin ZIP files + 1 complete multi-host bundle in <code>dist/</code>.</li>
+            <li><strong>GitHub Release Publication</strong>: Generates changelog notes and attaches downloadable archives.</li>
+            <li><strong>Documentation Portal Deployment</strong>: Automatically deploys <code>site/</code> to GitHub Pages.</li>
+          </ol>
+        </section>
+
+        <!-- 21 Skills Matrix -->
+        <section id="skills-core">
+          <h2>📦 8. Symmetrical 21-Skill Command Matrix</h2>
+          <p>Every single skill is available with identical semantics across all 6 AI coding hosts:</p>
+          
+          <table class="table-wrap" style="width:100%; border-collapse: collapse; margin-top: 16px;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+                <th style="padding: 10px;">Phase / Lane</th>
+                <th style="padding: 10px;">Antigravity Skill</th>
+                <th style="padding: 10px;">Claude / Gemini Command</th>
+                <th style="padding: 10px;">Copilot Prompt</th>
+                <th style="padding: 10px;">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 0: Init</strong></td>
+                <td style="padding: 8px;"><code>devweave-init</code></td>
+                <td style="padding: 8px;"><code>/devweave-init</code></td>
+                <td style="padding: 8px;"><code>@devweave /init</code></td>
+                <td style="padding: 8px;">5-Layer detection & Graph Memory init.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 1: Context</strong></td>
+                <td style="padding: 8px;"><code>devweave-context</code></td>
+                <td style="padding: 8px;"><code>/devweave-context</code></td>
+                <td style="padding: 8px;"><code>@devweave /context</code></td>
+                <td style="padding: 8px;">PII sanitized context & 1-hop blast radius.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 2: Analyze</strong></td>
+                <td style="padding: 8px;"><code>devweave-analyze</code></td>
+                <td style="padding: 8px;"><code>/devweave-analyze</code></td>
+                <td style="padding: 8px;"><code>@devweave /analyze</code></td>
+                <td style="padding: 8px;">Deep root cause & schema contract analysis.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 3: Plan</strong></td>
+                <td style="padding: 8px;"><code>devweave-plan</code></td>
+                <td style="padding: 8px;"><code>/devweave-plan</code></td>
+                <td style="padding: 8px;"><code>@devweave /plan</code></td>
+                <td style="padding: 8px;">Atomic task decomposition with test anchors.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 4: Branch</strong></td>
+                <td style="padding: 8px;"><code>devweave-branch</code></td>
+                <td style="padding: 8px;"><code>/devweave-branch</code></td>
+                <td style="padding: 8px;"><code>@devweave /branch</code></td>
+                <td style="padding: 8px;">Branch isolation hard gate.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 5: Implement</strong></td>
+                <td style="padding: 8px;"><code>devweave-implement</code></td>
+                <td style="padding: 8px;"><code>/devweave-implement</code></td>
+                <td style="padding: 8px;"><code>@devweave /implement</code></td>
+                <td style="padding: 8px;">Plan-bound surgical code modifications.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 6: Review</strong></td>
+                <td style="padding: 8px;"><code>devweave-pr-review</code></td>
+                <td style="padding: 8px;"><code>/devweave-pr-review</code></td>
+                <td style="padding: 8px;"><code>@devweave /review</code></td>
+                <td style="padding: 8px;">Dual-model Architect + Senior DBA review.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Phase 7: PR</strong></td>
+                <td style="padding: 8px;"><code>devweave-pr</code></td>
+                <td style="padding: 8px;"><code>/devweave-pr</code></td>
+                <td style="padding: 8px;"><code>@devweave /pr</code></td>
+                <td style="padding: 8px;">PR assembly & Graph Delta promotion.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Fix Lane</strong></td>
+                <td style="padding: 8px;"><code>devweave-fix-*</code></td>
+                <td style="padding: 8px;"><code>/devweave-fix-*</code></td>
+                <td style="padding: 8px;"><code>@devweave /fix-*</code></td>
+                <td style="padding: 8px;">Accelerated 3-step hotfix lane.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Modernize</strong></td>
+                <td style="padding: 8px;"><code>devweave-modernize</code></td>
+                <td style="padding: 8px;"><code>/devweave-modernize</code></td>
+                <td style="padding: 8px;"><code>@devweave /modernize</code></td>
+                <td style="padding: 8px;">Framework and runtime modernization manifests.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>Express</strong></td>
+                <td style="padding: 8px;"><code>devweave-express</code></td>
+                <td style="padding: 8px;"><code>/devweave-express</code></td>
+                <td style="padding: 8px;"><code>@devweave /express</code></td>
+                <td style="padding: 8px;">Single-pass fast track for low-risk changes.</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;"><strong>System Update</strong></td>
+                <td style="padding: 8px;"><code>devweave-update</code></td>
+                <td style="padding: 8px;"><code>/devweave-update</code></td>
+                <td style="padding: 8px;"><code>@devweave /update</code></td>
+                <td style="padding: 8px;">In-place autonomous plugin updater.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Conformance & Benchmarks -->
+        <section id="conformance">
+          <h2>🧪 9. Conformance & Benchmark Verification</h2>
+          <p>
+            DevWeave includes an automated test harness covering 100% of state transitions, schemas, and polyglot fixtures:
+          </p>
+          <ul>
+            <li><strong>JSON Schemas</strong>: 100% validation on <code>graph.json</code>, <code>architecture.json</code>, and <code>task-topology.json</code>.</li>
+            <li><strong>State Machine</strong>: 28/28 transitions verified with unreachable-state rejection.</li>
+            <li><strong>12 Polyglot Targets</strong>: .NET, Java, Python, Go, Rust, C++, Node, Angular, PHP, Rails, Legacy, Monorepo.</li>
+            <li><strong>Token ROI</strong>: Measured 84.1% to 93.4% token reduction and 94.8% to 99.6% cost savings.</li>
+          </ul>
+        </section>
+
       </main>
 
     </div>
@@ -191,9 +448,16 @@
   <!-- Footer -->
   <footer>
     <div class="container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#quickstart">Quick Start</a>
+        <a href="index.html#calculator">ROI Calculator</a>
+        <a href="https://github.com/paarthivnaik/DevWeave" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+      </div>
       <p>© 2026 DevWeave Project. Released under the Apache 2.0 License.</p>
     </div>
   </footer>
 
+  <script src="app.js"></script>
 </body>
 </html>
