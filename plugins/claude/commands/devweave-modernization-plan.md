@@ -1,9 +1,9 @@
-﻿---
+---
 name: devweave-modernization-plan
 description: "[Modernization Phase 3: Plan] Decompose approved architectural analysis into file-anchored implementation tasks, unit/integration test specifications, database migration scripts, and enforce Hard Gate #2."
 ---
 
-# Antigravity Modernization Planning Skill (`devweave-modernization-plan`)
+# Claude Code Modernization Planning Command (`claude /devweave-modernization-plan`)
 
 ## Purpose
 Construct a deterministic, file-level implementation plan that maps target files to create/modify/retire, specifies test scenarios, defines database migration steps, establishes validation commands, and halts at **Mandatory Human-in-the-Loop Hard Gate #2**.
@@ -32,7 +32,7 @@ Construct a deterministic, file-level implementation plan that maps target files
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â””â”€â”€ plan.md
+└── plan.md
 ```
 
 ---
@@ -63,4 +63,3 @@ devweave-modernization-branch <ID>  (Requires APPROVE)
 
 ## STOP Rule
 - Upon writing `plan.md` and presenting the plan, **STOP IMMEDIATELY**.
-

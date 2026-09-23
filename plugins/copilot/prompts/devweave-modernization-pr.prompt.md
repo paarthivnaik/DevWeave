@@ -1,9 +1,9 @@
-﻿---
-name: devweave-modernization-pr
+---
+name: modernization-pr
 description: "[Modernization Phase 7: PR] Assemble comprehensive modernization pull request package, promote durable knowledge into DevWeave graph, and prepare pr-description.md and report.md."
 ---
 
-# Antigravity Modernization PR Preparation Skill (`devweave-modernization-pr`)
+# GitHub Copilot Modernization PR Preparation Command (`@devweave /modernization-pr`)
 
 ## Purpose
 Compile the complete modernization release package, reconcile migration deltas into the persistent DevWeave knowledge graph, generate `pr-description.md` and `report.md`, and present final pull request details for human review.
@@ -37,8 +37,8 @@ Compile the complete modernization release package, reconcile migration deltas i
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â”œâ”€â”€ report.md
-â””â”€â”€ pr-description.md
+├── report.md
+└── pr-description.md
 ```
 
 ---
@@ -63,4 +63,3 @@ Compile the complete modernization release package, reconcile migration deltas i
 
 ## STOP Rule
 - Upon writing PR package and updating state, **STOP IMMEDIATELY**.
-

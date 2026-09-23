@@ -1,9 +1,9 @@
-﻿---
-name: devweave-modernization-analyze
+---
+name: modernization-analyze
 description: "[Modernization Phase 2: Analyze] Deeply analyze legacy behaviors, business rules, API schemas, and data structures against target architecture; produce analysis.md, migration mappings.json, and enforce Hard Gate #1."
 ---
 
-# Antigravity Modernization Analysis Skill (`devweave-modernization-analyze`)
+# GitHub Copilot Modernization Analysis Command (`@devweave /modernization-analyze`)
 
 ## Purpose
 Perform deep technical analysis of legacy functional behaviors, validation rules, transactional boundaries, API contracts, and database queries. Map every legacy component to its target architectural equivalent, synthesize `mappings.json`, and halt at **Mandatory Human-in-the-Loop Hard Gate #1**.
@@ -32,8 +32,8 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â”œâ”€â”€ analysis.md
-â””â”€â”€ mappings.json
+├── analysis.md
+└── mappings.json
 ```
 
 ---
@@ -58,11 +58,10 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
 
 ## Next Suggested Command
 ```text
-devweave-modernization-plan <ID>  (Requires APPROVE)
+modernization-plan <ID>  (Requires APPROVE)
 ```
 
 ---
 
 ## STOP Rule
 - Upon completing analysis and presenting findings, **STOP IMMEDIATELY**.
-

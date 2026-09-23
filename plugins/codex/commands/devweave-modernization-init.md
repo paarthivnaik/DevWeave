@@ -1,9 +1,9 @@
-﻿---
+---
 name: devweave-modernization-init
 description: "[Modernization Phase 0: Init] Initialize the V1.1 Modernization lifecycle by accepting natural-language architecture intent, inspecting target repository without questionnaires, generating technology practice profiles, and establishing modernization workspace."
 ---
 
-# Antigravity Modernization Initialization Skill (`devweave-modernization-init`)
+# OpenAI Codex Modernization Initialization Command (`codex run devweave-modernization-init`)
 
 ## Purpose
 Initialize a new modernization lifecycle for a legacy or target codebase by capturing natural language architecture declarations, inspecting existing target repositories for observed facts, generating combined engineering practice profiles, and persisting durable modernization workspace state.
@@ -35,11 +35,11 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â”œâ”€â”€ workspace.json
-â”œâ”€â”€ architecture-intent.json
-â”œâ”€â”€ technology-profile.json
-â”œâ”€â”€ source-memory.json
-â””â”€â”€ state.json
+├── workspace.json
+├── architecture-intent.json
+├── technology-profile.json
+├── source-memory.json
+└── state.json
 ```
 
 ---
@@ -73,4 +73,3 @@ devweave-modernization-context <ID>
 
 ## STOP Rule
 - Upon writing artifacts and reporting the summary, **STOP IMMEDIATELY**. Do not execute the next phase automatically.
-

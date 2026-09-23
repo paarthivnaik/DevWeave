@@ -1,9 +1,9 @@
-﻿---
-name: devweave-modernization-report
+---
+name: modernization-report
 description: "[Modernization Reporting] Synthesize comprehensive end-to-end modernization lifecycle report capturing architecture decisions, migration mappings, verification scorecards, and knowledge graph updates."
 ---
 
-# Antigravity Modernization Report Skill (`devweave-modernization-report`)
+# GitHub Copilot Modernization Report Command (`@devweave /modernization-report`)
 
 ## Purpose
 Assemble an executive and technical modernization summary report consolidating architecture intent, source slices, component transformation mappings, test execution proofs, and knowledge graph promotions.
@@ -30,7 +30,7 @@ Assemble an executive and technical modernization summary report consolidating a
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â””â”€â”€ report.md
+└── report.md
 ```
 
 ---
@@ -48,4 +48,3 @@ Assemble an executive and technical modernization summary report consolidating a
 
 ## STOP Rule
 - Upon assembling and saving the report, **STOP IMMEDIATELY**.
-

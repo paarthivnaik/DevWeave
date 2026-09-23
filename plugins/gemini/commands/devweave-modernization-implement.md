@@ -1,9 +1,9 @@
-﻿---
+---
 name: devweave-modernization-implement
 description: "[Modernization Phase 5: Implement] Execute surgical, plan-bound modernization code changes, execute automated tests, adhere to technology practices, and guard against scope drift."
 ---
 
-# Antigravity Modernization Implementation Skill (`devweave-modernization-implement`)
+# Gemini CLI Modernization Implementation Command (`gemini devweave-modernization-implement`)
 
 ## Purpose
 Execute surgical, plan-bound code creation and modifications strictly as specified in `plan.md`. Adhere to technology practice intelligence, execute local build and automated test suites, and prevent unauthorized scope drift.
@@ -34,21 +34,21 @@ Execute surgical, plan-bound code creation and modifications strictly as specifi
 ## Implementation Sequence
 ```text
 INSPECT
-   â†“
+   ↓
 IDENTIFY EXACT FILES
-   â†“
+   ↓
 READ REQUIRED CONTEXT & PRACTICES
-   â†“
+   ↓
 MODIFY ONLY REQUIRED FILES
-   â†“
+   ↓
 BUILD
-   â†“
+   ↓
 RUN TESTS
-   â†“
+   ↓
 GENERATE CHANGE SUMMARY
-   â†“
+   ↓
 PERSIST STATE
-   â†“
+   ↓
 STOP
 ```
 
@@ -76,4 +76,3 @@ devweave-modernization-verify <ID>
 
 ## STOP Rule
 - Upon completing implementation and tests, **STOP IMMEDIATELY**. Do not auto-run verify or PR.
-

@@ -1,9 +1,9 @@
-﻿---
+---
 name: devweave-modernization-verify
 description: "[Modernization Phase 6: Verify] Execute dual-layer functional and architectural verification, confirm behavioral preservation against legacy specs, validate security and database migrations, and enforce Hard Gate #3."
 ---
 
-# Antigravity Modernization Verification Skill (`devweave-modernization-verify`)
+# Gemini CLI Modernization Verification Command (`gemini devweave-modernization-verify`)
 
 ## Purpose
 Execute comprehensive, multi-perspective verification comparing modernized implementation against legacy behavioral baselines, validating architecture constraints, executing integration and security checks, producing `verification.md`, and halting at **Mandatory Human-in-the-Loop Hard Gate #3**.
@@ -37,7 +37,7 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â””â”€â”€ verification.md
+└── verification.md
 ```
 
 ---
@@ -75,4 +75,3 @@ devweave-modernization-pr <ID>  (Requires APPROVE)
 
 ## STOP Rule
 - Upon writing `verification.md` and presenting the scorecard, **STOP IMMEDIATELY**.
-

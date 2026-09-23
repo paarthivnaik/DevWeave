@@ -1,9 +1,9 @@
-﻿---
+---
 name: devweave-modernization-status
 description: "[Modernization Observation] Inspect and display durable status, completed phases, active gate requirements, and next suggested command for a modernization work item."
 ---
 
-# Antigravity Modernization Status Skill (`devweave-modernization-status`)
+# Cognition Devin Modernization Status Command (`devin run /devweave-modernization-status`)
 
 ## Purpose
 Read and render the current durable state of a modernization work item without modifying any files or triggering state transitions.
@@ -35,13 +35,13 @@ Current Phase:    VERIFY
 Status:           WAITING_FOR_HUMAN (Hard Gate #3)
 
 Phase Progression:
-  [âœ“] INIT
-  [âœ“] CONTEXT
-  [âœ“] ANALYZE (Approved by Human-Lead)
-  [âœ“] PLAN (Approved by Human-Lead)
-  [âœ“] BRANCH (devweave/modernization/MOD-001)
-  [âœ“] IMPLEMENT (All tests passing)
-  [â†’] VERIFY (Scorecard ready for review)
+  [✓] INIT
+  [✓] CONTEXT
+  [✓] ANALYZE (Approved by Human-Lead)
+  [✓] PLAN (Approved by Human-Lead)
+  [✓] BRANCH (devweave/modernization/MOD-001)
+  [✓] IMPLEMENT (All tests passing)
+  [→] VERIFY (Scorecard ready for review)
   [ ] PR
 
 Next Suggested Command:
@@ -52,4 +52,3 @@ Next Suggested Command:
 
 ## STOP Rule
 - Non-mutating observation command; **STOP IMMEDIATELY** after outputting status.
-

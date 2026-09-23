@@ -1,9 +1,9 @@
-﻿---
+---
 name: devweave-modernization-context
 description: "[Modernization Phase 1: Context] Ingest modernization scope, build bounded migration slice from legacy source, retrieve relevant knowledge graph neighborhood, and construct focused context.md."
 ---
 
-# Antigravity Modernization Context Skill (`devweave-modernization-context`)
+# Claude Code Modernization Context Command (`claude /devweave-modernization-context`)
 
 ## Purpose
 Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md` without loading entire legacy repositories into AI memory.
@@ -33,8 +33,8 @@ Construct a bounded, token-efficient migration context for the specified moderni
 ## Artifacts Generated
 ```text
 .devweave/modernization/<ID>/
-â”œâ”€â”€ context.md
-â””â”€â”€ migration-unit.json
+├── context.md
+└── migration-unit.json
 ```
 
 ---
@@ -67,4 +67,3 @@ devweave-modernization-analyze <ID>
 
 ## STOP Rule
 - Upon writing `context.md` and updating state, **STOP IMMEDIATELY**.
-

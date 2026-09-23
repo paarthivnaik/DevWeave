@@ -1,9 +1,9 @@
-﻿---
-name: devweave-modernization-branch
+---
+name: modernization-branch
 description: "[Modernization Phase 4: Branch] Enforce isolated workspace branching prior to executing modernization code modifications, protecting legacy source and target main branches."
 ---
 
-# Antigravity Modernization Branch Skill (`devweave-modernization-branch`)
+# GitHub Copilot Modernization Branch Command (`@devweave /modernization-branch`)
 
 ## Purpose
 Safely establish an isolated Git branch (e.g., `devweave/modernization/<ID>`) in the target workspace to guarantee sandbox isolation and protect the main branch and legacy source from unverified changes.
@@ -53,11 +53,10 @@ Safely establish an isolated Git branch (e.g., `devweave/modernization/<ID>`) in
 
 ## Next Suggested Command
 ```text
-devweave-modernization-implement <ID>
+modernization-implement <ID>
 ```
 
 ---
 
 ## STOP Rule
 - Upon completing branch setup, **STOP IMMEDIATELY**.
-
