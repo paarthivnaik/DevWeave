@@ -1,9 +1,22 @@
-﻿{
+{
   "$schema": "https://openai.com/schemas/codex-plugin.json",
   "name": "devweave",
   "version": "1.0.0",
-  "description": "DevWeave AI-DLC software engineering workflow for OpenAI Codex and ChatGPT CLI",
-  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "description": "Universal AI-DLC software engineering lifecycle plugin for OpenAI Codex and ChatGPT CLI with Graph-Based Durable Memory",
+  "author": "DevWeave Team",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/paarthivnaik/DevWeave",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paarthivnaik/DevWeave.git"
+  },
   "rules": "./CODEX.md",
-  "commands": "./commands"
+  "commands": "./commands",
+  "keywords": [
+    "ai-dlc",
+    "software-engineering",
+    "graph-memory",
+    "codex-plugin",
+    "token-optimization"
+  ]
 }

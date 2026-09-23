@@ -2,9 +2,22 @@
   "$schema": "https://github.com/schemas/copilot-extension.json",
   "name": "devweave",
   "version": "1.0.0",
-  "description": "DevWeave AI-DLC software engineering workflow for GitHub Copilot",
+  "description": "Universal AI-DLC software engineering lifecycle extension for GitHub Copilot with Graph-Based Durable Memory",
   "publisher": "DevWeave",
-  "repository": "https://github.com/paarthivnaik/DevWeave",
+  "author": "DevWeave Team",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/paarthivnaik/DevWeave",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paarthivnaik/DevWeave.git"
+  },
   "instructions": "./copilot-instructions.md",
-  "prompts": "./prompts"
+  "prompts": "./prompts",
+  "keywords": [
+    "ai-dlc",
+    "software-engineering",
+    "graph-memory",
+    "copilot-extension",
+    "token-optimization"
+  ]
 }
