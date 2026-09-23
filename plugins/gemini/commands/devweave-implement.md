@@ -9,7 +9,7 @@ description: "[Phase 5: Implement] Executes surgical, plan-bound code modificati
 1. **Plan-Bound Modifications**: Modify ONLY files and symbols explicitly declared in `plan.md`.
 2. **Stack-Aware Standards**: Strictly adhere to the detected ecosystem's naming conventions, typing rules, and coding standards recorded in `.devweave/repository/practices.md` and `.editorconfig`.
 3. **Scope Deviation Halt**: If unexpected conflicts invalidate the plan, stop and recommend returning to `ANALYZE`/`PLAN`. Do NOT silently expand scope.
-4. **Audit Invariance**: Record all modified files, test outputs, and developer prompts to `.devweave/work-items/<ID>/audit.md`.
+4. **Audit Invariance**: Record ONLY human developer prompts, custom instructions, and decisions to `.devweave/work-items/<ID>/audit.md`. Modified files and test outputs are recorded strictly in evidence artifacts (`graph-delta.json`, `test-results.json`).
 
 ## Step-by-Step Instructions
 1. **Load Approved Plan & Stack Standards**: Read `plan.md` tasks, acceptance checks, and `.devweave/repository/practices.md`.
@@ -21,7 +21,7 @@ description: "[Phase 5: Implement] Executes surgical, plan-bound code modificati
    - Write test outcomes to `.devweave/work-items/<ID>/test-results.json`.
 5. **Update State & Audit**:
    - Record `IMPLEMENT` status in `.devweave/work-items/<ID>/state.md`.
-   - Append code change summary, modified file list, test results, and timestamp to `.devweave/work-items/<ID>/audit.md`.
+   - Append ONLY human developer prompts and custom instructions to `.devweave/work-items/<ID>/audit.md`.
 6. **Human Checkpoint**: Output:
    ```text
    IMPLEMENTATION COMPLETE

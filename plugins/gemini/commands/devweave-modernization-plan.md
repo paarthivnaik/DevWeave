@@ -27,7 +27,7 @@ Construct a deterministic, file-level implementation plan that maps target files
 4. Formulate unit and integration test definitions covering parity against legacy behavior.
 5. Define concrete build, test, and verification shell commands.
 6. Create `plan.md`.
-7. Append activity entry and Hard Gate #2 presentation/verdict to `.devweave/modernization/stories/<ID>/audit.md`.
+7. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
@@ -35,7 +35,7 @@ Construct a deterministic, file-level implementation plan that maps target files
 ```text
 .devweave/modernization/stories/<ID>/
 ├── plan.md                     <-- File-anchored implementation plan
-└── audit.md                    <-- Updated with plan details & gate decision
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---
@@ -66,3 +66,4 @@ devweave-modernization-branch <ID>  (Requires APPROVE)
 
 ## STOP Rule
 - Upon writing `plan.md`, updating `audit.md`, and presenting the plan, **STOP IMMEDIATELY**.
+- Upon receiving `APPROVE` at Hard Gate #2, record approval in state/audit and **STOP IMMEDIATELY**. Never auto-progress to BRANCH or IMPLEMENT.

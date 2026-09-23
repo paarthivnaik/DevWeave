@@ -28,7 +28,8 @@ Execute surgical, plan-bound code creation and modifications strictly as specifi
 5. Execute build command (e.g. `dotnet build`, `ng build`, `npm run build`).
 6. Execute unit and integration tests (e.g. `dotnet test`, `ng test`, `pytest`).
 7. If build/tests fail, enter localized remediation loop without modifying files outside the approved plan.
-8. Append implementation activity, list of modified/created files, test execution metrics, and results to `.devweave/modernization/stories/<ID>/audit.md`.
+8. Write detailed implementation evidence, modified files list, and test results to `.devweave/modernization/stories/<ID>/evidence.md`.
+9. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
@@ -36,7 +37,7 @@ Execute surgical, plan-bound code creation and modifications strictly as specifi
 ```text
 .devweave/modernization/stories/<ID>/
 ├── evidence.md                 <-- Implementation & test execution evidence
-└── audit.md                    <-- Updated with code modification & test log
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---

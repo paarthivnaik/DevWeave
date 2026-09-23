@@ -32,7 +32,8 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
 4. Verify architectural conformance (CQRS separation, no circular dependencies).
 5. Verify database schema migrations and indexing.
 6. Create `verification.md`.
-7. Append verification metrics, scorecard, and Hard Gate #3 presentation/decision to `.devweave/modernization/stories/<ID>/audit.md`.
+7. Create `verification.md` containing complete verification scorecard and test matrix.
+7. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
@@ -40,7 +41,7 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
 ```text
 .devweave/modernization/stories/<ID>/
 ├── verification.md             <-- Dual-layer verification scorecard
-└── audit.md                    <-- Updated with verification log & gate decision
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---
@@ -81,3 +82,4 @@ devweave-modernization-pr <ID>  (Requires APPROVE)
 
 ## STOP Rule
 - Upon writing `verification.md`, updating `audit.md`, and presenting the scorecard, **STOP IMMEDIATELY**.
+- Upon receiving `APPROVE` at Hard Gate #3, record approval in state/audit and **STOP IMMEDIATELY**. Never auto-progress to PR.

@@ -31,7 +31,7 @@ Compile the complete modernization release package, reconcile migration deltas i
    - Test execution evidence
 4. Reconcile migration mappings into DevWeave knowledge graph (`graph/knowledge-graph.json`) using `MIGRATED_TO` / `REPLACED_BY` relationships without deleting legacy node history.
 5. Generate `pr-description.md` and `report.md`.
-6. Append final PR completion and graph promotion log to `.devweave/modernization/stories/<ID>/audit.md`.
+6. Append ONLY human developer prompts, custom PR instructions, and PR creation action to `.devweave/modernization/stories/<ID>/audit.md`.
 7. Prepare PR branch for review (never auto-merge).
 
 ---
@@ -41,7 +41,7 @@ Compile the complete modernization release package, reconcile migration deltas i
 .devweave/modernization/stories/<ID>/
 ├── report.md
 ├── pr-description.md
-└── audit.md                    <-- Final release audit log
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---

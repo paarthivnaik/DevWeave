@@ -31,16 +31,16 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
    - Error handling and problem-details responses
 4. Verify architectural conformance (CQRS separation, no circular dependencies).
 5. Verify database schema migrations and indexing.
-6. Create `verification.md`.
-7. Append verification metrics, scorecard, and Hard Gate #3 presentation/decision to `.devweave/modernization/stories/<ID>/audit.md`.
+6. Create `verification.md` containing complete verification scorecard and test matrix.
+7. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
 ## Artifacts Generated
 ```text
 .devweave/modernization/stories/<ID>/
-├── verification.md             <-- Dual-layer verification scorecard
-└── audit.md                    <-- Updated with verification log & gate decision
+├── verification.md             <-- Complete dual-layer verification scorecard
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---
@@ -49,13 +49,13 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
 - Sets `currentPhase` = `VERIFY`
 - Sets `phases.VERIFY` = `WAITING_APPROVAL`
 - Sets `status` = `WAITING_FOR_HUMAN`
-- Sets `nextSuggestedPhase` = `PR` (only applicable after approval)
+- Sets `nextSuggestedPhase` = `PR` (only applicable after explicit approval)
 
 ---
 
-## Human Checkpoint: HARD GATE #3
-- **Mandatory checkpoint**: PR preparation cannot occur without human verification approval.
-- Present verification scorecard:
+## Human Checkpoint: HARD GATE #3 (Blocking)
+- **Mandatory checkpoint**: PR preparation cannot occur without explicit human verification approval.
+- Present verification scorecard to developer:
   ```text
   Verification Summary for <ID>:
   - Functional Parity: PASS
@@ -65,19 +65,26 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
   - Database Migration: PASS
   - Behavior Preservation: CONFIRMED
   ```
-- Supported decisions:
-  - `APPROVE` &rarr; unlocks `PR` (logged in `audit.md`).
-  - `REQUEST_CHANGES` &rarr; logs feedback in `audit.md` and requests code fixes.
-  - `STOP` &rarr; terminates pipeline.
+- **Gate Decision Handling**:
+  - `APPROVE`:
+    1. Update state: `phases.VERIFY` = `APPROVED`.
+    2. Log user approval and comments to `audit.md`.
+    3. **STOP IMMEDIATELY**. Do NOT generate PR artifacts or mark story completed. Prompt user to execute `devweave-modernization-pr <ID>`.
+  - `REQUEST_CHANGES`:
+    1. Update state: `phases.VERIFY` = `CHANGES_REQUESTED`.
+    2. Log user change request comments to `audit.md`.
+    3. **STOP IMMEDIATELY**. Prompt user to re-execute implementation.
+  - `STOP`: Terminate pipeline.
 
 ---
 
 ## Next Suggested Command
 ```text
-devweave-modernization-pr <ID>  (Requires APPROVE)
+devweave-modernization-pr <ID>  (Requires explicit APPROVE at Hard Gate #3)
 ```
 
 ---
 
 ## STOP Rule
 - Upon writing `verification.md`, updating `audit.md`, and presenting the scorecard, **STOP IMMEDIATELY**.
+- Upon receiving `APPROVE` at Hard Gate #3, record approval in state/audit and **STOP IMMEDIATELY**. Never auto-progress to PR.

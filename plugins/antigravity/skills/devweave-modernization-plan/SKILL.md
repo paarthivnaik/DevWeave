@@ -27,7 +27,7 @@ Construct a deterministic, file-level implementation plan that maps target files
 4. Formulate unit and integration test definitions covering parity against legacy behavior.
 5. Define concrete build, test, and verification shell commands.
 6. Create `plan.md`.
-7. Append activity entry and Hard Gate #2 presentation/verdict to `.devweave/modernization/stories/<ID>/audit.md`.
+7. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
@@ -35,7 +35,7 @@ Construct a deterministic, file-level implementation plan that maps target files
 ```text
 .devweave/modernization/stories/<ID>/
 ├── plan.md                     <-- File-anchored implementation plan
-└── audit.md                    <-- Updated with plan details & gate decision
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---
@@ -44,25 +44,32 @@ Construct a deterministic, file-level implementation plan that maps target files
 - Sets `currentPhase` = `PLAN`
 - Sets `phases.PLAN` = `WAITING_APPROVAL`
 - Sets `status` = `WAITING_FOR_HUMAN`
-- Sets `nextSuggestedPhase` = `BRANCH` (only applicable after approval)
+- Sets `nextSuggestedPhase` = `BRANCH` (only applicable after explicit approval)
 
 ---
 
-## Human Checkpoint: HARD GATE #2
+## Human Checkpoint: HARD GATE #2 (Blocking)
 - **Mandatory checkpoint**: Code modifications cannot begin without explicit human plan approval.
-- Supported decisions:
-  - `APPROVE` &rarr; unlocks `BRANCH` and `IMPLEMENT` (logged in `audit.md`).
-  - `REQUEST_CHANGES` &rarr; updates `phases.PLAN` = `CHANGES_REQUESTED`, preserves plan versions (`plan.v1.md`, `plan.v2.md`), logs feedback in `audit.md`, and requests revision.
-  - `STOP` &rarr; halts execution.
+- **Gate Decision Handling**:
+  - `APPROVE`:
+    1. Update state: `phases.PLAN` = `APPROVED`.
+    2. Log user approval and comments to `audit.md`.
+    3. **STOP IMMEDIATELY**. Do NOT create branches or execute code modifications automatically. Prompt user to execute `devweave-modernization-branch <ID>`.
+  - `REQUEST_CHANGES`:
+    1. Update state: `phases.PLAN` = `CHANGES_REQUESTED`.
+    2. Preserve plan versions (`plan.v1.md`, `plan.v2.md`), log feedback in `audit.md`.
+    3. **STOP IMMEDIATELY**.
+  - `STOP`: Halts execution.
 
 ---
 
 ## Next Suggested Command
 ```text
-devweave-modernization-branch <ID>  (Requires APPROVE)
+devweave-modernization-branch <ID>  (Requires explicit APPROVE at Hard Gate #2)
 ```
 
 ---
 
 ## STOP Rule
 - Upon writing `plan.md`, updating `audit.md`, and presenting the plan, **STOP IMMEDIATELY**.
+- Upon receiving `APPROVE` at Hard Gate #2, record approval in state/audit and **STOP IMMEDIATELY**. Never auto-progress to BRANCH or IMPLEMENT.
