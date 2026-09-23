@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Conformance](https://img.shields.io/badge/Conformance-100%25_Verified-success)](conformance/)
 [![Platform Symmetry](https://img.shields.io/badge/Hosts-6_Platforms_Certified-6366f1)](#-1-click-universal-installation-all-6-hosts)
-[![Skills](https://img.shields.io/badge/Validated_Skills-21_Active-emerald)](#-complete-21-commands--skills-reference)
+[![Skills](https://img.shields.io/badge/Validated_Skills-31_Active-emerald)](#-complete-31-commands--skills-reference)
 [![Knowledge Graph](https://img.shields.io/badge/Architecture-JSON_Knowledge_Graph-orange)](#1-🧠-graph-based-durable-memory-zero-ai-amnesia)
 
 **DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable graph knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
@@ -23,7 +23,9 @@ Standard AI coding assistants suffer from **AI Amnesia** and **Context Bloat**: 
 
 - 🧠 **Graph-Based Memory**: Maps your codebase into a Git-native JSON Knowledge Graph so the AI touches **only the 2–3 connected files** instead of 3,000.
 - 💰 **90%+ Lower Bills**: Caches repository architecture once, saving **84%–93% tokens** and **95%–99% cost** on every task.
-- 🛡️ **Zero Uncontrolled Drift**: Enforces a strict 7-phase lifecycle (Ticket &rarr; Plan &rarr; Branch &rarr; Code &rarr; Dual-Model Review &rarr; PR) with mandatory Human-in-the-Loop gates.
+- 🛡️ **Zero Uncontrolled Drift**: Enforces a strict lifecycle (Ticket &rarr; Plan &rarr; Branch &rarr; Code &rarr; Dual-Model Review &rarr; PR) with mandatory Human-in-the-Loop gates.
+- 🧪 **Test Intelligence**: Changes production code and updates/creates corresponding unit, API, and E2E tests atomically with zero test weakening.
+- 🔄 **V1.1 Modernization Lifecycle**: Migrate legacy monoliths to modern architectures with bounded context slicing and 3 hard governance checkpoints.
 - 👥 **Dual-Model Review**: Evaluates pull requests concurrently as a **Principal Software Architect** (code/impact) and **Senior DBA** (SQL/locks/indexes) before shipping.
 - 🌐 **Zero Daemons & 100% Universal**: Zero background servers, zero cloud lock-in, and 100% symmetrical support across **all 6 major AI coding hosts**.
 
@@ -165,7 +167,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 
 ---
 
-## 📋 Complete 21 Commands & Skills Reference
+## 📋 Complete 31 Commands & Skills Reference
 
 | Phase / Lane | Antigravity (`agy run`) | Claude Code (`claude /`) | GitHub Copilot (`@devweave`) | Gemini / Codex / Devin | Plain English Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -174,11 +176,21 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 | **Phase 2: Analyze** | `devweave-analyze <ID>` | `/devweave-analyze <ID>` | `/analyze <ID>` | `devweave-analyze <ID>` | Checks database and API impacts before making changes. |
 | **Phase 3: Plan** | `devweave-plan <ID>` | `/devweave-plan <ID>` | `/plan <ID>` | `devweave-plan <ID>` | Writes an exact step-by-step implementation blueprint with test commands. |
 | **Phase 4: Branch** | `devweave-branch <ID>` | `/devweave-branch <ID>` | `/branch <ID>` | `devweave-branch <ID>` | Creates a safe Git branch; physically blocks editing on `main`. |
-| **Phase 5: Implement**| `devweave-implement <ID>`| `/devweave-implement <ID>`| `/implement <ID>` | `devweave-implement <ID>` | Surgical, plan-bound coding; runs tests and generates `graph-delta.json`. |
+| **Phase 5: Implement**| `devweave-implement <ID>`| `/devweave-implement <ID>`| `/implement <ID>` | `devweave-implement <ID>` | Surgical coding with atomic production + test updates; generates `graph-delta.json`. |
 | **Phase 6: PR Review**| `devweave-pr-review <ID>`| `/devweave-pr-review <ID>`| `/pr-review <ID>` | `devweave-pr-review <ID>` | Dual-Model Review: Principal Architect + Senior DBA audit code & SQL. |
 | **Phase 7: PR** | `devweave-pr <ID>` | `/devweave-pr <ID>` | `/pr <ID>` | `devweave-pr <ID>` | Assembles final PR, merges graph delta, and updates durable domain memory. |
+| **Modernization Init** | `devweave-modernization-init` | `/devweave-modernization-init` | `/modernization-init` | `devweave-modernization-init` | Natural-language architecture intent ingestion without long questionnaires. |
+| **Modernization Context** | `devweave-modernization-context <ID>` | `/devweave-modernization-context <ID>` | `/modernization-context <ID>` | `devweave-modernization-context <ID>` | Slices legacy source without loading full repo into AI memory. |
+| **Modernization Analyze** | `devweave-modernization-analyze <ID>` | `/devweave-modernization-analyze <ID>` | `/modernization-analyze <ID>` | `devweave-modernization-analyze <ID>` | Maps legacy business rules & produces `mappings.json` (Hard Gate #1). |
+| **Modernization Plan** | `devweave-modernization-plan <ID>` | `/devweave-modernization-plan <ID>` | `/modernization-plan <ID>` | `devweave-modernization-plan <ID>` | Decomposes architecture into file actions & DB migrations (Hard Gate #2). |
+| **Modernization Branch** | `devweave-modernization-branch <ID>` | `/devweave-modernization-branch <ID>` | `/modernization-branch <ID>` | `devweave-modernization-branch <ID>` | Isolates modernization branch `devweave/modernization/<ID>`. |
+| **Modernization Implement** | `devweave-modernization-implement <ID>` | `/devweave-modernization-implement <ID>` | `/modernization-implement <ID>` | `devweave-modernization-implement <ID>` | Surgical modernization code changes + test runs. |
+| **Modernization Verify** | `devweave-modernization-verify <ID>` | `/devweave-modernization-verify <ID>` | `/modernization-verify <ID>` | `devweave-modernization-verify <ID>` | Dual functional & architectural parity verification (Hard Gate #3). |
+| **Modernization PR** | `devweave-modernization-pr <ID>` | `/devweave-modernization-pr <ID>` | `/modernization-pr <ID>` | `devweave-modernization-pr <ID>` | PR release package assembly & graph delta promotion. |
+| **Modernization Status** | `devweave-modernization-status <ID>` | `/devweave-modernization-status <ID>` | `/modernization-status <ID>` | `devweave-modernization-status <ID>` | Non-mutating state inspection and next suggested command. |
+| **Modernization Report** | `devweave-modernization-report <ID>` | `/devweave-modernization-report <ID>` | `/modernization-report <ID>` | `devweave-modernization-report <ID>` | Comprehensive modernization executive & technical markdown report. |
 | **Fix Lane** | `devweave-fix-triage`, `devweave-fix-diagnose`, `devweave-fix-land` | `/devweave-fix-*` | `/fix-*` | `devweave-fix-*` | Accelerated 3-step bug triage, root-cause diagnosis, and regression hotfix PR. |
-| **Modernize** | `devweave-modernize <ID>` | `/devweave-modernize <ID>` | `/modernize <ID>` | `devweave-modernize <ID>` | Migration manifests for framework/runtime upgrades (e.g. .NET 8 &rarr; 9). |
+| **Modernize Manifest** | `devweave-modernize <ID>` | `/devweave-modernize <ID>` | `/modernize <ID>` | `devweave-modernize <ID>` | Migration manifests for framework/runtime upgrades (e.g. .NET 8 &rarr; 9). |
 | **Express Mode** | `devweave-express <ID>` | `/devweave-express <ID>` | `/express <ID>` | `devweave-express <ID>` | Single-turn fast track for low-risk changes (typos, docs, small tweaks). |
 | **System** | `devweave-update` | `/devweave-update` | `/update` | `devweave-update` | In-place plugin updater and 24h daily auto-sync. |
 | **Utilities** | `devweave-status`, `devweave-handoff`, `devweave-archive`, `devweave-report`, `devweave-improve` | `/devweave-*` | `/*` | `devweave-*` | Lifecycle inspection, team handoff packages, workspace archiver, and metrics. |
@@ -194,29 +206,32 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 | Document | Purpose |
 | :--- | :--- |
 | **[Product Overview (Simple English Guide)](docs/product-overview.md)** | Clear, friendly guide explaining the entire DevWeave system, 7 phases, and benefits in plain English. |
+| **[Modernization Guide](docs/modernization.md)** | Complete guide to V1.1 Modernization lifecycle, 3 Human Hard Gates, legacy source isolation, and mapping. |
+| **[Test Intelligence Guide](docs/test-intelligence.md)** | Shared test intelligence across V1.0 & V1.1 with atomic test changes, framework detection, and failure classification. |
 | **[Release Process & GitHub Actions Runbook](docs/release-process.md)** | Step-by-step automated release guide with GitHub Actions for testing, packaging, and deploying new versions. |
 | **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and JSON Knowledge Graphs. |
-| **[Developer Handbook & Command Reference](docs/developer-guide.md)** | Step-by-step tutorial, command parameters, and full reference for all 21 skills across 6 hosts. |
+| **[Developer Handbook & Command Reference](docs/developer-guide.md)** | Step-by-step tutorial, command parameters, and full reference for all 31 skills across 6 hosts. |
 | **[Universal Installation Guide](docs/installation-guide.md)** | 1-Click copy-pasteable Git installation and automated updates for all 6 AI coding assistants. |
-| **[Getting Started Guide](docs/getting-started.md)** | End-to-end walkthrough of the 7-phase canonical development lifecycle with Mermaid diagrams. |
+| **[Getting Started Guide](docs/getting-started.md)** | End-to-end walkthrough of the canonical development lifecycle with Mermaid diagrams. |
 | **[Token & Cost Benchmark Report](docs/v1-benchmarks.md)** | Empirical data proving 84%–93% token savings and 95%–99% cost reduction across 12 polyglot repositories. |
 | **[Normative AI-DLC Lifecycle Contract](docs/lifecycle.md)** | Specification of state transitions, phase boundaries, gate conditions, and failure loops. |
-| **[Workflow Profiles & Fast Lanes](docs/workflow-profiles.md)** | Execution guide for `EXPRESS`, `FEATURE`, `FIX`, and `MODERNIZE` workflow lanes. |
+| **[Workflow Profiles & Fast Lanes](docs/workflow-profiles.md)** | Execution guide for `EXPRESS`, `FEATURE`, `FIX`, and `MODERNIZATION` workflow lanes. |
 | **[Autonomous Stack & Layer Architecture](docs/architecture.md)** | 5-layer manifest discovery, physical-to-logical layer mapping, and host adapter bridges. |
-| **[Master Conformance Guide](docs/conformance.md)** | Complete breakdown of the 20-scenario automated integration test runner. |
+| **[Master Conformance Guide](docs/conformance.md)** | Complete breakdown of the 10 automated integration test suites. |
 
 ### 🤖 Host Platform Guides
 | Platform | Guide | Installation Target | Validated Skills |
 | :--- | :--- | :--- | :--- |
-| **Google Antigravity** | **[Antigravity Guide](docs/antigravity.md)** | `plugins/antigravity/` | 21 Validated Skills |
-| **Anthropic Claude Code** | **[Claude Code Guide](docs/claude-code.md)** | `plugins/claude/` | 21 Slash Commands |
-| **GitHub Copilot** | **[GitHub Copilot Guide](docs/github-copilot.md)** | `plugins/copilot/` | 21 Prompt Files |
-| **Google Gemini CLI** | **[Gemini CLI Guide](docs/gemini-cli.md)** | `plugins/gemini/` | 21 Command Definitions |
-| **OpenAI Codex** | **[OpenAI Codex Guide](docs/codex.md)** | `plugins/codex/` | 21 System Commands |
-| **Cognition Devin** | **[Cognition Devin Guide](docs/devin.md)** | `plugins/devin/` | 21 Playbook Actions |
+| **Google Antigravity** | **[Antigravity Guide](docs/antigravity.md)** | `plugins/antigravity/` | 31 Validated Skills |
+| **Anthropic Claude Code** | **[Claude Code Guide](docs/claude-code.md)** | `plugins/claude/` | 31 Slash Commands |
+| **GitHub Copilot** | **[GitHub Copilot Guide](docs/github-copilot.md)** | `plugins/copilot/` | 31 Prompt Files |
+| **Google Gemini CLI** | **[Gemini CLI Guide](docs/gemini-cli.md)** | `plugins/gemini/` | 31 Command Definitions |
+| **OpenAI Codex** | **[OpenAI Codex Guide](docs/codex.md)** | `plugins/codex/` | 31 System Commands |
+| **Cognition Devin** | **[Cognition Devin Guide](docs/devin.md)** | `plugins/devin/` | 31 Playbook Actions |
 
 ### 📜 Formal Specifications & Schemas
 - **[Lifecycle State Machine Spec](spec/specification/lifecycle.md)**
+- **[Modernization Command Contract Spec](spec/specification/modernization-commands.md)**
 - **[Knowledge Graph & Graph Delta Spec](spec/specification/knowledge-graph.md)**
 - **[Human-in-the-Loop Governance Spec](spec/specification/human-in-the-loop.md)**
 - **[Autonomous Technology Detection Spec](spec/specification/autonomous-detection.md)**
@@ -238,12 +253,16 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 =================================================================
                      SUITE EXECUTION SUMMARY                    
 =================================================================
-  [PASSED] JSON Schema Validation Suite                  (2.53s)
-  [PASSED] AI-DLC State Machine Transition Suite         (0.82s)
-  [PASSED] 18 Conformance Scenarios Suite                (1.10s)
-  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.38s)
-  [PASSED] Multi-Repository .devweave Initialization Suite (2.02s)
-  [PASSED] Token & Cost Efficiency Benchmark Suite       (1.51s)
+  [PASSED] JSON Schema Validation Suite                  (2.15s)
+  [PASSED] AI-DLC State Machine Transition Suite         (1.14s)
+  [PASSED] 18 Conformance Scenarios Suite                (1.16s)
+  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.44s)
+  [PASSED] Multi-Repository .devweave Initialization Suite (1.95s)
+  [PASSED] Token & Cost Efficiency Benchmark Suite       (0.78s)
+  [PASSED] V1.1 Modernization CLI Contract Suite         (1.28s)
+  [PASSED] V1.1 Modernization State Machine Suite        (1.54s)
+  [PASSED] V1.1 Modernization Modules & E2E Suite        (1.07s)
+  [PASSED] V1.0/V1.1 Test Intelligence Suite             (1.30s)
 -----------------------------------------------------------------
 RELEASE CANDIDATE STATUS: 100% CONFORMANCE VERIFIED (ALL SUITES PASSED)
 =================================================================

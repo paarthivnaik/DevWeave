@@ -11,14 +11,16 @@ Welcome to the **DevWeave Complete Product Document**. This guide is written in 
 2. [The Problem: Why Standard AI Coding is Broken & Expensive](#2-the-problem-why-standard-ai-coding-is-broken--expensive)
 3. [The Solution: What is AI-DLC (AI-Driven Development Lifecycle)?](#3-the-solution-what-is-ai-dlc)
 4. [The 7 Simple Phases: How Work Gets Done](#4-the-7-simple-phases-how-work-gets-done)
-5. [The Living Brain: Declarative JSON Knowledge Graph](#5-the-living-brain-declarative-json-knowledge-graph)
-6. [Why Your AI Bill Drops by 90%+ (The Math Made Simple)](#6-why-your-ai-bill-drops-by-90)
-7. [The 6 AI Helpers Supported](#7-the-6-ai-helpers-supported)
-8. [1-Minute Installation (Copy & Paste)](#8-1-minute-installation-copy--paste)
-9. [Automatic Daily Updates: Always Fresh with Zero Effort](#9-automatic-daily-updates)
-10. [The Complete 21 Commands & Skills Catalog](#10-the-complete-21-commands--skills-catalog)
-11. [A Day in the Life: A Real Story of Using DevWeave](#11-a-day-in-the-life-a-real-story)
-12. [Frequently Asked Questions (FAQ)](#12-frequently-asked-questions-faq)
+5. [Modernization Lifecycle & Legacy Migration (V1.1)](#5-modernization-lifecycle--legacy-migration-v11)
+6. [Developer Experience: Two Core Interaction Rules](#6-developer-experience-two-core-interaction-rules)
+7. [The Living Brain: Declarative JSON Knowledge Graph](#7-the-living-brain-declarative-json-knowledge-graph)
+8. [Why Your AI Bill Drops by 90%+ (The Math Made Simple)](#8-why-your-ai-bill-drops-by-90)
+9. [The 6 AI Helpers Supported](#9-the-6-ai-helpers-supported)
+10. [1-Minute Installation (Copy & Paste)](#10-1-minute-installation-copy--paste)
+11. [Automatic Daily Updates: Always Fresh with Zero Effort](#11-automatic-daily-updates)
+12. [The Complete 31 Commands & Skills Catalog](#12-the-complete-31-commands--skills-catalog)
+13. [A Day in the Life: A Real Story of Using DevWeave](#13-a-day-in-the-life-a-real-story)
+14. [Frequently Asked Questions (FAQ)](#14-frequently-asked-questions-faq)
 
 ---
 
@@ -95,12 +97,13 @@ Here is what happens in each phase in plain, simple terms:
 - **What it does**: Automatically creates a separate Git branch (e.g. `feature/AUTH-101`).
 - **Safety Gate**: **Strictly blocks the AI from making changes on `main` or `master`.**
 
-### 🔨 Phase 5: Implement (`devweave-implement <TicketID>`) — The Surgical Builder
-- **What it does**: Follows the blueprint line by line. It modifies **only** the allowed files, runs your local test suite, and captures proof that the tests passed.
+### 🔨 Phase 5: Implement (`devweave-implement <TicketID>`) — The Surgical Builder & Test Intelligence
+- **What it does**: Follows the blueprint line by line. It modifies **only** the allowed files, writes production code and corresponding unit, API, or E2E tests together as one atomic changeset, runs your local test suite, and captures proof that the tests passed.
+- **Test Intelligence**: If tests fail, it identifies whether it is an `IMPLEMENTATION_DEFECT` (fixing code) or `EXPECTED_BEHAVIOR_CHANGE` (updating test). It strictly forbids weakening tests just to make them green!
 
 ### 👥 Phase 6: Review (`devweave-pr-review <TicketID>`) — The Two Inspectors
 - **What it does**: Before you see the code, DevWeave calls two independent experts:
-  1. **The Software Architect**: *"Does this follow clean design and avoid breaking other services?"*
+  1. **The Software Architect**: *"Does this follow clean design, include proper tests, and avoid breaking other services?"*
   2. **The Senior Database Admin (DBA)**: *"Will this SQL query be slow? Does it lock tables?"*
 - **Safety Gate**: If the inspectors find an issue, the AI must fix it before proceeding.
 
@@ -110,7 +113,34 @@ Here is what happens in each phase in plain, simple terms:
 
 ---
 
-## 5. The Living Brain: Graph-Based Durable Memory
+## 5. Modernization Lifecycle & Legacy Migration (V1.1)
+
+DevWeave V1.1 adds a dedicated, 8-phase modernization pipeline to migrate legacy monoliths to modern architectures (e.g. Angular signals, CQRS microservices, clean architecture) without risk:
+
+1. **Natural-Language Initializer (`devweave-modernization-init`)**: State your target architecture naturally (e.g., "Angular frontend with Bootstrap, microservices backend with CQRS, and MySQL database") without long questionnaires.
+2. **Bounded Legacy Slicing (`devweave-modernization-context <ID>`)**: Slices only the active legacy component/feature into context, preventing context bloat.
+3. **Legacy Behavioral Mapping (`devweave-modernization-analyze <ID>`)**: Maps legacy business rules to modern targets (`mappings.json`) & enforces **Hard Gate #1**.
+4. **Implementation & Test Plan (`devweave-modernization-plan <ID>`)**: Plans target files, unit/API/E2E test specs, and database migrations & enforces **Hard Gate #2**.
+5. **Sandbox Branching (`devweave-modernization-branch <ID>`)**: Isolates code changes on `devweave/modernization/<ID>` and protects legacy code as strictly `READ_ONLY`.
+6. **Surgical Modernization & Tests (`devweave-modernization-implement <ID>`)**: Implements target code and executes automated tests.
+7. **Dual Functional & Parity Verification (`devweave-modernization-verify <ID>`)**: Confirms behavioral parity against legacy baselines & enforces **Hard Gate #3**.
+8. **PR Package & Knowledge Promotion (`devweave-modernization-pr <ID>`)**: Reconciles `MIGRATED_TO` edges into the knowledge graph and prepares the PR.
+
+---
+
+## 6. Developer Experience: Two Core Interaction Rules
+
+DevWeave follows two golden principles for every interaction:
+
+1. **Mandatory Description Prompting (Optional Input)**:
+   - For **every phase**, DevWeave mandatorily asks: *"Do you have any additional description, architectural constraints, or specific instructions for this phase?"*
+   - Giving input is **optional**; if you provide none, DevWeave continues with standard defaults.
+2. **Pre-Processing Transparency ("State Intent Before Action")**:
+   - Before executing any file reads, edits, builds, or test commands, DevWeave clearly explains what it is about to do, which files it will inspect/touch, and why.
+
+---
+
+## 7. The Living Brain: Graph-Based Durable Memory
 
 Standard AI assistants suffer from **AI Amnesia**: every time you close your chat window, the AI completely forgets your codebase. When you open a new chat, it starts from zero, guessing how your files connect and re-reading thousands of lines.
 
@@ -155,7 +185,7 @@ DevWeave solves this with **Graph-Based Durable Memory** (`.devweave/graph/knowl
 
 ---
 
-## 6. Why Your AI Bill Drops by 90%+ (The Math Made Simple)
+## 8. Why Your AI Bill Drops by 90%+ (The Math Made Simple)
 
 Here is a real comparison of doing the exact same task with standard AI vs DevWeave:
 
@@ -172,7 +202,7 @@ Here is a real comparison of doing the exact same task with standard AI vs DevWe
 
 ---
 
-## 7. The 6 AI Helpers Supported
+## 9. The 6 AI Helpers Supported
 
 DevWeave works **identically across all 6 major AI coding tools**:
 
@@ -187,7 +217,7 @@ You can switch assistants anytime—they all share the exact same `.devweave/` p
 
 ---
 
-## 8. 1-Minute Installation (Copy & Paste)
+## 10. 1-Minute Installation (Copy & Paste)
 
 You don't need to install Node.js, Python, or background servers. Just copy and paste the command for your AI assistant:
 
@@ -223,7 +253,7 @@ You don't need to install Node.js, Python, or background servers. Just copy and 
 
 ---
 
-## 9. Automatic Daily Updates
+## 11. Automatic Daily Updates
 
 You never have to worry about updating DevWeave manually:
 - **First Session of the Day**: When you start work in the morning, DevWeave automatically checks GitHub and syncs in-place with **0 token cost**.
@@ -232,35 +262,58 @@ You never have to worry about updating DevWeave manually:
 
 ---
 
-## 10. The Complete 21 Commands & Skills Catalog
+## 12. The Complete 31 Commands & Skills Catalog
 
-| Command | Phase / Lane | What it Does (Plain English) |
+### Canonical Feature Lifecycle (8 Commands)
+| Command | Phase | What it Does (Plain English) |
 | :--- | :--- | :--- |
 | `devweave-init` | **Phase 0: Init** | Maps your project architecture, layers, and knowledge graph without touching code. |
 | `devweave-context <ID>` | **Phase 1: Context** | Ingests ticket, cleans out passwords/PII, and isolates the 3 files needed. |
 | `devweave-analyze <ID>` | **Phase 2: Analyze** | Checks database and API impacts before making changes. |
 | `devweave-plan <ID>` | **Phase 3: Plan** | Writes an exact, step-by-step implementation blueprint with test commands. |
 | `devweave-branch <ID>` | **Phase 4: Branch** | Creates a safe Git branch; prevents editing directly on `main`. |
-| `devweave-implement <ID>`| **Phase 5: Implement**| Writes surgical code strictly following the plan and runs tests for proof. |
+| `devweave-implement <ID>`| **Phase 5: Implement**| Writes surgical code strictly following the plan and runs tests with Test Intelligence. |
 | `devweave-pr-review <ID>` | **Phase 6: Review** | Two independent inspectors (Architect + DBA) audit code and database queries. |
 | `devweave-pr <ID>` | **Phase 7: PR** | Prepares final PR description and updates project memory upon approval. |
-| `devweave-fix-triage <ID>`| **Fix Lane** | Ingests bug crash logs and classifies severity. |
-| `devweave-fix-diagnose <ID>`| **Fix Lane** | Investigates root cause and designs minimal reproduction test case. |
+
+### V1.1 Modernization Lifecycle (10 Commands)
+| Command | Phase / Role | What it Does (Plain English) |
+| :--- | :--- | :--- |
+| `devweave-modernization-init` | **Modernization Phase 0** | Accepts natural-language target architecture, generates practice profiles, and creates workspace. |
+| `devweave-modernization-context <ID>` | **Modernization Phase 1** | Ingests scope and extracts bounded legacy source slice without context bloat. |
+| `devweave-modernization-analyze <ID>` | **Modernization Phase 2** | Maps legacy rules to target patterns (`mappings.json`) & enforces **Hard Gate #1**. |
+| `devweave-modernization-plan <ID>` | **Modernization Phase 3** | Plans file targets, test specs (unit/API/E2E), and DB migrations & enforces **Hard Gate #2**. |
+| `devweave-modernization-branch <ID>` | **Modernization Phase 4** | Isolates changes on `devweave/modernization/<ID>`; keeps legacy code strictly read-only. |
+| `devweave-modernization-implement <ID>` | **Modernization Phase 5** | Implements target architecture and executes automated test suites. |
+| `devweave-modernization-verify <ID>` | **Modernization Phase 6** | Verifies functional parity, DB migrations, and security & enforces **Hard Gate #3**. |
+| `devweave-modernization-pr <ID>` | **Modernization Phase 7** | Reconciles knowledge graph with `MIGRATED_TO` edges and packages modernization PR. |
+| `devweave-modernization-status <ID>` | **Observation** | Displays durable phase status, active gates, and next suggested command. |
+| `devweave-modernization-report <ID>` | **Reporting** | Generates end-to-end modernization lifecycle audit report. |
+
+### Specialized Fast Lanes (5 Commands)
+| Command | Lane | What it Does (Plain English) |
+| :--- | :--- | :--- |
+| `devweave-fix-triage <ID>` | **Fix Lane** | Ingests bug crash logs and classifies severity. |
+| `devweave-fix-diagnose <ID>` | **Fix Lane** | Investigates root cause and designs minimal reproduction test case. |
 | `devweave-fix-land <ID>` | **Fix Lane** | Applies minimal patch, tests regression, and prepares emergency hotfix PR. |
-| `devweave-modernize <ID>`| **Modernize** | Helps upgrade old frameworks (e.g. .NET 8 &rarr; 9, React 18 &rarr; 19). |
+| `devweave-modernize <ID>` | **Modernize (V1.0)** | Upgrades single dependencies or frameworks (e.g. .NET 8 &rarr; 9). |
 | `devweave-express <ID>` | **Express Lane** | Fast 1-step track for tiny changes like typos and documentation updates. |
+
+### System, Utility & Knowledge Commands (8 Commands)
+| Command | Category | What it Does (Plain English) |
+| :--- | :--- | :--- |
 | `devweave-update` | **System** | In-place plugin updater with daily auto-sync. |
 | `devweave-status` | **Utility** | Shows current phase, token usage, and open tickets. |
 | `devweave-handoff` | **Utility** | Generates a clean summary so another developer can take over your task. |
 | `devweave-archive` | **Utility** | Cleans up temporary task files after your PR is merged. |
 | `devweave-report` | **Utility** | Generates an executive metrics report on token savings and quality. |
 | `devweave-improve` | **Utility** | Records friction points to continuously improve AI performance. |
-| `devweave-document-product`| **Knowledge** | Documents product features and domain maps. |
+| `devweave-document-product` | **Knowledge** | Documents product features and domain maps. |
 | `devweave-document-domain` | **Knowledge** | Documents business rules and compliance scorecards. |
 
 ---
 
-## 11. A Day in the Life: A Real Story
+## 13. A Day in the Life: A Real Story
 
 Let's see how Developer Sarah uses DevWeave on a Tuesday morning:
 
@@ -302,7 +355,7 @@ Let's see how Developer Sarah uses DevWeave on a Tuesday morning:
 
 ---
 
-## 12. Frequently Asked Questions (FAQ)
+## 14. Frequently Asked Questions (FAQ)
 
 ### Q: Does DevWeave send my code to an external cloud?
 **A: No.** DevWeave runs 100% locally in your IDE/CLI. All state is saved directly in your Git repository under `.devweave/`.
