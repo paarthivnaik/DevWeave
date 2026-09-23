@@ -55,12 +55,19 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 - Load relevant domain scorecards from `.devweave/domains/<name>.md` honoring YAML frontmatter (`criticality`, `compliance: ["WCAG 2.1 AA", "SOC2"]`, `owners`, `on_call`).
 - Detect target technology. If runtime version has changed (e.g. .NET Core 3.1 $\to$ .NET 9), mark affected domain knowledge as `NEEDS_REVALIDATION`.
 
-### Step 4: Assemble Context Artifact
+### Step 4: JSON Knowledge Graph Traversal & Blast Radius Scoping
+- Query `.devweave/graph/knowledge-graph.json` to identify target entrypoints and components.
+- Perform **1-Hop / 2-Hop Neighborhood Traversal**:
+  - *Incoming Edges (Callers)*: Components depending on target.
+  - *Outgoing Edges (Callees)*: Dependencies, Repositories, Database Tables, Event Queues.
+- Bound context strictly to calculated `focus_paths` under the **32,000 token context budget**.
+
+### Step 5: Assemble Context Artifact
 - Create or update `.devweave/work-items/<ID>/context.md`.
 - Record metrics and audit event in `.devweave/work-items/<ID>/audit.md`.
 - Update state in `.devweave/work-items/<ID>/state.md`.
 
-### Step 5: Human Checkpoint
+### Step 6: Human Checkpoint
 - Present completion summary:
   ```text
   CONTEXT COMPLETE

@@ -18,13 +18,4 @@ sequenceDiagram
     Repo-->>Svc: Domain Model
     Svc-->>Entry: Response DTO
     Entry-->>Client: HTTP / JSON Response
-`
-"@
-
-    # 11. integrations.md (External Interfaces & Data Stores)
-    Set-Content -Path (Join-Path D:\DevWeave\conformance\fixtures\go\.devweave\repository "integrations.md") @"
-# Integrations & External Interfaces: go
-
-- **Primary Database / Storage**: Ecosystem native or configured store
-- **Message Queues / APIs**: Discovered via dependencies
-- **Confidence**: HIGH
+`

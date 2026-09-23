@@ -1,6 +1,6 @@
 ---
 name: devweave-init
-description: "[Phase 0: Init] Initialize DevWeave in the repository by autonomously detecting technology stack across 5 layers and generating pin-to-pin architecture, layers, request flow, and multi-repository topology intelligence."
+description: "[Phase 0: Init] Initialize DevWeave in the repository by autonomously detecting technology stack across 5 layers and generating pin-to-pin architecture, layers, request flow, knowledge graph, and multi-repository topology intelligence."
 ---
 
 # Cognition Devin Initialization Playbook (`devweave:init`)
@@ -8,7 +8,7 @@ description: "[Phase 0: Init] Initialize DevWeave in the repository by autonomou
 > **"Less Tokens. More Work. Lower Bill."**
 
 ## Purpose
-Autonomously inspect the target workspace repository, detect its complete technology stack across 5 evidence-based layers, and establish concrete, pin-to-pin repository intelligence (physical-to-logical layers, end-to-end request flow, transaction boundaries, and multi-repo topology) without modifying application code. Operates generically on any software repository.
+Autonomously inspect the target workspace repository, detect its complete technology stack across 5 evidence-based layers, and establish concrete, pin-to-pin repository intelligence (physical-to-logical layers, end-to-end request flow, JSON knowledge graph, and multi-repo topology) without modifying application code. Operates generically on any software repository.
 
 ---
 
@@ -30,22 +30,16 @@ Execute targeted inspection of repository manifests, project files, directory la
 
 ---
 
-### Step 2: Pin-to-Pin Architecture & Request Flow Synthesis
+### Step 2: Pin-to-Pin Architecture, Request Flow & Knowledge Graph Synthesis
 Analyze project entrypoints, router definitions, middleware chains, service classes, and data access layers to map:
 
 1. **Physical-to-Logical Layer Mapping (`layers.md`)**:
-   - Map exact codebase directories to architectural tiers:
-     - *Entrypoint / Bootstrap* (e.g. `src/server.ts`, `Program.cs`)
-     - *HTTP Middleware / Guards* (e.g. `src/middleware/`, `Filters/`)
-     - *Controllers / Routers* (e.g. `src/controllers/`, `Endpoints/`)
-     - *Domain Services / Use Cases* (e.g. `src/services/`, `Domain/`)
-     - *Data Access / Repositories* (e.g. `src/repositories/`, `Data/`)
-     - *Database Models & Migrations* (e.g. `prisma/schema.prisma`, `Migrations/`)
+   - Map exact codebase directories to architectural tiers (Entrypoint, Middleware, Controllers, Services, Repositories, DB Models).
 2. **Concrete End-to-End Request Flow (`request-flow.md`)**:
    - Generate an execution trace (with Mermaid sequence diagram) detailing how a typical request flows:
-     `Client Request` &rarr; `Middleware (Auth/Tracing)` &rarr; `Controller (DTO Validation)` &rarr; `Service (Business Logic)` &rarr; `Repository (Parameterized Query)` &rarr; `Database/Cache` &rarr; `Response DTO`.
-3. **Multi-Service Monorepo Map (`monorepo-map.md`)** *(if multi-service)*:
-   - Map inter-service communications (REST, gRPC, Kafka/RabbitMQ events, shared types).
+     `Client Request` &rarr; `Middleware` &rarr; `Controller` &rarr; `Service` &rarr; `Repository` &rarr; `Database/Cache` &rarr; `Response DTO`.
+3. **JSON Knowledge Graph (`graph/knowledge-graph.json`)**:
+   - Synthesize a declarative, Git-native JSON Knowledge Graph representing all codebase nodes and directed edges (`CALLS`, `QUERIES`, `ROUTES_TO`, `MUTATES`, `PUBLISHES`).
 
 ---
 
@@ -66,6 +60,8 @@ Create or update the standardized `.devweave/` intelligence directory in the tar
 │   ├── request-flow.md     # End-to-end request/execution trace & sequence diagram
 │   ├── integrations.md     # External APIs, database connections, and event queues
 │   └── practices.md        # Stack-aware coding conventions and anti-patterns
+├── graph/
+│   └── knowledge-graph.json # Declarative JSON Knowledge Graph (Nodes & Edges)
 ├── knowledge/
 │   └── conventions.md      # Repository coding conventions, style guides & lint rules
 └── state/
@@ -93,7 +89,7 @@ Languages: <detected languages with versions & confidence>
 Frameworks: <detected web/ORM/UI frameworks>
 Build Tools: <detected build commands>
 Testing Runners: <detected test frameworks & commands>
-Architecture & Layers: Mapped pin-to-pin (layers.md, request-flow.md)
+Architecture & Graph: Mapped pin-to-pin (layers.md, request-flow.md, knowledge-graph.json)
 Artifacts: Created intelligence artifacts under .devweave/
 
 Devin is waiting for your instruction.

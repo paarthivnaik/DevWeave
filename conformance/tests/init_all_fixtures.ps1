@@ -269,7 +269,34 @@ sequenceDiagram
 "@
     Set-Content -Path (Join-Path $knowledgeDir "conventions.md") -Value $convContent
 
-    # 13. state/current.json
+    # 13. graph/knowledge-graph.json
+    $graphDir = Join-Path $devweaveDir "graph"
+    New-Item -ItemType Directory -Force -Path $graphDir | Out-Null
+    $graphJson = @"
+{
+  "`$schema": "https://devweave.org/schemas/v1/graph.json",
+  "version": "1.0.0",
+  "repository": "$($t.Name)",
+  "topology": "$($t.Arch)",
+  "updated_at": "2026-09-23T12:00:00Z",
+  "nodes": [
+    { "id": "NODE_ENTRY", "type": "file", "name": "Entrypoint", "file": "src/main", "layer": "Entrypoint" },
+    { "id": "NODE_CTRL", "type": "controller", "name": "MainController", "file": "src/controllers", "layer": "Controller" },
+    { "id": "NODE_SVC", "type": "service_class", "name": "MainService", "file": "src/services", "layer": "Domain" },
+    { "id": "NODE_REPO", "type": "repository_class", "name": "MainRepository", "file": "src/repositories", "layer": "Data" },
+    { "id": "NODE_TBL", "type": "table", "name": "entities", "layer": "Database" }
+  ],
+  "edges": [
+    { "source": "NODE_ENTRY", "target": "NODE_CTRL", "type": "ROUTES_TO" },
+    { "source": "NODE_CTRL", "target": "NODE_SVC", "type": "CALLS" },
+    { "source": "NODE_SVC", "target": "NODE_REPO", "type": "CALLS" },
+    { "source": "NODE_REPO", "target": "NODE_TBL", "type": "QUERIES" }
+  ]
+}
+"@
+    Set-Content -Path (Join-Path $graphDir "knowledge-graph.json") -Value $graphJson
+
+    # 14. state/current.json
     $stateJson = @"
 {
   "work_item_id": "WI-$($t.Name.ToUpper())-001",
@@ -290,7 +317,7 @@ sequenceDiagram
 "@
     Set-Content -Path (Join-Path $stateDir "current.json") -Value $stateJson
 
-    # Verification of all 13 artifacts per fixture
+    # Verification of all 14 artifacts per fixture
     $requiredFiles = @(
         (Join-Path $repoMetaDir "profile.md"),
         (Join-Path $repoMetaDir "architecture.md"),
@@ -303,13 +330,14 @@ sequenceDiagram
         (Join-Path $repoMetaDir "layers.md"),
         (Join-Path $repoMetaDir "request-flow.md"),
         (Join-Path $repoMetaDir "integrations.md"),
+        (Join-Path $graphDir "knowledge-graph.json"),
         (Join-Path $knowledgeDir "conventions.md"),
         (Join-Path $stateDir "current.json")
     )
 
     $missing = $requiredFiles | Where-Object { -not (Test-Path $_) }
     if ($missing.Count -eq 0) {
-        Write-Host "  [PASS] $($t.Name.PadRight(18)) -> 5-layer detection & pin-to-pin flow validated (13/13 artifacts)" -ForegroundColor Green
+        Write-Host "  [PASS] $($t.Name.PadRight(18)) -> 5-layer detection & knowledge graph validated (14/14 artifacts)" -ForegroundColor Green
         $passed++
     } else {
         Write-Host "  [FAIL] $($t.Name.PadRight(18)) -> Missing artifacts: $($missing -join ', ')" -ForegroundColor Red
@@ -322,3 +350,4 @@ $summaryColor = if ($failed -eq 0) { "Green" } else { "Red" }
 Write-Host "Summary: Total Targets=$($targets.Count), Passed=$passed, Failed=$failed" -ForegroundColor $summaryColor
 
 if ($failed -gt 0) { exit 1 } else { exit 0 }
+

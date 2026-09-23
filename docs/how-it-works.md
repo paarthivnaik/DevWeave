@@ -112,20 +112,21 @@ All DevWeave state is stored transparently in your Git repository under `.devwea
   [Phase 7: PR READY]      ──► Assembles PR ──► Promotes durable knowledge to .devweave/knowledge/
 ```
 
-### Phase 0: 5-Layer Autonomous Discovery
+### Phase 0: 5-Layer Autonomous Discovery & Knowledge Graph Synthesis
 - **Layer 1 — Topology**: Detects single-service, monorepo (`packages/*`, `apps/*`), or multi-repo linked topologies.
 - **Layer 2 — Languages**: Detects polyglot ecosystems (C#, TypeScript, Python, Go, Rust, Java, etc.) with evidence citations.
 - **Layer 3 — Frameworks & Engines**: Detects active frameworks (ASP.NET Core, Angular, Spring Boot, FastAPI, Rails).
 - **Layer 4 — Tooling & ORMs**: Maps build tools (`dotnet`, `mvn`, `npm`, `cargo`) and test runners (`xUnit`, `pytest`, `Jest`).
-- **Layer 5 — Pin-to-Pin Mapping**: Generates:
+- **Layer 5 — Pin-to-Pin Mapping & Graph**: Generates:
   - `layers.md`: Maps physical folders (`src/controllers/`, `Domain/`, `Data/`) to logical tiers.
   - `request-flow.md`: Generates end-to-end request journeys with Mermaid sequence diagrams.
   - `integrations.md`: Maps external databases, event queues (Kafka, RabbitMQ), and APIs.
+  - `graph/knowledge-graph.json`: Synthesizes declarative JSON Knowledge Graph of all nodes and directed relationships.
 
-### Phase 1: Intake, PII Gate & Blast Radius Scoping
+### Phase 1: Intake, PII Gate & 1-Hop Graph Neighborhood Scoping
 - Ingests issue details from Jira, Azure DevOps, GitHub, Linear, or manual CLI input.
 - **PII / Secret Sanitizer**: Strips API keys, passwords, connection strings, and personal information before LLM ingestion.
-- **Blast Radius Scoping**: Scopes active context to only `focus_paths`, discarding 90% of irrelevant repository files.
+- **1-Hop / 2-Hop Graph Traversal**: Queries `.devweave/graph/knowledge-graph.json` to calculate exact callers (incoming edges) and callees (outgoing dependencies), scoping active context strictly to `focus_paths` under the **32,000 token budget**.
 
 ### Phase 2 & 3: Archaeology & Atomic Planning
 - Analyzes existing code patterns, dependencies, and schema models.
@@ -134,20 +135,22 @@ All DevWeave state is stored transparently in your Git repository under `.devwea
   - Line number anchor.
   - Deterministic test / verification command.
 
-### Phase 4 & 5: Branch Gate & Plan-Bound Implementation
+### Phase 4 & 5: Branch Gate, Implementation & Graph Delta Generation
 - **Branch Gate**: Refuses to edit code until an isolated feature branch (e.g. `feature/AUTH-101-token-refresh`) is active.
 - **Plan-Bound Rule**: Edits are restricted strictly to the files declared in `plan.md`.
 - **Test Evidence**: Runs local tests after each change and records stdout/stderr to `.devweave/tasks/<ID>/evidence.md`.
+- **Graph Delta Extraction**: Computes task-isolated architectural mutations in `.devweave/tasks/<ID>/graph-delta.json`.
 
-### Phase 6: Dual-Model Consensus Review
-Before any PR can be opened, DevWeave runs a rigorous multi-perspective review:
-1. **Principal Software Architect Lens**: Validates design patterns, SOLID adherence, and downstream breaking changes.
+### Phase 6: Dual-Model Consensus Review & Graph Linter
+Before any PR can be opened, DevWeave runs a rigorous multi-perspective review auditing both code diffs and `graph-delta.json`:
+1. **Principal Software Architect Lens**: Validates design patterns, SOLID adherence, and graph layer integrity (e.g. Controller cannot bypass Service to mutate DB table).
 2. **Senior DBA Lens**: Audits SQL queries for table locks, missing indexes, N+1 query hazards, and rollback scripts.
 3. **Security Lens**: Scans for OWASP Top 10 vulnerabilities and unescaped input.
 4. **Downstream Impact Lens**: Verifies that microservice APIs and event contracts remain backward-compatible.
 5. **Cascading Resilience Lens**: Ensures timeouts and error boundaries prevent systemic outages.
 
-### Phase 7: PR Assembly & Compounding Knowledge Promotion
+### Phase 7: PR Assembly, Graph Merge & Compounding Knowledge Promotion
+- Atomically applies `graph-delta.json` into the root `.devweave/graph/knowledge-graph.json`, staging the updated graph in the PR.
 - Compiles the final PR body with full audit trails (Requirement &rarr; Solution &rarr; Code &rarr; Tests &rarr; Review).
 - Promotes discovered architectural idioms into `.devweave/knowledge/conventions.md`, enabling **0-token rediscovery** for future sessions.
 

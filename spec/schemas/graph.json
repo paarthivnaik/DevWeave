@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://devweave.org/schemas/v1/graph.json",
+  "title": "DevWeave Knowledge Graph Schema",
+  "description": "Declarative, Git-native JSON Knowledge Graph representing codebase architecture, nodes, and relationships.",
+  "type": "object",
+  "required": ["$schema", "version", "repository", "nodes", "edges"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "enum": ["1.0.0", "1.1.0"]
+    },
+    "repository": {
+      "type": "string"
+    },
+    "topology": {
+      "type": "string",
+      "enum": ["single-service", "monorepo", "multi-service"]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "layer",
+              "file",
+              "service",
+              "controller",
+              "service_class",
+              "repository_class",
+              "symbol",
+              "endpoint",
+              "table",
+              "event",
+              "rule"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "layer": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "type"],
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONTAINS",
+              "IMPORTS",
+              "CALLS",
+              "ROUTES_TO",
+              "QUERIES",
+              "MUTATES",
+              "EXPOSES",
+              "PUBLISHES",
+              "SUBSCRIBES",
+              "GOVERNED_BY",
+              "DEPENDS_ON"
+            ]
+          },
+          "weight": {
+            "type": "number"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["HIGH", "MEDIUM", "LOW"]
+          }
+        }
+      }
+    }
+  }
+}
