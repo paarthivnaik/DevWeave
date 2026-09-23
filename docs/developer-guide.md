@@ -244,8 +244,8 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 
 #### 9. `devweave-modernization-init` — Target Profile & Architecture Intent Initialization
 - **Host Syntax**: `agy run devweave-modernization-init` | `devweave-modernization-init --source <path>`
-- **What it Does**: Accepts natural language architectural intent, interactively prompts for the legacy source repository / knowledge base path (if `--source` is not passed), scans target repository without questionnaires, detects target profile and technology practices (CQRS, signals, indexing), locks legacy source as `READ_ONLY`, and initializes modernization workspace `.devweave/modernization/<ID>/`.
-- **Output Artifacts**: `architecture-intent.json`, `technology-profile.json`, `source-memory.json`, `state.json`.
+- **What it Does**: Accepts natural language architectural intent, interactively prompts for the legacy source repository / knowledge base path (if `--source` is not passed), scans target repository without questionnaires, detects target profile and technology practices (CQRS, signals, indexing), locks legacy source as `READ_ONLY`, and establishes central modernization workspace `.devweave/modernization/`.
+- **Output Artifacts**: `.devweave/modernization/` (`workspace.json`, `architecture-intent.json`, `technology-profile.json`, `source-memory.json`).
 
 #### 10. `devweave-modernization-context <ID>` — Work Item Intake & Legacy Slice Extraction
 - **Host Syntax**: `agy run devweave-modernization-context <ID>`
