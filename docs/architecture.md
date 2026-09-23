@@ -25,15 +25,15 @@ flowchart TD
     end
 
     subgraph LANES["3. Workflow & Execution Engine"]
-        CANONICAL["Canonical 6-Phase Flow<br>(context -> analyze -> plan -> branch -> implement -> pr)"]
+        CANONICAL["Canonical 7-Phase Flow<br>(init -> context -> analyze -> plan -> branch -> implement -> review -> pr)"]
+        MODERNIZATION["V1.1 Modernization Pipeline (8 Phases)<br>(init -> context -> analyze [G1] -> plan [G2] -> branch -> implement -> verify [G3] -> pr)"]
         FIX_LANE["Fix Fast Lane<br>(fix-triage -> fix-diagnose -> fix-land)"]
-        MODERNIZE["Modernization Lane<br>(migration_manifest.md)"]
         EXPRESS["Express Mode<br>(low-risk fast path)"]
     end
 
     subgraph ADAPTERS["4. Host Adapters & Runtime Integration"]
-        ANTIGRAVITY["Google Antigravity Native Host Adapter<br>(19 Skills, rules/AGENTS.md, plugin.json)"]
-        OTHER_HOSTS["Generic Host Adapter Contract<br>(Markdown, JSON Schema, CLI)"]
+        ANTIGRAVITY["Google Antigravity Native Host Adapter<br>(31 Skills, rules/AGENTS.md, plugin.json)"]
+        OTHER_HOSTS["Multi-Host Adapter Contract<br>(Claude, Copilot, Gemini, Codex, Devin)"]
     end
 
     SPEC --> REPO_INTEL
@@ -95,16 +95,23 @@ sequenceDiagram
 
 ---
 
-## 4. Human-in-the-Loop (HITL) Governance & Phase Isolation
+## 4. Human-in-the-Loop (HITL) Governance & Invariants
 
 DevWeave enforces strict governance invariants:
-1. **Phase Isolation**: Every command (e.g., `devweave-analyze`) performs only its scoped responsibilities, produces its artifact (`analysis.md`), and halts.
-2. **Zero Automatic Chaining**: The agent never automatically transitions from `ANALYZE` to `PLAN` without human review.
+1. **Phase Isolation**: Every command performs only its scoped responsibilities, produces its artifact, and halts.
+2. **Zero Automatic Progression**: The agent never automatically transitions across phases without human review.
 3. **Zero Self-Approval**: Gate approvals (`[APPROVE]`, `[REQUEST_CHANGES]`, `[REJECT]`) must be explicitly supplied by the human developer.
-4. **Mandatory Hard Gates**:
-   - **PII/Privacy Gate** (`devweave-context`): Sanitizes credentials and sensitive data.
-   - **Branch Gate** (`devweave-branch`): Requires human authorization before Git branch creation.
-   - **PR Gate** (`devweave-pr`): Requires human sign-off before generating the PR package.
+4. **Mandatory Description Prompting (Optional Input)**: Prompts developer for optional notes or constraints at every phase.
+5. **Pre-Processing Transparency**: AI states its intent, targets, and objectives before executing.
+6. **Mandatory Hard Gates**:
+   - **Feature Lifecycle Hard Gates**:
+     - **Branch Gate** (`devweave-branch`): Requires human authorization before Git branch creation.
+     - **PR Review Gate** (`devweave-pr-review`): Dual-model consensus review sign-off.
+     - **PR Gate** (`devweave-pr`): Human sign-off before generating the PR package.
+   - **Modernization Lifecycle Hard Gates**:
+     - **Hard Gate #1 (Post-ANALYZE)**: Approval of legacy behavioral mapping (`mappings.json`).
+     - **Hard Gate #2 (Post-PLAN)**: Approval of implementation tasks, test specs, and DB migration scripts.
+     - **Hard Gate #3 (Post-VERIFY)**: Approval of dual verification scorecard and functional parity proof.
 
 ---
 
@@ -114,25 +121,37 @@ DevWeave is packaged natively as an Antigravity Plugin located at `plugins/antig
 
 ```
 plugins/antigravity/
-├── plugin.json               # Plugin manifest (name, version, description)
+├── plugin.json               # Plugin manifest (name: "devweave", version: "1.1.0")
 ├── rules/
 │   └── AGENTS.md             # AI-DLC core rules loaded into agent context
-└── skills/
+└── skills/                   # 31 specialized skills
     ├── devweave-init/
     ├── devweave-context/
     ├── devweave-analyze/
     ├── devweave-plan/
     ├── devweave-branch/
     ├── devweave-implement/
+    ├── devweave-pr-review/
     ├── devweave-pr/
-    ├── devweave-status/
-    ├── devweave-handoff/
-    ├── devweave-archive/
+    ├── devweave-modernization-init/
+    ├── devweave-modernization-context/
+    ├── devweave-modernization-analyze/
+    ├── devweave-modernization-plan/
+    ├── devweave-modernization-branch/
+    ├── devweave-modernization-implement/
+    ├── devweave-modernization-verify/
+    ├── devweave-modernization-pr/
+    ├── devweave-modernization-status/
+    ├── devweave-modernization-report/
     ├── devweave-fix-triage/
     ├── devweave-fix-diagnose/
     ├── devweave-fix-land/
     ├── devweave-modernize/
     ├── devweave-express/
+    ├── devweave-update/
+    ├── devweave-status/
+    ├── devweave-handoff/
+    ├── devweave-archive/
     ├── devweave-report/
     ├── devweave-improve/
     ├── devweave-document-product/

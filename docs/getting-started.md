@@ -1,10 +1,10 @@
-# DevWeave V1.0 — Developer & User Guide
+# DevWeave V1.1 — Getting Started & User Guide
 
 Welcome to **DevWeave** — the declarative, evidence-based, and technology-neutral **AI-Driven Development Lifecycle (AI-DLC)** framework.
 
 > **Core Mission:** *Less Tokens. More Work. Lower Bill.*
 
-DevWeave guides developers and autonomous AI coding agents from initial work item requirements through analysis, planning, branch governance, implementation, deterministic testing, dual-model code/SQL review, and pull request readiness across **all major AI coding platforms**.
+DevWeave guides developers and autonomous AI coding agents from initial work item requirements through analysis, planning, branch governance, implementation, deterministic testing with Test Intelligence, dual-model code/SQL review, end-to-end legacy modernization, and pull request readiness across **all 6 major AI coding platforms**.
 
 ---
 
@@ -25,7 +25,7 @@ flowchart TD
         D1["Work Item / Ticket (Jira, ADO, GitHub, Linear, Manual)"] --> D2["Autonomous Detection & Scoped Context (.devweave/)"]
         D2 --> D3["Deep Analysis & Root-Cause Evaluation"]
         D3 --> D4["File-Anchored Plan & Branch Governance"]
-        D4 --> D5["Plan-Bound Incremental Implementation"]
+        D4 --> D5["Plan-Bound Incremental Implementation & Test Intelligence"]
         D5 --> D6["Deterministic Testing & Verification"]
         D6 --> D7["Dual-Model Code & SQL Review (Architect + DBA)"]
         D7 --> D8["Durable Domain Knowledge Promotion & PR Package"]
@@ -36,7 +36,7 @@ flowchart TD
 
 ## 2. Supported Multi-Host Platforms
 
-DevWeave runs natively across **6 AI coding hosts**:
+DevWeave runs natively across **6 AI coding hosts** with **31 validated skills and commands**:
 
 | Host Platform | Native Plugin Directory | Primary Command Style | Supported Models |
 |---|---|---|---|
@@ -49,7 +49,19 @@ DevWeave runs natively across **6 AI coding hosts**:
 
 ---
 
-## 3. The Canonical 7-Phase User Workflow
+## 3. Core Interaction Rules
+
+DevWeave strictly enforces two developer interaction standards across all phases:
+
+1. **Mandatory Description Prompting (Optional Input)**:
+   - For every phase, DevWeave asks: *"Do you have any additional description, architectural context, or instructions for this phase?"*
+   - Providing input is optional; if skipped or confirmed without extra notes, DevWeave continues with standard defaults.
+2. **Pre-Processing Transparency ("State Intent Before Action")**:
+   - Before executing file inspections, modifications, builds, or test commands, DevWeave declares what it is about to do, which files it will touch, and why.
+
+---
+
+## 4. The Canonical 7-Phase User Workflow
 
 ```mermaid
 flowchart LR
@@ -62,44 +74,41 @@ flowchart LR
     P6 --> P7["<b>Phase 7: PR</b><br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
 ```
 
-### Phase-by-Phase Breakdown
-
-#### Phase 0: Repository Onboarding (`devweave-init`)
-- **Action**: Inspects manifests, lockfiles, and configs across 5 layers (Runtime, Framework, Persistence, Testing, Build).
-- **Artifacts**: Populates [`.devweave/repository/`](file:///D:/DevWeave/.devweave/repository/) intelligence files.
-
-#### Phase 1: Context Intake (`devweave-context <ID>`)
-- **Action**: Prompts for PII/Privacy verification, presents the **Interactive PM Tool Selector** (Jira, Azure DevOps, GitHub, Linear, Manual Paste), loads central domain context from `.devweave/domains/`, and establishes blast radius.
-- **Artifact**: `.devweave/work-items/<ID>/context.md`.
-
-#### Phase 2: Architectural Analysis (`devweave-analyze <ID>`)
-- **Action**: Deep codebase archaeology, competing hypothesis analysis, root-cause defect diagnosis, and version-aware practice binding (`NEEDS_REVALIDATION`).
-- **Artifact**: `.devweave/work-items/<ID>/analysis.md`.
-
-#### Phase 3: Implementation Planning (`devweave-plan <ID>`)
-- **Action**: Decomposes solution into file-anchored, atomic tasks with explicit test commands.
-- **Artifact**: `.devweave/work-items/<ID>/plan.md`.
-
-#### Phase 4: Branch Isolation Gate (`devweave-branch <ID>`) — **[HARD GATE]**
-- **Action**: Enforces branch creation (`feature/<ID>`, `fix/<ID>`) before any code is modified.
-
-#### Phase 5: Surgical Implementation (`devweave-implement <ID>`)
-- **Action**: Executes plan-bound code edits strictly matching stack naming conventions and runs automated tests.
-- **Artifacts**: Source files, `.devweave/work-items/<ID>/test-results.json`.
-
-#### Phase 6: Dual-Model PR Review (`devweave-pr-review <ID>`) — **[HARD GATE]**
-- **Action**: Executes concurrent dual-model review:
-  - **Model A (Principal Software Architect)**: System boundaries, Clean/DDD modularity, public API contracts, and **downstream impact**.
-  - **Model B (Senior Database Administrator & Security Specialist)**: SQL table locks (`ONLINE=ON`/`CONCURRENTLY`), query execution plans, indexes, reversible migrations, **side effects**, and **cascading failures**.
-- **Artifact**: `.devweave/work-items/<ID>/review.md`.
-
-#### Phase 7: PR Packaging & Knowledge Promotion (`devweave-pr <ID>`) — **[HARD GATE]**
-- **Action**: Reuses the approved `review.md`, prompts to promote durable domain insights to `.devweave/domains/`, and assembles `pr-description.md`.
-- **Artifact**: `.devweave/work-items/<ID>/pr-description.md`.
+### Phase Breakdown & Test Intelligence
+- **Phase 0 (`devweave-init`)**: Inspects manifests across 5 layers (Runtime, Framework, Persistence, Testing, Build) and builds `.devweave/graph/knowledge-graph.json`.
+- **Phase 1 (`devweave-context <ID>`)**: Prompts for PII/Privacy verification, presents the interactive PM tool selector, and isolates the blast radius under a 32,000 token budget.
+- **Phase 2 (`devweave-analyze <ID>`)**: Deep codebase archaeology, competing hypothesis analysis, and version-aware practice binding.
+- **Phase 3 (`devweave-plan <ID>`)**: Decomposes the task into atomic, file-anchored tasks with explicit test commands and test specs.
+- **Phase 4 (`devweave-branch <ID>`)**: **[HARD GATE]** Enforces isolated branch creation before any code modifications.
+- **Phase 5 (`devweave-implement <ID>`)**: Executes plan-bound code changes with **Test Intelligence**: production code and test changes form an atomic changeset. Automatically classifies test failures (`IMPLEMENTATION_DEFECT` vs `EXPECTED_BEHAVIOR_CHANGE`) and strictly forbids test weakening.
+- **Phase 6 (`devweave-pr-review <ID>`)**: **[HARD GATE]** Dual-model consensus review (Principal Architect + Senior DBA + Security + Downstream Impact + Cascading Resilience).
+- **Phase 7 (`devweave-pr <ID>`)**: **[HARD GATE]** Reuses verified review evidence, promotes durable domain knowledge, and creates the PR.
 
 ---
 
-## 4. Specialized Fast Lanes
+## 5. V1.1 Modernization Lifecycle (Legacy Migration)
+
+DevWeave V1.1 provides an end-to-end 8-phase modernization lifecycle to migrate legacy monoliths to modern architectures with zero regressions:
+
+```mermaid
+flowchart LR
+    M0["0. Modernization Init<br><code>devweave-modernization-init</code>"] --> M1["1. Context Slicing<br><code>devweave-modernization-context &lt;ID&gt;</code>"]
+    M1 --> M2["2. Legacy Mapping<br><code>devweave-modernization-analyze &lt;ID&gt;</code><br><b>[HARD GATE #1]</b>"]
+    M2 --> M3["3. Modernization Plan<br><code>devweave-modernization-plan &lt;ID&gt;</code><br><b>[HARD GATE #2]</b>"]
+    M3 --> M4["4. Isolated Branch<br><code>devweave-modernization-branch &lt;ID&gt;</code>"]
+    M4 --> M5["5. Implement & Tests<br><code>devweave-modernization-implement &lt;ID&gt;</code>"]
+    M5 --> M6["6. Parity Verification<br><code>devweave-modernization-verify &lt;ID&gt;</code><br><b>[HARD GATE #3]</b>"]
+    M6 --> M7["7. PR & Promotion<br><code>devweave-modernization-pr &lt;ID&gt;</code>"]
+```
+
+### The 3 Mandatory Modernization Hard Gates:
+1. **Hard Gate #1 (Post-ANALYZE)**: Human approval of legacy behavioral mappings and target pattern selection.
+2. **Hard Gate #2 (Post-PLAN)**: Human approval of implementation blueprint, test specs, and DB migration scripts.
+3. **Hard Gate #3 (Post-VERIFY)**: Human approval of dual-layer functional parity scorecard and verification evidence.
+
+---
+
+## 6. Specialized Fast Lanes
 
 ### A. Fix Fast Lane (Accelerated Bug Remediation)
 ```text
@@ -107,20 +116,14 @@ devweave-fix-triage <ID>  ──►  devweave-fix-diagnose <ID>  ──►  devw
  (Log & Severity Triage)       (Root-Cause Investigation)        (Patch, Retest, Review & PR)
 ```
 
-### B. Modernization Lane (Legacy Stack Upgrades)
-```text
-devweave-context <ID> ──► devweave-analyze <ID> ──► devweave-modernize <ID> ──► Branch ──► Implement ──► Review ──► PR
-                                                    (migration_manifest.md)
-```
-
-### C. Express Mode (Low-Risk Fast Track)
+### B. Express Mode (Low-Risk Fast Track)
 ```text
 devweave-express <ID> ──► Unified Context + Patch + Test + PR (For verified single-file typos & docs)
 ```
 
 ---
 
-## 5. Central Compounding Knowledge Base
+## 7. Central Compounding Knowledge Base
 
 DevWeave continuously builds domain memory under [`.devweave/domains/`](file:///D:/DevWeave/.devweave/domains/):
 - **First Story in Domain**: Discovers architecture and builds domain scorecard.
@@ -128,3 +131,4 @@ DevWeave continuously builds domain memory under [`.devweave/domains/`](file:///
 - **PR Phase**: Promotes newly discovered patterns back to central storage, compounding intelligence with every merged PR.
 
 For full empirical benchmarks across 12 polyglot repositories and cost calculations, see [V1.0 Benchmarks & Performance Guide](file:///D:/DevWeave/docs/v1-benchmarks.md).
+
