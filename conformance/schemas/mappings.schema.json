@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/mappings.schema.json",
+  "title": "ModernizationMappings",
+  "type": "object",
+  "required": ["modernizationId", "mappings", "updated_at"],
+  "properties": {
+    "modernizationId": { "type": "string" },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sourceId", "relationship", "targetId", "confidence"],
+        "properties": {
+          "sourceId": { "type": "string" },
+          "sourceType": { "type": "string" },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "MIGRATED_TO",
+              "REPLACED_BY",
+              "TRANSFORMED_TO",
+              "SPLIT_INTO",
+              "MERGED_INTO",
+              "PRESERVED_AS",
+              "RETIRED",
+              "DEFERRED",
+              "UNKNOWN"
+            ]
+          },
+          "targetId": { "type": "string" },
+          "targetType": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "rationale": { "type": "string" },
+          "behaviorParityNotes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

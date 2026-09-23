@@ -10,25 +10,31 @@ This document defines the normative requirements for human checkpoints, phase is
 2. **Phase Isolation**: Every phase command must execute **only its own phase**, generate its artifact, present a structured summary, and terminate.
 3. **Zero Automatic Chaining**: No phase may automatically invoke the next phase. The next command is suggested, but must be explicitly invoked by the developer.
 4. **Durable Decision Audit**: Human decisions must be permanently recorded in `.devweave/work-items/<ID>/state.md` and `audit.md`.
+5. **Mandatory Description Prompting (Optional Input)**: For **every phase**, it is **mandatory** for DevWeave to ask the user/developer if they have any additional description, custom requirements, or constraints. Providing input is **optional**; if no additional description is provided, DevWeave continues with standard defaults.
+6. **Pre-Processing Transparency**: Before performing any processing, inspections, or mutations in any phase, DevWeave must explicitly explain what it is about to do, which files/areas it will inspect or edit, and its specific objective.
 
 ---
 
-## 2. Standard Human Checkpoint Interface
+## 2. Standard Human Checkpoint Interface & Description Solicitation
 
-At the conclusion of every phase execution, DevWeave presents a standardized checkpoint:
+For **every phase** in the lifecycle (both V1.0 standard development and V1.1 modernization), DevWeave must explicitly ask the user/developer if they have any additional description, context, or specific requirements:
 
 ```text
 ======================================================================
-  PHASE COMPLETE: <PHASE_NAME>
-  Work Item: <WORK_ITEM_ID>
+  PHASE: <PHASE_NAME> | Work Item: <WORK_ITEM_ID>
   Artifact: .devweave/work-items/<ID>/<artifact-name>
 ======================================================================
 Key Findings / Summary:
 - ...
 - ...
 
-Human Decision Options:
+Developer Context & Description Solicitation:
+> "Please provide any additional description, architectural constraints, 
+   or specific instructions for this phase (or press Enter/Submit to proceed with defaults)."
+
+Human Decision & Input Options:
   [APPROVE]              -> Accept phase outcome and mark phase COMPLETED.
+  [PROVIDE_DESCRIPTION]  -> Supply custom description, additional requirements, or domain context.
   [REQUEST_CHANGES]      -> Provide feedback; phase remains IN_PROGRESS.
   [PROVIDE_INFORMATION]  -> Supply missing requirements or context.
   [REJECT]               -> Reject outcome; revert to preceding phase.
@@ -36,8 +42,6 @@ Human Decision Options:
 
 Suggested Next Phase: <NEXT_PHASE>
 Run: DevWeave-<next-phase> <WORK_ITEM_ID>
-
-DevWeave is waiting for your instruction.
 ```
 
 ---

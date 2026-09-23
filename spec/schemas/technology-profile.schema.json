@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/technology-profile.schema.json",
+  "title": "TechnologyPracticeProfile",
+  "type": "object",
+  "required": ["modernizationId", "technologies", "practices", "updated_at"],
+  "properties": {
+    "modernizationId": { "type": "string" },
+    "technologies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "category", "source", "status", "lastVerified"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "version": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["FRONTEND", "BACKEND", "DATABASE", "INFRASTRUCTURE", "TESTING", "API", "SECURITY"]
+          },
+          "source": {
+            "type": "string",
+            "enum": ["USER_DECLARED", "OBSERVED", "INFERRED"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["CURRENT", "NEEDS_REVALIDATION", "UNKNOWN", "DEPRECATED"]
+          },
+          "lastVerified": { "type": "string", "format": "date-time" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "practices": {
+      "type": "object",
+      "properties": {
+        "bestPractices": { "type": "array", "items": { "type": "string" } },
+        "designPatterns": { "type": "array", "items": { "type": "string" } },
+        "solidPrinciples": { "type": "array", "items": { "type": "string" } },
+        "cleanCode": { "type": "array", "items": { "type": "string" } },
+        "architecturePrinciples": { "type": "array", "items": { "type": "string" } },
+        "securityPractices": { "type": "array", "items": { "type": "string" } },
+        "apiPractices": { "type": "array", "items": { "type": "string" } },
+        "databasePractices": { "type": "array", "items": { "type": "string" } },
+        "testingPractices": { "type": "array", "items": { "type": "string" } },
+        "performancePractices": { "type": "array", "items": { "type": "string" } },
+        "errorHandling": { "type": "array", "items": { "type": "string" } },
+        "loggingObservability": { "type": "array", "items": { "type": "string" } },
+        "configuration": { "type": "array", "items": { "type": "string" } },
+        "dependencyManagement": { "type": "array", "items": { "type": "string" } },
+        "antiPatterns": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

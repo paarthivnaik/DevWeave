@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/test-traceability.schema.json",
+  "title": "TestTraceability",
+  "type": "object",
+  "required": ["storyId", "traceabilityMatrix", "updated_at"],
+  "properties": {
+    "storyId": { "type": "string" },
+    "traceabilityMatrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["behaviorId", "testPath", "testType", "action"],
+        "properties": {
+          "behaviorId": { "type": "string" },
+          "testId": { "type": "string" },
+          "testPath": { "type": "string" },
+          "testType": { "type": "string", "enum": ["UNIT", "INTEGRATION", "API", "DATABASE", "E2E"] },
+          "action": { "type": "string", "enum": ["CREATED", "UPDATED", "PRESERVED", "RETIRED"] },
+          "rationale": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
