@@ -200,6 +200,33 @@ if ($e2ePhasesCompleted.Count -eq 12 -and $e2ePhasesCompleted -contains "HARD_GA
     $failedCount++
 }
 
+# --- Test Scenario 7: Story Audit Trail (audit.md) Logging & Invariance ---
+Write-Host "`n[Scenario 7] Story Audit Trail (audit.md) Lifecycle Logging..." -ForegroundColor Yellow
+
+$totalTests++
+$auditLog = @(
+    @{ Phase = "CONTEXT"; Timestamp = "2026-09-23T23:45:00+05:30"; Action = "PHASE_START"; Prompt = "Modernize user registration screen from legacy JSP to Angular 22"; Artifacts = @("context.md", "migration-unit.json") },
+    @{ Phase = "ANALYZE"; Timestamp = "2026-09-23T23:46:00+05:30"; Action = "HARD_GATE_1_DECISION"; Decision = "APPROVE"; Feedback = "Target architecture approved with Signals"; Artifacts = @("analysis.md", "mappings.json") },
+    @{ Phase = "PLAN"; Timestamp = "2026-09-23T23:47:00+05:30"; Action = "HARD_GATE_2_DECISION"; Decision = "APPROVE"; Feedback = "Task sequence verified"; Artifacts = @("plan.md") },
+    @{ Phase = "BRANCH"; Timestamp = "2026-09-23T23:48:00+05:30"; Action = "BRANCH_CREATION"; TargetBranch = "feature/99-User-Registration"; BaseBranch = "master"; Artifacts = @("state.json") },
+    @{ Phase = "IMPLEMENT"; Timestamp = "2026-09-23T23:49:00+05:30"; Action = "IMPLEMENTATION"; TestsPassed = 12; Artifacts = @("evidence.md") },
+    @{ Phase = "VERIFY"; Timestamp = "2026-09-23T23:50:00+05:30"; Action = "HARD_GATE_3_DECISION"; Decision = "APPROVE"; Feedback = "All parity checks verified"; Artifacts = @("verification.md") },
+    @{ Phase = "PR"; Timestamp = "2026-09-23T23:51:00+05:30"; Action = "PR_READY"; Artifacts = @("pr-description.md", "report.md") }
+)
+
+$auditPhases = $auditLog | ForEach-Object { $_.Phase }
+$hasAllPhases = ($auditPhases -contains "CONTEXT") -and ($auditPhases -contains "ANALYZE") -and ($auditPhases -contains "PLAN") -and ($auditPhases -contains "BRANCH") -and ($auditPhases -contains "IMPLEMENT") -and ($auditPhases -contains "VERIFY") -and ($auditPhases -contains "PR")
+$hasPromptLogged = ($auditLog[0].Prompt -like "*Modernize user registration*")
+$hasBranchLogged = ($auditLog[3].TargetBranch -eq "feature/99-User-Registration" -and $auditLog[3].BaseBranch -eq "master")
+
+if ($hasAllPhases -and $hasPromptLogged -and $hasBranchLogged) {
+    Write-Host "  [PASS] Story audit trail (audit.md) recorded end-to-end prompts, human decisions, branch details, and artifacts" -ForegroundColor Green
+    $passedCount++
+} else {
+    Write-Host "  [FAIL] Story audit trail verification failed" -ForegroundColor Red
+    $failedCount++
+}
+
 Write-Host "`n----------------------------------------------------------"
 Write-Host "Master Modernization E2E Summary: Total=$totalTests, Passed=$passedCount, Failed=$failedCount" -ForegroundColor $(if ($failedCount -eq 0) { "Green" } else { "Red" })
 

@@ -45,7 +45,7 @@ Phase Progression:
   [ ] PR
 
 Next Suggested Command:
-  modernization-verify MOD-001
+  devweave-modernization-verify MOD-001
 ```
 
 ---

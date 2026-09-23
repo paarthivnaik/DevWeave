@@ -16,7 +16,7 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
    Please specify the path to your legacy source repository / codebase (or press Enter if modernizing code in-place within the current directory):
    ```
    Never default to the current directory without the user's explicit confirmation.
-2. **Zero state.json in INIT**: `devweave-modernization-init` establishes static, declarative project configuration only. Lifecycle `state.json` is created strictly per-story inside `.devweave/modernization/stories/<ID>/state.json`.
+2. **Zero state.json in INIT**: `devweave-modernization-init` establishes static, declarative project configuration only. Lifecycle `state.json` is created strictly per-story inside `.devweave/modernization/<ID>/state.json`.
 
 ---
 

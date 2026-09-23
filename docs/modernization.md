@@ -80,6 +80,7 @@ DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchic
 └── stories/                        <-- [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created via devweave-modernization-context <ID>)
     ├── 98/                         <-- Story #98 (e.g. User Login)
     │   ├── state.json              <-- Story lifecycle phase & hard gate tracker
+    │   ├── audit.md                <-- Append-only user activity, prompt & decision log
     │   ├── context.md              <-- Bounded legacy slice context
     │   ├── migration-unit.json     <-- Targeted legacy components & DTOs
     │   ├── analysis.md             <-- Behavioral rules & dependency analysis
@@ -90,7 +91,19 @@ DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchic
     │
     └── 99/                         <-- Story #99 (e.g. User Registration)
         ├── state.json
+        ├── audit.md
         ├── context.md
         ├── migration-unit.json
         └── ...
 ```
+
+---
+
+## 6. Story Audit Trail (`audit.md`)
+Every story maintains an append-only `.devweave/modernization/stories/<ID>/audit.md` file tracking the full history of the work item:
+- **User Prompts & Instructions**: Captures user inputs, custom descriptions, and specific instructions at every phase.
+- **Interactive Choices**: Records PM tool selections, branch names, and base branch configurations.
+- **Hard Gate Decisions**: Logs human approvals, change requests, and feedback for Gates #1, #2, and #3.
+- **Phase Transitions**: Timestamps and status changes from `INIT` through `PR`.
+- **Artifact Modifications**: Precise files created and modified at each step.
+

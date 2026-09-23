@@ -38,16 +38,16 @@ Auxiliary inspection commands:
 
 | Command | Argument | Phase Mapped | Input Description | Primary Output Artifacts | Next Suggested Action |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `devweave-modernization-init` | *Optional flags* | `INIT` | Natural language architecture declaration, optional legacy source path | `.devweave/modernization/<ID>/architecture-intent.json`, `technology-profile.json`, `state.json` | `devweave-modernization-context <ID>` |
-| `devweave-modernization-context` | `<ID>` (Required) | `CONTEXT` | Work item ID / Modernization ID | `.devweave/modernization/<ID>/context.md`, `source-memory.json` | `devweave-modernization-analyze <ID>` |
-| `devweave-modernization-analyze` | `<ID>` (Required) | `ANALYZE` | Work item ID | `.devweave/modernization/<ID>/analysis.md`, `mappings.json` | **Hard Gate #1** $\to$ `devweave-modernization-plan <ID>` |
-| `devweave-modernization-plan` | `<ID>` (Required) | `PLAN` | Work item ID | `.devweave/modernization/<ID>/plan.md` | **Hard Gate #2** $\to$ `devweave-modernization-branch <ID>` |
-| `devweave-modernization-branch` | `<ID>` (Required) | `BRANCH` | Work item ID | `.devweave/modernization/<ID>/state.json` (branch metadata) | `devweave-modernization-implement <ID>` |
-| `devweave-modernization-implement` | `<ID>` (Required) | `IMPLEMENT` | Work item ID | Target source files, test run logs | `devweave-modernization-verify <ID>` |
-| `devweave-modernization-verify` | `<ID>` (Required) | `VERIFY` | Work item ID | `.devweave/modernization/<ID>/verification.md` | **Hard Gate #3** $\to$ `devweave-modernization-pr <ID>` |
-| `devweave-modernization-pr` | `<ID>` (Required) | `PR` | Work item ID | `.devweave/modernization/<ID>/report.md`, `pr-description.md` | PR merge review |
+| `devweave-modernization-init` | *Optional flags* | `INIT` | Natural language architecture declaration, optional legacy source path | `.devweave/modernization/` (`architecture-intent.json`, `technology-profile.json`, `source-memory.json`, `workspace.json`) | `devweave-modernization-context <ID>` |
+| `devweave-modernization-context` | `<ID>` (Required) | `CONTEXT` | Work item ID / Modernization ID | `.devweave/modernization/stories/<ID>/` (`context.md`, `migration-unit.json`, `state.json`, `audit.md`) | `devweave-modernization-analyze <ID>` |
+| `devweave-modernization-analyze` | `<ID>` (Required) | `ANALYZE` | Work item ID | `.devweave/modernization/stories/<ID>/` (`analysis.md`, `mappings.json`, `audit.md`) | **Hard Gate #1** $\to$ `devweave-modernization-plan <ID>` |
+| `devweave-modernization-plan` | `<ID>` (Required) | `PLAN` | Work item ID | `.devweave/modernization/stories/<ID>/` (`plan.md`, `audit.md`) | **Hard Gate #2** $\to$ `devweave-modernization-branch <ID>` |
+| `devweave-modernization-branch` | `<ID>` (Required) | `BRANCH` | Work item ID | `.devweave/modernization/stories/<ID>/` (`state.json`, `audit.md`) | `devweave-modernization-implement <ID>` |
+| `devweave-modernization-implement` | `<ID>` (Required) | `IMPLEMENT` | Work item ID | Target source files, `evidence.md`, `audit.md` | `devweave-modernization-verify <ID>` |
+| `devweave-modernization-verify` | `<ID>` (Required) | `VERIFY` | Work item ID | `.devweave/modernization/stories/<ID>/` (`verification.md`, `audit.md`) | **Hard Gate #3** $\to$ `devweave-modernization-pr <ID>` |
+| `devweave-modernization-pr` | `<ID>` (Required) | `PR` | Work item ID | `.devweave/modernization/stories/<ID>/` (`report.md`, `pr-description.md`, `audit.md`) | PR merge review |
 | `devweave-modernization-status` | `<ID>` (Required) | `STATUS` | Work item ID | Formatted CLI status summary | None (Non-mutating) |
-| `devweave-modernization-report` | `<ID>` (Required) | `REPORT` | Work item ID | `.devweave/modernization/<ID>/report.md` | None (Non-mutating) |
+| `devweave-modernization-report` | `<ID>` (Required) | `REPORT` | Work item ID | `.devweave/modernization/stories/<ID>/report.md` | None (Non-mutating) |
 
 ---
 

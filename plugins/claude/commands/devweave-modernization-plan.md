@@ -1,17 +1,17 @@
 ---
 name: devweave-modernization-plan
-description: "[Modernization Phase 3: Plan] Decompose approved architectural analysis into file-anchored implementation tasks, unit/integration test specifications, database migration scripts, and enforce Hard Gate #2."
+description: "[Modernization Phase 3: Plan] Decompose approved architectural analysis into file-anchored implementation tasks, unit/integration test specifications, database migration scripts, update audit.md, and enforce Hard Gate #2."
 ---
 
 # Claude Code Modernization Planning Command (`claude /devweave-modernization-plan`)
 
 ## Purpose
-Construct a deterministic, file-level implementation plan that maps target files to create/modify/retire, specifies test scenarios, defines database migration steps, establishes validation commands, and halts at **Mandatory Human-in-the-Loop Hard Gate #2**.
+Construct a deterministic, file-level implementation plan that maps target files to create/modify/retire, specifies test scenarios, defines database migration steps, establishes validation commands, logs plan details and approvals into `audit.md`, and halts at **Mandatory Human-in-the-Loop Hard Gate #2**.
 
 ---
 
 ## Inputs & Parameters
-- `<ID>`: Modernization work item ID (e.g. `MOD-001`).
+- `<ID>`: Modernization work item ID (e.g. `MOD-001`, `99`).
 
 ---
 
@@ -21,18 +21,21 @@ Construct a deterministic, file-level implementation plan that maps target files
 ---
 
 ## Allowed Actions
-1. Map target files to create, update, or retire with exact symbol signatures and path layouts.
-2. Formulate database migration scripts (idempotent SQL/EF Core migrations).
-3. Formulate unit and integration test definitions covering parity against legacy behavior.
-4. Define concrete build, test, and verification shell commands.
-5. Create `plan.md`.
+1. **Mandatory Description Prompting**: Ask developer for any specific plan constraints or technical preferences.
+2. Map target files to create, update, or retire with exact symbol signatures and path layouts.
+3. Formulate database migration scripts (idempotent SQL/EF Core migrations).
+4. Formulate unit and integration test definitions covering parity against legacy behavior.
+5. Define concrete build, test, and verification shell commands.
+6. Create `plan.md`.
+7. Append activity entry and Hard Gate #2 presentation/verdict to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
 ## Artifacts Generated
 ```text
 .devweave/modernization/stories/<ID>/
-└── plan.md
+├── plan.md                     <-- File-anchored implementation plan
+└── audit.md                    <-- Updated with plan details & gate decision
 ```
 
 ---
@@ -48,8 +51,8 @@ Construct a deterministic, file-level implementation plan that maps target files
 ## Human Checkpoint: HARD GATE #2
 - **Mandatory checkpoint**: Code modifications cannot begin without explicit human plan approval.
 - Supported decisions:
-  - `APPROVE` &rarr; unlocks `BRANCH` and `IMPLEMENT`.
-  - `REQUEST_CHANGES` &rarr; updates `phases.PLAN` = `CHANGES_REQUESTED` and preserves plan versions (`plan.v1.md`, `plan.v2.md`).
+  - `APPROVE` &rarr; unlocks `BRANCH` and `IMPLEMENT` (logged in `audit.md`).
+  - `REQUEST_CHANGES` &rarr; updates `phases.PLAN` = `CHANGES_REQUESTED`, preserves plan versions (`plan.v1.md`, `plan.v2.md`), logs feedback in `audit.md`, and requests revision.
   - `STOP` &rarr; halts execution.
 
 ---
@@ -62,4 +65,4 @@ devweave-modernization-branch <ID>  (Requires APPROVE)
 ---
 
 ## STOP Rule
-- Upon writing `plan.md` and presenting the plan, **STOP IMMEDIATELY**.
+- Upon writing `plan.md`, updating `audit.md`, and presenting the plan, **STOP IMMEDIATELY**.

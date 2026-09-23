@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-status
+name: status
 description: [Utility - Lifecycle Status] Inspects current work-item lifecycle phase, completed artifacts, open governance gates, and suggests the next valid phase.
 ---
 

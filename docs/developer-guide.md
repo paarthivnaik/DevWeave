@@ -190,32 +190,32 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
 #### 2. `devweave-context <ID>` — Work Item Intake & PII Gate
 - **Host Syntax**: `agy run devweave-context PROJ-123` | `/devweave-context PROJ-123`
 - **When to Use**: At the start of every ticket, bug, or user story.
-- **What it Does**: Ingests issue details from Jira, GitHub, Azure DevOps, Linear, or manual input. Runs a mandatory PII/secret sanitizer, calculates the precise codebase blast radius (`focus_paths`), and enforces a token budget (e.g. 32k tokens).
-- **Output Artifacts**: `.devweave/tasks/<ID>/context.md`.
+- **What it Does**: Ingests issue details from Jira, GitHub, Azure DevOps, Linear, or manual input. Runs a mandatory PII/secret sanitizer, calculates the precise codebase blast radius (`focus_paths`), enforces a token budget, and initializes the work item `audit.md` activity tracker.
+- **Output Artifacts**: `.devweave/work-items/<ID>/context.md`, `.devweave/work-items/<ID>/audit.md`.
 
 #### 3. `devweave-analyze <ID>` — Architectural Impact & Deep Archaeology
 - **Host Syntax**: `agy run devweave-analyze PROJ-123`
 - **When to Use**: After context is built, before designing the technical solution.
-- **What it Does**: Inspects relevant components within the blast radius, identifies database schema touchpoints, checks interface contracts, and evaluates breaking change risks.
-- **Output Artifacts**: `.devweave/tasks/<ID>/analysis.md`.
+- **What it Does**: Inspects relevant components within the blast radius, identifies database schema touchpoints, checks interface contracts, evaluates breaking change risks, and logs findings to `audit.md`.
+- **Output Artifacts**: `.devweave/work-items/<ID>/analysis.md`, `.devweave/work-items/<ID>/audit.md`.
 
 #### 4. `devweave-plan <ID>` — Atomic Implementation Task Breakdown
 - **Host Syntax**: `agy run devweave-plan PROJ-123`
 - **When to Use**: To produce an approved engineering plan before writing code.
-- **What it Does**: Decomposes the task into atomic, sequentially numbered tasks with exact file targets, line anchors, test specs, and deterministic test commands.
-- **Output Artifacts**: `.devweave/tasks/<ID>/plan.md`.
+- **What it Does**: Decomposes the task into atomic, sequentially numbered tasks with exact file targets, line anchors, test specs, and deterministic test commands, logging plan details to `audit.md`.
+- **Output Artifacts**: `.devweave/work-items/<ID>/plan.md`, `.devweave/work-items/<ID>/audit.md`.
 
 #### 5. `devweave-branch <ID>` — Git Branch Isolation & Branch Gate
 - **Host Syntax**: `agy run devweave-branch <ID>` | `devweave-branch <ID> [--name <name>] [--base <branch>]`
 - **When to Use**: Before writing code to guarantee branch safety.
-- **What it Does**: Interactively prompts or accepts custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`), validates clean workspace status, and establishes the isolated feature branch from the specified base. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
-- **Output Artifacts**: Isolated Git working branch created, state metadata updated.
+- **What it Does**: Interactively prompts or accepts custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`), validates clean workspace status, establishes the isolated feature branch from the specified base, and records branch choices to `audit.md`. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
+- **Output Artifacts**: Isolated Git working branch created, state metadata and `audit.md` updated.
 
 #### 6. `devweave-implement <ID>` — Plan-Bound Surgical Coding & Test Intelligence
 - **Host Syntax**: `agy run devweave-implement PROJ-123`
 - **When to Use**: To execute the approved plan.
-- **What it Does**: Performs targeted, localized edits strictly on the files authorized in `plan.md`. Employs **Test Intelligence**: production code and test edits form an atomic changeset. Automatically classifies test failures into `IMPLEMENTATION_DEFECT` (fix production code), `EXPECTED_BEHAVIOR_CHANGE` (update test with audit trail), or `UNRELATED_REGRESSION`. Strictly forbids weakening assertions or deleting tests.
-- **Output Artifacts**: Code modifications and test evidence in `.devweave/tasks/<ID>/evidence.md` and `test-results.json`.
+- **What it Does**: Performs targeted, localized edits strictly on the files authorized in `plan.md`. Employs **Test Intelligence**: production code and test edits form an atomic changeset. Automatically classifies test failures into `IMPLEMENTATION_DEFECT` (fix production code), `EXPECTED_BEHAVIOR_CHANGE` (update test with audit trail), or `UNRELATED_REGRESSION`. Strictly forbids weakening assertions or deleting tests. Logs modified files and test outputs to `audit.md`.
+- **Output Artifacts**: Code modifications and test evidence in `.devweave/work-items/<ID>/evidence.md`, `test-results.json`, and `audit.md`.
 
 #### 7. `devweave-pr-review <ID>` — Dual-Model Consensus Review
 - **Host Syntax**: `agy run devweave-pr-review PROJ-123`
@@ -226,13 +226,14 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
   3. **Security Lens**: OWASP vulnerabilities, input sanitization, secret leakage.
   4. **Downstream Impact Lens**: API contracts, breaking changes to dependent services.
   5. **Cascading Resilience Lens**: Circuit breakers, timeouts, error propagation.
-- **Output Artifacts**: `.devweave/tasks/<ID>/review.md`. Requires Human sign-off.
+  Logs review verdicts and human gate sign-off to `audit.md`.
+- **Output Artifacts**: `.devweave/work-items/<ID>/review.md`, `.devweave/work-items/<ID>/audit.md`. Requires Human sign-off.
 
 #### 8. `devweave-pr <ID>` — PR Packaging & Durable Knowledge Promotion
 - **Host Syntax**: `agy run devweave-pr PROJ-123`
 - **When to Use**: Final step to assemble the pull request and update domain knowledge.
-- **What it Does**: Compiles clean PR description with full traceability (Ticket &rarr; Plan &rarr; Tests &rarr; Review). Promotes reusable conventions to `.devweave/knowledge/conventions.md`.
-- **Output Artifacts**: Pull request created on GitHub/GitLab/Azure DevOps.
+- **What it Does**: Compiles clean PR description with full traceability (Ticket &rarr; Plan &rarr; Tests &rarr; Review). Promotes reusable conventions to `.devweave/knowledge/conventions.md` and appends final release record to `audit.md`.
+- **Output Artifacts**: Pull request created on GitHub/GitLab/Azure DevOps, `pr-description.md`, `audit.md`.
 
 ---
 
@@ -249,38 +250,38 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 
 #### 10. `devweave-modernization-context <ID>` — Work Item Intake & Legacy Slice Extraction
 - **Host Syntax**: `agy run devweave-modernization-context <ID>`
-- **What it Does**: Ingests migration scope via PM tool selector (Jira, Azure DevOps, GitHub, Linear, or Manual User Story paste), runs PII privacy check, extracts bounded legacy source slice from read-only source memory, and retrieves relevant graph neighborhood.
-- **Output Artifacts**: `context.md`, `migration-unit.json`.
+- **What it Does**: Ingests migration scope via PM tool selector (Jira, Azure DevOps, GitHub, Linear, or Manual User Story paste), runs PII privacy check, extracts bounded legacy source slice from read-only source memory, retrieves relevant graph neighborhood, and initializes the append-only `audit.md` activity tracker.
+- **Output Artifacts**: `.devweave/modernization/stories/<ID>/` (`context.md`, `migration-unit.json`, `state.json`, `audit.md`).
 
 #### 11. `devweave-modernization-analyze <ID>` — Behavioral Mapping & [HARD GATE #1]
 - **Host Syntax**: `agy run devweave-modernization-analyze <ID>`
-- **What it Does**: Analyzes legacy behaviors, business rules, API schemas, and data structures against target architecture. Generates `mappings.json` and enforces **Hard Gate #1** (explicit human approval required before planning).
-- **Output Artifacts**: `analysis.md`, `mappings.json`.
+- **What it Does**: Analyzes legacy behaviors, business rules, API schemas, and data structures against target architecture. Generates `mappings.json`, logs gate presentation to `audit.md`, and enforces **Hard Gate #1** (explicit human approval required before planning).
+- **Output Artifacts**: `.devweave/modernization/stories/<ID>/` (`analysis.md`, `mappings.json`, `audit.md`).
 
 #### 12. `devweave-modernization-plan <ID>` — Implementation Blueprint & [HARD GATE #2]
 - **Host Syntax**: `agy run devweave-modernization-plan <ID>`
-- **What it Does**: Decomposes mappings into file-anchored implementation tasks, unit/integration/E2E test specifications, and database migration scripts. Enforces **Hard Gate #2** (explicit human approval required before branch/implementation).
-- **Output Artifacts**: `plan.md`, `test-plan.json`.
+- **What it Does**: Decomposes mappings into file-anchored implementation tasks, unit/integration/E2E test specifications, and database migration scripts. Logs plan details to `audit.md` and enforces **Hard Gate #2** (explicit human approval required before branch/implementation).
+- **Output Artifacts**: `.devweave/modernization/stories/<ID>/` (`plan.md`, `test-plan.json`, `audit.md`).
 
 #### 13. `devweave-modernization-branch <ID>` — Modernization Sandbox Branching
 - **Host Syntax**: `agy run devweave-modernization-branch <ID>` | `devweave-modernization-branch <ID> [--name <name>] [--base <branch>]`
-- **What it Does**: Interactively prompts or accepts custom target branch name (e.g., `feature/99-User-Registration`) and source base branch (e.g., `master`, `develop`, `release/*`, `epic/*`), verifies clean working state, creates and switches to the isolated modernization branch from the base branch, and protects legacy source code as strictly **READ_ONLY**. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
-- **Output Artifacts**: Git branch created, `.devweave/modernization/stories/<ID>/state.json` updated with branch metadata.
+- **What it Does**: Interactively prompts or accepts custom target branch name (e.g., `feature/99-User-Registration`) and source base branch (e.g., `master`, `develop`, `release/*`, `epic/*`), verifies clean working state, creates and switches to the isolated modernization branch from the base branch, logs branch choices to `audit.md`, and protects legacy source code as strictly **READ_ONLY**. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
+- **Output Artifacts**: Git branch created, `.devweave/modernization/stories/<ID>/state.json` and `audit.md` updated.
 
 #### 14. `devweave-modernization-implement <ID>` — Modernization Implementation & Test Suite
 - **Host Syntax**: `agy run devweave-modernization-implement <ID>`
-- **What it Does**: Executes surgical, plan-bound modernization code changes, runs automated test runners, adheres to target technology practices, and prevents scope drift.
-- **Output Artifacts**: Target code modifications, `evidence.md`, `test-results.json`.
+- **What it Does**: Executes surgical, plan-bound modernization code changes, runs automated test runners, adheres to target technology practices, logs modified files and test outputs to `audit.md`, and prevents scope drift.
+- **Output Artifacts**: Target code modifications, `evidence.md`, `test-results.json`, `audit.md`.
 
 #### 15. `devweave-modernization-verify <ID>` — Dual Verification & [HARD GATE #3]
 - **Host Syntax**: `agy run devweave-modernization-verify <ID>`
-- **What it Does**: Executes dual-layer verification (functional test suite + architectural/behavioral parity scorecard). Validates DB migrations and security, enforcing **Hard Gate #3** (explicit human approval required before PR).
-- **Output Artifacts**: `verification.md`, `scorecard.json`.
+- **What it Does**: Executes dual-layer verification (functional test suite + architectural/behavioral parity scorecard). Validates DB migrations and security, logs scorecard to `audit.md`, and enforces **Hard Gate #3** (explicit human approval required before PR).
+- **Output Artifacts**: `.devweave/modernization/stories/<ID>/` (`verification.md`, `scorecard.json`, `audit.md`).
 
 #### 16. `devweave-modernization-pr <ID>` — Modernization PR & Graph Promotion
 - **Host Syntax**: `agy run devweave-modernization-pr <ID>`
-- **What it Does**: Assembles comprehensive modernization PR package, promotes `MIGRATED_TO` edges to knowledge graph, and outputs `pr-description.md` and `report.md`.
-- **Output Artifacts**: PR opened, `pr-description.md`, `report.md`.
+- **What it Does**: Assembles comprehensive modernization PR package, promotes `MIGRATED_TO` edges to knowledge graph, logs final PR completion to `audit.md`, and outputs `pr-description.md` and `report.md`.
+- **Output Artifacts**: PR opened, `.devweave/modernization/stories/<ID>/` (`pr-description.md`, `report.md`, `audit.md`).
 
 #### 17. `devweave-modernization-status <ID>` — Durable Modernization Inspector
 - **Host Syntax**: `agy run devweave-modernization-status <ID>`

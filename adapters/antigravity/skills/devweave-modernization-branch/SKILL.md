@@ -1,12 +1,12 @@
 ---
 name: devweave-modernization-branch
-description: "[Modernization Phase 4: Branch] Enforce isolated workspace branching with customizable branch name and base branch prior to executing modernization code modifications, protecting legacy source and target main branches."
+description: "[Modernization Phase 4: Branch] Enforce isolated workspace branching with customizable branch name and base branch prior to executing modernization code modifications, protecting legacy source and target main branches, and logging to audit.md."
 ---
 
 # Antigravity Modernization Branch Skill (`devweave-modernization-branch`)
 
 ## Purpose
-Safely establish an isolated Git branch in the target workspace to guarantee sandbox isolation and protect the main branch and legacy source from unverified changes. Allows developers to specify custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`) interactively or via command arguments.
+Safely establish an isolated Git branch in the target workspace to guarantee sandbox isolation and protect the main branch and legacy source from unverified changes. Allows developers to specify custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`) interactively or via command arguments, logging all branch choices into `audit.md`.
 
 ---
 
@@ -65,11 +65,16 @@ Example: "create feature/99-User-Registration from master"
    ```
 6. Verify legacy source repository configured in `source-memory.json` remains untouched and read-only (`READ_ONLY` invariant).
 7. Record branch metadata in `.devweave/modernization/stories/<ID>/state.json`.
+8. Append branch creation activity, user input/prompt, resolved target branch, and base branch to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
 ## Artifacts Generated
-- Branch metadata recorded in `.devweave/modernization/stories/<ID>/state.json`.
+```text
+.devweave/modernization/stories/<ID>/
+├── state.json                  <-- Updated with branch metadata
+└── audit.md                    <-- Updated with branch creation log
+```
 
 ---
 
@@ -109,4 +114,4 @@ devweave-modernization-implement <ID>
 ---
 
 ## STOP Rule
-- Upon completing branch setup and state persistence, **STOP IMMEDIATELY**. Do not proceed to `IMPLEMENT` automatically.
+- Upon completing branch setup, logging to `audit.md`, and state persistence, **STOP IMMEDIATELY**. Do not proceed to `IMPLEMENT` automatically.

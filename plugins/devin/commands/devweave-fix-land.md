@@ -1,4 +1,4 @@
-﻿---
+---
 name: devweave-fix-land
 description: "[Fix Lane - Phase 3: Land] Branch from verified base, apply minimal fix, execute regression test suite, run dual-model collective review, and assemble fix PR."
 ---

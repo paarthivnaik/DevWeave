@@ -1,12 +1,12 @@
 ---
 name: devweave-branch
-description: "[Phase 4: Branch] Enforces isolated Git branch creation with customizable branch name and base branch from verified base before implementation begins."
+description: "[Phase 4: Branch] Enforces isolated Git branch creation with customizable branch name and base branch from verified base before implementation begins, logging to audit.md."
 ---
 
-# OpenAI Codex DevWeave Branch Command (`codex run devweave-branch`)
+# DevWeave Branch Skill (`devweave-branch`)
 
 ## Purpose
-Safely establish an isolated Git branch in the workspace to guarantee sandbox isolation and protect the main branch from unverified changes. Allows developers to specify custom branch names (e.g., `feature/99-User-Registration`, `fix/101-auth-timeout`) and source base branches (e.g., `master`, `develop`, `release/*`, `epic/*`) interactively, via command arguments, or using natural phrasing.
+Safely establish an isolated Git branch in the workspace to guarantee sandbox isolation and protect the main branch from unverified changes. Allows developers to specify custom branch names (e.g., `feature/99-User-Registration`, `fix/101-auth-timeout`) and source base branches (e.g., `master`, `develop`, `release/*`, `epic/*`) interactively, via command arguments, or using natural phrasing, logging all branch choices into `audit.md`.
 
 ---
 
@@ -16,7 +16,7 @@ Safely establish an isolated Git branch in the workspace to guarantee sandbox is
 - `--base <base_branch>` (Optional): Explicit base branch from which to branch (e.g., `master`, `main`, `develop`, `release/1.0`, `epic/checkout`).
 
 ### Natural Phrasing Support
-Recognizes natural instructions such as:
+The agent must recognize natural developer requests, such as:
 - `"create feature/99-User Registration from master branch"`
 - `"create branch feature/98-login from develop"`
 - `"branch TASK-001 fix/auth-token from release/v2.0"`
@@ -30,7 +30,7 @@ Recognizes natural instructions such as:
 ---
 
 ## Interactive Branch Configuration Checkpoint
-If `--name` or `--base` are not provided on the command line or via natural phrasing, prompt the developer:
+If `--name` or `--base` are not provided on the command line or via natural phrasing, the agent **MUST** prompt the developer for branch details before executing Git commands:
 
 ```text
 =======================================================
@@ -53,8 +53,12 @@ Example: "create feature/99-User-Registration from master"
 ## Allowed Actions
 1. Confirm `plan.md` exists and `PLAN` status is `APPROVED`.
 2. Verify workspace working tree is clean (`git status`).
-3. Resolve target branch name (from flags, natural phrasing, prompt, or default `feature/<ID>`).
-4. Resolve base branch (from flags, natural phrasing, prompt, or default active branch / `main` / `master`).
+3. Resolve target branch name:
+   - Use explicitly provided name from flags, natural phrasing, or prompt.
+   - Fall back to standard default: `feature/<ID>` (or `fix/<ID>`).
+4. Resolve base branch:
+   - Use explicitly provided base branch from flags, natural phrasing, or prompt.
+   - Fall back to current active branch or repository default (`main`/`master`).
 5. Validate base branch exists (`git rev-parse --verify <base_branch>`).
 6. Execute Git branch creation and checkout:
    ```bash
@@ -67,6 +71,7 @@ Example: "create feature/99-User-Registration from master"
    - Sets `branch.checkedOut` = `true`
    - Sets `phases.BRANCH` = `COMPLETED`
    - Sets `nextSuggestedPhase` = `IMPLEMENT`
+8. Append branch creation activity, user prompt, and resolved target/base branches to `.devweave/work-items/<ID>/audit.md`.
 
 ---
 
@@ -77,19 +82,20 @@ Output clear confirmation upon branch creation:
 Work Item:      <ID>
 Active Branch:  <target_branch>
 Base Branch:    <base_branch>
+Audit Log:      .devweave/work-items/<ID>/audit.md
 
 Suggested next phase:
-IMPLEMENT (Run: codex run devweave-implement <ID>)
+IMPLEMENT (Run: devweave-implement <ID>)
 ```
 
 ---
 
 ## Next Suggested Command
 ```text
-codex run devweave-implement <ID>
+devweave-implement <ID>
 ```
 
 ---
 
 ## STOP Rule
-- Upon completing branch setup and state persistence, **STOP IMMEDIATELY**.
+- Upon completing branch setup, logging to `audit.md`, and state persistence, **STOP IMMEDIATELY**. Do not proceed to `IMPLEMENT` automatically.

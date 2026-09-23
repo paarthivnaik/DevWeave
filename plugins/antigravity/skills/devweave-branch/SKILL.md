@@ -1,12 +1,12 @@
 ---
 name: devweave-branch
-description: "[Phase 4: Branch] Enforces isolated Git branch creation with customizable branch name and base branch from verified base before implementation begins."
+description: "[Phase 4: Branch] Enforces isolated Git branch creation with customizable branch name and base branch from verified base before implementation begins, logging to audit.md."
 ---
 
 # DevWeave Branch Skill (`devweave-branch`)
 
 ## Purpose
-Safely establish an isolated Git branch in the workspace to guarantee sandbox isolation and protect the main branch from unverified changes. Allows developers to specify custom branch names (e.g., `feature/99-User-Registration`, `fix/101-auth-timeout`) and source base branches (e.g., `master`, `develop`, `release/*`, `epic/*`) interactively, via command arguments, or using natural phrasing.
+Safely establish an isolated Git branch in the workspace to guarantee sandbox isolation and protect the main branch from unverified changes. Allows developers to specify custom branch names (e.g., `feature/99-User-Registration`, `fix/101-auth-timeout`) and source base branches (e.g., `master`, `develop`, `release/*`, `epic/*`) interactively, via command arguments, or using natural phrasing, logging all branch choices into `audit.md`.
 
 ---
 
@@ -71,6 +71,7 @@ Example: "create feature/99-User-Registration from master"
    - Sets `branch.checkedOut` = `true`
    - Sets `phases.BRANCH` = `COMPLETED`
    - Sets `nextSuggestedPhase` = `IMPLEMENT`
+8. Append branch creation activity, user prompt, and resolved target/base branches to `.devweave/work-items/<ID>/audit.md`.
 
 ---
 
@@ -81,6 +82,7 @@ Output clear confirmation upon branch creation:
 Work Item:      <ID>
 Active Branch:  <target_branch>
 Base Branch:    <base_branch>
+Audit Log:      .devweave/work-items/<ID>/audit.md
 
 Suggested next phase:
 IMPLEMENT (Run: devweave-implement <ID>)
@@ -96,4 +98,4 @@ devweave-implement <ID>
 ---
 
 ## STOP Rule
-- Upon completing branch setup and state persistence, **STOP IMMEDIATELY**. Do not proceed to `IMPLEMENT` automatically.
+- Upon completing branch setup, logging to `audit.md`, and state persistence, **STOP IMMEDIATELY**. Do not proceed to `IMPLEMENT` automatically.

@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-modernize
+name: modernize
 description: [Modernization Lane - Phase 3: Migration Manifest] Orchestrates framework/runtime upgrades, parity contracts, migration manifests (migration_manifest.md), and stepwise feature migration.
 ---
 
