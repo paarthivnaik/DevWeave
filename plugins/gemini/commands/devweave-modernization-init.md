@@ -10,6 +10,16 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 
 ---
 
+## Execution Invariants
+1. **Mandatory Legacy Source Gate (BLOCKING)**: If `--source <path>` is NOT explicitly provided in the command invocation, the agent **MUST NOT** proceed to inspect repositories or generate artifacts. The agent **MUST IMMEDIATELY ASK THE USER AND STOP** to wait for the user's response:
+   ```text
+   Please specify the path to your legacy source repository / codebase (or press Enter if modernizing code in-place within the current directory):
+   ```
+   Never default to the current directory without the user's explicit confirmation.
+2. **Zero state.json in INIT**: `devweave-modernization-init` establishes static, declarative project configuration only. Lifecycle `state.json` is created strictly per-story inside `.devweave/modernization/<ID>/state.json`.
+
+---
+
 ## Inputs & Parameters
 - `Intent`: Natural language description of the target architecture (e.g. "We are using Angular FE with Bootstrap, backend as microservices with CQRS, and MySQL database").
 - `--source <path>`: (Optional) Absolute or relative path to the legacy source repository. If omitted, the agent MUST interactively ask the developer for the legacy source/codebase path.
@@ -24,7 +34,7 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 
 ## Allowed Actions
 1. Parse natural language intent into structured components (`frontend`, `backend`, `database`, `implementationPolicy`).
-2. **Mandatory Legacy Source Prompting**: If `--source` was not provided in the command, prompt the user:
+2. **Mandatory Legacy Source Checkpoint (BLOCKING)**: If `--source` was not provided, prompt the user and wait for their input before proceeding:
    `"Please specify the path to your legacy source repository / knowledge base (or press Enter if modernizing code in-place within the current repository):"`
    - If a path is provided, validate its existence and record in `source-memory.json` with strict `READ_ONLY` access mode.
    - If empty/skipped, confirm and record the current directory as the legacy source location.
@@ -42,16 +52,14 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 ├── workspace.json              <-- Target solution metadata & PM tool preference
 ├── architecture-intent.json    <-- Declared target architecture
 ├── technology-profile.json     <-- Technology & engineering practice profiles
-├── source-memory.json          <-- Legacy source path & READ_ONLY access mode
-└── state.json                  <-- Central modernization project registry
+└── source-memory.json          <-- Legacy source path & READ_ONLY access mode
 ```
 
 ---
 
 ## State Updates
-- Sets `projectStatus` = `INITIALIZED`
+- Project configuration established at `.devweave/modernization/`
 - Sets `nextSuggestedPhase` = `CONTEXT`
-- Sets `status` = `WAITING_FOR_HUMAN`
 
 ---
 
