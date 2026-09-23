@@ -66,10 +66,18 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 ```
 
 ### Verify Active Plugin
-```powershell
-agy plugin list
+When installing or verifying the plugin, Antigravity processes all 31 skills:
+```text
+devweave
+          ✔ skills      : 31 processed
+          - agents      : skipped (not found)
+          - commands    : skipped (not found)
+          - mcpServers  : skipped (not found)
+          - hooks       : skipped (not found)
 ```
-*Expected Output:*
+> **Note**: DevWeave packages its full execution workflows as **Progressive Skills** (under `skills/`) and core rules (under `rules/AGENTS.md`). The skipped entries (`agents`, `commands`, `mcpServers`, `hooks`) are optional Antigravity plugin directories not required by DevWeave.
+
+Running `agy plugin list` displays:
 ```json
 {
   "imports": [
