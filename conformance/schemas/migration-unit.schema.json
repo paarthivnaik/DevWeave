@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/migration-unit.schema.json",
+  "title": "MigrationUnit",
+  "type": "object",
+  "required": ["id", "unitType", "name", "scope", "updated_at"],
+  "properties": {
+    "id": { "type": "string" },
+    "unitType": {
+      "type": "string",
+      "enum": [
+        "PAGE",
+        "SCREEN",
+        "FEATURE",
+        "MODULE",
+        "SERVICE",
+        "DOMAIN",
+        "WORKFLOW",
+        "API",
+        "TRANSACTION",
+        "COMPONENT",
+        "CAPABILITY",
+        "CUSTOM"
+      ]
+    },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "sourceFiles": { "type": "array", "items": { "type": "string" } },
+        "targetFiles": { "type": "array", "items": { "type": "string" } },
+        "databaseEntities": { "type": "array", "items": { "type": "string" } },
+        "apiEndpoints": { "type": "array", "items": { "type": "string" } },
+        "businessRules": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

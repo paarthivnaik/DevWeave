@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/test-impact.schema.json",
+  "title": "TestImpactAnalysis",
+  "type": "object",
+  "required": ["storyId", "affectedSourceFiles", "affectedBehaviors", "impactedExistingTests", "missingTestScenarios", "updated_at"],
+  "properties": {
+    "storyId": { "type": "string" },
+    "affectedSourceFiles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affectedBehaviors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["behaviorId", "description", "changeType"],
+        "properties": {
+          "behaviorId": { "type": "string" },
+          "description": { "type": "string" },
+          "changeType": {
+            "type": "string",
+            "enum": ["NEW", "MODIFIED", "DEPRECATED", "PRESERVED"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "impactedExistingTests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "testLevel", "action", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "testLevel": {
+            "type": "string",
+            "enum": ["UNIT", "INTEGRATION", "API", "DATABASE", "E2E"]
+          },
+          "action": {
+            "type": "string",
+            "enum": ["UPDATE", "KEEP", "RETIRE"]
+          },
+          "reason": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "missingTestScenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scenario", "targetTestLevel", "category"],
+        "properties": {
+          "scenario": { "type": "string" },
+          "targetTestLevel": {
+            "type": "string",
+            "enum": ["UNIT", "INTEGRATION", "API", "DATABASE", "E2E"]
+          },
+          "category": {
+            "type": "string",
+            "enum": ["HAPPY_PATH", "BOUNDARY", "VALIDATION", "NEGATIVE", "SECURITY", "REGRESSION", "USER_JOURNEY"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "e2eFrameworkDetected": {
+      "type": "object",
+      "properties": {
+        "framework": {
+          "type": "string",
+          "enum": ["PLAYWRIGHT", "CYPRESS", "SELENIUM", "JEST_E2E", "NONE", "CUSTOM"]
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "source": { "type": "string", "enum": ["OBSERVED", "DECLARED", "RECOMMENDED"] }
+      },
+      "additionalProperties": false
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

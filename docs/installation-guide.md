@@ -1,10 +1,10 @@
-# DevWeave V1.0 — Universal Installation & Setup Guide
+# DevWeave V1.1 — Universal Installation & Setup Guide
 
 > **"Less Tokens. More Work. Lower Bill."**
 
 Welcome to the **DevWeave Multi-Host Installation Guide**.
 
-DevWeave is designed from first principles to be **100% host-neutral**. Whether you use **Google Antigravity**, **Anthropic Claude Code**, **GitHub Copilot**, **Google Gemini CLI**, **OpenAI Codex**, or **Cognition Devin**, this guide provides clear, copy-pasteable setup commands from GitHub with automated updates.
+DevWeave is designed from first principles to be **100% host-neutral**. Whether you use **Google Antigravity**, **Anthropic Claude Code**, **GitHub Copilot**, **Google Gemini CLI**, **OpenAI Codex**, or **Cognition Devin**, this guide provides clear, copy-pasteable setup commands from GitHub with automated updates across all 31 skills.
 
 > 📖 **Looking for full command breakdowns and tutorials?** See the [DevWeave Developer Handbook](developer-guide.md).
 
@@ -43,7 +43,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 ### Verification:
 ```powershell
 agy plugin list
-# Expected output: devweave - Components: skills (21 validated skills)
+# Expected output: devweave - Components: skills (31 validated skills)
 ```
 
 ---
@@ -100,7 +100,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 
 ```powershell
 # Windows (PowerShell):
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .gemini\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\gemini\GEMINI.md .gemini\GEMINI.md; Copy-Item $env:TEMP\devweave\plugins\gemini\commands\* .gemini\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .gemini\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\gemini\GEMINI.md .gemini/GEMINI.md; Copy-Item $env:TEMP\devweave\plugins\gemini\commands\* .gemini\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
 ```
 
 ### Verification:
@@ -121,7 +121,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 
 ```powershell
 # Windows (PowerShell):
-git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .codex\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\codex\CODEX.md .codex\CODEX.md; Copy-Item $env:TEMP\devweave\plugins\codex\commands\* .codex\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
+git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git $env:TEMP\devweave; New-Item -ItemType Directory -Force -Path .codex\commands | Out-Null; Copy-Item $env:TEMP\devweave\plugins\codex\CODEX.md .codex/CODEX.md; Copy-Item $env:TEMP\devweave\plugins\codex\commands\* .codex\commands\; Remove-Item -Recurse -Force $env:TEMP\devweave
 ```
 
 ### Verification:
@@ -164,9 +164,7 @@ Run the update command in your AI assistant without needing to uninstall:
 
 ---
 
-## 8. Canonical Workflow Execution Across All Platforms
-
-Regardless of which AI coding host you use, the command sequence and state progression remain identical:
+## 8. Canonical Feature Workflow Across Platforms
 
 | Phase | Antigravity (`agy run`) | Claude Code (`claude /`) | GitHub Copilot (`@devweave`) | Gemini / Codex / Devin |
 |---|---|---|---|---|
@@ -181,7 +179,24 @@ Regardless of which AI coding host you use, the command sequence and state progr
 
 ---
 
-## 9. Troubleshooting & FAQ
+## 9. Modernization Workflow Across Platforms
+
+| Phase | Antigravity (`agy run`) | Description / Gate |
+|---|---|---|
+| **Modernization Init** | `agy run devweave-modernization-init` | Natural-language intent & target profile |
+| **Modernization Context**| `agy run devweave-modernization-context <ID>` | Bounded legacy slice extraction |
+| **Modernization Analyze**| `agy run devweave-modernization-analyze <ID>` | Legacy mapping & **[HARD GATE #1]** |
+| **Modernization Plan** | `agy run devweave-modernization-plan <ID>` | Implementation blueprint & **[HARD GATE #2]** |
+| **Modernization Branch** | `agy run devweave-modernization-branch <ID>` | `devweave/modernization/<ID>` sandbox branch |
+| **Modernization Implement**| `agy run devweave-modernization-implement <ID>`| Surgical target coding & test suite |
+| **Modernization Verify** | `agy run devweave-modernization-verify <ID>` | Parity verification scorecard & **[HARD GATE #3]** |
+| **Modernization PR** | `agy run devweave-modernization-pr <ID>` | Graph `MIGRATED_TO` promotion & PR package |
+| **Modernization Status** | `agy run devweave-modernization-status <ID>` | Durable state and active gate inspection |
+| **Modernization Report** | `agy run devweave-modernization-report <ID>` | Comprehensive lifecycle audit report |
+
+---
+
+## 10. Troubleshooting & FAQ
 
 ### Q1: Does DevWeave require a background server or Node runtime?
 **No.** DevWeave is 100% declarative. It executes statelessly within agent turns and stores its state directly in your Git repository under `.devweave/`.

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/modernization-state.schema.json",
+  "title": "ModernizationState",
+  "type": "object",
+  "required": ["id", "type", "currentPhase", "status", "phases", "nextSuggestedPhase", "updated_at"],
+  "properties": {
+    "id": { "type": "string" },
+    "type": { "type": "string", "enum": ["MODERNIZATION"] },
+    "currentPhase": {
+      "type": "string",
+      "enum": ["INIT", "CONTEXT", "ANALYZE", "PLAN", "BRANCH", "IMPLEMENT", "VERIFY", "PR"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["IN_PROGRESS", "WAITING_FOR_HUMAN", "APPROVED", "CHANGES_REQUESTED", "COMPLETED", "FAILED", "BLOCKED"]
+    },
+    "phases": {
+      "type": "object",
+      "required": ["INIT", "CONTEXT", "ANALYZE", "PLAN", "BRANCH", "IMPLEMENT", "VERIFY", "PR"],
+      "properties": {
+        "INIT": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"] },
+        "CONTEXT": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"] },
+        "ANALYZE": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "WAITING_APPROVAL", "APPROVED", "CHANGES_REQUESTED", "FAILED"] },
+        "PLAN": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "WAITING_APPROVAL", "APPROVED", "CHANGES_REQUESTED", "FAILED"] },
+        "BRANCH": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"] },
+        "IMPLEMENT": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"] },
+        "VERIFY": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "WAITING_APPROVAL", "APPROVED", "CHANGES_REQUESTED", "FAILED"] },
+        "PR": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"] }
+      },
+      "additionalProperties": false
+    },
+    "nextSuggestedPhase": {
+      "type": "string",
+      "enum": ["CONTEXT", "ANALYZE", "PLAN", "BRANCH", "IMPLEMENT", "VERIFY", "PR", "NONE"]
+    },
+    "humanDecisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["phase", "decision", "timestamp"],
+        "properties": {
+          "phase": { "type": "string" },
+          "decision": {
+            "type": "string",
+            "enum": ["APPROVE", "REQUEST_CHANGES", "PROVIDE_INFORMATION", "REJECT", "STOP", "RETRY"]
+          },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "actor": { "type": "string" },
+          "feedback": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "branch": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "created": { "type": "boolean" },
+        "checkedOut": { "type": "boolean" },
+        "baseCommit": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
