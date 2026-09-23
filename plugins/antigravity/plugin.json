@@ -2,6 +2,20 @@
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "devweave",
   "version": "1.0.0",
-  "description": "DevWeave AI-DLC software engineering workflow",
-  "repository": "https://github.com/paarthivnaik/DevWeave"
+  "description": "Universal AI-DLC software engineering lifecycle plugin with Graph-Based Durable Memory",
+  "author": "DevWeave Team",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/paarthivnaik/DevWeave",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paarthivnaik/DevWeave.git"
+  },
+  "keywords": [
+    "ai-dlc",
+    "software-engineering",
+    "graph-memory",
+    "spec-driven",
+    "antigravity-plugin",
+    "token-optimization"
+  ]
 }
