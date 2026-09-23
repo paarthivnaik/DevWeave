@@ -1,6 +1,6 @@
 ---
 name: devweave-pr
-description: "[Phase 7: PR] Compiles verified PR package, promotes durable domain knowledge, and enforces hard human approval gate before creating the pull request."
+description: "[Phase 7: PR] Compiles verified PR package, promotes durable domain knowledge, logs final audit.md release record, and enforces hard human approval gate before creating the pull request."
 ---
 
 # DevWeave PR Skill (`devweave-pr`)
@@ -11,6 +11,7 @@ description: "[Phase 7: PR] Compiles verified PR package, promotes durable domai
    - If `review.md` is **already available** and `CONSENSUS_APPROVED`, DevWeave ignores re-review and uses the verified artifact directly.
    - If `review.md` is **not available** or has blocking findings, DevWeave halts and instructs the developer to run `devweave-pr-review <ID>`.
 3. **Deterministic Verification**: Zero tolerance for failing tests or unverified acceptance criteria (`verification.md`).
+4. **Audit Invariance**: Record final PR creation and durable graph promotion in `.devweave/work-items/<ID>/audit.md`.
 
 ## Step-by-Step Instructions
 1. **Verify Review & Test Status**:
@@ -38,8 +39,11 @@ description: "[Phase 7: PR] Compiles verified PR package, promotes durable domai
    Verification: PASS | Tests: 100% PASS | Dual-Model Review: CONSENSUS_APPROVED
    Architect Review: APPROVED | DBA Review: APPROVED | Security: PASS
    Artifact: .devweave/work-items/<ID>/pr-description.md
+   Audit Log: .devweave/work-items/<ID>/audit.md
    
    Authorize pull request creation? [Create PR] [Request Changes] [Stop]
    ```
-5. **Update State**: Record `PR_COMPLETED` in `.devweave/work-items/<ID>/state.md`.
+5. **Update State & Audit**:
+   - Record `PR_COMPLETED` in `.devweave/work-items/<ID>/state.md`.
+   - Append final PR completion and promotion audit log to `.devweave/work-items/<ID>/audit.md`.
 6. **Terminate Execution**: Stop and wait for user instruction.

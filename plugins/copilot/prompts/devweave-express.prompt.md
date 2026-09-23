@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-express
+name: express
 description: [Express Lane - Fast Track] Runs Context -> Analyze -> Plan -> Branch -> Implement -> PR for one or more low-risk work items with batch confirmation and test gate.
 ---
 

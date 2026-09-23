@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-fix-triage
+name: fix-triage
 description: [Fix Lane - Phase 1: Triage] Rapid defect classification, reproduction sequence extraction, and initial triage ledger assembly.
 ---
 

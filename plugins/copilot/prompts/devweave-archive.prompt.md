@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-archive
+name: archive
 description: [Utility - Workspace Archive] Archives completed work-item workspace to .devweave/archive/<ID>/ post-merge while permanently preserving audit logs.
 ---
 

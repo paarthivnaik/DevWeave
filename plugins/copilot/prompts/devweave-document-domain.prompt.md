@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-document-domain
+name: document-domain
 description: [Knowledge - Domain Documentation] Captures durable, subsystem-level domain knowledge and scorecards with YAML frontmatter into .devweave/domains/<name>.md.
 ---
 

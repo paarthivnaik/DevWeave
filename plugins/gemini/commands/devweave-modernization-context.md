@@ -1,17 +1,17 @@
 ---
 name: devweave-modernization-context
-description: "[Modernization Phase 1: Context] Ingest modernization scope, build bounded migration slice from legacy source, retrieve relevant knowledge graph neighborhood, and construct focused context.md."
+description: "[Modernization Phase 1: Context] Ingest modernization scope, build bounded migration slice from legacy source, retrieve relevant knowledge graph neighborhood, and construct focused context.md and audit.md."
 ---
 
 # Gemini CLI Modernization Context Command (`gemini devweave-modernization-context`)
 
 ## Purpose
-Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md` without loading entire legacy repositories into AI memory.
+Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md` and initial `audit.md` without loading entire legacy repositories into AI memory.
 
 ---
 
 ## Inputs & Parameters
-- `<ID>`: Modernization work item ID (e.g. `MOD-001`).
+- `<ID>`: Modernization work item ID (e.g. `MOD-001`, `99`).
 
 ---
 
@@ -49,14 +49,18 @@ Construct a bounded, token-efficient migration context for the specified moderni
    - Inspect specified migration slice in legacy source (controllers, views, models, database tables, business rules).
    - Query knowledge graph for direct dependencies and bounded 1-hop / 2-hop neighbor relationships.
    - Extract only applicable technology practices matching the slice (e.g., Angular component guidelines for UI slices, CQRS/EF Core guidelines for backend slices).
-   - Initialize story directory `.devweave/modernization/<ID>/` and compile concise `context.md`, `migration-unit.json`, and `state.json` with explicit token budgeting (< 12,000 tokens).
+   - Initialize story directory `.devweave/modernization/stories/<ID>/` and compile concise `context.md`, `migration-unit.json`, and `state.json` with explicit token budgeting (< 12,000 tokens).
+6. **Story Audit Trail Initialization (`audit.md`)**:
+   - Create or append to `.devweave/modernization/stories/<ID>/audit.md`.
+   - Record initial entry: Work item ID, timestamp, PM tool source, user prompt/story details, optional instructions, and generated artifacts.
 
 ---
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 ├── state.json                  <-- Story phase tracker & hard gates
+├── audit.md                    <-- Append-only user activity, prompt & decision log
 ├── context.md                  <-- Bounded legacy slice context
 └── migration-unit.json         <-- Target legacy components
 ```
@@ -90,4 +94,4 @@ devweave-modernization-analyze <ID>
 ---
 
 ## STOP Rule
-- Upon writing `context.md` and updating state, **STOP IMMEDIATELY**.
+- Upon writing `context.md`, `audit.md`, and updating state, **STOP IMMEDIATELY**.

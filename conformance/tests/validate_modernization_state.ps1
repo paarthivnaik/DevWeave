@@ -35,6 +35,7 @@ function New-ModernizationState {
         humanDecisions = @()
         branch = [PSCustomObject]@{
             name = $null
+            baseBranch = $null
             created = $false
             checkedOut = $false
         }
@@ -298,11 +299,12 @@ $totalTests++
 $chk = Test-CanExecuteModernizationPhase -State $s -TargetPhase "BRANCH"
 if ($chk.Allowed) {
     $s.phases.BRANCH = "COMPLETED"
-    $s.branch.name = "devweave/modernization/MOD-002"
+    $s.branch.name = "feature/99-User-Registration"
+    $s.branch.baseBranch = "master"
     $s.branch.created = $true
     $s.branch.checkedOut = $true
     $s.nextSuggestedPhase = "IMPLEMENT"
-    Write-Host "  [PASS] BRANCH created ($($s.branch.name)) -> Next: IMPLEMENT" -ForegroundColor Green
+    Write-Host "  [PASS] BRANCH created ($($s.branch.name) from $($s.branch.baseBranch)) -> Next: IMPLEMENT" -ForegroundColor Green
     $passedCount++
 } else {
     Write-Host "  [FAIL] BRANCH was blocked: $($chk.Reason)" -ForegroundColor Red

@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-handoff
+name: handoff
 description: [Utility - Team Handoff] Generates a durable handoff.md package capturing decisions, test results, open issues, and implementation summaries for teammates.
 ---
 

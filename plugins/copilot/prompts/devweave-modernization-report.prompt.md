@@ -16,20 +16,20 @@ Assemble an executive and technical modernization summary report consolidating a
 ---
 
 ## Preconditions
-- Modernization workspace exists (`.devweave/modernization/<ID>/`).
+- Modernization workspace exists (`.devweave/modernization/stories/<ID>/`).
 
 ---
 
 ## Allowed Actions
 1. Read all phase artifacts (`architecture-intent.json`, `technology-profile.json`, `context.md`, `analysis.md`, `mappings.json`, `plan.md`, `verification.md`, `state.json`).
 2. Synthesize comprehensive markdown report.
-3. Save report to `.devweave/modernization/<ID>/report.md`.
+3. Save report to `.devweave/modernization/stories/<ID>/report.md`.
 
 ---
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 └── report.md
 ```
 
