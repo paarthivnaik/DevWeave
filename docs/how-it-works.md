@@ -9,19 +9,16 @@ This document provides a deep, pin-to-pin architectural explanation of how DevWe
 ## 📑 Table of Contents
 1. [The Problem: The Chaos of Unstructured AI Coding](#1-the-problem-the-chaos-of-unstructured-ai-coding)
 2. [The Solution: Declarative AI-DLC Architecture](#2-the-solution-declarative-ai-dlc-architecture)
-3. [The Declarative State Machine (`.devweave/state/current.json`)](#3-the-declarative-state-machine)
-4. [Phase-by-Phase Internal Mechanics](#4-phase-by-phase-internal-mechanics)
-   - [Phase 0: 5-Layer Autonomous Discovery & Pin-to-Pin Mapping](#phase-0-5-layer-autonomous-discovery)
-   - [Phase 1: Work Item Intake, PII Sanitizer & Blast Radius Scoping](#phase-1-intake-pii-gate--blast-radius)
-   - [Phase 2 & 3: Architectural Archaeology & Atomic Task Breakdown](#phase-2--3-archaeology--planning)
-   - [Phase 4 & 5: Branch Gate & Plan-Bound Implementation](#phase-4--5-branch-gate--implementation)
-   - [Phase 6: Dual-Model Consensus Review (5 Specialized Lenses)](#phase-6-dual-model-consensus-review)
-   - [Phase 7: PR Assembly & Compounding Knowledge Promotion](#phase-7-pr-assembly--knowledge-promotion)
-5. [Stage-Based Model Routing Engine](#5-stage-based-model-routing-engine)
-6. [Dynamic Technology Revalidation Engine](#6-dynamic-technology-revalidation-engine)
-7. [Durable Knowledge Caching (Why 0-Token Rediscovery Works)](#7-durable-knowledge-caching)
-8. [Automated Daily Sync Engine (24-Hour TTL)](#8-automated-daily-sync-engine)
-9. [Empirical Performance & Cost Benchmarks](#9-empirical-performance--cost-benchmarks)
+3. [Universal Interaction Rules](#3-universal-interaction-rules)
+4. [The Declarative State Machine (`.devweave/state/current.json`)](#4-the-declarative-state-machine)
+5. [Phase-by-Phase Internal Mechanics](#5-phase-by-phase-internal-mechanics)
+6. [Test Intelligence Engine](#6-test-intelligence-engine)
+7. [V1.1 Modernization Architecture & Mechanics](#7-v11-modernization-architecture--mechanics)
+8. [Stage-Based Model Routing Engine](#8-stage-based-model-routing-engine)
+9. [Dynamic Technology Revalidation Engine](#9-dynamic-technology-revalidation-engine)
+10. [Durable Knowledge Caching (Why 0-Token Rediscovery Works)](#10-durable-knowledge-caching)
+11. [Automated Daily Sync Engine (24-Hour TTL)](#11-automated-daily-sync-engine)
+12. [Empirical Performance & Cost Benchmarks](#12-empirical-performance--cost-benchmarks)
 
 ---
 
@@ -64,9 +61,21 @@ flowchart LR
 
 ---
 
-## 3. The Declarative State Machine
+## 3. Universal Interaction Rules
 
-All DevWeave state is stored transparently in your Git repository under `.devweave/state/current.json`. There are **zero background servers or runtime daemons**.
+DevWeave operates under two invariant principles for every interaction:
+
+1. **Mandatory Description Prompting (Optional Input)**:
+   - Before executing any phase, DevWeave must prompt the user: *"Do you have any additional description, architectural constraints, or specific instructions for this phase?"*
+   - Providing input is optional; if the user provides none, DevWeave continues with standard defaults.
+2. **Pre-Processing Transparency ("State Intent Before Action")**:
+   - Before inspecting or modifying files, running builds, or executing tests, DevWeave explicitly declares its planned actions, target files, and objectives.
+
+---
+
+## 4. The Declarative State Machine
+
+All DevWeave state is stored transparently in your Git repository under `.devweave/state/current.json` (for standard tasks) and `.devweave/modernization/<ID>/state.json` (for modernization tasks). There are **zero background servers or runtime daemons**.
 
 ```json
 {
@@ -96,7 +105,7 @@ All DevWeave state is stored transparently in your Git repository under `.devwea
 
 ---
 
-## 4. Phase-by-Phase Internal Mechanics
+## 5. Phase-by-Phase Internal Mechanics
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -107,7 +116,7 @@ All DevWeave state is stored transparently in your Git repository under `.devwea
   [Phase 2: ANALYZE]       ──► Maps blast radius ──► Checks DB schema & API interface contracts
   [Phase 3: PLAN]          ──► Decomposes atomic tasks ──► Anchors exact file lines & test commands
   [Phase 4: BRANCH GATE]   ──► Validates git branch ──► Blocks direct writes to main/master
-  [Phase 5: IMPLEMENT]     ──► Executes plan-bound edits ──► Runs tests ──► Captures proof
+  [Phase 5: IMPLEMENT]     ──► Executes plan-bound edits ──► Runs Test Intelligence ──► Captures proof
   [Phase 6: REVIEW GATE]   ──► Dual-Model consensus (Architect + DBA + Security) ──► Human sign-off
   [Phase 7: PR READY]      ──► Assembles PR ──► Promotes durable knowledge to .devweave/knowledge/
 ```
@@ -156,7 +165,35 @@ Before any PR can be opened, DevWeave runs a rigorous multi-perspective review a
 
 ---
 
-## 5. Stage-Based Model Routing Engine
+## 6. Test Intelligence Engine
+
+The **Test Intelligence Engine** enforces strict quality and test governance during `IMPLEMENT` and `VERIFY`:
+
+1. **Atomic Changesets**: Production code modifications and test modifications are authored and committed together in a single atomic changeset.
+2. **Deterministic Failure Classification**:
+   - `IMPLEMENTATION_DEFECT`: Failure in newly written code &rarr; fix production code.
+   - `EXPECTED_BEHAVIOR_CHANGE`: Requirements deliberately evolved &rarr; update test assertion with explicit justification.
+   - `UNRELATED_REGRESSION`: Pre-existing or collateral failure outside scope &rarr; preserve failure, block PR progression.
+3. **Zero Test Weakening**: Deleting test cases, disabling assertions, removing `@Test` annotations, or catching exceptions silently is strictly prohibited.
+4. **E2E Framework Discovery**: Resolves existing project test frameworks (Playwright, Cypress, Jest, xUnit) without blindly injecting new test libraries.
+
+---
+
+## 7. V1.1 Modernization Architecture & Mechanics
+
+The Modernization engine enables safe, automated migration of legacy systems:
+
+1. **Zero Questionnaire Initialization**: Accepts architectural intent in natural language and autonomously inspects the target repository structure (`architecture-intent.json`, `technology-profile.json`).
+2. **Legacy Source Read-Only Invariance**: Legacy source repositories are referenced strictly as `READ_ONLY` in `source-memory.json`.
+3. **3 Mandatory Human Hard Gates**:
+   - **Hard Gate #1 (Post-ANALYZE)**: Explicit human `APPROVE` on `mappings.json`.
+   - **Hard Gate #2 (Post-PLAN)**: Explicit human `APPROVE` on `plan.md` and test specifications.
+   - **Hard Gate #3 (Post-VERIFY)**: Explicit human `APPROVE` on `verification.md` and parity scorecard.
+4. **Knowledge Graph Migration Tracking**: Automatically generates `MIGRATED_TO` edges connecting legacy components to target modernized components.
+
+---
+
+## 8. Stage-Based Model Routing Engine
 
 DevWeave optimizes cost and latency by routing tasks to calibrated model capabilities:
 
@@ -170,7 +207,7 @@ DevWeave optimizes cost and latency by routing tasks to calibrated model capabil
 
 ---
 
-## 6. Dynamic Technology Revalidation Engine
+## 9. Dynamic Technology Revalidation Engine
 
 When a dependency is upgraded (e.g., `.NET 8` &rarr; `.NET 9`, `Java 17` &rarr; `Java 21`, `React 18` &rarr; `19`), DevWeave avoids stale instructions:
 
@@ -189,7 +226,7 @@ When a dependency is upgraded (e.g., `.NET 8` &rarr; `.NET 9`, `Java 17` &rarr; 
 
 ---
 
-## 7. Durable Knowledge Caching (Why 0-Token Rediscovery Works)
+## 10. Durable Knowledge Caching (Why 0-Token Rediscovery Works)
 
 Standard AI agents waste 80,000+ tokens re-analyzing repositories on every prompt. DevWeave persists intelligence across turns:
 
@@ -207,7 +244,7 @@ On subsequent tasks in the same repository:
 
 ---
 
-## 8. Automated Daily Sync Engine (24-Hour TTL)
+## 11. Automated Daily Sync Engine (24-Hour TTL)
 
 To eliminate manual plugin maintenance:
 1. **Daily First Session**: When a developer opens their IDE in the morning, DevWeave checks remote GitHub `HEAD` via a 2-second non-blocking socket check.
@@ -217,7 +254,7 @@ To eliminate manual plugin maintenance:
 
 ---
 
-## 9. Empirical Performance & Cost Benchmarks
+## 12. Empirical Performance & Cost Benchmarks
 
 From the automated benchmark suite (`conformance/tests/token_benchmark.ps1`):
 

@@ -1,5 +1,5 @@
 ﻿---
-name: devweave-status
+name: status
 description: [Utility - Lifecycle Status] Inspects current work-item lifecycle phase, completed artifacts, open governance gates, and suggests the next valid phase.
 ---
 
@@ -13,14 +13,14 @@ description: [Utility - Lifecycle Status] Inspects current work-item lifecycle p
 2. Output clear status board:
    ```text
    DevWeave Status: <WORK_ITEM_ID>
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   ──────────────────────────────────
    [Phase Status Board]
-   âœ“ CONTEXT
-   âœ“ ANALYZE
-   âœ“ PLAN
-   âœ“ BRANCH
-   â—‹ IMPLEMENT (Ready)
-   â—‹ PR (Pending)
+   ✓ CONTEXT
+   ✓ ANALYZE
+   ✓ PLAN
+   ✓ BRANCH
+   ○ IMPLEMENT (Ready)
+   ○ PR (Pending)
 
    Current State: READY_FOR_IMPLEMENT
    Suggested Next Phase: IMPLEMENT

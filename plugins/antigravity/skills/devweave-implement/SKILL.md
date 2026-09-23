@@ -1,6 +1,6 @@
 ---
 name: devweave-implement
-description: "[Phase 5: Implement] Executes surgical, plan-bound code modifications adhering to stack-aware naming conventions and coding standards, runs automated tests, and captures execution evidence."
+description: "[Phase 5: Implement] Executes surgical, plan-bound code modifications adhering to stack-aware naming conventions and coding standards, runs automated tests, captures execution evidence, and updates audit.md."
 ---
 
 # DevWeave Implement Skill (`devweave-implement`)
@@ -9,6 +9,7 @@ description: "[Phase 5: Implement] Executes surgical, plan-bound code modificati
 1. **Plan-Bound Modifications**: Modify ONLY files and symbols explicitly declared in `plan.md`.
 2. **Stack-Aware Standards**: Strictly adhere to the detected ecosystem's naming conventions, typing rules, and coding standards recorded in `.devweave/repository/practices.md` and `.editorconfig`.
 3. **Scope Deviation Halt**: If unexpected conflicts invalidate the plan, stop and recommend returning to `ANALYZE`/`PLAN`. Do NOT silently expand scope.
+4. **Audit Invariance**: Record all modified files, test outputs, and developer prompts to `.devweave/work-items/<ID>/audit.md`.
 
 ## Step-by-Step Instructions
 1. **Load Approved Plan & Stack Standards**: Read `plan.md` tasks, acceptance checks, and `.devweave/repository/practices.md`.
@@ -18,13 +19,16 @@ description: "[Phase 5: Implement] Executes surgical, plan-bound code modificati
    - Extract newly introduced/modified symbols, dependencies, and database schemas.
    - Write task graph patch to `.devweave/work-items/<ID>/graph-delta.json`.
    - Write test outcomes to `.devweave/work-items/<ID>/test-results.json`.
-5. **Update State**: Record `IMPLEMENT` status in `.devweave/work-items/<ID>/state.md`.
+5. **Update State & Audit**:
+   - Record `IMPLEMENT` status in `.devweave/work-items/<ID>/state.md`.
+   - Append code change summary, modified file list, test results, and timestamp to `.devweave/work-items/<ID>/audit.md`.
 6. **Human Checkpoint**: Output:
    ```text
    IMPLEMENTATION COMPLETE
    Work Item: <ID>
    Files Modified: <list>
    Graph Delta: Generated (.devweave/work-items/<ID>/graph-delta.json)
+   Audit Log: Updated (.devweave/work-items/<ID>/audit.md)
    Standards Adherence: VERIFIED (Stack Conventions Checked)
    Tests: <X passed, 0 failed>
    

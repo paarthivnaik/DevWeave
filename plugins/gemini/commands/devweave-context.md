@@ -3,7 +3,7 @@ name: devweave-context
 description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, Azure DevOps, GitHub, Linear, Manual) with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md."
 ---
 
-# DevWeave Context Skill (`devweave-context`)
+# Gemini CLI Context Command (`gemini devweave-context`)
 
 ## Execution Invariants
 1. **Single-Phase Execution**: Execute ONLY the CONTEXT phase. Do NOT automatically advance to ANALYZE.
@@ -29,23 +29,29 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
   [Confirm & Proceed] [Cancel]
   ```
 
-### Step 2: PM Tool Selection & Work Item Retrieval
-- Present Project Management source selector:
-  ```text
-  [DevWeave Context Intake]
-  Work Item: <ID>
+### Step 2: PM Tool Selection, Persistence & Work Item Retrieval
+- **Check Persisted PM Source**:
+  - Read `pmSource` from `.devweave/workspace.json`.
+  - If `pmSource` is not yet configured (First-Time Run) or `--reconfigure` / `--pm-source <source>` is provided:
+    - Present Project Management source selector:
+      ```text
+      [Antigravity Context Intake]
+      Work Item: <ID>
 
-  Select Project Management Source:
-    [1] Atlassian Jira (Jira MCP / API)
-    [2] Azure DevOps Boards (ADO MCP / API)
-    [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
-    [4] Linear (Linear MCP)
-    [5] Manual Paste / Offline Markdown Input
+      Select Project Management Source:
+        [1] Atlassian Jira (Jira MCP / API)
+        [2] Azure DevOps Boards (ADO MCP / API)
+        [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
+        [4] Linear (Linear MCP)
+        [5] Manual Paste / Offline Markdown Input
 
-  Selection: [1 | 2 | 3 | 4 | 5]
-  ```
-- If Options **[1â€“4]** selected: Query connected PM MCP tool and fetch ticket metadata.
-- If Option **[5]** selected: Provide a structured Markdown template for the developer to paste ticket details.
+      Selection: [1 | 2 | 3 | 4 | 5]
+      ```
+    - Persist selected `pmSource` into `.devweave/workspace.json`.
+  - **Subsequent Invocations**:
+    - If `pmSource` is configured for an MCP tool (`jira`, `ado`, `github`, `linear`) and the MCP server is active, automatically connect and fetch ticket `<ID>` without prompting.
+    - If MCP connection is unavailable or `pmSource` is `manual`, prompt the developer with the structured Markdown template to paste ticket details.
+  - **Mid-Stream Setup**: The user can set up or change MCP tools at any time via `--pm-source <source>` or by configuring an MCP server in the host environment.
 - Classify work item type: `BUG` vs `FEATURE` (Story/Task/Epic).
 - For **Features**: Extract acceptance criteria, parent Epic, sibling stories, and Figma design references.
 - For **Bugs**: Extract environment, reproduction sequence, error logs, and runtime stack traces.
@@ -79,9 +85,9 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 
   Human Decision: [Approve Context] [Request Changes] [Provide Info] [Stop]
   Suggested Next Phase: ANALYZE
-  Run: devweave-analyze <ID>
+  Run: gemini devweave-analyze <ID>
 
-  DevWeave is waiting for your instruction.
+  Antigravity is waiting for your instruction.
   ```
 
 ### Step 6: Terminate Execution

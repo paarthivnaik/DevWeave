@@ -10,41 +10,67 @@ DevWeave provides **risk-calibrated workflow profiles** and **specialized execut
 flowchart TD
     subgraph LANES["DevWeave Execution Lanes"]
         direction TB
-        L1["<b>Canonical 6-Phase Flow</b><br>Feature, Refactor, Security, Database, High-Risk"]
-        L2["<b>Fix Fast Lane</b><br>Triage -> Diagnose -> Land"]
-        L3["<b>Modernization Lane</b><br>Analyze -> Plan (Migration Manifest) -> Implement -> Verify"]
+        L1["<b>Canonical 7-Phase Flow</b><br>Feature, Refactor, Security, Database, High-Risk"]
+        L2["<b>V1.1 Modernization Pipeline (8 Phases)</b><br>Init -> Context -> Analyze [G1] -> Plan [G2] -> Branch -> Implement -> Verify [G3] -> PR"]
+        L3["<b>Fix Fast Lane</b><br>Triage -> Diagnose -> Land [GATE]"]
         L4["<b>Express Mode</b><br>Low-Risk / Docs / Typos (Unified Flow)"]
     end
 ```
 
 ---
 
-## 2. Canonical 6-Phase User Workflow
+## 2. Canonical 7-Phase User Workflow
 
 The standard pathway for net-new features, complex refactoring, and multi-file architecture changes:
 
 ```mermaid
 flowchart LR
-    P1["1. CONTEXT<br><code>devweave-context</code>"] --> P2["2. ANALYZE<br><code>devweave-analyze</code>"]
+    P0["0. INIT<br><code>devweave-init</code>"] --> P1["1. CONTEXT<br><code>devweave-context</code>"]
+    P1 --> P2["2. ANALYZE<br><code>devweave-analyze</code>"]
     P2 --> P3["3. PLAN<br><code>devweave-plan</code>"]
     P3 --> P4["4. BRANCH<br><code>devweave-branch</code><br><b>[HARD GATE]</b>"]
     P4 --> P5["5. IMPLEMENT<br><code>devweave-implement</code>"]
-    P5 --> P6["6. PR<br><code>devweave-pr</code><br><b>[HARD GATE]</b>"]
+    P5 --> P6["6. REVIEW<br><code>devweave-pr-review</code><br><b>[HARD GATE]</b>"]
+    P6 --> P7["7. PR<br><code>devweave-pr</code><br><b>[HARD GATE]</b>"]
 ```
 
 ### Phase Summary:
-1. **`devweave-context <ID>`**: Work item intake, PII/Privacy gating, blast-radius scoping, durable resume detection (`handoff.md`).
-2. **`devweave-analyze <ID>`**: Deep architectural exploration, root-cause investigation, and technology revalidation.
-3. **`devweave-plan <ID>`**: Precise, verifiable implementation plan with exact file anchors and test criteria.
-4. **`devweave-branch <ID>`**: Mandatory branch checkpoint (`feature/<ID>`, `refactor/<ID>`).
-5. **`devweave-implement <ID>`**: Surgical code modifications and automated test verification.
-6. **`devweave-pr <ID>`**: Final compliance check, multi-perspective code review, durable domain knowledge promotion, and PR assembly.
+1. **`devweave-init`**: 5-layer tech stack detection and knowledge graph synthesis.
+2. **`devweave-context <ID>`**: Work item intake, PII/Privacy gating, blast-radius scoping, durable resume detection (`handoff.md`).
+3. **`devweave-analyze <ID>`**: Deep architectural exploration, root-cause investigation, and technology revalidation.
+4. **`devweave-plan <ID>`**: Precise, verifiable implementation plan with exact file anchors and test criteria.
+5. **`devweave-branch <ID>`**: Mandatory branch checkpoint (`feature/<ID>`, `refactor/<ID>`).
+6. **`devweave-implement <ID>`**: Surgical code modifications with Test Intelligence and automated test execution.
+7. **`devweave-pr-review <ID>`**: Dual-model consensus review (Principal Architect + Senior DBA + Security).
+8. **`devweave-pr <ID>`**: Final compliance check, durable domain knowledge promotion, and PR assembly.
 
 ---
 
-## 3. Specialized Fast Lanes
+## 3. Specialized Fast Lanes & Modernization Pipeline
 
-### A. Fix Lane (Bug Triage & Rapid Remediation)
+### A. V1.1 Modernization Pipeline (Legacy Monolith Migration)
+
+Tailored for migrating legacy stacks (e.g., monolith to microservices, framework upgrades, language migrations) with zero regressions:
+
+```mermaid
+flowchart LR
+    M0["0. M-INIT<br><code>devweave-modernization-init</code>"] --> M1["1. M-CONTEXT<br><code>devweave-modernization-context &lt;ID&gt;</code>"]
+    M1 --> M2["2. M-ANALYZE<br><code>devweave-modernization-analyze &lt;ID&gt;</code><br><b>[HARD GATE #1]</b>"]
+    M2 --> M3["3. M-PLAN<br><code>devweave-modernization-plan &lt;ID&gt;</code><br><b>[HARD GATE #2]</b>"]
+    M3 --> M4["4. M-BRANCH<br><code>devweave-modernization-branch &lt;ID&gt;</code>"]
+    M4 --> M5["5. M-IMPLEMENT<br><code>devweave-modernization-implement &lt;ID&gt;</code>"]
+    M5 --> M6["6. M-VERIFY<br><code>devweave-modernization-verify &lt;ID&gt;</code><br><b>[HARD GATE #3]</b>"]
+    M6 --> M7["7. M-PR<br><code>devweave-modernization-pr &lt;ID&gt;</code>"]
+```
+
+#### The 3 Mandatory Modernization Hard Gates:
+- **Hard Gate #1 (Post-ANALYZE)**: Human signs off on legacy behavioral mapping (`mappings.json`).
+- **Hard Gate #2 (Post-PLAN)**: Human signs off on implementation blueprint, test specs, and DB migration scripts.
+- **Hard Gate #3 (Post-VERIFY)**: Human signs off on dual verification scorecard and parity checks.
+
+---
+
+### B. Fix Lane (Bug Triage & Rapid Remediation)
 
 Designed for accelerated bug fixes with deterministic root-cause diagnosis:
 
@@ -62,29 +88,6 @@ flowchart LR
 
 ---
 
-### B. Modernization Lane (Legacy Migration & Upgrades)
-
-Tailored for migrating legacy stacks (e.g., monolith to microservices, framework upgrades, language migrations):
-
-```mermaid
-flowchart TD
-    M1["1. Migration Scope & Context<br><code>devweave-context &lt;ID&gt;</code>"] --> M2["2. Legacy Source & Target Architecture Analysis<br><code>devweave-analyze &lt;ID&gt;</code>"]
-    M2 --> M3["3. Migration Manifest Planning<br><code>devweave-modernize &lt;ID&gt;</code><br><i>Generates migration_manifest.md</i>"]
-    M3 --> M4["4. Isolated Branch Creation<br><code>devweave-branch &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
-    M4 --> M5["5. Incremental Modernization Implementation<br><code>devweave-implement &lt;ID&gt;</code>"]
-    M5 --> M6["6. Parity Verification & PR<br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
-```
-
-#### Key Modernization Artifact: `migration_manifest.md`
-Contains:
-- Source component contract & legacy behavior definition.
-- Target component architecture & pattern alignment.
-- API & schema translation mapping.
-- Feature parity verification matrix.
-- Rollback & coexistence strategy.
-
----
-
 ### C. Express Mode (Low-Risk Fast Track)
 
 For typos, documentation updates, configuration tweaks, or single-line trivial fixes:
@@ -96,7 +99,7 @@ flowchart LR
 ```
 
 - **Execution**: Single autonomous command verifying safety thresholds.
-- **Safety Guard**: Halts immediately and escalates to the canonical 6-phase flow if blast radius exceeds 3 files or touches core business logic.
+- **Safety Guard**: Halts immediately and escalates to the canonical flow if blast radius exceeds 3 files or touches core business logic.
 
 ---
 
@@ -106,12 +109,12 @@ flowchart LR
 |---|---|---|---|---|
 | **`EXPRESS`** | Typos, doc fixes, comments, trivial config | `CONTEXT` $\to$ `IMPLEMENT` $\to$ `VERIFY` $\to$ `PR` | Pre-PR | Low |
 | **`BUG`** | Production defects, test failures, regressions | `TRIAGE` $\to$ `DIAGNOSE` $\to$ `PLAN` $\to$ `IMPLEMENT` $\to$ `LAND` | Diagnose, Land | Medium |
-| **`FEATURE`** | Net-new business capabilities, user stories | `CONTEXT` $\to$ `ANALYZE` $\to$ `PLAN` $\to$ `BRANCH` $\to$ `IMPLEMENT` $\to$ `PR` | Context, Analyze, Plan, Branch, PR | Medium-High |
-| **`REFACTOR`** | Code cleanup, performance tuning, architecture decoupling | `CONTEXT` $\to$ `BASELINE_TEST` $\to$ `ANALYZE` $\to$ `PLAN` $\to$ `IMPLEMENT` $\to$ `VERIFY` $\to$ `PR` | Plan, Branch, PR | Medium-High |
-| **`MODERNIZATION`** | Framework migrations, runtime upgrades, monolith extraction | `CONTEXT` $\to$ `ANALYZE` $\to$ `MODERNIZE_MANIFEST` $\to$ `BRANCH` $\to$ `IMPLEMENT` $\to$ `PR` | Analysis, Manifest, Branch, PR | High |
-| **`SECURITY`** | CVE remediation, auth/authz fixes, crypto upgrades | `CONTEXT` $\to$ `THREAT_MODEL` $\to$ `PLAN` $\to$ `BRANCH` $\to$ `IMPLEMENT` $\to$ `SEC_SCAN` $\to$ `PR` | Threat Model, Plan, PR | Critical |
-| **`DATABASE`** | Schema migrations, index tuning, ORM updates | `CONTEXT` $\to$ `SCHEMA_INSPECT` $\to$ `MIGRATION_PLAN` $\to$ `DRY_RUN` $\to$ `IMPLEMENT` $\to$ `PR` | Migration Plan, Dry Run, PR | High |
-| **`HIGH_RISK`** | Core financial logic, PII pipelines, kernel modules | `CONTEXT` $\to$ `DEEP_DISCOVERY` $\to$ `MULTI_PLAN` $\to$ `PANEL_APPROVAL` $\to$ `IMPLEMENT` $\to$ `PR` | All Phases Mandatory | Critical |
+| **`FEATURE`** | Net-new business capabilities, user stories | `INIT` $\to$ `CONTEXT` $\to$ `ANALYZE` $\to$ `PLAN` $\to$ `BRANCH` $\to$ `IMPLEMENT` $\to$ `REVIEW` $\to$ `PR` | Branch, Review, PR | Medium-High |
+| **`REFACTOR`** | Code cleanup, performance tuning, architecture decoupling | `CONTEXT` $\to$ `BASELINE_TEST` $\to$ `ANALYZE` $\to$ `PLAN` $\to$ `BRANCH` $\to$ `IMPLEMENT` $\to$ `REVIEW` $\to$ `PR` | Branch, Review, PR | Medium-High |
+| **`MODERNIZATION`** | Framework migrations, runtime upgrades, monolith extraction | `M-INIT` $\to$ `M-CONTEXT` $\to$ `M-ANALYZE` $\to$ `M-PLAN` $\to$ `M-BRANCH` $\to$ `M-IMPLEMENT` $\to$ `M-VERIFY` $\to$ `M-PR` | Analyze (G1), Plan (G2), Verify (G3) | High |
+| **`SECURITY`** | CVE remediation, auth/authz fixes, crypto upgrades | `CONTEXT` $\to$ `THREAT_MODEL` $\to$ `PLAN` $\to$ `BRANCH` $\to$ `IMPLEMENT` $\to$ `SEC_SCAN` $\to$ `REVIEW` $\to$ `PR` | Threat Model, Plan, Review, PR | Critical |
+| **`DATABASE`** | Schema migrations, index tuning, ORM updates | `CONTEXT` $\to$ `SCHEMA_INSPECT` $\to$ `MIGRATION_PLAN` $\to$ `DRY_RUN` $\to$ `IMPLEMENT` $\to$ `REVIEW` $\to$ `PR` | Migration Plan, Dry Run, Review, PR | High |
+| **`HIGH_RISK`** | Core financial logic, PII pipelines, kernel modules | `CONTEXT` $\to$ `DEEP_DISCOVERY` $\to$ `MULTI_PLAN` $\to$ `PANEL_APPROVAL` $\to$ `IMPLEMENT` $\to$ `REVIEW` $\to$ `PR` | All Phases Mandatory | Critical |
 
 ---
 
