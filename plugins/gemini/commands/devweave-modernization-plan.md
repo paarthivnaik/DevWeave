@@ -31,7 +31,7 @@ Construct a deterministic, file-level implementation plan that maps target files
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 └── plan.md
 ```
 

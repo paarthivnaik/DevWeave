@@ -36,7 +36,7 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 └── verification.md
 ```
 

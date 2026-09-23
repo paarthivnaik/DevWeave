@@ -31,7 +31,7 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 ├── analysis.md
 └── mappings.json
 ```

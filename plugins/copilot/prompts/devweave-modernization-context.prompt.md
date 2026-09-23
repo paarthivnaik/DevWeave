@@ -49,13 +49,13 @@ Construct a bounded, token-efficient migration context for the specified moderni
    - Inspect specified migration slice in legacy source (controllers, views, models, database tables, business rules).
    - Query knowledge graph for direct dependencies and bounded 1-hop / 2-hop neighbor relationships.
    - Extract only applicable technology practices matching the slice (e.g., Angular component guidelines for UI slices, CQRS/EF Core guidelines for backend slices).
-   - Initialize story directory `.devweave/modernization/<ID>/` and compile concise `context.md`, `migration-unit.json`, and `state.json` with explicit token budgeting (< 12,000 tokens).
+   - Initialize story directory `.devweave/modernization/stories/<ID>/` and compile concise `context.md`, `migration-unit.json`, and `state.json` with explicit token budgeting (< 12,000 tokens).
 
 ---
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 ├── state.json                  <-- Story phase tracker & hard gates
 ├── context.md                  <-- Bounded legacy slice context
 └── migration-unit.json         <-- Target legacy components

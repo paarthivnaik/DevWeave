@@ -36,7 +36,7 @@ Compile the complete modernization release package, reconcile migration deltas i
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/<ID>/
+.devweave/modernization/stories/<ID>/
 ├── report.md
 └── pr-description.md
 ```

@@ -31,7 +31,7 @@ Safely establish an isolated Git branch (e.g., `devweave/modernization/<ID>`) in
 ---
 
 ## Artifacts Generated
-- Branch creation recorded in `.devweave/modernization/<ID>/state.json`.
+- Branch creation recorded in `.devweave/modernization/stories/<ID>/state.json`.
 
 ---
 

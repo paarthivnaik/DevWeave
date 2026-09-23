@@ -13,7 +13,7 @@ When the `devweave` plugin is active, follow the declarative AI-DLC software eng
 8. **Pre-Processing Transparency**: Before executing any phase processing, the agent must clearly state what it is about to do, which files/areas it will inspect or modify, and the exact objective of the action.
 
 ## 2. V1.1 Modernization Lifecycle Rules
-1. **Modernization State Awareness**: Check `.devweave/modernization/<ID>/state.json` before performing modernization operations.
+1. **Modernization State Awareness**: Check `.devweave/modernization/stories/<ID>/state.json` before performing modernization operations.
 2. **Mandatory Hyphenated CLI Contract**: All modernization commands MUST use the hyphenated prefix `devweave-modernization-<phase>` (`init`, `context`, `analyze`, `plan`, `branch`, `implement`, `verify`, `pr`, `status`, `report`). Space-separated subcommands or colon prefixes are strictly prohibited.
 3. **Human-in-the-Loop Hard Gates**: Strictly observe the 3 mandatory human checkpoints:
    - **Hard Gate #1 (Post-ANALYZE)**: Requires explicit `APPROVE` before planning.
@@ -24,4 +24,4 @@ When the `devweave` plugin is active, follow the declarative AI-DLC software eng
 6. **Zero Fact Fabrication**: For new or empty target repositories, unobserved facts must remain `UNKNOWN` and unspecified decisions marked `AI_DETERMINED`.
 7. **Technology Practice Intelligence**: Retrieve and enforce stack-aware practices (CQRS, SOLID, Clean Code, Security, DB indexing) matching the target technology profile.
 8. **Mandatory Legacy Source Checkpoint (Blocking)**: In `devweave-modernization-init`, if `--source <path>` is not explicitly provided on the CLI, the agent **MUST NOT** proceed or generate `source-memory.json`. The agent **MUST IMMEDIATELY STOP AND ASK** the developer for the legacy repository path before inspecting or writing any files. Never default to the current directory without user confirmation.
-9. **Zero State in INIT**: `devweave-modernization-init` writes ONLY static declarative project configuration (`workspace.json`, `architecture-intent.json`, `technology-profile.json`, `source-memory.json`). Lifecycle state tracking (`state.json`) is maintained strictly per-story under `.devweave/modernization/<ID>/state.json`.
+9. **Zero State in INIT**: `devweave-modernization-init` writes ONLY static declarative project configuration (`workspace.json`, `architecture-intent.json`, `technology-profile.json`, `source-memory.json`). Lifecycle state tracking (`state.json`) is maintained strictly per-story under `.devweave/modernization/stories/<ID>/state.json`.

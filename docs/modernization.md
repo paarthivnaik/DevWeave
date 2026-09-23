@@ -75,10 +75,9 @@ DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchic
 │   ├── workspace.json              <-- Target solution metadata & PM tool preference
 │   ├── architecture-intent.json    <-- Declared target architecture (e.g. Angular 22, CQRS, SQLite)
 │   ├── technology-profile.json     <-- Combined engineering practices (SOLID, Clean Code, CQRS)
-│   ├── source-memory.json          <-- Legacy repository pointer (READ_ONLY access mode)
-│   └── state.json                  <-- Central modernization project registry
+│   └── source-memory.json          <-- Legacy repository pointer (READ_ONLY access mode)
 │
-└── [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created per work item via devweave-modernization-context <ID>)
+└── stories/                        <-- [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created via devweave-modernization-context <ID>)
     ├── 98/                         <-- Story #98 (e.g. User Login)
     │   ├── state.json              <-- Story lifecycle phase & hard gate tracker
     │   ├── context.md              <-- Bounded legacy slice context
