@@ -18,7 +18,11 @@ $tests = @(
     @{ Name = "18 Conformance Scenarios Suite"; Script = "conformance/tests/run_scenarios.ps1" },
     @{ Name = "12-Ecosystem Technology Neutrality Suite"; Script = "conformance/tests/validate_tech_neutrality.ps1" },
     @{ Name = "Multi-Repository .devweave Initialization Suite"; Script = "conformance/tests/init_all_fixtures.ps1" },
-    @{ Name = "Token & Cost Efficiency Benchmark Suite"; Script = "conformance/tests/measure_efficiency.ps1" }
+    @{ Name = "Token & Cost Efficiency Benchmark Suite"; Script = "conformance/tests/measure_efficiency.ps1" },
+    @{ Name = "V1.1 Modernization CLI Contract Suite"; Script = "conformance/tests/validate_modernization_cli.ps1" },
+    @{ Name = "V1.1 Modernization State Machine Suite"; Script = "conformance/tests/validate_modernization_state.ps1" },
+    @{ Name = "V1.1 Modernization Modules & E2E Suite"; Script = "conformance/tests/validate_modernization_e2e.ps1" },
+    @{ Name = "V1.0/V1.1 Test Intelligence Suite"; Script = "conformance/tests/validate_test_intelligence.ps1" }
 )
 
 $suiteResults = @()

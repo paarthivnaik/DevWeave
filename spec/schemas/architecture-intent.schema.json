@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/architecture-intent.schema.json",
+  "title": "ArchitectureIntent",
+  "type": "object",
+  "required": ["modernizationId", "frontend", "backend", "database", "implementationPolicy", "evidenceState", "updated_at"],
+  "properties": {
+    "modernizationId": { "type": "string" },
+    "userDeclaration": { "type": "string" },
+    "frontend": {
+      "type": "object",
+      "required": ["technology", "source"],
+      "properties": {
+        "technology": { "type": "string" },
+        "ui": { "type": "string" },
+        "version": { "type": "string" },
+        "source": {
+          "type": "string",
+          "enum": ["USER_DECLARED", "OBSERVED", "INFERRED", "AI_PROPOSED", "UNKNOWN", "DECIDED"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "backend": {
+      "type": "object",
+      "required": ["architecture", "source"],
+      "properties": {
+        "architecture": { "type": "string" },
+        "pattern": { "type": "string" },
+        "framework": { "type": "string" },
+        "version": { "type": "string" },
+        "source": {
+          "type": "string",
+          "enum": ["USER_DECLARED", "OBSERVED", "INFERRED", "AI_PROPOSED", "UNKNOWN", "DECIDED"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "database": {
+      "type": "object",
+      "required": ["technology", "source"],
+      "properties": {
+        "technology": { "type": "string" },
+        "version": { "type": "string" },
+        "pattern": { "type": "string" },
+        "source": {
+          "type": "string",
+          "enum": ["USER_DECLARED", "OBSERVED", "INFERRED", "AI_PROPOSED", "UNKNOWN", "DECIDED"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "implementationPolicy": {
+      "type": "object",
+      "required": ["unspecifiedDetails"],
+      "properties": {
+        "unspecifiedDetails": {
+          "type": "string",
+          "enum": ["AI_DETERMINED", "HUMAN_MANDATED", "STRICT_CONSERVATIVE"]
+        },
+        "backwardCompatibility": { "type": "string" },
+        "databaseMigrationStrategy": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "evidenceState": {
+      "type": "string",
+      "enum": ["USER_DECLARED", "OBSERVED", "INFERRED", "AI_PROPOSED", "UNKNOWN", "DECIDED"]
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "declared", "observed", "status"],
+        "properties": {
+          "category": { "type": "string" },
+          "declared": { "type": "string" },
+          "observed": { "type": "string" },
+          "status": { "type": "string", "enum": ["MATCH", "CONFLICT", "UNVERIFIED"] },
+          "resolution": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

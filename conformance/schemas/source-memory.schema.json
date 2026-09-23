@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/source-memory.schema.json",
+  "title": "ModernizationSourceMemory",
+  "type": "object",
+  "required": ["modernizationId", "sources", "isolationEnforced", "updated_at"],
+  "properties": {
+    "modernizationId": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "role", "repositoryPath", "access"],
+        "properties": {
+          "id": { "type": "string" },
+          "role": { "type": "string", "enum": ["LEGACY", "TARGET", "REFERENCE", "SHARED_LIB"] },
+          "repositoryPath": { "type": "string" },
+          "access": { "type": "string", "enum": ["READ_ONLY", "READ_WRITE"] },
+          "technologySummary": { "type": "string" },
+          "validatedPath": { "type": "boolean" },
+          "scanRestrictedToSlice": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "isolationEnforced": { "type": "boolean" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
