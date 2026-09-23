@@ -20,17 +20,18 @@ flowchart TD
     subgraph HIGHLIGHTS["DevWeave Core Highlights"]
         H1["<b>💰 Token & Cost Efficiency</b><br>84%–93% token savings, 95%–99% lower API bills via durable knowledge caching"]
         H2["<b>🌐 100% Universal & Tech-Neutral</b><br>Autonomous 5-layer detection across 12 polyglot ecosystems with zero hardcoding"]
-        H3["<b>🧠 Stage-Based Model Routing</b><br>Fast scanning on lightweight models (flash_lite), deep reasoning on flagship models (pro)"]
-        H4["<b>🔄 Dynamic Technology Revalidation</b><br>Auto-detects framework upgrades (e.g. .NET 8 → 9) and hot-swaps active best practices"]
-        H5["<b>🛡️ Human-in-the-Loop Governance</b><br>Phase isolation, zero auto-chaining, zero self-approval, and 4 mandatory hard gates"]
-        H6["<b>👥 Dual-Model Review (Architect + DBA)</b><br>Dedicated pre-PR review command (devweave-pr-review) evaluating impact, side effects & SQL"]
-        H7["<b>📦 Zero Mandatory Daemons</b><br>100% declarative Git-native state (.devweave/), no background server or daemon needed"]
-        H8["<b>🧩 Marketplace-Ready Plugin</b><br>20 validated Antigravity skills with explicit [Phase X] tagging and AI-DLC rules"]
+        H3["<b>🧠 Graph-Based Durable Memory</b><br>Declarative JSON Knowledge Graph (.devweave/graph/) with 1-hop traversal & delta merging"]
+        H4["<b>⚡ Stage-Based Model Routing</b><br>Fast scanning on lightweight models (flash_lite), deep reasoning on flagship models (pro)"]
+        H5["<b>🔄 Dynamic Technology Revalidation</b><br>Auto-detects framework upgrades (e.g. .NET 8 → 9) and hot-swaps active best practices"]
+        H6["<b>🛡️ Human-in-the-Loop Governance</b><br>Phase isolation, zero auto-chaining, zero self-approval, and 4 mandatory hard gates"]
+        H7["<b>👥 Dual-Model Review (Architect + DBA)</b><br>Dedicated pre-PR review command (devweave-pr-review) evaluating impact, side effects & SQL"]
+        H8["<b>📦 Zero Mandatory Daemons</b><br>100% declarative Git-native state (.devweave/), no background server or daemon needed"]
     end
 ```
 
 | Highlight | Description | Realized Benefit |
 |---|---|---|
+| **Graph-Based Durable Memory** | Maintains a Git-native JSON Knowledge Graph (`knowledge-graph.json`) with 1-hop neighborhood recall and automated task delta merging (`graph-delta.json`). | **Eliminates AI amnesia**; loads only the exact 2–3 connected files instead of whole directories. |
 | **Token & Cost Efficiency** | Caches discovered codebase patterns into `.devweave/domains/` and `.devweave/products/` and scopes execution to precise blast radiuses. | **84.1%–93.4% Token Savings** ($0.0018–$0.0039 vs $0.50–$1.16 on repeat tasks). |
 | **Stage-Based Model Routing** | Routes abstract capabilities (`fast-analysis`, `deep-reasoning`, `coding`, `independent-review`) to calibrated model tiers (`flash_lite`, `flash`, `pro`). | Eliminates paying flagship model prices for routine file scanning and git checks. |
 | **5-Layer Autonomous Tech Detection** | Progressively parses lockfiles and manifests across Language, Framework, Persistence, Testing, and Build layers. | Works out-of-the-box on **C#, Python, TypeScript, Java, Go, Rust, PHP, Ruby, C++**, monorepos, and legacy codebases. |

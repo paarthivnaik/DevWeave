@@ -110,23 +110,48 @@ Here is what happens in each phase in plain, simple terms:
 
 ---
 
-## 5. The Living Brain: Declarative JSON Knowledge Graph
+## 5. The Living Brain: Graph-Based Durable Memory
 
-Instead of using complicated, slow vector databases, DevWeave keeps a simple, beautiful JSON file in your repository: `.devweave/graph/knowledge-graph.json`.
+Standard AI assistants suffer from **AI Amnesia**: every time you close your chat window, the AI completely forgets your codebase. When you open a new chat, it starts from zero, guessing how your files connect and re-reading thousands of lines.
+
+DevWeave solves this with **Graph-Based Durable Memory** (`.devweave/graph/knowledge-graph.json`).
 
 ```text
-       [ Login Controller ]
-               │ (calls)
-               ▼
-       [ Authentication Service ]
-               │ (queries)
-               ▼
-       [ Users Database Table ]
+       ┌────────────────────────┐
+       │    Login Controller    │
+       └───────────┬────────────┘
+                   │ (ROUTES_TO / CALLS)
+                   ▼
+       ┌────────────────────────┐
+       │ Authentication Service │
+       └─────┬────────────┬─────┘
+             │            │ (MUTATES / QUERIES)
+ (PUBLISHES) │            ▼
+             │   ┌────────────────────────┐
+             │   │  Users Database Table  │
+             │   └────────────────────────┘
+             ▼
+ ┌────────────────────────┐
+ │ User Logged In Event   │
+ └────────────────────────┘
 ```
 
-### Why this is magic:
-- When you want to change the `Authentication Service`, DevWeave looks at the graph and instantly knows to load only the `Login Controller` and the `Users Table`.
-- **Result**: The AI loads **3 files** instead of **3,000 files**.
+### 🧠 How Graph-Based Memory Works in 3 Steps:
+
+1. **Instant Memory Recall (1-Hop Neighborhood Traversal)**:
+   - When you ask to update the `Authentication Service`, DevWeave queries the graph's memory.
+   - It instantly recalls:
+     - *Who calls this?* &rarr; `Login Controller`
+     - *What does this touch?* &rarr; `Users Database Table` and `User Logged In Event`
+   - **Result**: The AI loads **only the 3 connected files** into memory, cutting prompt size from 40,000 tokens down to 1,500 tokens!
+
+2. **Learning New Code (Graph Delta Memory Patching)**:
+   - While working on a user story, as you add new services or database tables, DevWeave creates a temporary memory patch (`.devweave/tasks/<ID>/graph-delta.json`).
+   - It never pollutes the master memory until your code is tested and verified.
+
+3. **Collective Shared Brain (Git-Native Team Sync)**:
+   - When your Pull Request is approved and merged into `main`, the memory patch is committed directly into the repository.
+   - When your teammates pull latest code, **their AI assistants instantly inherit the updated memory graph with 0 tokens and 0 latency!**
 
 ---
 
