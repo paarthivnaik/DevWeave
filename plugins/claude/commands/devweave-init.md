@@ -3,7 +3,7 @@ name: devweave-init
 description: "[Phase 0: Init] Initialize DevWeave in the repository by autonomously detecting technology stack across 5 layers and generating pin-to-pin architecture, layers, request flow, knowledge graph, and multi-repository topology intelligence."
 ---
 
-# Claude Code Initialization Command (`/devweave-init`)
+# Claude Code Initialization Command (`claude /devweave-init`)
 
 ## Purpose
 Autonomously inspect the target workspace repository, detect its complete technology stack across 5 evidence-based layers, and establish concrete, pin-to-pin repository intelligence (physical-to-logical layers, end-to-end request flow, JSON knowledge graph, and multi-repo topology) without modifying application code.
@@ -16,7 +16,7 @@ Autonomously inspect the target workspace repository, detect its complete techno
 Execute targeted inspection of repository manifests, project files, directory layouts, and configuration:
 
 1. **Layer 1 — Repository Structure & Multi-Repo Topology**:
-   - Inspect workspace root for project topology (single service, monorepo with `services/*` / `packages/*`, or multi-repo linked workspace).
+   - Inspect workspace root for project topology (Single-Service, Monorepo with `services/*`/`packages/*`, or Linked Multi-Repo).
 2. **Layer 2 — Programming Languages**:
    - Detect all languages present with confidence scores (`HIGH`, `MEDIUM`, `LOW`) based on manifest files (`package.json`, `*.csproj`, `*.sln`, `pom.xml`, `build.gradle`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `requirements.txt`, `composer.json`, `Gemfile`, `CMakeLists.txt`). Support polyglot repositories.
 3. **Layer 3 — Frameworks & Engines**:
@@ -37,7 +37,7 @@ Analyze project entrypoints, router definitions, middleware chains, service clas
    - Generate an execution trace (with Mermaid sequence diagram) detailing how a typical request flows:
      `Client Request` &rarr; `Middleware` &rarr; `Controller` &rarr; `Service` &rarr; `Repository` &rarr; `Database/Cache` &rarr; `Response DTO`.
 3. **JSON Knowledge Graph (`graph/knowledge-graph.json`)**:
-   - Synthesize a declarative, Git-native JSON Knowledge Graph representing all codebase nodes and directed edges (`CALLS`, `QUERIES`, `ROUTES_TO`, `MUTATES`, `PUBLISHES`).
+   - Synthesize a declarative, Git-native JSON Knowledge Graph representing all codebase nodes (controllers, services, repositories, tables, events) and directed edges (`CALLS`, `QUERIES`, `ROUTES_TO`, `MUTATES`, `PUBLISHES`).
 
 ---
 
@@ -79,7 +79,7 @@ Create or update the standardized `.devweave/` intelligence directory in the tar
 Present the structured initialization summary to the developer:
 
 ```text
-Claude Code initialization completed.
+Antigravity initialization completed.
 
 Repository: <repository-name>
 Topology: <monorepo / single-service / multi-service>
@@ -90,6 +90,6 @@ Testing Runners: <detected test frameworks & commands>
 Architecture & Graph: Mapped pin-to-pin (layers.md, request-flow.md, knowledge-graph.json)
 Artifacts: Created intelligence artifacts under .devweave/
 
-Claude is waiting for your instruction.
+Antigravity is waiting for your instruction.
 Run: claude /devweave-context <WorkItemId>
 ```

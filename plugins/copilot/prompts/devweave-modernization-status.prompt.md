@@ -16,12 +16,12 @@ Read and render the current durable state of a modernization work item without m
 ---
 
 ## Preconditions
-- State file exists (`.devweave/modernization/<ID>/state.json`).
+- State file exists (`.devweave/modernization/stories/<ID>/state.json`).
 
 ---
 
 ## Allowed Actions
-1. Read `.devweave/modernization/<ID>/state.json`.
+1. Read `.devweave/modernization/stories/<ID>/state.json`.
 2. Format human-readable phase progression scorecard.
 3. Display current gate requirements and blocker details if any.
 4. Output exact next suggested CLI command.
@@ -45,7 +45,7 @@ Phase Progression:
   [ ] PR
 
 Next Suggested Command:
-  modernization-verify MOD-001
+  devweave-modernization-verify MOD-001
 ```
 
 ---

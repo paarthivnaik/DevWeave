@@ -5,6 +5,15 @@ All notable changes to DevWeave will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-09-23
+### Added
+- **2-Tier Hierarchical Workspace Architecture**: Separates central project configuration (`.devweave/modernization/` with `workspace.json`, `architecture-intent.json`, `technology-profile.json`, `source-memory.json`) from story-level deliverables (`.devweave/modernization/stories/<ID>/`), eliminating duplicated project questionnaires and configs.
+- **Interactive Branch & Base Branch Selection**: Added `--name <branch>` and `--base <branch>` parameters along with interactive prompting and natural language phrasing (`"create feature/99-User-Registration from master"`) to `devweave-branch` and `devweave-modernization-branch`.
+- **User-Only Story Audit Trail (`audit.md`)**: Enforced append-only audit trail capturing exclusively human developer activities with author attribution (`Author: <User Name> <email@example.com>`), filtering out internal framework machinery.
+- **Blocking Legacy Source Path Checkpoint**: In `devweave-modernization-init`, if `--source <path>` is omitted on CLI, the agent blocks execution and interactively asks for the legacy repository path before inspecting or writing any files.
+- **PM Tool Intake & Auto-Connect Persistence**: First-time PM tool selection (`jira`, `ado`, `github`, `linear`, `manual`) persists to `workspace.json` and auto-connects without re-prompting on subsequent invocations.
+- **Multi-Host Parity**: Synchronized all features across all 6 AI coding host platforms (Antigravity, Claude Code, Gemini CLI, GitHub Copilot, OpenAI Codex, Cognition Devin).
+
 ## [1.1.0] - 2026-09-23
 ### Added
 - **V1.1 Modernization Lifecycle**: 8-phase deterministic workflow (`INIT`, `CONTEXT`, `ANALYZE`, `PLAN`, `BRANCH`, `IMPLEMENT`, `VERIFY`, `PR`) with 3 Human-in-the-Loop Hard Governance Gates.

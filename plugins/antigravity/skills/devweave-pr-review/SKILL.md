@@ -1,6 +1,6 @@
 ---
 name: devweave-pr-review
-description: "[Phase 6: Review] Executes dual-model consensus code review (Principal Architect + Senior DBA + Security + Downstream Impact + Cascading Resilience) with a mandatory Human-in-the-Loop checkpoint before PR creation."
+description: "[Phase 6: Review] Executes dual-model consensus code review (Principal Architect + Senior DBA + Security + Downstream Impact + Cascading Resilience) with mandatory audit.md logging and Human-in-the-Loop checkpoint before PR creation."
 ---
 
 # DevWeave PR Review Skill (`devweave-pr-review`)
@@ -11,6 +11,7 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    - **Model B (Senior Database Administrator & Security Specialist)**: Table locks (`ONLINE=ON`/`CONCURRENTLY`), query execution plans, indexes, rollback safety, N+1 queries, OWASP vulnerabilities, side effects, and cascading resilience.
 2. **Phase Isolation**: This skill executes **only the review phase**, compiles `.devweave/work-items/<ID>/review.md`, and halts. It does NOT automatically open a PR.
 3. **Mandatory Human Checkpoint**: Execution must present the collective verdict to the developer and wait for human authorization before any PR step.
+4. **Audit Invariance**: Append review findings, consensus verdicts, and human gate authorization to `.devweave/work-items/<ID>/audit.md`.
 
 ## Step-by-Step Instructions
 1. **Load Implementation Context**: Read git diff, modified source files, SQL migrations, `plan.md`, and `.devweave/work-items/<ID>/test-results.json`.
@@ -34,7 +35,9 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
 4. **Handle Review Verdict**:
    - If **P0/P1 Blocking Findings** exist: Recommend isolated remediation (`devweave-implement <ID>` or fix loop) before proceeding.
    - If **Passed / Advisory Only**: Mark review as ready for human sign-off.
-5. **Update State**: Record `REVIEWED` status in `.devweave/work-items/<ID>/state.md`.
+5. **Update State & Audit**:
+   - Record `REVIEWED` status in `.devweave/work-items/<ID>/state.md`.
+   - Append collective review verdict, specialist summaries, and human gate decision to `.devweave/work-items/<ID>/audit.md`.
 6. **Mandatory Human Checkpoint**: Output:
    ```text
    REVIEW COMPLETE
@@ -43,6 +46,7 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    Architect Review: APPROVED | DBA Review: APPROVED | Security: PASS
    Downstream Impact: LOW | Side Effects: NONE | Cascading Risks: MITIGATED
    Artifact: .devweave/work-items/<ID>/review.md
+   Audit Log: .devweave/work-items/<ID>/audit.md
 
    Human decision: [Approve Review & Proceed to PR] [Request Changes / Fix] [Stop]
    Suggested next phase: PR (Run: devweave-pr <ID>)

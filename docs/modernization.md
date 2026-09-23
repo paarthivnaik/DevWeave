@@ -35,7 +35,7 @@ flowchart TD
 | `devweave-modernization-context <ID>` | `CONTEXT` | Ingests legacy slice, scopes graph neighborhood, loads targeted practices. |
 | `devweave-modernization-analyze <ID>` | `ANALYZE` | Analyzes legacy behavior and produces `analysis.md` + `mappings.json`. |
 | `devweave-modernization-plan <ID>` | `PLAN` | Constructs file-anchored plan, tests, and DB migrations in `plan.md`. |
-| `devweave-modernization-branch <ID>` | `BRANCH` | Creates isolated branch `devweave/modernization/<ID>`. |
+| `devweave-modernization-branch <ID>` | `BRANCH` | Creates isolated branch (supports `--name`, `--base`, and interactive/natural language branch selection). |
 | `devweave-modernization-implement <ID>`| `IMPLEMENT` | Executes surgical, plan-bound code changes and local tests. |
 | `devweave-modernization-verify <ID>` | `VERIFY` | Executes behavioral parity, architecture, and security checks. |
 | `devweave-modernization-pr <ID>` | `PR` | Assembles PR package (`report.md`, `pr-description.md`) and promotes graph memory. |
@@ -75,12 +75,12 @@ DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchic
 │   ├── workspace.json              <-- Target solution metadata & PM tool preference
 │   ├── architecture-intent.json    <-- Declared target architecture (e.g. Angular 22, CQRS, SQLite)
 │   ├── technology-profile.json     <-- Combined engineering practices (SOLID, Clean Code, CQRS)
-│   ├── source-memory.json          <-- Legacy repository pointer (READ_ONLY access mode)
-│   └── state.json                  <-- Central modernization project registry
+│   └── source-memory.json          <-- Legacy repository pointer (READ_ONLY access mode)
 │
-└── [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created per work item via devweave-modernization-context <ID>)
+└── stories/                        <-- [TIER 2: STORY-LEVEL MIGRATION SLICES] (Created via devweave-modernization-context <ID>)
     ├── 98/                         <-- Story #98 (e.g. User Login)
     │   ├── state.json              <-- Story lifecycle phase & hard gate tracker
+    │   ├── audit.md                <-- Append-only user activity, prompt & decision log
     │   ├── context.md              <-- Bounded legacy slice context
     │   ├── migration-unit.json     <-- Targeted legacy components & DTOs
     │   ├── analysis.md             <-- Behavioral rules & dependency analysis
@@ -91,7 +91,53 @@ DevWeave V1.1 organizes modernization artifacts into a clean **2-Tier Hierarchic
     │
     └── 99/                         <-- Story #99 (e.g. User Registration)
         ├── state.json
+        ├── audit.md
         ├── context.md
         ├── migration-unit.json
         └── ...
 ```
+
+---
+
+## 6. User Activity Audit Trail (`audit.md`)
+Every story maintains an append-only `.devweave/modernization/stories/<ID>/audit.md` dedicated **EXCLUSIVELY to human developer actions** (internal AI-DLC framework machinery, AST scans, and agent traces are omitted):
+- **Author Attribution**: Every entry records `Author: <User Name> <email@example.com>` (from `git config user.name` and `user.email`).
+- **User Prompts & Instructions**: Captures developer instructions, custom descriptions, and pasted requirements.
+- **Interactive Configurations**: Records PM tool choices, custom branch names, and base branch selections (e.g. `"create feature/99-User-Registration from master"`).
+- **Governance Gate Decisions**: Logs human approvals, change requests, and written feedback at Hard Gates #1, #2, and #3.
+- **Pull Request Sign-off**: Records developer authorization to open the release PR.
+
+#### Example `audit.md`:
+```markdown
+# User Audit Trail: Story 99
+
+**Work Item ID**: 99
+**Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+**Created At**: 2026-09-23T23:45:00+05:30
+
+---
+
+### [2026-09-23T23:45:00+05:30] Command: devweave-modernization-context 99
+- **Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+- **Activity**: Work Item Ingestion & Scope Input
+- **User Prompt**: "Modernize user registration screen from legacy JSP to Angular 22"
+- **Inputs Provided**: PM Source = Manual Paste, PII Confirmed = Yes
+
+---
+
+### [2026-09-23T23:46:00+05:30] Hard Gate #1: Architecture Authorization
+- **Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+- **Activity**: Gate Review Decision
+- **Decision**: APPROVE
+- **User Feedback / Comments**: "Target architecture approved with Signals store"
+
+---
+
+### [2026-09-23T23:47:00+05:30] Command: devweave-modernization-branch 99
+- **Author**: Balaji Naik Mudavatu <balaji.mudavatu@example.com>
+- **Activity**: Branch Configuration
+- **User Input**: "create feature/99-User-Registration from master"
+- **Target Branch**: feature/99-User-Registration
+- **Base Branch**: master
+```
+
