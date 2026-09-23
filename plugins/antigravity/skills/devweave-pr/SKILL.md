@@ -22,10 +22,13 @@ description: "[Phase 7: PR] Compiles verified PR package, promotes durable domai
      Please run Phase 6 Review first: devweave-pr-review <ID>
      ```
      and halt.
-2. **Durable Knowledge Promotion**: Prompt the developer to promote any reusable domain conventions, architectural decisions, or schema patterns discovered during the work item to `.devweave/domains/`.
+2. **Durable Knowledge & Graph Delta Promotion**:
+   - Apply `.devweave/work-items/<ID>/graph-delta.json` into `.devweave/graph/knowledge-graph.json` to atomically sync the master architecture graph.
+   - Prompt the developer to promote any reusable domain conventions, architectural decisions, or schema patterns discovered during the work item to `.devweave/domains/` and `.devweave/knowledge/conventions.md`.
 3. **Assemble PR Description**: Write comprehensive PR package to `.devweave/work-items/<ID>/pr-description.md` including:
    - Work Item Summary & Acceptance Criteria fulfillment.
    - Dual-Model Review Summary (Principal Architect + Senior DBA verdicts from `review.md`).
+   - Knowledge Graph Delta Summary (Nodes & Edges added/mutated).
    - Downstream Impact & Resilience assessment.
    - Exact file diff summary and test evidence.
 4. **Hard Human Approval Gate**:

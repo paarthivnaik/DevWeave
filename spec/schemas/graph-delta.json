@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://devweave.org/schemas/v1/graph-delta.json",
+  "title": "DevWeave Knowledge Graph Delta Schema",
+  "description": "Schema for task-level graph mutations and delta patches produced during implementation.",
+  "type": "object",
+  "required": ["$schema", "task_id", "added_nodes", "modified_nodes", "removed_nodes", "added_edges", "removed_edges"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "added_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "name"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "name": { "type": "string" },
+          "file": { "type": "string" },
+          "layer": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "modified_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": "string" },
+          "changes": { "type": "string" }
+        }
+      }
+    },
+    "removed_nodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "added_edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "type"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "type": { "type": "string" },
+          "confidence": { "type": "string" }
+        }
+      }
+    },
+    "removed_edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "type"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "type": { "type": "string" }
+        }
+      }
+    }
+  }
+}

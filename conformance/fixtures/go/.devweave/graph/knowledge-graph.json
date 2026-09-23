@@ -1,0 +1,20 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/graph.json",
+  "version": "1.0.0",
+  "repository": "go",
+  "topology": "Modular Go Package",
+  "updated_at": "2026-09-23T12:00:00Z",
+  "nodes": [
+    { "id": "NODE_ENTRY", "type": "file", "name": "Entrypoint", "file": "src/main", "layer": "Entrypoint" },
+    { "id": "NODE_CTRL", "type": "controller", "name": "MainController", "file": "src/controllers", "layer": "Controller" },
+    { "id": "NODE_SVC", "type": "service_class", "name": "MainService", "file": "src/services", "layer": "Domain" },
+    { "id": "NODE_REPO", "type": "repository_class", "name": "MainRepository", "file": "src/repositories", "layer": "Data" },
+    { "id": "NODE_TBL", "type": "table", "name": "entities", "layer": "Database" }
+  ],
+  "edges": [
+    { "source": "NODE_ENTRY", "target": "NODE_CTRL", "type": "ROUTES_TO" },
+    { "source": "NODE_CTRL", "target": "NODE_SVC", "type": "CALLS" },
+    { "source": "NODE_SVC", "target": "NODE_REPO", "type": "CALLS" },
+    { "source": "NODE_REPO", "target": "NODE_TBL", "type": "QUERIES" }
+  ]
+}
