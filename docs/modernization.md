@@ -35,7 +35,7 @@ flowchart TD
 | `devweave-modernization-context <ID>` | `CONTEXT` | Ingests legacy slice, scopes graph neighborhood, loads targeted practices. |
 | `devweave-modernization-analyze <ID>` | `ANALYZE` | Analyzes legacy behavior and produces `analysis.md` + `mappings.json`. |
 | `devweave-modernization-plan <ID>` | `PLAN` | Constructs file-anchored plan, tests, and DB migrations in `plan.md`. |
-| `devweave-modernization-branch <ID>` | `BRANCH` | Creates isolated branch `devweave/modernization/<ID>`. |
+| `devweave-modernization-branch <ID>` | `BRANCH` | Creates isolated branch (supports `--name`, `--base`, and interactive/natural language branch selection). |
 | `devweave-modernization-implement <ID>`| `IMPLEMENT` | Executes surgical, plan-bound code changes and local tests. |
 | `devweave-modernization-verify <ID>` | `VERIFY` | Executes behavioral parity, architecture, and security checks. |
 | `devweave-modernization-pr <ID>` | `PR` | Assembles PR package (`report.md`, `pr-description.md`) and promotes graph memory. |

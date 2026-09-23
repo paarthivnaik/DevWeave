@@ -206,10 +206,10 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
 - **Output Artifacts**: `.devweave/tasks/<ID>/plan.md`.
 
 #### 5. `devweave-branch <ID>` — Git Branch Isolation & Branch Gate
-- **Host Syntax**: `agy run devweave-branch PROJ-123`
+- **Host Syntax**: `agy run devweave-branch <ID>` | `devweave-branch <ID> [--name <name>] [--base <branch>]`
 - **When to Use**: Before writing code to guarantee branch safety.
-- **What it Does**: Validates branch naming conventions (`feature/PROJ-123-short-desc`), verifies base commit alignment, and strictly blocks implementation directly on `main` or `master`.
-- **Output Artifacts**: Isolated Git working branch created.
+- **What it Does**: Interactively prompts or accepts custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`), validates clean workspace status, and establishes the isolated feature branch from the specified base. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
+- **Output Artifacts**: Isolated Git working branch created, state metadata updated.
 
 #### 6. `devweave-implement <ID>` — Plan-Bound Surgical Coding & Test Intelligence
 - **Host Syntax**: `agy run devweave-implement PROJ-123`
@@ -263,9 +263,9 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 - **Output Artifacts**: `plan.md`, `test-plan.json`.
 
 #### 13. `devweave-modernization-branch <ID>` — Modernization Sandbox Branching
-- **Host Syntax**: `agy run devweave-modernization-branch <ID>`
-- **What it Does**: Creates isolated branch `devweave/modernization/<ID>`. Enforces strict **READ_ONLY** invariance on legacy source repositories.
-- **Output Artifacts**: Git branch created, `state.json` updated.
+- **Host Syntax**: `agy run devweave-modernization-branch <ID>` | `devweave-modernization-branch <ID> [--name <name>] [--base <branch>]`
+- **What it Does**: Interactively prompts or accepts custom target branch name (e.g., `feature/99-User-Registration`) and source base branch (e.g., `master`, `develop`, `release/*`, `epic/*`), verifies clean working state, creates and switches to the isolated modernization branch from the base branch, and protects legacy source code as strictly **READ_ONLY**. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
+- **Output Artifacts**: Git branch created, `.devweave/modernization/stories/<ID>/state.json` updated with branch metadata.
 
 #### 14. `devweave-modernization-implement <ID>` — Modernization Implementation & Test Suite
 - **Host Syntax**: `agy run devweave-modernization-implement <ID>`

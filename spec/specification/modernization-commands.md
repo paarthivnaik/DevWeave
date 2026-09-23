@@ -63,9 +63,10 @@ Auxiliary inspection commands:
 
 ### 3.2 Item-Scoped Commands (`context`, `analyze`, `plan`, `branch`, `implement`, `verify`, `pr`, `status`, `report`)
 - **Syntax**: `devweave-modernization-<command> <ID>`
+- **Branch Syntax**: `devweave-modernization-branch <ID> [--name <branch_name>] [--base <base_branch>]` (supports explicit flags, interactive prompting, and natural language phrasing such as `"create feature/99-User-Registration from master"`).
 - **Validation**:
   - The `<ID>` parameter is **mandatory**.
-  - Format must match `^[A-Za-z0-9_-]+$` (e.g., `MOD-001`, `MIG-42`, `MOD-LEGACY-AUTH`).
+  - Format must match `^[A-Za-z0-9_-]+$` (e.g., `MOD-001`, `MIG-42`, `MOD-LEGACY-AUTH`, `99`).
   - Missing `<ID>` returns exit code `1` with explicit usage instructions:
     ```text
     ERROR: Missing required argument <ID>.

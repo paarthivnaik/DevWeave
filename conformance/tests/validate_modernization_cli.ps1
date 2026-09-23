@@ -125,6 +125,8 @@ $validTestCases = @(
     @{ Cmd = "devweave-modernization-analyze MOD-001"; ExpectedPhase = "ANALYZE"; ExpectedId = "MOD-001" },
     @{ Cmd = "devweave-modernization-plan MOD-001"; ExpectedPhase = "PLAN"; ExpectedId = "MOD-001" },
     @{ Cmd = "devweave-modernization-branch MOD-001"; ExpectedPhase = "BRANCH"; ExpectedId = "MOD-001" },
+    @{ Cmd = "devweave-modernization-branch MOD-001 --name feature/99-user-reg --base master"; ExpectedPhase = "BRANCH"; ExpectedId = "MOD-001" },
+    @{ Cmd = "devweave-modernization-branch 99 --name feature/99-registration --base develop"; ExpectedPhase = "BRANCH"; ExpectedId = "99" },
     @{ Cmd = "devweave-modernization-implement MOD-001"; ExpectedPhase = "IMPLEMENT"; ExpectedId = "MOD-001" },
     @{ Cmd = "devweave-modernization-verify MOD-001"; ExpectedPhase = "VERIFY"; ExpectedId = "MOD-001" },
     @{ Cmd = "devweave-modernization-pr MOD-001"; ExpectedPhase = "PR"; ExpectedId = "MOD-001" },
