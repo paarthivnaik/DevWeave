@@ -247,9 +247,9 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 - **What it Does**: Accepts natural language architectural intent, interactively prompts for the legacy source repository / knowledge base path (if `--source` is not passed), scans target repository without questionnaires, detects target profile and technology practices (CQRS, signals, indexing), locks legacy source as `READ_ONLY`, and initializes modernization workspace `.devweave/modernization/<ID>/`.
 - **Output Artifacts**: `architecture-intent.json`, `technology-profile.json`, `source-memory.json`, `state.json`.
 
-#### 10. `devweave-modernization-context <ID>` — Legacy Slice Extraction
+#### 10. `devweave-modernization-context <ID>` — Work Item Intake & Legacy Slice Extraction
 - **Host Syntax**: `agy run devweave-modernization-context <ID>`
-- **What it Does**: Ingests migration scope, extracts bounded legacy source slice into `legacy-source-slice.md`, and retrieves relevant graph neighborhood.
+- **What it Does**: Ingests migration scope via PM tool selector (Jira, Azure DevOps, GitHub, Linear, or Manual User Story paste), runs PII privacy check, extracts bounded legacy source slice from read-only source memory, and retrieves relevant graph neighborhood.
 - **Output Artifacts**: `context.md`, `migration-unit.json`.
 
 #### 11. `devweave-modernization-analyze <ID>` — Behavioral Mapping & [HARD GATE #1]

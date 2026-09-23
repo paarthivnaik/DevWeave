@@ -22,11 +22,35 @@ Construct a bounded, token-efficient migration context for the specified moderni
 ---
 
 ## Allowed Actions
-1. Load `architecture-intent.json`, `technology-profile.json`, and `source-memory.json`.
-2. Inspect specified migration slice in legacy source (controllers, views, models, database tables, business rules).
-3. Query knowledge graph for direct dependencies and bounded 1-hop / 2-hop neighbor relationships.
-4. Extract only applicable technology practices matching the slice (e.g., Angular component guidelines for UI slices, CQRS/EF Core guidelines for backend slices).
-5. Compile concise `context.md` with explicit token budgeting (< 12,000 tokens).
+1. **PII / Privacy Hard Gate**: Prompt developer to confirm the work item / user story contains no unredacted credentials or sensitive customer data.
+2. **PM Tool Selection, Persistence & Work Item Intake**:
+   - **Check Persisted PM Source**: Read `pmSource` from `.devweave/modernization/<ID>/workspace.json` or `.devweave/workspace.json`.
+   - **First-Time Run (or if `--reconfigure` / `--pm-source <source>` is provided)**:
+     - Prompt developer to select the Project Management source:
+       ```text
+       [Modernization Context Intake: <ID>]
+       Select Work Item / User Story Source:
+         [1] Atlassian Jira (Jira MCP / API)
+         [2] Azure DevOps Boards (ADO MCP / API)
+         [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
+         [4] Linear (Linear MCP)
+         [5] Manual Paste / Offline User Story Input
+
+       Selection: [1 | 2 | 3 | 4 | 5]
+       ```
+     - Persist selected `pmSource` into workspace configuration.
+   - **Subsequent Runs**:
+     - If `pmSource` is configured for an MCP tool (`jira`, `ado`, `github`, `linear`) and the MCP server is active, automatically connect and fetch ticket/story `<ID>` without prompting.
+     - If MCP connection is unavailable or `pmSource` is `manual`, prompt developer with a structured Markdown template to paste their user story, migration requirements, and legacy screen/module targets.
+   - **Mid-Stream Setup**: The developer can configure or switch MCP tools at any time via `--pm-source <source>` or by configuring MCP servers in the environment.
+3. **Mandatory Description Prompting (Optional Input)**: Ask the developer if they have any additional migration scope descriptions, context, or specific instructions before processing (per Rule #7).
+4. **Pre-Processing Transparency**: Clearly state the legacy slice paths, repositories, and knowledge graph entities that will be inspected.
+5. **Context Assembly & Legacy Slicing**:
+   - Load `architecture-intent.json`, `technology-profile.json`, and `source-memory.json` (pointing to legacy source in `READ_ONLY` mode).
+   - Inspect specified migration slice in legacy source (controllers, views, models, database tables, business rules).
+   - Query knowledge graph for direct dependencies and bounded 1-hop / 2-hop neighbor relationships.
+   - Extract only applicable technology practices matching the slice (e.g., Angular component guidelines for UI slices, CQRS/EF Core guidelines for backend slices).
+   - Compile concise `context.md` and `migration-unit.json` with explicit token budgeting (< 12,000 tokens).
 
 ---
 
