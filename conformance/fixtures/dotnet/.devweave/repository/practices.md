@@ -1,4 +1,4 @@
-# .NET / EF Core Best Practices & Invariants
+# .NET / EF Core Best Practices
 
 - **MANDATORY**: Ensure nullable reference types are respected.
 - **RECOMMENDED**: Use AsNoTracking() on read-only EF Core queries.

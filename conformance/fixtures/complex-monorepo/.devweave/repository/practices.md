@@ -1,4 +1,4 @@
-# Monorepo Best Practices & Invariants
+# Monorepo Best Practices
 
 - **MANDATORY**: Keep service boundaries decoupled; communicate via shared event contracts.
 - **RECOMMENDED**: Run targeted service test suites during local task execution.
