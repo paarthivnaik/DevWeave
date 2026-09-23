@@ -1,38 +1,51 @@
-﻿---
+---
 name: devweave-init
-description: [Phase 0: Init] Initialize DevWeave in the repository by autonomously detecting technology stack across 5 layers and establishing repository knowledge.
+description: "[Phase 0: Init] Initialize DevWeave in the repository by autonomously detecting technology stack across 5 layers and generating pin-to-pin architecture, layers, request flow, and multi-repository topology intelligence."
 ---
 
-# DevWeave Initialization Skill (`devweave-init`)
+# OpenAI Codex Initialization Command (`$devweave init`)
+
+> **"Less Tokens. More Work. Lower Bill."**
 
 ## Purpose
-Autonomously inspect the target workspace repository, detect its complete technology stack across 5 evidence-based layers, and establish reusable repository intelligence and lifecycle state without modifying application code.
+Autonomously inspect the target workspace repository, detect its complete technology stack across 5 evidence-based layers, and establish concrete, pin-to-pin repository intelligence (physical-to-logical layers, end-to-end request flow, transaction boundaries, and multi-repo topology) without modifying application code. Operates generically on any software repository.
 
 ---
 
 ## Execution Workflow
 
-### Step 1: Progressive 5-Layer Technology Detection
-Execute targeted inspection of repository manifests, project files, lockfiles, and configuration:
+### Step 1: Progressive 5-Layer Technology & Topology Detection
+Execute targeted inspection of repository manifests, project files, directory layouts, and configuration:
 
-1. **Layer 1 â€” Repository Structure**:
-   - Inspect workspace root for project topology (monorepo, single service, microservices, frontend/backend separation, database migrations, CI/CD workflows).
-2. **Layer 2 â€” Programming Languages**:
+1. **Layer 1 — Repository Structure & Multi-Repo Topology**:
+   - Inspect workspace root for project topology (single service, monorepo with `services/*` / `packages/*`, or multi-repo linked workspace).
+2. **Layer 2 — Programming Languages**:
    - Detect all languages present with confidence scores (`HIGH`, `MEDIUM`, `LOW`) based on manifest files (`package.json`, `*.csproj`, `*.sln`, `pom.xml`, `build.gradle`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `requirements.txt`, `composer.json`, `Gemfile`, `CMakeLists.txt`). Support polyglot repositories.
-3. **Layer 3 â€” Frameworks & Engines**:
-   - Detect active web, ORM, and UI frameworks (e.g., ASP.NET Core, Angular, React, Spring Boot, Laravel, Rails, FastAPI, Django, Express, NestJS).
-4. **Layer 4 â€” Libraries & Tooling**:
-   - Detect ORMs (EF Core, Prisma, Hibernate, SQLAlchemy), build tools (dotnet, npm, maven, gradle, cargo, cmake), and test runners (xUnit, pytest, Jest, JUnit, PHPUnit, Karma).
-5. **Layer 5 â€” Versions & Capabilities**:
+3. **Layer 3 — Frameworks & Engines**:
+   - Detect active web, ORM, and UI frameworks (e.g., ASP.NET Core, Angular, React, Spring Boot, Laravel, Rails, FastAPI, Express, NestJS, Tokio).
+4. **Layer 4 — Libraries & Tooling**:
+   - Detect ORMs (EF Core, Prisma, Hibernate, SQLAlchemy), build tools (dotnet, npm, maven, gradle, cargo, cmake), and test runners (xUnit, pytest, Jest, JUnit, PHPUnit, Karma, CTest).
+5. **Layer 5 — Versions & Capabilities**:
    - Extract exact runtime versions and dependency targets from lockfiles or project definitions. Record `unknown` if version cannot be determined from evidence; never guess.
 
 ---
 
-### Step 2: Project Management & Capability Detection
-- Check whether an external project-management MCP server (Jira, Azure DevOps, GitHub, GitLab, Linear) is configured in the environment.
-- If detected, record available capabilities (`readWorkItems`, `updateWorkItems`, `transitionStatus`).
-- If not configured, record `projectManagement.enabled = false` and use local manual input fallback.
-- **Security Rule**: Never write Personal Access Tokens (PATs), API keys, or raw secrets into any artifact.
+### Step 2: Pin-to-Pin Architecture & Request Flow Synthesis
+Analyze project entrypoints, router definitions, middleware chains, service classes, and data access layers to map:
+
+1. **Physical-to-Logical Layer Mapping (`layers.md`)**:
+   - Map exact codebase directories to architectural tiers:
+     - *Entrypoint / Bootstrap* (e.g. `src/server.ts`, `Program.cs`)
+     - *HTTP Middleware / Guards* (e.g. `src/middleware/`, `Filters/`)
+     - *Controllers / Routers* (e.g. `src/controllers/`, `Endpoints/`)
+     - *Domain Services / Use Cases* (e.g. `src/services/`, `Domain/`)
+     - *Data Access / Repositories* (e.g. `src/repositories/`, `Data/`)
+     - *Database Models & Migrations* (e.g. `prisma/schema.prisma`, `Migrations/`)
+2. **Concrete End-to-End Request Flow (`request-flow.md`)**:
+   - Generate an execution trace (with Mermaid sequence diagram) detailing how a typical request flows:
+     `Client Request` &rarr; `Middleware (Auth/Tracing)` &rarr; `Controller (DTO Validation)` &rarr; `Service (Business Logic)` &rarr; `Repository (Parameterized Query)` &rarr; `Database/Cache` &rarr; `Response DTO`.
+3. **Multi-Service Monorepo Map (`monorepo-map.md`)** *(if multi-service)*:
+   - Map inter-service communications (REST, gRPC, Kafka/RabbitMQ events, shared types).
 
 ---
 
@@ -41,19 +54,22 @@ Create or update the standardized `.devweave/` intelligence directory in the tar
 
 ```text
 .devweave/
-â”œâ”€â”€ repository/
-â”‚   â”œâ”€â”€ profile.md          # 5-Layer classification & repository overview
-â”‚   â”œâ”€â”€ technologies.md     # Primary & secondary runtimes with evidence citations
-â”‚   â”œâ”€â”€ frameworks.md       # Detected frameworks, ORMs, and UI libraries
-â”‚   â”œâ”€â”€ dependencies.md     # Package manager & dependency lockfile status
-â”‚   â”œâ”€â”€ build.md            # Deterministic build commands and build targets
-â”‚   â”œâ”€â”€ testing.md          # Test runners, single-test commands, coverage flags
-â”‚   â”œâ”€â”€ architecture.md     # Component layout, entry points, and module boundaries
-â”‚   â””â”€â”€ practices.md        # Applicable best practices and anti-patterns
-â”œâ”€â”€ knowledge/
-â”‚   â””â”€â”€ conventions.md      # Repository coding conventions, style guides & lint rules
-â””â”€â”€ state/
-    â””â”€â”€ current.json        # AI-DLC lifecycle state, token usage, and gate status
+├── repository/
+│   ├── profile.md          # 5-Layer classification & repository overview
+│   ├── technologies.md     # Primary & secondary runtimes with evidence citations
+│   ├── frameworks.md       # Detected frameworks, ORMs, and UI libraries
+│   ├── dependencies.md     # Package manager & dependency lockfile status
+│   ├── build.md            # Deterministic build commands and build targets
+│   ├── testing.md          # Test runners, single-test commands, coverage flags
+│   ├── architecture.md     # Comprehensive system topology & component layout
+│   ├── layers.md           # Pin-to-pin physical-to-logical layer mapping
+│   ├── request-flow.md     # End-to-end request/execution trace & sequence diagram
+│   ├── integrations.md     # External APIs, database connections, and event queues
+│   └── practices.md        # Stack-aware coding conventions and anti-patterns
+├── knowledge/
+│   └── conventions.md      # Repository coding conventions, style guides & lint rules
+└── state/
+    └── current.json        # AI-DLC lifecycle state, token usage, and gate status
 ```
 
 ---
@@ -69,17 +85,17 @@ Create or update the standardized `.devweave/` intelligence directory in the tar
 Present the structured initialization summary to the developer:
 
 ```text
-DevWeave initialization completed.
+OpenAI Codex initialization completed.
 
 Repository: <repository-name>
-Topology: <monorepo / single-service / multi-project>
+Topology: <monorepo / single-service / multi-service>
 Languages: <detected languages with versions & confidence>
 Frameworks: <detected web/ORM/UI frameworks>
 Build Tools: <detected build commands>
 Testing Runners: <detected test frameworks & commands>
-Project Management MCP: <Configured (Provider Name) / Not Configured (Local Fallback)>
-Artifacts: Created 10/10 intelligence artifacts under .devweave/
+Architecture & Layers: Mapped pin-to-pin (layers.md, request-flow.md)
+Artifacts: Created intelligence artifacts under .devweave/
 
-Next recommended action:
-Start your first work item using: DevWeave-context <WorkItemId>
+Codex is waiting for your instruction.
+Run: $devweave context <WorkItemId>
 ```

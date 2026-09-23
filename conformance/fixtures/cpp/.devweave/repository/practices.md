@@ -1,4 +1,4 @@
-# C++ Best Practices & Invariants
+# C++ Best Practices
 
 - **MANDATORY**: Enforce RAII for memory and resource management.
 - **RECOMMENDED**: Prefer std::string_view and std::span for non-owning references.

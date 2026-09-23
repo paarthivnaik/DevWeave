@@ -1,4 +1,4 @@
-# Python / FastAPI Best Practices & Invariants
+# Python / FastAPI Best Practices
 
 - **MANDATORY**: Use Pydantic v2 schemas for all request/response models.
 - **RECOMMENDED**: Use async route handlers for I/O-bound operations.
