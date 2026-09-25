@@ -37,11 +37,12 @@ flowchart LR
 
 ## 2. Normal Development Phase Contracts
 
-### Phase 0: Repository Inception (`devweave-init`)
+### Phase 0: Repository Inception (`devweave-init`) & Update Sync (`devweave-update`)
 - **Purpose**: Autonomous 5-layer technology stack discovery and repository intelligence establishment.
+- **24-Hour TTL Invariant**: Repository intelligence expires after 24 hours (`ttlHours = 24`). If cache age >= 24 hours or when `devweave-update` runs inside an initialized workspace, DevWeave triggers an autonomous non-destructive re-scan to refresh `.devweave/repository/` and `knowledge-graph.json` while strictly preserving active stories.
 - **Prerequisite Gate**: No work-item phase may proceed before `devweave-init` is completed. If uninitialized, commands halt with:
   *"DevWeave has not been initialized for this repository. Run: devweave-init before continuing."*
-- **Artifacts**: `.devweave/repository/*`, `.devweave/graph/knowledge-graph.json`.
+- **Artifacts**: `.devweave/repository/*`, `.devweave/graph/knowledge-graph.json`, `.devweave/state/current.json`.
 
 ### Phase 1: Context (`devweave-context <ID>`)
 - **Purpose**: Ingest work item via generic `WorkItemProvider` (Azure DevOps, Jira, GitHub, Custom), apply privacy gate, extract attachment text & OCR, model candidate claims (`evidence.json`), and build bounded context (`context.md`).
