@@ -38,21 +38,32 @@ Check remote repository connectivity and compare the local installation against 
 
 ---
 
-### Step 2: In-Place Cache & State Refresh
-1. Update `~/.devweave/update-cache.json` with current UTC timestamp and commit hash.
-2. Preserve all existing workspace state files in `.devweave/state/` and `.devweave/knowledge/`.
-3. Report the updated version and active capabilities to the developer.
+### Step 2: In-Place Cache & 24-Hour TTL Repository Refresh
+1. Update `~/.devweave/update-cache.json` with current UTC timestamp, version (`1.2.0`), and commit hash.
+2. **Intelligent Repository Detection & 24h TTL Evaluation**:
+   - If current working directory contains `.devweave/`:
+     - Read `lastScanTime` / `initializedAt` from `.devweave/state/current.json`.
+     - Calculate cache age: `(CurrentUTC - lastScanTime)`.
+     - **If Cache Age >= 24 Hours OR plugin version updated**:
+       - Trigger autonomous non-destructive `devweave-init`.
+       - Re-scan 5 layers (manifests, packages, dependencies) and refresh `.devweave/repository/` and `.devweave/graph/knowledge-graph.json`.
+       - Update `lastScanTime = CurrentUTC`, `lastUpdated = CurrentUTC`, and `ttlHours = 24` in `.devweave/state/current.json`.
+       - **Strict Invariance**: Never overwrite or delete active in-progress story files (`.devweave/modernization/stories/` or `.devweave/work-items/`).
+     - **If Cache Age < 24 Hours and plugin version unchanged**:
+       - Retain existing repository intelligence (`"Repository intelligence is fresh (< 24h TTL). Skipping re-init."`).
+   - If current directory is not an initialized DevWeave repository:
+     - Log: `"Global DevWeave plugin updated. (Run 'devweave-init' inside a project repository to establish repository intelligence)."`
+3. Report the updated version, active capabilities, and repository TTL sync status to the developer.
 
 ---
 
 ### Step 3: Report Update Summary
 ```text
-✨ DevWeave Antigravity Plugin updated successfully.
+✨ DevWeave Codex Plugin updated successfully.
 
-Source: https://github.com/paarthivnaik/DevWeave.git (branch: develop)
-Skills Verified: 21 active skills
-Status: Up to date & ready
+Source: https://github.com/paarthivnaik/DevWeave.git (branch: master)
+Plugin Version: 1.2.0 (22 active skills)
+Repository Status: Intelligence refreshed & 24h TTL synced (Non-destructive)
 
-Run: codex run devweave-init  (to initialize or re-verify repository stack)
 Run: codex run devweave-context <WorkItemId>  (to begin work item)
 ```

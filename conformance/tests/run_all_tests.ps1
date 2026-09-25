@@ -23,7 +23,8 @@ $tests = @(
     @{ Name = "V1.1 Modernization State Machine Suite"; Script = "conformance/tests/validate_modernization_state.ps1" },
     @{ Name = "V1.1 Modernization Modules & E2E Suite"; Script = "conformance/tests/validate_modernization_e2e.ps1" },
     @{ Name = "V1.0/V1.1 Test Intelligence Suite"; Script = "conformance/tests/validate_test_intelligence.ps1" },
-    @{ Name = "V1.2 Work Item Context Acquisition Suite"; Script = "conformance/tests/validate_context_acquisition.ps1" }
+    @{ Name = "V1.2 Work Item Context Acquisition Suite"; Script = "conformance/tests/validate_context_acquisition.ps1" },
+    @{ Name = "V1.2 Update & 24h TTL Sync Suite"; Script = "conformance/tests/validate_update_ttl.ps1" }
 )
 
 $suiteResults = @()
