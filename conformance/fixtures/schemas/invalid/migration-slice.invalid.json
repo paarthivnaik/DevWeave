@@ -1,0 +1,10 @@
+{
+  "work_item_id": "MOD-001",
+  "modernization_unit": {
+    "id": "UNIT-001",
+    "name": "Customer Page",
+    "type": "INVALID_TYPE"
+  },
+  "legacy_components": "not-an-array",
+  "generated_at": "2026-09-25T09:30:00Z"
+}

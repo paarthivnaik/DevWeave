@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/provider-config.schema.json",
+  "title": "ProviderConfig",
+  "type": "object",
+  "required": ["provider", "cli_tool", "cli_detected", "auth_type", "authenticated"],
+  "properties": {
+    "provider": {
+      "type": "string",
+      "enum": ["jira", "azure-devops", "github", "linear", "custom", "manual"]
+    },
+    "cli_tool": {
+      "type": "string"
+    },
+    "cli_detected": {
+      "type": "boolean"
+    },
+    "cli_version": {
+      "type": "string"
+    },
+    "auth_type": {
+      "type": "string",
+      "enum": ["cli", "token", "pat", "oauth", "sso", "manual", "environment"]
+    },
+    "authenticated": {
+      "type": "boolean"
+    },
+    "endpoint": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "privacy_gate_accepted": {
+      "type": "boolean"
+    },
+    "last_verified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

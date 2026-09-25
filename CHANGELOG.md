@@ -5,6 +5,19 @@ All notable changes to DevWeave will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-09-25
+### Added
+- **Generic Work Item Context Acquisition & Setup Subsystem**: Decoupled DevWeave core lifecycle from any single PM platform, CLI wrapper, or AI vendor.
+- **Provider Adapters (`WorkItemProvider`)**: Built-in adapter reference architectures for Azure DevOps (`azure-devops`), Atlassian Jira (`jira`), GitHub Issues & Projects (`github`), and Custom/Offline manual templates (`custom`).
+- **Setup Orchestrator (`devweave-setup`)**: Central environment diagnostic, tool detection (`az`, `jira`/`acli`, `gh`, `tesseract`), human-authorized package installation, and secure OS credential verification.
+- **Client Detection & Mandatory Setup Routing**: In `devweave-modernization-context`, if a required CLI client is missing, automatically routes to `devweave-setup` and halts execution.
+- **Zero Secret Storage Invariance**: Enforced strict policy where no tokens, PATs, passwords, or session credentials are saved in `.devweave/`, Git history, state files, or AI prompts.
+- **Generic Privacy & Data-Processing Hard Gate**: Developer confirmation checkpoint before dispatching work items, comments, or attachments to remote services or AI processing.
+- **Safe Attachment Text Extraction & Image OCR Pipeline**: Sanitized file extraction with directory traversal protection (`../`), multi-format text classification, and non-blocking OCR image processing with quality confidence scoring (`SUCCESS`, `PARTIAL`, `FAILED`).
+- **Candidate Claims & Evidence Verification Modeling (`evidence.json`)**: Formally cataloged assertions with verification statuses (`UNVERIFIED`, `VERIFIED`, `CONTRADICTED`, `PARTIALLY_VERIFIED`, `UNKNOWN`), preventing unverified statements from becoming unverified implementation tasks.
+- **Bounded Migration Slicing (`migration-slice.json`)**: Construct focused dependency slices (< 12,000 tokens) connecting views, controllers, services, database objects, and tests.
+- **V1.2 Schemas & Conformance Suite**: Added `work-item.schema.json`, `evidence.schema.json`, `migration-slice.schema.json`, `provider-config.schema.json`, test fixtures, and `validate_context_acquisition.ps1`, expanding test matrix to 11 passing suites (100% conformance).
+
 ## [1.1.3] - 2026-09-24
 ### Added
 - **Strict Gate Isolation & Command Boundaries**: Approving Hard Gates #1, #2, #3 or PR review checkpoints records the human authorization in `state.json` and `audit.md` and halts immediately. Strictly prohibits auto-progressing to subsequent phase commands without explicit developer CLI invocation.

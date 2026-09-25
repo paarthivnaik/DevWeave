@@ -1,7 +1,7 @@
 {
   "$schema": "https://openai.com/schemas/codex-plugin.json",
   "name": "devweave",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Universal AI-DLC software engineering lifecycle plugin for OpenAI Codex and ChatGPT CLI with Graph-Based Durable Memory",
   "author": "DevWeave Team",
   "license": "Apache-2.0",

@@ -1,0 +1,76 @@
+{
+  "work_item_id": "MOD-001",
+  "title": "Modernize Customer Management Screen to Angular & CQRS",
+  "description": "Migrate legacy ASP.NET WebForms customer management screen to modern Angular with CQRS microservices architecture.",
+  "type": "ModernizationUnit",
+  "status": "Active",
+  "priority": "High",
+  "assignee": "Balaji Naik Mudavatu",
+  "reporter": "Product Lead",
+  "labels": ["modernization", "customer-portal", "cqrs", "angular"],
+  "iteration": "Sprint 42",
+  "created_at": "2026-09-25T08:00:00Z",
+  "updated_at": "2026-09-25T09:30:00Z",
+  "acceptance_criteria": [
+    "Customer search and grid display behaves identically to legacy screen",
+    "Customer edit updates trigger CQRS command handler with validation",
+    "All legacy stored procedure logic preserved in command handlers"
+  ],
+  "source": {
+    "provider": "azure-devops",
+    "url": "https://dev.azure.com/org/project/_workitems/edit/101",
+    "project": "ModernizationCore",
+    "key": "101"
+  },
+  "comments": [
+    {
+      "id": "c-101-1",
+      "author": "Architect Alice",
+      "created_at": "2026-09-25T08:30:00Z",
+      "text": "Note that Customer_Update sproc has an undocumented tax calculation side effect."
+    }
+  ],
+  "attachments": [
+    {
+      "id": "att-101-1",
+      "filename": "customer-screen-spec.txt",
+      "content_type": "text/plain",
+      "size_bytes": 1024,
+      "category": "TEXT",
+      "extracted_text": "Legacy screen includes customer credit limit validation and tax rate lookup.",
+      "ocr_status": "NOT_APPLICABLE",
+      "evidence_reference": ".devweave/modernization/stories/MOD-001/evidence/att-101-1.txt"
+    },
+    {
+      "id": "att-101-2",
+      "filename": "legacy-ui-mockup.png",
+      "content_type": "image/png",
+      "size_bytes": 204800,
+      "category": "IMAGE",
+      "extracted_text": "Customer ID | Name | Credit Status | Discount Tier",
+      "ocr_status": "SUCCESS",
+      "ocr_confidence": 0.96,
+      "evidence_reference": ".devweave/modernization/stories/MOD-001/evidence/att-101-2-ocr.txt"
+    }
+  ],
+  "linked_items": [
+    {
+      "id": "MOD-002",
+      "relationship": "blocks",
+      "title": "Customer Invoicing Microservice",
+      "status": "New"
+    }
+  ],
+  "related_historical_work": [
+    {
+      "id": "HIST-45",
+      "title": "Vendor Profile Modernization",
+      "relevance_reason": "Shares same data grid pattern and tax lookup service",
+      "status": "Completed"
+    }
+  ],
+  "provider_metadata": {
+    "systemInfo": "ADO-Cloud",
+    "boardColumn": "Ready for Modernization"
+  }
+}

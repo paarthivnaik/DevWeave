@@ -1,17 +1,21 @@
 ---
 name: devweave-modernization-context
-description: "[Modernization Phase 1: Context] Ingest modernization scope, build bounded migration slice from legacy source, retrieve relevant knowledge graph neighborhood, and construct focused context.md and audit.md."
+description: "[Modernization Phase 1: Context] Ingest generic work item context via WorkItemProvider adapters, extract attachment text & OCR images, model candidate claims, build bounded migration slice, integrate knowledge graph deltas, and enforce human checkpoint."
 ---
 
 # Claude Code Modernization Context Command (`claude /devweave-modernization-context`)
 
 ## Purpose
-Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md` and initial `audit.md` without loading entire legacy repositories into AI memory.
+Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, acquiring full work item details via generic provider adapters (Azure DevOps, Jira, GitHub, Custom), extracting text and performing OCR on attachments, cataloging candidate claims with verification statuses, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md`, `work-item.json`, `evidence.json`, `migration-slice.json`, and `audit.md` without loading entire legacy repositories into AI memory.
 
 ---
 
 ## Inputs & Parameters
-- `<ID>`: Modernization work item ID (e.g. `MOD-001`, `99`).
+- `<ID>`: Modernization work item ID (e.g. `MOD-001`, `99`, `PROJ-1234`).
+- Optional flags:
+  - `--provider <azure-devops|jira|github|custom>`: Explicitly select or override PM provider.
+  - `--reconfigure`: Prompt to update provider selection.
+  - `--skip-ocr`: Skip OCR extraction on image attachments.
 
 ---
 
@@ -21,48 +25,86 @@ Construct a bounded, token-efficient migration context for the specified moderni
 ---
 
 ## Allowed Actions
-1. **PII / Privacy Hard Gate**: Prompt developer to confirm the work item / user story contains no unredacted credentials or sensitive customer data.
-2. **PM Tool Selection, Persistence & Work Item Intake**:
-   - **Check Persisted PM Source**: Read `pmSource` from `.devweave/modernization/workspace.json` or `.devweave/workspace.json`.
-   - **First-Time Run (or if `--reconfigure` / `--pm-source <source>` is provided)**:
-     - Prompt developer to select the Project Management source:
-       ```text
-       [Modernization Context Intake: <ID>]
-       Select Work Item / User Story Source:
-         [1] Atlassian Jira (Jira MCP / API)
-         [2] Azure DevOps Boards (ADO MCP / API)
-         [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
-         [4] Linear (Linear MCP)
-         [5] Manual Paste / Offline User Story Input
 
-       Selection: [1 | 2 | 3 | 4 | 5]
-       ```
-     - Persist selected `pmSource` into central `.devweave/modernization/workspace.json`.
-   - **Subsequent Runs**:
-     - If `pmSource` is configured for an MCP tool (`jira`, `ado`, `github`, `linear`) and the MCP server is active, automatically connect and fetch ticket/story `<ID>` without prompting.
-     - If MCP connection is unavailable or `pmSource` is `manual`, prompt developer with a structured Markdown template to paste their user story, migration requirements, and legacy screen/module targets.
-   - **Mid-Stream Setup**: The developer can configure or switch MCP tools at any time via `--pm-source <source>` or by configuring MCP servers in the environment.
-3. **Mandatory Description Prompting (Optional Input)**: Ask the developer if they have any additional migration scope descriptions, context, or specific instructions before processing (per Rule #7).
-4. **Pre-Processing Transparency**: Clearly state the legacy slice paths, repositories, and knowledge graph entities that will be inspected.
-5. **Context Assembly & Legacy Slicing**:
-   - Inherit central `.devweave/modernization/architecture-intent.json`, `technology-profile.json`, and `source-memory.json` (pointing to legacy source in `READ_ONLY` mode).
-   - Inspect specified migration slice in legacy source (controllers, views, models, database tables, business rules).
-   - Query knowledge graph for direct dependencies and bounded 1-hop / 2-hop neighbor relationships.
-   - Extract only applicable technology practices matching the slice (e.g., Angular component guidelines for UI slices, CQRS/EF Core guidelines for backend slices).
-   - Initialize story directory `.devweave/modernization/stories/<ID>/` and compile concise `context.md`, `migration-unit.json`, and `state.json` with explicit token budgeting (< 12,000 tokens).
-6. **Story Audit Trail Initialization (`audit.md`)**:
-   - Create or append to `.devweave/modernization/stories/<ID>/audit.md`.
-   - Record initial entry: Work item ID, timestamp, PM tool source, user prompt/story details, optional instructions, and generated artifacts.
+### 1. PM Provider Selection & Client Verification
+- **Check Persisted Provider**: Read provider configuration from `.devweave/modernization/workspace.json`.
+- **First-Time Selection**:
+  If not configured, prompt the developer:
+  ```text
+  Which project-management system contains this work item?
+  1. Azure DevOps
+  2. Jira
+  3. GitHub
+  4. Other / Custom
+  ```
+- **Client / CLI Detection**:
+  - Run `ProviderAdapter.detectClient()` (e.g., `az`, `jira`/`acli`, `gh`).
+  - If client is missing:
+    ```text
+    Required client for <provider> is not installed.
+    Run:
+    devweave-setup
+    ```
+    **STOP IMMEDIATELY**. Do not proceed with unmanaged installation.
+- **Secure Authentication Check**:
+  - Verify credentials via provider native status command.
+  - If unauthenticated, guide developer to authenticate.
+  - **Zero Secret Rule**: Never store credentials, tokens, or PATs in `.devweave/`, Git, logs, JSON, or prompts.
+
+### 2. Generic Privacy & Data-Processing Hard Gate
+- Prompt developer to confirm permission before dispatching work-item text or attachments to external processing:
+  ```text
+  This operation will retrieve work-item information, comments, attachments, and related content for modernization analysis.
+  Proceed? [Approve] [Reject]
+  ```
+- If rejected, stop context acquisition immediately.
+
+### 3. Work Item Acquisition & Evidence Processing
+- **Work Item Retrieval**: Ingest title, description, type, status, priority, acceptance criteria, assignee, reporter, labels, iteration, and provider metadata. Save normalized `.devweave/modernization/stories/<ID>/work-item.json`.
+- **Comments Extraction**: Fetch chronological comments with author attribution.
+- **Attachment Text & OCR Processing**:
+  - Classify attachments: `TEXT`, `DOCUMENT`, `IMAGE`, `ARCHIVE`, `OTHER`.
+  - Extract text from text-based attachments into `.devweave/modernization/stories/<ID>/evidence/`.
+  - Execute OCR on image attachments (`SUCCESS`, `PARTIAL`, `FAILED`).
+  - *Non-Blocking*: OCR failures do NOT halt the context phase.
+  - *Zero Hallucination*: Never fabricate visual text.
+- **Linked Items & Historical Work**: Ingest linked work items and discover related prior art.
+- **Candidate Claims Modeling**: Extract claims requiring verification (`UNVERIFIED`, `VERIFIED`, `CONTRADICTED`, `PARTIALLY_VERIFIED`, `UNKNOWN`) and write `.devweave/modernization/stories/<ID>/evidence.json`.
+
+### 4. Legacy Repository Slicing & Graph Delta Integration
+- **Legacy Inspection**: Inspect legacy codebase in `READ_ONLY` mode (controllers, views, models, database objects, tests).
+- **Bounded Migration Slice**: Identify modernization unit (`PAGE`, `SCREEN`, `FEATURE`, `MODULE`, `SERVICE`, `DOMAIN`, etc.) and trace direct dependencies. Persist `.devweave/modernization/stories/<ID>/migration-slice.json` within token budget (< 12,000 tokens).
+- **Target Architecture Alignment**: Map against `.devweave/modernization/architecture-intent.json` (`USER_DECLARED` vs `UNKNOWN` / `AI_DETERMINED`).
+- **Knowledge Graph Delta**: Record incremental relationships (`WORK_ITEM`, `MIGRATED_TO`, `AFFECTS`, `REFERENCES`, `HAS_ATTACHMENT`).
+
+### 5. Unified Context Synthesis (`context.md`)
+- Compile standard `context.md` covering:
+  - Work Item Metadata & Description
+  - Requested Modernization Unit
+  - Target Architecture Intent
+  - Legacy Architecture & Bounded Migration Slice
+  - Database & Integration Dependencies
+  - Tests & Verification Traceability
+  - Linked & Historical Prior Art
+  - Evidence & Candidate Claims Matrix
+  - Risks & Unresolved Questions
+
+### 6. User-Only Story Audit Trail (`audit.md`)
+- Log exclusively human actions and prompt inputs to `.devweave/modernization/stories/<ID>/audit.md` with `Author: <User Name> <email@example.com>`.
 
 ---
 
 ## Artifacts Generated
 ```text
 .devweave/modernization/stories/<ID>/
+├── work-item.json              <-- Normalized work-item details, comments & attachment catalog
+├── evidence.json               <-- Extracted claims & verification statuses
+├── migration-unit.json         <-- Target modernization unit definition
+├── migration-slice.json        <-- Bounded dependency graph slice
+├── context.md                  <-- Unified Markdown context
 ├── state.json                  <-- Story phase tracker & hard gates
-├── audit.md                    <-- Append-only user activity, prompt & decision log
-├── context.md                  <-- Bounded legacy slice context
-└── migration-unit.json         <-- Target legacy components
+├── audit.md                    <-- Append-only human activity, prompt & decision log
+└── evidence/                   <-- Extracted text & OCR evidence files
 ```
 
 ---
@@ -71,27 +113,27 @@ Construct a bounded, token-efficient migration context for the specified moderni
 - Sets `currentPhase` = `CONTEXT`
 - Sets `phases.CONTEXT` = `COMPLETED`
 - Sets `phases.ANALYZE` = `PENDING`
+- Sets `status` = `WAITING_FOR_HUMAN`
 - Sets `nextSuggestedPhase` = `ANALYZE`
 
 ---
 
-## Human Checkpoint
-- Present bounded migration slice and context scope.
-- Confirm accuracy with human.
+## Human Checkpoint (Blocking Stop)
+- Present structured summary:
+  ```text
+  Modernization context completed.
 
----
+  Work item: <ID> (<Title>)
+  Provider: <provider>
+  Modernization unit: <Unit Name> (<Unit Type>)
+  Legacy dependencies identified: <N>
+  Database dependencies: <N>
+  Tests identified: <N>
+  Related work items: <N>
+  Unverified claims: <N>
+  OCR findings: <N> images processed
+  Target architecture: <Frontend> + <Backend> + <Pattern> + <Database>
 
-## Next Suggested Command
-```text
-devweave-modernization-analyze <ID>
-```
-
----
-
-## Failure Behavior
-- If migration slice contains unresolved dependencies or missing legacy references, record open questions in `context.md` and alert user.
-
----
-
-## STOP Rule
-- Upon writing `context.md`, `audit.md`, and updating state, **STOP IMMEDIATELY**.
+  Next suggested phase: ANALYZE
+  ```
+- **STOP IMMEDIATELY**. Never automatically execute `devweave-modernization-analyze`.
