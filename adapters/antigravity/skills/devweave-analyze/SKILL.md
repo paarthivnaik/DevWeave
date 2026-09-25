@@ -46,10 +46,13 @@ Execute a comprehensive technical and architectural impact analysis for the spec
 
 ## Allowed Actions
 
-### 1. Mandatory Description Prompting (Optional Input)
+### 1. Mandatory Disk-First Artifact Ingestion
+Before analyzing, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/work-items/<ID>/` (`context.md`, `work-item.json`, `state.json`) and `.devweave/repository/` (`profile.md`, `layers.md`). Never rely on in-memory conversation history.
+
+### 2. Mandatory Description Prompting (Optional Input)
 Ask the developer if they have any additional analysis context, focus areas, or specific performance/security constraints (per Rule #7).
 
-### 2. Pre-Processing Transparency
+### 3. Pre-Processing Transparency
 State clearly which modules, service boundaries, database objects, and API endpoints will be inspected.
 
 ### 3. Deep 11-Dimension Impact Analysis

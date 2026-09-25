@@ -21,21 +21,22 @@ Execute comprehensive, multi-perspective verification comparing modernized imple
 ---
 
 ## Allowed Actions
-1. **Mandatory Description Prompting**: Ask developer for any specific verification instructions or test targets.
-2. **Clean Build & Automated Test Execution**: Run production build and test suites (unit, integration, API, UI, database regression).
-3. **Behavioral Preservation Verification**:
+1. **Mandatory Disk-First Artifact Ingestion**: Before verifying, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/modernization/stories/<ID>/` (`evidence.md`, `plan.md`, `analysis.md`, `mappings.json`, `context.md`, `state.json`) and `.devweave/modernization/` (`architecture-intent.json`, `technology-profile.json`). Never rely on in-memory context.
+2. **Mandatory Description Prompting**: Ask developer for any specific verification instructions or test targets.
+3. **Clean Build & Automated Test Execution**: Run production build and test suites (unit, integration, API, UI, database regression).
+4. **Behavioral Preservation Verification**:
    - Input validation rules (boundary values, constraints)
    - Business calculation logic & domain workflows
    - Authorization/security boundaries
    - Persistence data integrity & schema transformations
    - Error handling and problem-details responses
-4. **Architectural Conformance**: Confirm adherence to target architecture intent (e.g., CQRS separation, interface contracts, no circular dependencies).
-5. **Database Migration & Reversibility**: Verify migration scripts, indexes, and rollback capabilities.
-6. **Migration Mapping Completeness Check**:
+5. **Architectural Conformance**: Confirm adherence to target architecture intent (e.g., CQRS separation, interface contracts, no circular dependencies).
+6. **Database Migration & Reversibility**: Verify migration scripts, indexes, and rollback capabilities.
+7. **Migration Mapping Completeness Check**:
    - Verify every legacy source component in `mappings.json` is assigned an intentional status (`MIGRATED`, `REPLACED`, `TRANSFORMED`, `PRESERVED`, `RETIRED`, `DEFERRED`, `UNKNOWN`).
    - Validate that no critical legacy component has silently disappeared from the migration map.
-7. **Assemble Deliverable**: Create `verification.md` containing complete verification scorecard, test matrix, and mapping completeness status.
-8. **User-Only Story Audit Trail (`audit.md`)**: Append exclusively human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
+8. **Assemble Deliverable**: Create `verification.md` containing complete verification scorecard, test matrix, and mapping completeness status.
+9. **User-Only Story Audit Trail (`audit.md`)**: Append exclusively human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 

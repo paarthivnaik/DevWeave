@@ -21,8 +21,8 @@ Execute surgical, plan-bound code creation and modifications strictly as specifi
 ---
 
 ## Allowed Actions
-1. **Mandatory Description Prompting**: Ask developer for any specific implementation guidance or custom flags.
-2. Load approved `plan.md` and surgical context.
+1. **Mandatory Disk-First Artifact Ingestion**: Before implementing, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/modernization/stories/<ID>/` (`plan.md`, `analysis.md`, `mappings.json`, `context.md`, `state.json`) and `.devweave/modernization/` (`technology-profile.json`). Never rely on in-memory context.
+2. **Mandatory Description Prompting**: Ask developer for any specific implementation guidance or custom flags.
 3. Retrieve targeted engineering practices matching the implementation task (e.g., Angular component guidelines, CQRS command handler templates, MySQL query parameterization).
 4. Create target directory layouts and files strictly within plan boundaries.
 5. Execute build command (e.g. `dotnet build`, `ng build`, `npm run build`).
