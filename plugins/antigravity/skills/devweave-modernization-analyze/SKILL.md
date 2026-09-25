@@ -21,13 +21,14 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
 ---
 
 ## Allowed Actions
-1. **Mandatory Description Prompting**: Ask developer for any specific focus areas or additional instructions.
-2. Analyze legacy business logic, state machines, validation rules, and corner-case handling.
-3. Formulate target architectural design adhering to declared patterns (e.g., CQRS Command/Query split, Mediator, Repository pattern).
-4. Generate formal migration relationships (`MIGRATED_TO`, `REPLACED_BY`, `TRANSFORMED_TO`, `SPLIT_INTO`, `MERGED_INTO`, `PRESERVED_AS`, `RETIRED`, `DEFERRED`).
-5. Identify schema migration needs, foreign key changes, and REST API contract equivalents.
-6. Create `analysis.md` and `mappings.json`.
-7. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
+1. **Mandatory Disk-First Artifact Ingestion**: Before analyzing, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/modernization/stories/<ID>/` (`context.md`, `work-item.json`, `evidence.json`, `migration-slice.json`, `state.json`) and `.devweave/modernization/` (`architecture-intent.json`, `technology-profile.json`). Never rely on ephemeral conversation memory.
+2. **Mandatory Description Prompting**: Ask developer for any specific focus areas or additional instructions.
+3. Analyze legacy business logic, state machines, validation rules, and corner-case handling loaded from disk.
+4. Formulate target architectural design adhering to declared patterns (e.g., CQRS Command/Query split, Mediator, Repository pattern).
+5. Generate formal migration relationships (`MIGRATED_TO`, `REPLACED_BY`, `TRANSFORMED_TO`, `SPLIT_INTO`, `MERGED_INTO`, `PRESERVED_AS`, `RETIRED`, `DEFERRED`).
+6. Identify schema migration needs, foreign key changes, and REST API contract equivalents.
+7. Create `analysis.md` and `mappings.json`.
+8. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
