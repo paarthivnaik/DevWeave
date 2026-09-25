@@ -1,30 +1,32 @@
-# DevWeave V1.1 Modernization Command Contract Specification
+# DevWeave V1.2 Modernization & Setup Command Contract Specification
 
-This specification defines the canonical command naming, parameter schema, lifecycle phase mapping, and syntax validation rules for the **DevWeave V1.1 Modernization Lifecycle**.
+This specification defines the canonical command naming, parameter schema, lifecycle phase mapping, and syntax validation rules for the **DevWeave Modernization Lifecycle** and **Generic Setup Subsystem**.
 
 ---
 
 ## 1. Mandatory Hyphenated Command Contract
 
-All DevWeave modernization commands use **hyphen-separated naming** (`devweave-modernization-<phase>`).
+All DevWeave modernization and setup commands use **hyphen-separated naming** (`devweave-setup`, `devweave-modernization-<phase>`).
 
 Namespace space-separated syntax (e.g., `devweave modernization init`) and colon syntax (e.g., `devweave:modernization:init`) are **strictly prohibited and invalid**.
 
 ```text
+devweave-setup
+       ↓
 devweave-modernization-init
-        ↓
+       ↓
 devweave-modernization-context <ID>
-        ↓
+       ↓
 devweave-modernization-analyze <ID>
-        ↓
+       ↓
 devweave-modernization-plan <ID>
-        ↓
+       ↓
 devweave-modernization-branch <ID>
-        ↓
+       ↓
 devweave-modernization-implement <ID>
-        ↓
+       ↓
 devweave-modernization-verify <ID>
-        ↓
+       ↓
 devweave-modernization-pr <ID>
 ```
 
@@ -38,8 +40,9 @@ Auxiliary inspection commands:
 
 | Command | Argument | Phase Mapped | Input Description | Primary Output Artifacts | Next Suggested Action |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| `devweave-setup` | *Optional flags* | `SETUP` | Optional `--provider <name>`, `--check-only`, `--reconfigure` | Host tool detection, OS credential verification, `.devweave/modernization/workspace.json` | `devweave-modernization-context <ID>` |
 | `devweave-modernization-init` | *Optional flags* | `INIT` | Natural language architecture declaration, optional legacy source path | `.devweave/modernization/` (`architecture-intent.json`, `technology-profile.json`, `source-memory.json`, `workspace.json`) | `devweave-modernization-context <ID>` |
-| `devweave-modernization-context` | `<ID>` (Required) | `CONTEXT` | Work item ID / Modernization ID | `.devweave/modernization/stories/<ID>/` (`context.md`, `migration-unit.json`, `state.json`, `audit.md`) | `devweave-modernization-analyze <ID>` |
+| `devweave-modernization-context` | `<ID>` (Required) | `CONTEXT` | Work item ID / Modernization ID | `.devweave/modernization/stories/<ID>/` (`work-item.json`, `evidence.json`, `migration-unit.json`, `migration-slice.json`, `context.md`, `state.json`, `audit.md`) | `devweave-modernization-analyze <ID>` |
 | `devweave-modernization-analyze` | `<ID>` (Required) | `ANALYZE` | Work item ID | `.devweave/modernization/stories/<ID>/` (`analysis.md`, `mappings.json`, `audit.md`) | **Hard Gate #1** $\to$ `devweave-modernization-plan <ID>` |
 | `devweave-modernization-plan` | `<ID>` (Required) | `PLAN` | Work item ID | `.devweave/modernization/stories/<ID>/` (`plan.md`, `audit.md`) | **Hard Gate #2** $\to$ `devweave-modernization-branch <ID>` |
 | `devweave-modernization-branch` | `<ID>` (Required) | `BRANCH` | Work item ID | `.devweave/modernization/stories/<ID>/` (`state.json`, `audit.md`) | `devweave-modernization-implement <ID>` |
@@ -53,7 +56,14 @@ Auxiliary inspection commands:
 
 ## 3. Command Syntax & Parameter Rules
 
-### 3.1 `devweave-modernization-init`
+### 3.1 `devweave-setup`
+- **Syntax**: `devweave-setup [--provider <jira|azure-devops|github|custom>] [--check-only] [--reconfigure]`
+- **Behavior**:
+  - Scans environment for PM CLI clients (`az`, `jira`/`acli`, `gh`), OCR engines (`tesseract`), and credentials.
+  - Asks developer authorization before triggering installation helpers.
+  - Verifies secure authentication without writing credentials to repository.
+
+### 3.2 `devweave-modernization-init`
 - **Syntax**: `devweave-modernization-init [intent-string] [--source <path>] [--target <path>]`
 - **Behavior**:
   - Accepts natural language architecture descriptions without requiring a rigid questionnaire.
@@ -61,7 +71,7 @@ Auxiliary inspection commands:
   - If target repository is empty/insufficient, records state as `AI_DETERMINED` for unspecified details.
   - Generates initial Modernization ID (`MOD-001`, `MOD-002`, etc.) and initial durable state.
 
-### 3.2 Item-Scoped Commands (`context`, `analyze`, `plan`, `branch`, `implement`, `verify`, `pr`, `status`, `report`)
+### 3.3 Item-Scoped Commands (`context`, `analyze`, `plan`, `branch`, `implement`, `verify`, `pr`, `status`, `report`)
 - **Syntax**: `devweave-modernization-<command> <ID>`
 - **Branch Syntax**: `devweave-modernization-branch <ID> [--name <branch_name>] [--base <base_branch>]` (supports explicit flags, interactive prompting, and natural language phrasing such as `"create feature/99-User-Registration from master"`).
 - **Validation**:
@@ -85,7 +95,7 @@ The CLI dispatcher must reject the following patterns with descriptive remediati
    - Rejection:
      ```text
      ERROR: Invalid command syntax 'devweave modernization init'.
-     DevWeave V1.1 uses hyphenated modernization commands.
+     DevWeave uses hyphenated modernization commands.
      Did you mean: devweave-modernization-init?
      ```
 2. **Colon-separated namespace pattern**:
@@ -101,6 +111,7 @@ The CLI dispatcher must reject the following patterns with descriptive remediati
      ```text
      ERROR: Unknown modernization command 'devweave-modernization-compile'.
      Supported commands:
+       - devweave-setup
        - devweave-modernization-init
        - devweave-modernization-context <ID>
        - devweave-modernization-analyze <ID>

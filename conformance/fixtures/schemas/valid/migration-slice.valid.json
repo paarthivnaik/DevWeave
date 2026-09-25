@@ -1,0 +1,64 @@
+{
+  "work_item_id": "MOD-001",
+  "modernization_unit": {
+    "id": "UNIT-001",
+    "name": "Customer Management Page",
+    "type": "PAGE",
+    "description": "Legacy WebForms customer management view with grid and edit controls"
+  },
+  "legacy_components": [
+    {
+      "path": "legacy/src/Web/CustomerEdit.aspx",
+      "layer": "UI",
+      "role": "View template with grid and form controls",
+      "line_count": 340
+    },
+    {
+      "path": "legacy/src/Web/CustomerEdit.aspx.cs",
+      "layer": "Controller",
+      "role": "Code-behind event handlers and data binding",
+      "line_count": 480
+    },
+    {
+      "path": "legacy/src/Core/CustomerService.cs",
+      "layer": "Service",
+      "role": "Business logic and transaction execution",
+      "line_count": 210
+    }
+  ],
+  "database_dependencies": [
+    {
+      "name": "tbl_Customers",
+      "type": "TABLE",
+      "operations": ["SELECT", "INSERT", "UPDATE"]
+    },
+    {
+      "name": "sp_Customer_Update",
+      "type": "STORED_PROCEDURE",
+      "operations": ["EXECUTE"]
+    }
+  ],
+  "test_dependencies": [
+    {
+      "path": "legacy/tests/CustomerServiceTests.cs",
+      "framework": "NUnit",
+      "test_count": 14
+    }
+  ],
+  "external_integrations": [
+    {
+      "name": "TaxRateGateway",
+      "protocol": "SOAP/XML",
+      "direction": "OUTBOUND"
+    }
+  ],
+  "bounded_graph_nodes": [
+    "COMP:CustomerEdit.aspx",
+    "COMP:CustomerEdit.aspx.cs",
+    "SERVICE:CustomerService",
+    "DB:tbl_Customers",
+    "DB:sp_Customer_Update"
+  ],
+  "slice_token_estimate": 4200,
+  "generated_at": "2026-09-25T09:30:00Z"
+}

@@ -5,8 +5,8 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Conformance](https://img.shields.io/badge/Conformance-100%25_Verified-success)](conformance/)
 [![Platform Symmetry](https://img.shields.io/badge/Hosts-6_Platforms_Certified-6366f1)](#-1-click-universal-installation-all-6-hosts)
-[![Skills](https://img.shields.io/badge/Validated_Skills-31_Active-emerald)](#-complete-31-commands--skills-reference)
-[![Knowledge Graph](https://img.shields.io/badge/Architecture-JSON_Knowledge_Graph-orange)](#1-🧠-graph-based-durable-memory-zero-ai-amnesia)
+[![Skills](https://img.shields.io/badge/Validated_Skills-32_Active-emerald)](#-complete-32-commands--skills-reference)
+[![Knowledge Graph](https://img.shields.io/badge/Architecture-JSON_Knowledge_Graph-orange)](#1--graph-based-durable-memory-zero-ai-amnesia)
 
 **DevWeave** is a **generic, declarative, host-neutral AI-Driven Development Lifecycle (AI-DLC)** specification, durable graph knowledge architecture, and workflow orchestration framework for AI coding assistants and autonomous engineering agents.
 
@@ -170,10 +170,11 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 
 ---
 
-## 📋 Complete 31 Commands & Skills Reference
+## 📋 Complete 32 Commands & Skills Reference
 
 | Phase / Lane | Antigravity (`agy run`) | Claude Code (`claude /`) | GitHub Copilot (`@devweave`) | Gemini / Codex / Devin | Plain English Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Setup Orchestrator** | `devweave-setup` | `/devweave-setup` | `/setup` | `devweave-setup` | Diagnostics host environment, verifies PM client CLIs (`az`, `jira`, `gh`, `tesseract`), and configures secure auth. |
 | **Phase 0: Init** | `devweave-init` | `/devweave-init` | `/init` | `devweave-init` | Maps 5-layer tech stack, physical layers (`layers.md`), and JSON Knowledge Graph without touching code. |
 | **Phase 1: Context** | `devweave-context <ID>` | `/devweave-context <ID>` | `/context <ID>` | `devweave-context <ID>` | Ingests ticket (Jira/GitHub/ADO/Linear), cleans secrets/PII, and runs 1-hop graph traversal under 32k budget. |
 | **Phase 2: Analyze** | `devweave-analyze <ID>` | `/devweave-analyze <ID>` | `/analyze <ID>` | `devweave-analyze <ID>` | Checks database and API impacts before making changes. |
@@ -183,7 +184,7 @@ git clone --depth 1 https://github.com/paarthivnaik/DevWeave.git /tmp/devweave &
 | **Phase 6: PR Review**| `devweave-pr-review <ID>`| `/devweave-pr-review <ID>`| `/pr-review <ID>` | `devweave-pr-review <ID>` | Dual-Model Review: Principal Architect + Senior DBA audit code & SQL. |
 | **Phase 7: PR** | `devweave-pr <ID>` | `/devweave-pr <ID>` | `/pr <ID>` | `devweave-pr <ID>` | Assembles final PR, merges graph delta, and updates durable domain memory. |
 | **Modernization Init** | `devweave-modernization-init` | `/devweave-modernization-init` | `/modernization-init` | `devweave-modernization-init` | Natural-language architecture intent ingestion; blocking legacy source path checkpoint. |
-| **Modernization Context** | `devweave-modernization-context <ID>` | `/devweave-modernization-context <ID>` | `/modernization-context <ID>` | `devweave-modernization-context <ID>` | Slices legacy source into 2-tier story workspace; initializes user-only `audit.md`. |
+| **Modernization Context** | `devweave-modernization-context <ID>` | `/devweave-modernization-context <ID>` | `/modernization-context <ID>` | `devweave-modernization-context <ID>` | Ingests full work items via generic provider adapters, extracts attachment text & OCR, models claims, slices legacy source. |
 | **Modernization Analyze** | `devweave-modernization-analyze <ID>` | `/devweave-modernization-analyze <ID>` | `/modernization-analyze <ID>` | `devweave-modernization-analyze <ID>` | Maps legacy business rules & produces `mappings.json` (Hard Gate #1). |
 | **Modernization Plan** | `devweave-modernization-plan <ID>` | `/devweave-modernization-plan <ID>` | `/modernization-plan <ID>` | `devweave-modernization-plan <ID>` | Decomposes architecture into file actions & DB migrations (Hard Gate #2). |
 | **Modernization Branch** | `devweave-modernization-branch <ID>` | `/devweave-modernization-branch <ID>` | `/modernization-branch <ID>` | `devweave-modernization-branch <ID>` | Isolates modernization branch with interactive branch and base selection (`--name`, `--base`). |
@@ -209,7 +210,9 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 | Document | Purpose |
 | :--- | :--- |
 | **[Product Overview (Simple English Guide)](docs/product-overview.md)** | Clear, friendly guide explaining the entire DevWeave system, 7 phases, and benefits in plain English. |
-| **[Modernization Guide](docs/modernization.md)** | Complete guide to V1.1 Modernization lifecycle, 3 Human Hard Gates, legacy source isolation, and mapping. |
+| **[Modernization Guide](docs/modernization.md)** | Complete guide to V1.1/V1.2 Modernization lifecycle, 3 Human Hard Gates, legacy source isolation, and mapping. |
+| **[Generic Context Acquisition & Evidence Guide](docs/context-acquisition.md)** | Provider-neutral work-item intake, attachment text extraction, image OCR, and claims modeling. |
+| **[Environment & Setup Orchestrator Guide](docs/setup.md)** | Tool detection, human authorization gate, and secure authentication with zero secret storage. |
 | **[Test Intelligence Guide](docs/test-intelligence.md)** | Shared test intelligence across V1.0 & V1.1 with atomic test changes, framework detection, and failure classification. |
 | **[Release Process & GitHub Actions Runbook](docs/release-process.md)** | Step-by-step automated release guide with GitHub Actions for testing, packaging, and deploying new versions. |
 | **[How It Works (Deep Architecture)](docs/how-it-works.md)** | Pin-to-pin architectural explanation of state machines, blast radius, dual-model reviews, and JSON Knowledge Graphs. |

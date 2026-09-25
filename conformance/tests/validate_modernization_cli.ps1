@@ -1,16 +1,17 @@
 <#
 .SYNOPSIS
-    DevWeave V1.1 Modernization CLI Command Contract Validator
+    DevWeave Modernization & Setup CLI Command Contract Validator
 .DESCRIPTION
-    Validates recognition of all mandatory hyphenated modernization commands,
+    Validates recognition of all mandatory hyphenated modernization and setup commands,
     rejection of malformed / space-separated / colon syntax, parameter enforcement,
     and non-interference with V1.0 commands.
 #>
 
 $ErrorActionPreference = "Stop"
 
-# Canonical V1.1 Modernization Commands Definition
+# Canonical Modernization & Setup Commands Definition
 $ModernizationCommands = @{
+    "devweave-setup"                   = @{ RequiresId = $false; Phase = "SETUP" }
     "devweave-modernization-init"      = @{ RequiresId = $false; Phase = "INIT" }
     "devweave-modernization-context"   = @{ RequiresId = $true;  Phase = "CONTEXT" }
     "devweave-modernization-analyze"   = @{ RequiresId = $true;  Phase = "ANALYZE" }
@@ -55,7 +56,7 @@ function Parse-DevWeaveCliCommand {
         }
     }
 
-    # Match modernization commands
+    # Match modernization and setup commands
     if ($ModernizationCommands.ContainsKey($cmd)) {
         $spec = $ModernizationCommands[$cmd]
         $cmdArgs = @($tokens | Select-Object -Skip 1)
@@ -109,16 +110,19 @@ function Parse-DevWeaveCliCommand {
 }
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "   DevWeave V1.1 Modernization CLI Contract Validator     " -ForegroundColor Cyan
+Write-Host "   DevWeave Modernization & Setup CLI Contract Validator  " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 $totalTests = 0
 $passedCount = 0
 $failedCount = 0
 
-# --- Test Suite 1: Valid Modernization Commands Recognition ---
-Write-Host "`n[Suite 1] Valid Modernization Invocations..." -ForegroundColor Yellow
+# --- Test Suite 1: Valid Modernization & Setup Commands Recognition ---
+Write-Host "`n[Suite 1] Valid Modernization & Setup Invocations..." -ForegroundColor Yellow
 $validTestCases = @(
+    @{ Cmd = "devweave-setup"; ExpectedPhase = "SETUP" },
+    @{ Cmd = "devweave-setup --provider jira"; ExpectedPhase = "SETUP" },
+    @{ Cmd = "devweave-setup --provider azure-devops --check-only"; ExpectedPhase = "SETUP" },
     @{ Cmd = "devweave-modernization-init"; ExpectedPhase = "INIT" },
     @{ Cmd = "devweave-modernization-init Angular microservices CQRS MySQL"; ExpectedPhase = "INIT" },
     @{ Cmd = "devweave-modernization-context MOD-001"; ExpectedPhase = "CONTEXT"; ExpectedId = "MOD-001" },

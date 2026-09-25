@@ -1,0 +1,39 @@
+{
+  "work_item_id": "MOD-001",
+  "claims": [
+    {
+      "id": "claim-001",
+      "statement": "Customer page uses stored procedure sp_Customer_Update for discount calculation",
+      "source": "attachment:customer-screen-spec.txt",
+      "source_type": "attachment",
+      "verification_status": "UNVERIFIED",
+      "notes": "Must be verified against legacy SQL definitions before implementing handler."
+    },
+    {
+      "id": "claim-002",
+      "statement": "Tax calculation requires state tax code lookup table tbl_TaxCodes",
+      "source": "legacy-code:CustomerService.cs",
+      "source_type": "legacy-code",
+      "verification_status": "VERIFIED",
+      "verified_by": "Repository Analysis AST Scanner",
+      "notes": "Confirmed reference in legacy CustomerService.cs line 142."
+    }
+  ],
+  "evidence_items": [
+    {
+      "id": "ev-001",
+      "category": "TEXT_EXTRACTION",
+      "reference_path": ".devweave/modernization/stories/MOD-001/evidence/att-101-1.txt",
+      "content_summary": "Extracted requirements text detailing customer credit validation",
+      "quality": "HIGH"
+    },
+    {
+      "id": "ev-002",
+      "category": "OCR",
+      "reference_path": ".devweave/modernization/stories/MOD-001/evidence/att-101-2-ocr.txt",
+      "content_summary": "Extracted UI labels and columns from legacy screen screenshot",
+      "quality": "HIGH"
+    }
+  ],
+  "updated_at": "2026-09-25T09:30:00Z"
+}

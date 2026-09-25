@@ -1,0 +1,13 @@
+{
+  "provider": "azure-devops",
+  "cli_tool": "az",
+  "cli_detected": true,
+  "cli_version": "2.58.0",
+  "auth_type": "cli",
+  "authenticated": true,
+  "endpoint": "https://dev.azure.com/modernization-org",
+  "organization": "modernization-org",
+  "project": "ModernizationCore",
+  "privacy_gate_accepted": true,
+  "last_verified_at": "2026-09-25T08:00:00Z"
+}
