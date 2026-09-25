@@ -58,12 +58,24 @@ Check remote repository connectivity and compare the local installation against 
 ---
 
 ### Step 3: Report Update Summary
-```text
-✨ DevWeave Claude Plugin updated successfully.
+- **When inside an initialized repository**:
+  ```text
+  ✨ DevWeave Claude Plugin updated & repository intelligence synchronized.
 
-Source: https://github.com/paarthivnaik/DevWeave.git (branch: master)
-Plugin Version: 1.2.0 (22 active skills)
-Repository Status: Intelligence refreshed & 24h TTL synced (Non-destructive)
+  Source: https://github.com/paarthivnaik/DevWeave.git (branch: master)
+  Plugin Version: 1.2.0 (22 active skills)
+  Repository Status: Intelligence refreshed & 24h TTL synced (Non-destructive)
 
-Run: claude /devweave-context <WorkItemId>  (to begin work item)
-```
+  Suggested Next Commands:
+    • claude /devweave-modernization-context <WorkItemId> (to begin modernization)
+    • claude /devweave-context <WorkItemId> (to begin standard work item)
+  ```
+- **When outside a repository**:
+  ```text
+  ✨ DevWeave Claude Plugin updated globally.
+
+  Plugin Version: 1.2.0 (22 active skills)
+
+  Suggested Next Commands:
+    • claude /devweave-init (run inside a project repository to establish repository intelligence)
+  ```
