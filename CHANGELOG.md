@@ -5,6 +5,13 @@ All notable changes to DevWeave will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-09-25
+### Added
+- **Intelligent PR Review Orchestration**: `devweave-pr` and `devweave-modernization-pr` automatically run Phase 6 Dual-Model Review (Architect + Senior DBA + Security) inline if `review.md` is missing or outdated, while keeping standalone `devweave-pr-review` fully operable.
+- **Automated Repository PR Creation**: Upon human authorization at the PR governance gate (`[Create PR]`), DevWeave automatically pushes the working branch (`git push -u origin <branch>`) and creates the remote PR using GitHub (`gh pr create`) or Azure DevOps (`az repos pr create`) CLI adapters, logging the live PR URL to `audit.md`.
+- **Preflight Git Verification & Guided Setup in Branch Creation**: Added automated Git tool presence and author identity (`user.name`, `user.email`) preflight checks to `devweave-branch` and `devweave-modernization-branch`, interactively prompting for missing credentials or routing to `devweave-setup`.
+- **Two-Tier PM Tool Persistence & Dynamic Process PATH Refresh**: Implemented two-tier provider config resolution (`.devweave/workspace.json` -> `~/.devweave/config.json`) and dynamic environment PATH synchronization across `devweave-context`, `devweave-modernization-context`, and `devweave-setup`, ensuring PM tool clients installed in the current session are detected across subsequent stories without re-prompting.
+
 ## [1.2.0] - 2026-09-25
 ### Added
 - **Generic Work Item Context Acquisition & Setup Subsystem**: Decoupled DevWeave core lifecycle from any single PM platform, CLI wrapper, or AI vendor.

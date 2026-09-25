@@ -9,8 +9,8 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
 1. **Dual-Model Collective Review**: Code changes and SQL migrations must be evaluated concurrently by two distinct model perspectives:
    - **Model A (Principal Software Architect Mindset)**: System design, DDD/Clean boundaries, scalability, public API contracts, and downstream impact.
    - **Model B (Senior Database Administrator & Security Specialist)**: Table locks (`ONLINE=ON`/`CONCURRENTLY`), query execution plans, indexes, rollback safety, N+1 queries, OWASP vulnerabilities, side effects, and cascading resilience.
-2. **Phase Isolation**: This skill executes **only the review phase**, compiles `.devweave/work-items/<ID>/review.md`, and halts. It does NOT automatically open a PR.
-3. **Mandatory Human Checkpoint**: Execution must present the collective verdict to the developer and wait for human authorization before any PR step.
+2. **Phase Isolation & Standalone Capability**: This skill can be executed independently at any point to audit implementation quality, compile `.devweave/work-items/<ID>/review.md`, and record findings in state.
+3. **Mandatory Human Checkpoint**: Execution must present the collective verdict to the developer and wait for human authorization before transitioning to PR creation.
 4. **Audit Invariance**: Append ONLY human developer prompts, custom review instructions, and human gate decisions/feedback to `.devweave/work-items/<ID>/audit.md`. Detailed review critiques stay in `review.md`.
 
 ## Step-by-Step Instructions
@@ -26,20 +26,20 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
      - Performs **Side Effects & State Mutation Audit** (global state, cache invalidation races, async message order).
      - Models **Cascading Failures & Resilience** (timeout propagation, retry storms, unhandled exceptions, circuit breaking).
      - Audits OWASP Top 10 security and zero raw credential storage.
-3. **Synthesize Collective Review Output**:
+4. **Synthesize Collective Review Output**:
    - Compile comprehensive `.devweave/work-items/<ID>/review.md` containing:
      - Executive summary and collective verdict (`CONSENSUS_APPROVED` vs `CHANGES_REQUESTED`).
      - Principal Architect System & Design Critique.
      - Senior DBA SQL & Migration Audit.
      - Downstream Impact, Side Effects & Cascading Resilience Matrix.
      - Consensus findings (flagged by both models) and specialist findings.
-4. **Handle Review Verdict**:
+5. **Handle Review Verdict**:
    - If **P0/P1 Blocking Findings** exist: Recommend isolated remediation (`devweave-implement <ID>` or fix loop) before proceeding.
    - If **Passed / Advisory Only**: Mark review as ready for human sign-off.
-5. **Update State & Audit**:
-   - Record `REVIEWED` status in `.devweave/work-items/<ID>/state.md`.
+6. **Update State & Audit**:
+   - Record `REVIEWED` status and verdict in `.devweave/work-items/<ID>/state.md` (and `state.json`).
    - Append ONLY human developer prompts and custom instructions to `.devweave/work-items/<ID>/audit.md`.
-6. **Mandatory Human Checkpoint**: Output:
+7. **Mandatory Human Checkpoint**: Output:
    ```text
    REVIEW COMPLETE
    Work Item: <ID>
@@ -52,6 +52,6 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    Human decision: [Approve Review & Proceed to PR] [Request Changes / Fix] [Skip with Comment] [Stop]
    Suggested next phase: PR (Run: devweave-pr <ID>)
    ```
-7. **Terminate Execution**: Stop and wait for user instruction.
-   - Upon human approval: Record approval in audit and STOP. Never auto-execute `devweave-pr <ID>`.
-   - Upon human skip: Prompt for mandatory reason comment, record `SKIPPED` with reason in audit and state, and STOP. Never auto-execute `devweave-pr <ID>`.
+8. **Terminate Execution**: Stop and wait for user instruction.
+   - Upon human approval: Record approval in audit and state. Suggested next command is `devweave-pr <ID>`.
+   - Upon human skip: Prompt for mandatory reason comment, record `SKIPPED` with reason in audit and state, and STOP.

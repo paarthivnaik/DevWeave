@@ -1,6 +1,6 @@
 ---
 name: devweave-context
-description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, Azure DevOps, GitHub, Linear, Manual) with PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md."
+description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, Azure DevOps, GitHub, Linear, Manual) with two-tier configuration persistence, dynamic PATH refresh, PII/privacy hard gate, supports --refresh change detection, loads domain/product catalogs, and builds focused context.md."
 ---
 
 # Antigravity Context Skill (`devweave-context`)
@@ -8,9 +8,10 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 ## Execution Invariants
 1. **Single-Phase Execution**: Execute ONLY the CONTEXT phase. Do NOT automatically advance to ANALYZE.
 2. **PII / Privacy Hard Gate**: Prompt user to confirm ticket contains no unredacted PII/PHI or sensitive data before fetching.
-3. **PM Tool Selection**: Prompt developer to select the active Project Management source (Jira, Azure DevOps, GitHub, Linear, Manual Paste).
-4. **Resume Detection**: If `.devweave/work-items/<ID>/` exists, check for `handoff.md` and display before continuing.
-5. **Zero Secret Storage**: Never write Personal Access Tokens (PATs) or raw secrets into artifacts.
+3. **PM Tool Persistence & Two-Tier Resolution**: Check `.devweave/workspace.json` $\to$ `~/.devweave/config.json` before prompting. Only prompt if no provider is configured.
+4. **Dynamic PATH Refresh**: Refresh environment PATH dynamically before probing CLI presence so newly installed tools are recognized without terminal restarts.
+5. **Resume Detection**: If `.devweave/work-items/<ID>/` exists, check for `handoff.md` and display before continuing.
+6. **Zero Secret Storage**: Never write Personal Access Tokens (PATs) or raw secrets into artifacts.
 
 ---
 
@@ -29,29 +30,32 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
   [Confirm & Proceed] [Cancel]
   ```
 
-### Step 2: PM Tool Selection, Persistence & Work Item Retrieval
-- **Check Persisted PM Source**:
-  - Read `pmSource` from `.devweave/workspace.json`.
-  - If `pmSource` is not yet configured (First-Time Run) or `--reconfigure` / `--pm-source <source>` is provided:
-    - Present Project Management source selector:
-      ```text
-      [Antigravity Context Intake]
-      Work Item: <ID>
+### Step 2: Two-Tier PM Tool Resolution & Work Item Retrieval
+- **Dynamic PATH Refresh**:
+  - Refresh the current process `PATH` from Windows Environment / Registry before checking CLI availability.
+- **Check Persisted PM Source (Two-Tier Hierarchy)**:
+  - 1. Check workspace configuration: `.devweave/workspace.json` (`pmSource`).
+  - 2. Check global user configuration: `~/.devweave/config.json` (`defaultPmSource`).
+  - If a PM source is found in workspace or global configuration, **automatically use it without re-prompting**.
+- **First-Time Selection (If not found or `--reconfigure` passed)**:
+  - Present Project Management source selector:
+    ```text
+    [DevWeave Context Intake]
+    Work Item: <ID>
 
-      Select Project Management Source:
-        [1] Atlassian Jira (Jira MCP / API)
-        [2] Azure DevOps Boards (ADO MCP / API)
-        [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
-        [4] Linear (Linear MCP)
-        [5] Manual Paste / Offline Markdown Input
+    Select Project Management Source:
+      [1] Atlassian Jira (Jira MCP / API)
+      [2] Azure DevOps Boards (ADO MCP / API)
+      [3] GitHub Issues & Projects (GitHub MCP / GraphQL)
+      [4] Linear (Linear MCP)
+      [5] Manual Paste / Offline Markdown Input
 
-      Selection: [1 | 2 | 3 | 4 | 5]
-      ```
-    - Persist selected `pmSource` into `.devweave/workspace.json`.
-  - **Subsequent Invocations**:
-    - If `pmSource` is configured for an MCP tool (`jira`, `ado`, `github`, `linear`) and the MCP server is active, automatically connect and fetch ticket `<ID>` without prompting.
-    - If MCP connection is unavailable or `pmSource` is `manual`, prompt the developer with the structured Markdown template to paste ticket details.
-  - **Mid-Stream Setup**: The user can set up or change MCP tools at any time via `--pm-source <source>` or by configuring an MCP server in the host environment.
+    Selection: [1 | 2 | 3 | 4 | 5]
+    ```
+  - Persist selected `pmSource` into `.devweave/workspace.json` and `~/.devweave/config.json`.
+- **Subsequent Invocations**:
+  - If `pmSource` is configured for an MCP tool (`jira`, `ado`, `github`, `linear`) and the client/MCP server is active, automatically connect and fetch ticket `<ID>` without prompting.
+  - If MCP/CLI connection is unavailable or `pmSource` is `manual`, prompt the developer with the structured Markdown template to paste ticket details.
 - Classify work item type: `BUG` vs `FEATURE` (Story/Task/Epic).
 - For **Features**: Extract acceptance criteria, parent Epic, sibling stories, and Figma design references.
 - For **Bugs**: Extract environment, reproduction sequence, error logs, and runtime stack traces.
@@ -85,10 +89,8 @@ description: "[Phase 1: Context] Ingests work item via PM tool selection (Jira, 
 
   Human Decision: [Approve Context] [Request Changes] [Provide Info] [Stop]
   Suggested Next Phase: ANALYZE
-  Run: agy run devweave-analyze <ID>
-
-  Antigravity is waiting for your instruction.
+  Run: devweave-analyze <ID>
   ```
 
-### Step 6: Terminate Execution
+### Step 7: Terminate Execution
 - Stop and wait for explicit user instruction.
