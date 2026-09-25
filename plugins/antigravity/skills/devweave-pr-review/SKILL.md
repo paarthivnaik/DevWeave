@@ -11,7 +11,7 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    - **Model B (Senior Database Administrator & Security Specialist)**: Table locks (`ONLINE=ON`/`CONCURRENTLY`), query execution plans, indexes, rollback safety, N+1 queries, OWASP vulnerabilities, side effects, and cascading resilience.
 2. **Phase Isolation**: This skill executes **only the review phase**, compiles `.devweave/work-items/<ID>/review.md`, and halts. It does NOT automatically open a PR.
 3. **Mandatory Human Checkpoint**: Execution must present the collective verdict to the developer and wait for human authorization before any PR step.
-4. **Audit Invariance**: Append review findings, consensus verdicts, and human gate authorization to `.devweave/work-items/<ID>/audit.md`.
+4. **Audit Invariance**: Append ONLY human developer prompts, custom review instructions, and human gate decisions/feedback to `.devweave/work-items/<ID>/audit.md`. Detailed review critiques stay in `review.md`.
 
 ## Step-by-Step Instructions
 1. **Load Implementation Context**: Read git diff, modified source files, SQL migrations, `plan.md`, and `.devweave/work-items/<ID>/test-results.json`.
@@ -37,7 +37,7 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    - If **Passed / Advisory Only**: Mark review as ready for human sign-off.
 5. **Update State & Audit**:
    - Record `REVIEWED` status in `.devweave/work-items/<ID>/state.md`.
-   - Append collective review verdict, specialist summaries, and human gate decision to `.devweave/work-items/<ID>/audit.md`.
+   - Append ONLY human developer prompts and custom instructions to `.devweave/work-items/<ID>/audit.md`.
 6. **Mandatory Human Checkpoint**: Output:
    ```text
    REVIEW COMPLETE
@@ -48,7 +48,9 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
    Artifact: .devweave/work-items/<ID>/review.md
    Audit Log: .devweave/work-items/<ID>/audit.md
 
-   Human decision: [Approve Review & Proceed to PR] [Request Changes / Fix] [Stop]
+   Human decision: [Approve Review & Proceed to PR] [Request Changes / Fix] [Skip with Comment] [Stop]
    Suggested next phase: PR (Run: devweave-pr <ID>)
    ```
 7. **Terminate Execution**: Stop and wait for user instruction.
+   - Upon human approval: Record approval in audit and STOP. Never auto-execute `devweave-pr <ID>`.
+   - Upon human skip: Prompt for mandatory reason comment, record `SKIPPED` with reason in audit and state, and STOP. Never auto-execute `devweave-pr <ID>`.

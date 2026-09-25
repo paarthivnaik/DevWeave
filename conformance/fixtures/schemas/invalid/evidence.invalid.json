@@ -1,0 +1,11 @@
+{
+  "work_item_id": "MOD-001",
+  "claims": [
+    {
+      "id": "claim-001",
+      "statement": "Missing source type and invalid verification status",
+      "verification_status": "INVALID_STATUS"
+    }
+  ],
+  "updated_at": "2026-09-25T09:30:00Z"
+}

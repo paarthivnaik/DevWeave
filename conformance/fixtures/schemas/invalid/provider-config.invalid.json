@@ -1,0 +1,7 @@
+{
+  "provider": "unsupported-provider",
+  "cli_tool": "custom",
+  "cli_detected": "not-a-bool",
+  "auth_type": "invalid-auth",
+  "authenticated": false
+}
