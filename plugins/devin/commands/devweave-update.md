@@ -58,12 +58,24 @@ Check remote repository connectivity and compare the local installation against 
 ---
 
 ### Step 3: Report Update Summary
-```text
-✨ DevWeave Devin Plugin updated successfully.
+- **When inside an initialized repository**:
+  ```text
+  ✨ DevWeave Devin Plugin updated & repository intelligence synchronized.
 
-Source: https://github.com/paarthivnaik/DevWeave.git (branch: master)
-Plugin Version: 1.2.0 (22 active skills)
-Repository Status: Intelligence refreshed & 24h TTL synced (Non-destructive)
+  Source: https://github.com/paarthivnaik/DevWeave.git (branch: master)
+  Plugin Version: 1.2.0 (22 active skills)
+  Repository Status: Intelligence refreshed & 24h TTL synced (Non-destructive)
 
-Run: devin run /devweave-context <WorkItemId>  (to begin work item)
-```
+  Suggested Next Commands:
+    • devin run /devweave-modernization-context <WorkItemId> (to begin modernization)
+    • devin run /devweave-context <WorkItemId> (to begin standard work item)
+  ```
+- **When outside a repository**:
+  ```text
+  ✨ DevWeave Devin Plugin updated globally.
+
+  Plugin Version: 1.2.0 (22 active skills)
+
+  Suggested Next Commands:
+    • devin run /devweave-init (run inside a project repository to establish repository intelligence)
+  ```
