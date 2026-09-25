@@ -1,31 +1,85 @@
 ---
 name: devweave-plan
-description: [Phase 3: Plan] Decomposes approved analysis into concrete, file-anchored implementation tasks with test commands, verification gates, and audit.md logging.
+description: "[Phase 3: Plan] Decomposes approved analysis into concrete, file-anchored implementation tasks with explicit requirement tracing, test specifications, and audit.md logging."
 ---
 
 # DevWeave Plan Skill (`devweave-plan`)
 
-## Execution Invariants
-1. **Single-Phase Execution**: Execute ONLY the PLAN phase. Do NOT automatically advance to BRANCH.
-2. **Implementation Contract**: Every task must cite exact files, anchors, changes, and verification checks.
-3. **Audit Invariance**: Append plan details, prompt, and approval decisions to `.devweave/work-items/<ID>/audit.md`.
+## Purpose
+Decompose the approved `analysis.md` into a concrete, file-anchored implementation contract with full traceability to requirements and analysis findings, test execution commands, database migration instructions, and rollback safeguards.
 
-## Step-by-Step Instructions
-1. **Load Approved Analysis**: Read `analysis.md` and `context.md`.
-2. **Decompose Tasks**: Specify atomic implementation steps with explicit file paths, symbols, changes, and test commands.
-3. **Database & API Safeguards**: Explicitly specify schema migrations, API backward compatibility checks, and rollback steps.
-4. **Assemble Artifact**: Write to `.devweave/work-items/<ID>/plan.md`.
-5. **Update State & Audit**:
-   - Record `PLAN` status in `.devweave/work-items/<ID>/state.md`.
-   - Append plan creation log, task count, and human decision to `.devweave/work-items/<ID>/audit.md`.
-6. **Human Checkpoint**: Output the completion summary:
+---
+
+## Inputs & Parameters
+- `<ID>`: Work item ID (e.g. `TASK-001`, `98`, `FEAT-42`).
+
+---
+
+## Preconditions & Guards
+1. **Base Init Prerequisite Guard**:
+   Ensure `.devweave/` is initialized. If not:
    ```text
-   PLAN COMPLETE
-   Work Item: <ID>
-   Artifact: .devweave/work-items/<ID>/plan.md
-   Audit Log: .devweave/work-items/<ID>/audit.md
-   
-   Human decision: [Approve Plan] [Request Changes] [Stop]
-   Suggested next phase: BRANCH (Run: DevWeave-branch <ID>)
+   DevWeave has not been initialized for this repository.
+
+   Run:
+
+   devweave-init
+
+   before continuing.
    ```
-7. **Terminate Execution**: Stop and wait for user instruction.
+   **STOP IMMEDIATELY**.
+2. **Analysis Dependency & Staleness Guard**:
+   Verify `ANALYZE` is `COMPLETED` and approved. If `analysis.md` or `context.md` was updated after plan generation, mark previous plan `STALE` and regenerate.
+
+---
+
+## Allowed Actions
+
+### 1. Mandatory Description Prompting (Optional Input)
+Ask the developer if they have any additional planning preferences or rollout constraints (per Rule #7).
+
+### 2. Pre-Processing Transparency
+State clearly which source files, database migration paths, and test suites will be planned for modification.
+
+### 3. Task Decomposition & Traceability
+Break down solution into discrete, ordered tasks with explicit bidirectional traceability:
+- Task ID: `PLAN-001`
+- Traced Analysis Finding: `ANALYSIS-007`
+- Traced Requirement: `REQUIREMENT-003`
+- Target Files & Line Anchors: Explicit file paths, symbols, functions to create/modify/delete.
+- Code & API Contract Changes: Signatures, validation rules, error codes.
+- Database & Data Migrations: Schema updates, indexes, reversible migration scripts.
+- UI & Flow Modifications: Components, routes, reactive state bindings.
+- Test Specifications: Unit, integration, and E2E test commands and assertions.
+- Security & Permission Controls: Input sanitization, authorization gates.
+- Rollback & Safeguard Strategy: Step-by-step procedure to revert changes cleanly.
+
+### 4. Assemble Artifact
+Write `.devweave/work-items/<ID>/plan.md` and update `state.json`.
+
+### 5. User-Only Story Audit Trail (`audit.md`)
+Log developer prompt, custom input, and decisions to `.devweave/work-items/<ID>/audit.md` with `Author: <User Name> <email@example.com>`.
+
+---
+
+## Artifacts Generated
+```text
+.devweave/work-items/<ID>/
+├── plan.md                     <-- Traceable implementation blueprint
+├── state.json                  <-- Phase tracker (currentPhase: PLAN, status: WAITING_FOR_HUMAN)
+└── audit.md                    <-- Append-only human activity audit log
+```
+
+---
+
+## Human Checkpoint & Stop Rule
+- Present summary and request human approval:
+  ```text
+  PLAN COMPLETE
+  Work Item: <ID>
+  Artifact: .devweave/work-items/<ID>/plan.md
+
+  Human decision: [Approve Plan] [Request Changes] [Stop]
+  Suggested next phase: BRANCH (Run: devweave-branch <ID>)
+  ```
+- **STOP IMMEDIATELY**. Never automatically execute `devweave-branch`.

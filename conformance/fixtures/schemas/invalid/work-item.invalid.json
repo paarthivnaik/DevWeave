@@ -1,0 +1,10 @@
+{
+  "work_item_id": "MOD-001",
+  "title": "Missing required fields",
+  "type": "InvalidTypeName",
+  "status": "Active",
+  "source": {
+    "provider": "invalid-provider"
+  },
+  "created_at": "2026-09-25T08:00:00Z"
+}

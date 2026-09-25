@@ -141,3 +141,26 @@ Every story maintains an append-only `.devweave/modernization/stories/<ID>/audit
 - **Base Branch**: master
 ```
 
+---
+
+## 7. Strict Gate Isolation & Command Boundaries
+When a developer authorizes a Hard Gate (`APPROVE` at Hard Gate #1, #2, or #3):
+1. The agent updates story state (`phases.<PHASE>` = `APPROVED`) and records the human approval in `audit.md`.
+2. **The agent STOPS IMMEDIATELY**.
+3. It is strictly prohibited from automatically running the next command (e.g. auto-running `devweave-modernization-plan` or `devweave-modernization-pr`).
+4. The developer must explicitly execute the next phase command.
+
+---
+
+## 8. Controlled Phase & Gate `SKIP` with Mandatory Justification
+Developers can fast-track or bypass optional phases or governance gates using `SKIP`:
+- **Mandatory Justification**: The agent requires an explicit developer justification comment.
+- **Traceability**: The skip decision, comment, and author attribution are permanently logged to `audit.md`.
+- **State Transition**: Sets `phases.<PHASE>` = `SKIPPED`, `skipReason` = `"<comment>"`, and halts for the next explicit command.
+
+---
+
+## 9. Technology-Neutral Generic Architecture
+DevWeave is 100% generic across all programming languages, web frameworks, ORMs, and databases. Dynamic 5-layer detection extracts runtime, ecosystem, persistence, test runners, and build systems from repository manifests without hardcoded language couplings.
+
+

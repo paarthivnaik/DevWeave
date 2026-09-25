@@ -195,5 +195,35 @@ DevWeave maintains strict auditability by generating an append-only `.devweave/m
 - **Author Identity**: Each entry records `Author: <User Name> <email@example.com>` from Git config.
 - **Developer Prompts**: Full text of user instructions, custom descriptions, and pasted requirements.
 - **Interactive Configurations**: PM tool choices and custom branch configurations (`--name`, `--base`, or natural phrasing).
-- **Governance Gate Records**: Explicit human decisions (`APPROVE`, `REQUEST_CHANGES`, `STOP`) and reviewer comments at Hard Gates #1, #2, and #3.
-- **Zero Framework Operations**: AI-DLC internal machinery, AST scans, and agent traces are excluded to maintain clean human governance history.
+- **Governance Gate Records**: Explicit human decisions (`APPROVE`, `REQUEST_CHANGES`, `SKIP`, `STOP`) and reviewer comments at Hard Gates #1, #2, and #3.
+- **Zero Framework Operations**: AI-DLC internal machinery, AST scans, build metrics, scorecards, and agent traces are excluded to maintain clean human governance history.
+
+---
+
+## 8. Strict Gate Isolation & Zero Auto-Progression
+
+When a human developer authorizes a governance checkpoint (`APPROVE` at Hard Gates #1, #2, or #3, or Review approval):
+- The agent updates the story state (`APPROVED`) and appends the human authorization to `audit.md`.
+- **The agent STOPS IMMEDIATELY**.
+- Auto-progression into subsequent commands is strictly prohibited. The developer must explicitly trigger the next phase command (e.g. `devweave-modernization-pr <ID>`).
+
+---
+
+## 9. Controlled Phase & Gate `SKIP` Governance
+
+When an optional phase or governance gate needs to be bypassed (e.g., hotfixes, spikes, direct 1:1 legacy porting):
+- **Mandatory Developer Justification**: The developer must provide a reason comment (e.g., `"Approved hotfix bypass by Tech Lead"`).
+- **Attribution & Audit**: The decision, justification, and author identity (`Author: <User Name> <email@example.com>`) are logged to `audit.md`.
+- **State Transition**: Sets `phases.<PHASE>` = `SKIPPED`, `skipReason` = `"<comment>"`, and halts for the next explicit command.
+
+---
+
+## 10. Technology-Neutral 5-Layer Stack Detection Engine
+
+DevWeave operates with 100% technology neutrality across all languages and frameworks. It dynamically inspects repositories across 5 layers:
+1. **Layer 1 (Language & Runtime)**: C#, TypeScript, JavaScript, Python, Go, Rust, Java, PHP, Ruby, C++, Swift, Kotlin.
+2. **Layer 2 (Frameworks & Libraries)**: ASP.NET Core, Angular, React, FastAPI, Spring Boot, Gin, Actix, Laravel, Rails.
+3. **Layer 3 (Persistence & ORM)**: EF Core, TypeORM, Prisma, SQLAlchemy, Hibernate, Dapper, GORM, Diesel.
+4. **Layer 4 (Testing & Quality)**: xUnit, Jest, Pytest, Playwright, Cypress, JUnit, go test, cargo test, PHPUnit.
+5. **Layer 5 (Build & Packaging)**: dotnet CLI, npm/pnpm, Cargo, Gradle/Maven, go build, CMake, Composer, Bundler.
+

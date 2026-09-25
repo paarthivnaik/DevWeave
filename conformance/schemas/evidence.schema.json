@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/evidence.schema.json",
+  "title": "EvidenceAndClaims",
+  "type": "object",
+  "required": ["work_item_id", "claims", "evidence_items", "updated_at"],
+  "properties": {
+    "work_item_id": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement", "source", "source_type", "verification_status"],
+        "properties": {
+          "id": { "type": "string" },
+          "statement": { "type": "string" },
+          "source": { "type": "string" },
+          "source_type": {
+            "type": "string",
+            "enum": ["work-item", "attachment", "comment", "legacy-code", "test", "manual-declaration"]
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": ["UNVERIFIED", "VERIFIED", "CONTRADICTED", "PARTIALLY_VERIFIED", "UNKNOWN"]
+          },
+          "verified_by": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "reference_path", "content_summary"],
+        "properties": {
+          "id": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["TEXT_EXTRACTION", "OCR", "CODE_REFERENCE", "SCHEMA_REFERENCE", "TEST_OUTPUT", "REQUIREMENT_DOC"]
+          },
+          "reference_path": { "type": "string" },
+          "content_summary": { "type": "string" },
+          "quality": {
+            "type": "string",
+            "enum": ["HIGH", "MEDIUM", "LOW", "UNKNOWN"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

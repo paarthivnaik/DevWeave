@@ -1,22 +1,31 @@
 ---
 name: devweave-modernization-init
-description: "[Modernization Phase 0: Init] Initialize the V1.1 Modernization lifecycle by accepting natural-language architecture intent, inspecting target repository without questionnaires, generating technology practice profiles, and establishing modernization workspace."
+description: "[Modernization Phase 0: Init] Initialize the Modernization lifecycle by validating base devweave-init, capturing architecture intent, inspecting target repository without questionnaires, generating technology practice profiles, and establishing modernization workspace."
 ---
 
 # Antigravity Modernization Initialization Skill (`devweave-modernization-init`)
 
 ## Purpose
-Initialize a new modernization lifecycle for a legacy or target codebase by capturing natural language architecture declarations, inspecting existing target repositories for observed facts, generating combined engineering practice profiles, and persisting durable modernization workspace state.
+Initialize a new modernization lifecycle for a legacy or target codebase by verifying base repository initialization, capturing natural language architecture declarations, inspecting existing target repositories for observed facts, generating combined engineering practice profiles, and persisting durable modernization workspace configuration.
 
 ---
 
 ## Execution Invariants
-1. **Mandatory Legacy Source Gate (BLOCKING)**: If `--source <path>` is NOT explicitly provided in the command invocation, the agent **MUST NOT** proceed to inspect repositories or generate artifacts. The agent **MUST IMMEDIATELY ASK THE USER AND STOP** to wait for the user's response:
+1. **Base Init Prerequisite Guard (BLOCKING)**: `devweave-modernization-init` MUST verify that base `devweave-init` has completed (`.devweave/repository/` or `.devweave/graph/knowledge-graph.json` exists). If not initialized:
+   ```text
+   DevWeave base initialization is required.
+
+   Run:
+
+   devweave-init
+   ```
+   **STOP IMMEDIATELY**. Do not automatically invoke `devweave-init`.
+2. **Mandatory Legacy Source Gate (BLOCKING)**: If `--source <path>` is NOT explicitly provided in the command invocation, the agent **MUST NOT** proceed to inspect repositories or generate artifacts. The agent **MUST IMMEDIATELY ASK THE USER AND STOP** to wait for the user's response:
    ```text
    Please specify the path to your legacy source repository / codebase (or press Enter if modernizing code in-place within the current directory):
    ```
    Never default to the current directory without the user's explicit confirmation.
-2. **Zero state.json in INIT**: `devweave-modernization-init` establishes static, declarative project configuration only. Lifecycle `state.json` is created strictly per-story inside `.devweave/modernization/<ID>/state.json`.
+3. **Zero state.json in INIT**: `devweave-modernization-init` establishes static, declarative project configuration only. Lifecycle `state.json` is created strictly per-story inside `.devweave/modernization/stories/<ID>/state.json`.
 
 ---
 
@@ -28,21 +37,22 @@ Initialize a new modernization lifecycle for a legacy or target codebase by capt
 ---
 
 ## Preconditions
-- None (can be executed on empty, existing, or multi-repo targets).
+- Base repository initialization completed (`devweave-init`).
 
 ---
 
 ## Allowed Actions
-1. Parse natural language intent into structured components (`frontend`, `backend`, `database`, `implementationPolicy`).
-2. **Mandatory Legacy Source Checkpoint (BLOCKING)**: If `--source` was not provided, prompt the user and wait for their input before proceeding:
+1. **Verify Base Init**: Confirm `.devweave/repository/` and `.devweave/graph/knowledge-graph.json` exist. If missing, halt with required remediation message.
+2. **Parse Intent**: Parse natural language intent into structured components (`frontend`, `backend`, `database`, `implementationPolicy`).
+3. **Mandatory Legacy Source Checkpoint (BLOCKING)**: If `--source` was not provided, prompt the user and wait for their input before proceeding:
    `"Please specify the path to your legacy source repository / knowledge base (or press Enter if modernizing code in-place within the current repository):"`
    - If a path is provided, validate its existence and record in `source-memory.json` with strict `READ_ONLY` access mode.
    - If empty/skipped, confirm and record the current directory as the legacy source location.
-3. **Mandatory Description Prompting (Optional Input)**: Ask the developer if they have any additional architecture intent or specific instructions before processing (per Rule #7).
-4. Inspect target repository if files exist (detect languages, frameworks, ORMs, build tools).
-5. If target repository is empty or has insufficient code, record target architecture intent directly while marking unspecified details as `AI_DETERMINED` and unobserved facts as `UNKNOWN`. Never fabricate facts.
-6. Synthesize technology practice profile across: Best Practices, Design Patterns, SOLID, Clean Code, Security, API, Database, Testing, Performance, and Anti-Patterns.
-7. Initialize central `.devweave/modernization/` workspace configuration.
+4. **Mandatory Description Prompting (Optional Input)**: Ask the developer if they have any additional architecture intent or specific instructions before processing (per Rule #7).
+5. Inspect target repository if files exist (detect languages, frameworks, ORMs, build tools).
+6. If target repository is empty or has insufficient code, record target architecture intent directly while marking unspecified details as `AI_DETERMINED` and unobserved facts as `UNKNOWN`. Never fabricate facts.
+7. Synthesize technology practice profile across: Best Practices, Design Patterns, SOLID, Clean Code, Security, API, Database, Testing, Performance, and Anti-Patterns.
+8. Initialize central `.devweave/modernization/` workspace configuration.
 
 ---
 
@@ -77,7 +87,7 @@ devweave-modernization-context <ID>
 ---
 
 ## Failure Behavior
-- If legacy source path is invalid or inaccessible, record error in `state.json`, warn user, and stop without modifying files.
+- If legacy source path is invalid or inaccessible, record error, warn user, and stop without modifying files.
 
 ---
 

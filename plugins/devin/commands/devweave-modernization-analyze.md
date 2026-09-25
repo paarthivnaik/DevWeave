@@ -27,7 +27,7 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
 4. Generate formal migration relationships (`MIGRATED_TO`, `REPLACED_BY`, `TRANSFORMED_TO`, `SPLIT_INTO`, `MERGED_INTO`, `PRESERVED_AS`, `RETIRED`, `DEFERRED`).
 5. Identify schema migration needs, foreign key changes, and REST API contract equivalents.
 6. Create `analysis.md` and `mappings.json`.
-7. Append activity entry and Hard Gate #1 presentation/verdict to `.devweave/modernization/stories/<ID>/audit.md`.
+7. Append ONLY human developer prompts and custom instructions to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 
@@ -36,7 +36,7 @@ Perform deep technical analysis of legacy functional behaviors, validation rules
 .devweave/modernization/stories/<ID>/
 ├── analysis.md                 <-- Behavioral & architectural analysis
 ├── mappings.json               <-- Legacy to modern entity mappings
-└── audit.md                    <-- Updated with analysis run & gate decision
+└── audit.md                    <-- Updated with user activity log
 ```
 
 ---
@@ -68,3 +68,4 @@ devweave-modernization-plan <ID>  (Requires APPROVE)
 
 ## STOP Rule
 - Upon completing analysis, updating `audit.md`, and presenting findings, **STOP IMMEDIATELY**.
+- Upon receiving `APPROVE` at Hard Gate #1, record approval in state/audit and **STOP IMMEDIATELY**. Never auto-progress to PLAN.
