@@ -14,8 +14,9 @@ description: "[Phase 6: Review] Executes dual-model consensus code review (Princ
 4. **Audit Invariance**: Append ONLY human developer prompts, custom review instructions, and human gate decisions/feedback to `.devweave/work-items/<ID>/audit.md`. Detailed review critiques stay in `review.md`.
 
 ## Step-by-Step Instructions
-1. **Load Implementation Context**: Read git diff, modified source files, SQL migrations, `plan.md`, and `.devweave/work-items/<ID>/test-results.json`.
-2. **Execute Dual-Model Review**:
+1. **Mandatory Disk-First Artifact Ingestion**: Before reviewing, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/work-items/<ID>/` (`plan.md`, `test-results.json`, `analysis.md`, `state.json`) and inspect Git diff / modified source files on disk. Never rely on in-memory conversation history.
+2. **Load Implementation Context**: Read git diff, modified source files, SQL migrations, `plan.md`, and `.devweave/work-items/<ID>/test-results.json`.
+3. **Execute Dual-Model Review**:
    - **Model A (Principal Software Architect Mindset)**:
      - Evaluates system boundaries, decoupling, modularity, and SOLID/DDD compliance.
      - Performs **Downstream Impact Analysis** (API breaking changes, caller hierarchies, shared library coupling).

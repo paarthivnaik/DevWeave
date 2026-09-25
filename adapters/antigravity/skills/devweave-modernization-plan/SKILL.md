@@ -21,13 +21,14 @@ Construct a deterministic, file-level implementation plan that maps target files
 ---
 
 ## Allowed Actions
-1. **Mandatory Description Prompting**: Ask developer for any specific plan constraints or technical preferences.
-2. Map target files to create, update, or retire with exact symbol signatures and path layouts.
-3. Formulate database migration scripts (idempotent SQL/EF Core migrations).
-4. Formulate unit and integration test definitions covering parity against legacy behavior.
-5. Define concrete build, test, and verification shell commands.
-6. Create `plan.md`.
-7. Append activity entry and Hard Gate #2 presentation/verdict to `.devweave/modernization/stories/<ID>/audit.md`.
+1. **Mandatory Disk-First Artifact Ingestion**: Before constructing the plan, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/modernization/stories/<ID>/` (`analysis.md`, `mappings.json`, `context.md`, `work-item.json`, `state.json`) and `.devweave/modernization/` (`architecture-intent.json`, `technology-profile.json`). Never rely on ephemeral conversation memory.
+2. **Mandatory Description Prompting**: Ask developer for any specific plan constraints or technical preferences.
+3. Map target files to create, update, or retire with exact symbol signatures and path layouts.
+4. Formulate database migration scripts (idempotent SQL/EF Core migrations).
+5. Formulate unit and integration test definitions covering parity against legacy behavior.
+6. Define concrete build, test, and verification shell commands.
+7. Create `plan.md`.
+8. Append activity entry and Hard Gate #2 presentation/verdict to `.devweave/modernization/stories/<ID>/audit.md`.
 
 ---
 

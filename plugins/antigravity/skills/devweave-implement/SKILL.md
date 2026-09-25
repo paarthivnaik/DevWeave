@@ -37,10 +37,13 @@ Execute surgical, plan-bound source code and test modifications strictly adherin
 
 ## Allowed Actions
 
-### 1. Mandatory Description Prompting (Optional Input)
+### 1. Mandatory Disk-First Artifact Ingestion
+Before writing code, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/work-items/<ID>/` (`plan.md`, `analysis.md`, `context.md`, `work-item.json`, `state.json`) and `.devweave/knowledge/` (`conventions.md`). Never rely on in-memory conversation history.
+
+### 2. Mandatory Description Prompting (Optional Input)
 Ask the developer if they have any additional implementation instructions or specific constraints before beginning (per Rule #7).
 
-### 2. Pre-Processing Transparency
+### 3. Pre-Processing Transparency
 Clearly announce which files, classes, and test suites will be modified.
 
 ### 3. Repository Pattern vs Best Practice Conflict Check

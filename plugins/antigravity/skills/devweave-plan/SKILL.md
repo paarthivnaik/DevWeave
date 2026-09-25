@@ -35,10 +35,13 @@ Decompose the approved `analysis.md` into a concrete, file-anchored implementati
 
 ## Allowed Actions
 
-### 1. Mandatory Description Prompting (Optional Input)
+### 1. Mandatory Disk-First Artifact Ingestion
+Before planning, the agent **MUST EXPLICITLY READ DISK ARTIFACTS (`view_file`)** from `.devweave/work-items/<ID>/` (`analysis.md`, `context.md`, `work-item.json`, `state.json`) and `.devweave/repository/` (`profile.md`, `layers.md`). Never rely on in-memory conversation history.
+
+### 2. Mandatory Description Prompting (Optional Input)
 Ask the developer if they have any additional planning preferences or rollout constraints (per Rule #7).
 
-### 2. Pre-Processing Transparency
+### 3. Pre-Processing Transparency
 State clearly which source files, database migration paths, and test suites will be planned for modification.
 
 ### 3. Task Decomposition & Traceability
