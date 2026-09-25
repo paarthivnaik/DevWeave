@@ -187,10 +187,10 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
 - **Zero Modification Guarantee**: Never alters application code.
 - **Output Artifacts**: `.devweave/repository/profile.md`, `layers.md`, `request-flow.md`, `technologies.md`, `frameworks.md`, `dependencies.md`, `build.md`, `testing.md`, `practices.md`, `graph/knowledge-graph.json`.
 
-#### 2. `devweave-context <ID>` — Work Item Intake & PII Gate
+#### 2. `devweave-context <ID>` — Work Item Intake & Two-Tier PM Resolution
 - **Host Syntax**: `agy run devweave-context PROJ-123` | `/devweave-context PROJ-123`
 - **When to Use**: At the start of every ticket, bug, or user story.
-- **What it Does**: Ingests issue details from Jira, GitHub, Azure DevOps, Linear, or manual input. Runs a mandatory PII/secret sanitizer, calculates the precise codebase blast radius (`focus_paths`), enforces a token budget, and initializes the work item `audit.md` activity tracker.
+- **What it Does**: Ingests issue details from Jira, GitHub, Azure DevOps, Linear, or manual input with two-tier configuration persistence (`.devweave/workspace.json` -> `~/.devweave/config.json`) and dynamic environment PATH refresh so PM tools are configured once and reused across stories. Runs a mandatory PII/secret sanitizer, calculates the precise codebase blast radius (`focus_paths`), enforces a token budget, and initializes the work item `audit.md` activity tracker.
 - **Output Artifacts**: `.devweave/work-items/<ID>/context.md`, `.devweave/work-items/<ID>/audit.md`.
 
 #### 3. `devweave-analyze <ID>` — Architectural Impact & Deep Archaeology
@@ -205,10 +205,10 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
 - **What it Does**: Decomposes the task into atomic, sequentially numbered tasks with exact file targets, line anchors, test specs, and deterministic test commands, logging plan details to `audit.md`.
 - **Output Artifacts**: `.devweave/work-items/<ID>/plan.md`, `.devweave/work-items/<ID>/audit.md`.
 
-#### 5. `devweave-branch <ID>` — Git Branch Isolation & Branch Gate
+#### 5. `devweave-branch <ID>` — Git Preflight & Branch Isolation Gate
 - **Host Syntax**: `agy run devweave-branch <ID>` | `devweave-branch <ID> [--name <name>] [--base <branch>]`
 - **When to Use**: Before writing code to guarantee branch safety.
-- **What it Does**: Interactively prompts or accepts custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`), validates clean workspace status, establishes the isolated feature branch from the specified base, and records branch choices to `audit.md`. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
+- **What it Does**: Runs preflight verification for Git installation and author identity (`user.name`, `user.email`), prompting to set them if missing. Interactively prompts or accepts custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`), validates clean workspace status, establishes the isolated feature branch from the specified base, and records branch choices to `audit.md`. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
 - **Output Artifacts**: Isolated Git working branch created, state metadata and `audit.md` updated.
 
 #### 6. `devweave-implement <ID>` — Plan-Bound Surgical Coding & Test Intelligence
@@ -219,7 +219,7 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
 
 #### 7. `devweave-pr-review <ID>` — Dual-Model Consensus Review
 - **Host Syntax**: `agy run devweave-pr-review PROJ-123`
-- **When to Use**: Mandatory before creating a pull request.
+- **When to Use**: Standalone code review or invoked automatically by `devweave-pr`.
 - **What it Does**: Concurrently executes 5 review lenses:
   1. **Principal Architect Lens**: Design coherence, SOLID principles, anti-patterns.
   2. **Senior DBA Lens**: SQL indexing, transaction boundaries, lock escalation, migration safety.
@@ -229,11 +229,11 @@ INIT ──► CONTEXT ──► ANALYZE ──► PLAN ──► BRANCH [GATE] 
   Logs review verdicts and human gate sign-off to `audit.md`.
 - **Output Artifacts**: `.devweave/work-items/<ID>/review.md`, `.devweave/work-items/<ID>/audit.md`. Requires Human sign-off.
 
-#### 8. `devweave-pr <ID>` — PR Packaging & Durable Knowledge Promotion
+#### 8. `devweave-pr <ID>` — Intelligent Review Orchestration & Automated PR Creation
 - **Host Syntax**: `agy run devweave-pr PROJ-123`
-- **When to Use**: Final step to assemble the pull request and update domain knowledge.
-- **What it Does**: Compiles clean PR description with full traceability (Ticket &rarr; Plan &rarr; Tests &rarr; Review). Promotes reusable conventions to `.devweave/knowledge/conventions.md` and appends final release record to `audit.md`.
-- **Output Artifacts**: Pull request created on GitHub/GitLab/Azure DevOps, `pr-description.md`, `audit.md`.
+- **When to Use**: Final step to assemble the pull request, run review if needed, and create remote PR.
+- **What it Does**: Automatically orchestrates Phase 6 Dual-Model Review inline if `review.md` is missing or stale. Compiles clean PR description with full traceability (Ticket &rarr; Plan &rarr; Tests &rarr; Review). Upon human gate approval, automatically pushes the branch upstream (`git push -u origin <branch>`) and creates the pull request via provider CLI (`gh pr create`, `az repos pr create`). Promotes reusable conventions to `.devweave/knowledge/conventions.md` and appends final release record with live PR URL to `audit.md`.
+- **Output Artifacts**: Pull request created on GitHub/Azure DevOps with live URL, `pr-description.md`, `audit.md`.
 
 ---
 
@@ -250,7 +250,7 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 
 #### 10. `devweave-modernization-context <ID>` — Work Item Intake & Legacy Slice Extraction
 - **Host Syntax**: `agy run devweave-modernization-context <ID>`
-- **What it Does**: Ingests migration scope via PM tool selector (Jira, Azure DevOps, GitHub, Linear, or Manual User Story paste), runs PII privacy check, extracts bounded legacy source slice from read-only source memory, retrieves relevant graph neighborhood, and initializes the append-only `audit.md` activity tracker.
+- **What it Does**: Ingests migration scope via PM tool selector with two-tier persistence and dynamic PATH refresh, runs PII privacy check, extracts bounded legacy source slice from read-only source memory, retrieves relevant graph neighborhood, and initializes the append-only `audit.md` activity tracker.
 - **Output Artifacts**: `.devweave/modernization/stories/<ID>/` (`context.md`, `migration-unit.json`, `state.json`, `audit.md`).
 
 #### 11. `devweave-modernization-analyze <ID>` — Behavioral Mapping & [HARD GATE #1]
@@ -265,7 +265,7 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 
 #### 13. `devweave-modernization-branch <ID>` — Modernization Sandbox Branching
 - **Host Syntax**: `agy run devweave-modernization-branch <ID>` | `devweave-modernization-branch <ID> [--name <name>] [--base <branch>]`
-- **What it Does**: Interactively prompts or accepts custom target branch name (e.g., `feature/99-User-Registration`) and source base branch (e.g., `master`, `develop`, `release/*`, `epic/*`), verifies clean working state, creates and switches to the isolated modernization branch from the base branch, logs branch choices to `audit.md`, and protects legacy source code as strictly **READ_ONLY**. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
+- **What it Does**: Runs preflight Git and user identity checks. Interactively prompts or accepts custom target branch name (e.g., `feature/99-User-Registration`) and source base branch (e.g., `master`, `develop`, `release/*`, `epic/*`), verifies clean working state, creates and switches to the isolated modernization branch from the base branch, logs branch choices to `audit.md`, and protects legacy source code as strictly **READ_ONLY**. Also accepts natural phrasing like `"create feature/99-User Registration from master branch"`.
 - **Output Artifacts**: Git branch created, `.devweave/modernization/stories/<ID>/state.json` and `audit.md` updated.
 
 #### 14. `devweave-modernization-implement <ID>` — Modernization Implementation & Test Suite
@@ -278,10 +278,10 @@ M-INIT ──► M-CONTEXT ──► M-ANALYZE [GATE #1] ──► M-PLAN [GATE 
 - **What it Does**: Executes dual-layer verification (functional test suite + architectural/behavioral parity scorecard). Validates DB migrations and security, logs scorecard to `audit.md`, and enforces **Hard Gate #3** (explicit human approval required before PR).
 - **Output Artifacts**: `.devweave/modernization/stories/<ID>/` (`verification.md`, `scorecard.json`, `audit.md`).
 
-#### 16. `devweave-modernization-pr <ID>` — Modernization PR & Graph Promotion
+#### 16. `devweave-modernization-pr <ID>` — Modernization Review & Automated PR Creation
 - **Host Syntax**: `agy run devweave-modernization-pr <ID>`
-- **What it Does**: Assembles comprehensive modernization PR package, promotes `MIGRATED_TO` edges to knowledge graph, logs final PR completion to `audit.md`, and outputs `pr-description.md` and `report.md`.
-- **Output Artifacts**: PR opened, `.devweave/modernization/stories/<ID>/` (`pr-description.md`, `report.md`, `audit.md`).
+- **What it Does**: Orchestrates review parity verification, assembles comprehensive modernization PR package, pushes branch upstream, creates PR via repository provider CLI (`gh`, `az`) upon human sign-off, promotes `MIGRATED_TO` edges to knowledge graph, logs final PR completion and URL to `audit.md`, and outputs `pr-description.md` and `report.md`.
+- **Output Artifacts**: PR created on remote repository, `.devweave/modernization/stories/<ID>/` (`pr-description.md`, `report.md`, `audit.md`).
 
 #### 17. `devweave-modernization-status <ID>` — Durable Modernization Inspector
 - **Host Syntax**: `agy run devweave-modernization-status <ID>`

@@ -1,12 +1,12 @@
 ---
 name: devweave-modernization-context
-description: "[Modernization Phase 1: Context] Ingest generic work item context via WorkItemProvider adapters, extract attachment text & OCR images, model candidate claims, build bounded migration slice, integrate knowledge graph deltas, and enforce human checkpoint."
+description: "[Modernization Phase 1: Context] Ingest generic work item context via WorkItemProvider adapters with two-tier configuration persistence and dynamic PATH refresh, extract attachment text & OCR images, model candidate claims, build bounded migration slice, integrate knowledge graph deltas, and enforce human checkpoint."
 ---
 
 # Antigravity Modernization Context Skill (`devweave-modernization-context`)
 
 ## Purpose
-Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, acquiring full work item details via generic provider adapters (Azure DevOps, Jira, GitHub, Custom), extracting text and performing OCR on attachments, cataloging candidate claims with verification statuses, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md`, `work-item.json`, `evidence.json`, `migration-slice.json`, and `audit.md` without loading entire legacy repositories into AI memory.
+Construct a bounded, token-efficient migration context for the specified modernization work item by discovering relevant legacy source slices, acquiring full work item details via generic provider adapters (Azure DevOps, Jira, GitHub, Custom) with two-tier configuration persistence and dynamic PATH refresh, extracting text and performing OCR on attachments, cataloging candidate claims with verification statuses, retrieving related knowledge graph entities, loading targeted technology practices, and compiling `context.md`, `work-item.json`, `evidence.json`, `migration-slice.json`, and `audit.md` without loading entire legacy repositories into AI memory.
 
 ---
 
@@ -26,10 +26,14 @@ Construct a bounded, token-efficient migration context for the specified moderni
 
 ## Allowed Actions
 
-### 1. PM Provider Selection & Client Verification
-- **Check Persisted Provider**: Read provider configuration from `.devweave/modernization/workspace.json`.
-- **First-Time Selection**:
-  If not configured, prompt the developer:
+### 1. PM Provider Selection & Dynamic PATH Verification
+- **Dynamic PATH Refresh**: Refresh current process `PATH` from OS Registry/Environment before probing provider CLIs.
+- **Two-Tier Configuration Check**:
+  - 1. Check workspace configuration: `.devweave/modernization/workspace.json` (or `.devweave/workspace.json`).
+  - 2. Check global user configuration: `~/.devweave/config.json`.
+  - If provider is configured in workspace or global settings and `--reconfigure` is not set, **automatically use the configured provider without re-prompting**.
+- **First-Time Selection (If unconfigured or `--reconfigure` passed)**:
+  Prompt the developer:
   ```text
   Which project-management system contains this work item?
   1. Azure DevOps
@@ -37,11 +41,12 @@ Construct a bounded, token-efficient migration context for the specified moderni
   3. GitHub
   4. Other / Custom
   ```
+  Persist selected provider to `.devweave/modernization/workspace.json` and `~/.devweave/config.json`.
 - **Client / CLI Detection**:
   - Run `ProviderAdapter.detectClient()` (e.g., `az`, `jira`/`acli`, `gh`).
   - If client is missing:
     ```text
-    Required client for <provider> is not installed.
+    Required client for <provider> is not installed or not found in PATH.
     Run:
     devweave-setup
     ```

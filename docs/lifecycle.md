@@ -45,7 +45,9 @@ flowchart LR
 3. **Pre-Processing Transparency**:
    The agent states all files to be inspected/modified and exact objectives prior to execution.
 4. **User-Only Story Audit Trail (`audit.md`)**:
-   Appends exclusively human developer actions, prompts, and gate decisions with `Author: <User Name> <email@example.com>`.
+   Appends exclusively human developer actions, prompts, branch configurations, and gate decisions with `Author: <User Name> <email@example.com>`.
+5. **Preflight Git Verification**:
+   Validates Git tools and user identity (`user.name`, `user.email`) before branching operations.
 
 ---
 
@@ -56,6 +58,8 @@ flowchart LR
 
 ### Phase 1: `CONTEXT` (`devweave-context <ID>`)
 - Ingests work items via generic `WorkItemProvider` (Azure DevOps, Jira, GitHub, Custom).
+- **Two-Tier Configuration Resolution**: Reads workspace settings (`.devweave/workspace.json`) $\to$ global user profile (`~/.devweave/config.json`) to persist PM source across stories without repetitive prompting.
+- **Dynamic PATH Refresh**: Dynamically syncs process environment PATH before probing CLIs.
 - Safe attachment text extraction and non-blocking image OCR.
 - Privacy & data-processing hard gate (`[Approve] [Reject]`).
 - Outputs `.devweave/work-items/<ID>/context.md` and `work-item.json`.
@@ -73,7 +77,8 @@ flowchart LR
 - Outputs `.devweave/work-items/<ID>/plan.md`.
 
 ### Phase 4: `BRANCH` (`devweave-branch <ID>`) — **[HARD GATE]**
-- Enforces isolated workspace branch with interactive target branch (`--name`) and base branch (`--base`) confirmation.
+- Enforces isolated workspace branch with preflight Git installation & identity verification.
+- Interactively prompts for target branch (`--name`) and base branch (`--base`) confirmation if not passed on CLI.
 
 ### Phase 5: `IMPLEMENT` (`devweave-implement <ID>`)
 - Plan-bound code modifications with atomic test updates.
@@ -82,27 +87,29 @@ flowchart LR
 - Generates `graph-delta.json` and `test-results.json`.
 
 ### Phase 6: `REVIEW` (`devweave-pr-review <ID>`) — **[HARD GATE]**
-- Dual-model independent code review:
-  - **Reviewer A**: Principal Technical Architect.
-  - **Reviewer B**: Senior DBA & Security Architect.
+- Standalone or orchestratable dual-model independent code review:
+  - **Reviewer A**: Principal Technical Architect (System design, boundaries, downstream impact).
+  - **Reviewer B**: Senior DBA & Security Architect (SQL locking, indexes, OWASP, resilience).
 - Consolidated `review.md`. Requires `CRITICAL = 0` and blocking `ERROR = 0` for approval.
 
 ### Phase 7: `PR` (`devweave-pr <ID>`) — **[HARD GATE]**
+- **Intelligent Review Orchestration**: Automatically runs Phase 6 Dual-Model Review inline if `review.md` is missing or stale. Halts with remediation guidance if blocking findings are found.
 - Assembles PR description from existing artifacts without rediscovery.
 - Merges graph delta into master knowledge graph.
+- **Automated Provider PR Creation**: Upon developer authorization (`[Create PR]`), automatically pushes the active branch (`git push -u origin <branch>`) and creates the remote PR using the provider CLI (`gh pr create`, `az repos pr create`).
 
 ---
 
 ## 4. Modernization Lifecycle Alignment
 
 1. **Modernization Init (`devweave-modernization-init`)**: Verifies base init, captures architecture intent, creates read-only `source-memory.json`.
-2. **Modernization Context (`devweave-modernization-context <ID>`)**: Slices legacy source into bounded slice (`migration-slice.json` < 12k tokens), processes OCR, models candidate claims (`evidence.json`, `UNVERIFIED`).
+2. **Modernization Context (`devweave-modernization-context <ID>`)**: Slices legacy source into bounded slice (`migration-slice.json` < 12k tokens), applies two-tier provider config, processes OCR, models candidate claims (`evidence.json`, `UNVERIFIED`).
 3. **Modernization Analyze (`devweave-modernization-analyze <ID>`)**: Deep legacy behavioral and business rule understanding (**Hard Gate #1**).
 4. **Modernization Plan (`devweave-modernization-plan <ID>`)**: Decomposes into source-to-target migration mappings (`MIGRATED_TO`, `REPLACED_BY`, etc.) (**Hard Gate #2**).
-5. **Modernization Branch (`devweave-modernization-branch <ID>`)**: Branch isolation.
+5. **Modernization Branch (`devweave-modernization-branch <ID>`)**: Git preflight check, author identity validation, and branch isolation.
 6. **Modernization Implement (`devweave-modernization-implement <ID>`)**: Preserves legacy behavior while applying target architecture.
 7. **Modernization Verify (`devweave-modernization-verify <ID>`)**: Functional parity, database migration, and mapping completeness verification (**Hard Gate #3**).
-8. **Modernization PR (`devweave-modernization-pr <ID>`)**: Release packaging and graph delta promotion.
+8. **Modernization PR (`devweave-modernization-pr <ID>`)**: Review orchestration, release packaging, automated provider PR creation on sign-off, and graph delta promotion.
 
 ---
 

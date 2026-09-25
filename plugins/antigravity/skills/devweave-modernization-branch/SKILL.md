@@ -1,12 +1,12 @@
 ---
 name: devweave-modernization-branch
-description: "[Modernization Phase 4: Branch] Enforce isolated workspace branching with customizable branch name and base branch prior to executing modernization code modifications, protecting legacy source and target main branches, and logging to audit.md."
+description: "[Modernization Phase 4: Branch] Enforce isolated workspace branching with preflight Git check, customizable branch name and base branch prior to executing modernization code modifications, protecting legacy source and target main branches, and logging to audit.md."
 ---
 
 # Antigravity Modernization Branch Skill (`devweave-modernization-branch`)
 
 ## Purpose
-Safely establish an isolated Git branch in the target workspace to guarantee sandbox isolation and protect the main branch and legacy source from unverified changes. Allows developers to specify custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`) interactively or via command arguments, logging all branch choices into `audit.md`.
+Safely establish an isolated Git branch in the target workspace to guarantee sandbox isolation and protect the main branch and legacy source from unverified changes. Performs preflight Git verification, and allows developers to specify custom branch names (e.g. `feature/99-User-Registration`) and source base branches (e.g. `master`, `develop`, `release/*`, `epic/*`) interactively or via command arguments, logging all branch choices into `audit.md`.
 
 ---
 
@@ -23,9 +23,20 @@ The agent must recognize natural developer requests, such as:
 
 ---
 
-## Preconditions
-- `phases.PLAN` is `APPROVED` (Hard Gate #2 must be passed).
-- Target repository working tree is clean or verified safe.
+## Preconditions & Preflight Git Check
+1. `phases.PLAN` is `APPROVED` (Hard Gate #2 must be passed).
+2. **Preflight Git Tool & Identity Check**:
+   - Check if Git is installed: `git --version`. If missing, direct developer to run `devweave-setup` and halt.
+   - Check Git author identity: `git config user.name`, `git config user.email`.
+   - If missing, prompt developer interactively:
+     ```text
+     Git author identity is not configured.
+     Please provide your name and email for modernization commits:
+     - Name: 
+     - Email:
+     ```
+     Configure with `git config user.name "<Name>"` and `git config user.email "<Email>"`.
+3. Target repository working tree is clean or verified safe (`git status`).
 
 ---
 
@@ -38,6 +49,7 @@ If `--name` or `--base` are not provided on the command line or via natural phra
 =======================================================
 Work Item ID: <ID>
 Plan Status:  APPROVED
+Git Author:   <User Name> <user.email@example.com>
 
 Detected Repository Branches:
 - master / main (Production/Default)
@@ -57,7 +69,7 @@ Confirm:
 ---
 
 ## Allowed Actions
-1. Verify target repository clean state (`git status`).
+1. Verify target repository clean state (`git status`) and Git preflight checks.
 2. Resolve target branch name:
    - Use explicitly provided name from flags, natural phrasing, or prompt.
    - Fall back to standard default: `devweave/modernization/<ID>`.
