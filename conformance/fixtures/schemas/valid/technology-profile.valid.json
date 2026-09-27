@@ -1,0 +1,43 @@
+{
+  "modernizationId": "MOD-001",
+  "technologies": [
+    {
+      "id": "tech-001",
+      "name": "ASP.NET Core",
+      "version": "8.0",
+      "category": "BACKEND",
+      "source": "OBSERVED",
+      "status": "CURRENT",
+      "lastVerified": "2026-09-27T10:00:00Z",
+      "evidence": [
+        {
+          "file": "src/App/App.csproj",
+          "reason": "TargetFramework=net8.0"
+        }
+      ]
+    },
+    {
+      "id": "tech-002",
+      "name": ".NET Framework",
+      "version": "4.8",
+      "category": "BACKEND",
+      "source": "OBSERVED",
+      "status": "LEGACY",
+      "lastVerified": "2026-09-27T10:00:00Z",
+      "evidence": [
+        {
+          "file": "legacy/LegacyApp.csproj",
+          "reason": "TargetFrameworkVersion=v4.8"
+        }
+      ]
+    }
+  ],
+  "practices": {
+    "bestPractices": ["Use AsNoTracking() for read queries"],
+    "designPatterns": ["CQRS", "Repository"],
+    "solidPrinciples": ["Single Responsibility Principle"],
+    "cleanCode": ["Descriptive variable naming"],
+    "antiPatterns": ["Avoid async void"]
+  },
+  "updated_at": "2026-09-27T10:00:00Z"
+}

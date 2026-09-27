@@ -17,17 +17,27 @@
           "version": { "type": "string" },
           "category": {
             "type": "string",
-            "enum": ["FRONTEND", "BACKEND", "DATABASE", "INFRASTRUCTURE", "TESTING", "API", "SECURITY"]
+            "enum": ["FRONTEND", "BACKEND", "DATABASE", "INFRASTRUCTURE", "TESTING", "API", "SECURITY", "MESSAGING", "BUILD"]
           },
           "source": {
             "type": "string",
-            "enum": ["USER_DECLARED", "OBSERVED", "INFERRED"]
+            "enum": ["USER_DECLARED", "OBSERVED", "INFERRED", "ORGANIZATION_DEFINED", "PROJECT_DEFINED", "REPOSITORY_DEFINED", "DEVELOPER_DEFINED", "TECHNOLOGY_OFFICIAL", "DEVWEAVE_RECOMMENDED", "GENERATED"]
           },
           "status": {
             "type": "string",
-            "enum": ["CURRENT", "NEEDS_REVALIDATION", "UNKNOWN", "DEPRECATED"]
+            "enum": ["CURRENT", "LEGACY", "NEEDS_REVALIDATION", "UNKNOWN", "DEPRECATED"]
           },
-          "lastVerified": { "type": "string", "format": "date-time" }
+          "lastVerified": { "type": "string", "format": "date-time" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file": { "type": "string" },
+                "reason": { "type": "string" }
+              }
+            }
+          }
         },
         "additionalProperties": false
       }

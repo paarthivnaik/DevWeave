@@ -60,6 +60,7 @@ flowchart TD
         S5["<b>⚡ Stage-Based Model Routing</b><br>Lightweight models (flash_lite) for scanning, flagship models (pro) for design"]
         S6["<b>🔄 24h Daily Auto-Sync & Updater</b><br>Silently checks GitHub on first morning session with 0 token overhead"]
         S7["<b>🌐 Universal & Zero Runtime Daemons</b><br>100% Git-native state across 12 polyglot stacks with zero background servers"]
+        S8["<b>🧬 Engineering Intelligence Subsystem</b><br>Contextual, technology-neutral architecture engine with 11-dimension detection"]
     end
 ```
 
@@ -90,6 +91,14 @@ Phase 6 (`devweave-pr-review`) executes a multi-perspective review before pull r
 2. **Branch Hard Gate**: Prevents accidental direct commits to `main`/`master`.
 3. **Test Verification Gate**: Requires 100% deterministic test execution evidence.
 4. **Human Review Gate**: Requires explicit engineer sign-off on dual-model findings before PR creation.
+
+### 5. 🧬 Engineering Intelligence Subsystem (Current, Legacy & Modernization)
+DevWeave equips AI assistants with deep, stack-aware architectural memory and engineering standards without hard-coding specific technologies into core:
+- **11-Dimension Detection**: Discovers languages, frameworks, libraries, databases, cloud, messaging, testing, build, deployment, architecture, and legacy technologies with evidence citations.
+- **Tripartite Modernization**: Orchestrates Legacy EI + Modernization EI (transformation mappings: `MIGRATED_TO`, `TRANSFORMED_TO`, `SPLIT_INTO`, `RETIRED`) + Target Technology EI.
+- **Contextual Resolver**: Surgical 6-stage filtering stays under a 1,500 token budget with telemetry metrics (`rulesAvailable`, `rulesMatched`, `rulesProvidedToModel`).
+- **Natural Language Rule Creation & Versioning**: Developers prompt standards naturally, producing schema-validated proposals with human approval gates and immutable history (`.devweave/intelligence/history/`).
+- **Expirable Exceptions & Staleness Guards**: Resolves conflicts via 7-tier precedence and invalidates expired exceptions automatically without silently rewriting approved artifacts.
 
 ---
 

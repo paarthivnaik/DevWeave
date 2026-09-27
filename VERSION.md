@@ -1,10 +1,10 @@
 # DevWeave Release Specification & Version Documentation
 
-## Current Version: `1.2.0`
-- **Release Name**: Generic Work Item Context Acquisition & Setup Release
-- **Release Date**: September 25, 2026
-- **Release Branch**: `feature/V1.2.0-Context-acuisition-capabity`
-- **Specification Status**: Normative & Conformance Verified (100% Pass across 11 Test Suites)
+## Current Version: `1.3.0`
+- **Release Name**: Engineering Intelligence Release
+- **Release Date**: September 27, 2026
+- **Release Branch**: `feature/v1.3.0-engineering-intelligence`
+- **Specification Status**: Normative & Conformance Verified (100% Pass across 13 Test Suites)
 - **License**: Apache 2.0
 
 ---
@@ -41,10 +41,16 @@ timeline
                : devweave-setup Orchestrator
                : Attachment Text & OCR Pipeline
                : Candidate Claims Model
+    2026-09-27 : V1.3.0 Engineering Intelligence
+               : Tripartite EI Architecture
+               : Contextual Resolver & Telemetry
+               : 11-Dimension Technology Detection
+               : Natural Language Rule Creation
 ```
 
 | Version | Release Date | Key Themes & Deliverables | Conformance |
 | :--- | :--- | :--- | :--- |
+| **`1.3.0`** | 2026-09-27 | **Engineering Intelligence Subsystem**<br>• Generic, technology-neutral architecture engine<br>• 11-dimension evidence-based detection & classification<br>• Tripartite EI (Legacy + Modernization + Target Tech)<br>• Contextual Resolver (< 1,500 tokens) & usage telemetry<br>• Natural language rule creation with human approval gates<br>• Expirable exceptions & 7-tier conflict hierarchy<br>• 13 passing test suites (100% conformance) | **100% Verified** (13/13 Suites) |
 | **`1.2.0`** | 2026-09-25 | **Generic Work Item Context Acquisition & Setup Subsystem**<br>• Vendor-neutral `WorkItemProvider` (Azure DevOps, Jira, GitHub, Custom)<br>• Central `devweave-setup` environment & auth orchestrator<br>• Safe attachment text extraction & non-blocking image OCR<br>• Candidate claims modeling (`evidence.json`, `UNVERIFIED`)<br>• Bounded migration slicing (`migration-slice.json`)<br>• 4 new JSON schemas & 11 test suites | **100% Verified** (11/11 Suites) |
 | **`1.1.3`** | 2026-09-24 | **Strict Gate Isolation & Controlled Skipping**<br>• Immediate stop on gate approval (zero auto-chaining)<br>• Mandatory developer justification for `SKIP` decisions<br>• Interactive branch & base selection with confirmation | **100% Verified** (10/10 Suites) |
 | **`1.1.2`** | 2026-09-23 | **2-Tier Hierarchical Workspace & User Audit Trail**<br>• Split central intent from story-level deliverables<br>• User-only `audit.md` logging strictly human actions<br>• Blocking legacy source path checkpoint in INIT | **100% Verified** (10/10 Suites) |

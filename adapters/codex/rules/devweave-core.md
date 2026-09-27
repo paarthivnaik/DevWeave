@@ -1,4 +1,4 @@
-﻿# DevWeave Core Antigravity Rules
+# DevWeave Core Rules for OpenAI Codex
 
 ## 1. AI-DLC Lifecycle Enforcement
 - Strictly follow state machine transitions: `INIT` -> `DISCOVERED` -> `REQUIREMENTS_READY` -> `SOLUTION_READY` -> `APPROVED` -> `PLANNED` -> `IMPLEMENTING` -> `IMPLEMENTED` -> `TESTED` -> `VERIFIED` -> `REVIEWING` -> `REVIEWED` -> `PR_READY`.
@@ -17,3 +17,12 @@
 ## 4. Deterministic Verification & Quality
 - All modifications must pass native repository tests, linters, and type checkers before entering review.
 - Ensure every code change traces back to an active task in `plan.md` and requirement in `requirements.md`.
+
+## 5. Engineering Intelligence Subsystem
+- Discovered technologies are classified as `CURRENT` or `LEGACY` based on concrete file evidence; unobserved facts remain `UNKNOWN`.
+- Legacy practices are documented as `OBSERVED` invariants and are strictly forbidden from becoming recommended best practices.
+- Modernization operations orchestrate tripartite intelligence (Legacy EI + Modernization EI + Target Technology EI) with transformation relationships (`MIGRATED_TO`, `TRANSFORMED_TO`, `SPLIT_INTO`, `RETIRED`).
+- Execute `EngineeringIntelligenceResolver` before code generation to inject relevant rules under a 1,500 token budget.
+- LLM-generated mandatory rules require human approval before activation; rules are versioned (`v1` -> `v2`) with immutable history in `.devweave/intelligence/history/`.
+- Precedence hierarchy resolves conflicts (`ORGANIZATION` > `PROJECT` > `REPOSITORY` > `DEVELOPER` > `OFFICIAL` > `RECOMMENDED` > `OBSERVED`); expired exceptions are automatically invalidated.
+- Flag downstream artifacts as `NEEDS_REVALIDATION` when bound rules change; never silently rewrite approved artifacts.
