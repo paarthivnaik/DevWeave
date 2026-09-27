@@ -95,6 +95,7 @@ flowchart LR
 Both workflows strictly share the same underlying core services:
 - **State Machine**: Unified state transitions and resume validation.
 - **Git Branching**: Clean tree validation and interactive branching.
-- **Knowledge Graph**: Single `knowledge-graph.json` with incremental deltas.
+- **Knowledge Graph & Deep Analyzer**: Single `knowledge-graph.json` with bounded traversal (<32k tokens), technology-aware Deep Analyzers, and incremental `graph-delta.json`.
+- **Domain Knowledge Engine**: Durable semantic business rules and concepts in `.devweave/domain/knowledge.json` with story-scoped `domain-delta.json` and conflict detection.
 - **Provider Infrastructure**: Generic `WorkItemProvider` and `devweave-setup`.
 - **Policy Engine**: Privacy gates, human-in-the-loop checkpoints, user-only `audit.md`.
