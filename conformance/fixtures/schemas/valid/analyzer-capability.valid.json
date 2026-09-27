@@ -1,0 +1,16 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/analyzer-capability.schema.json",
+  "schemaVersion": "1.4.0",
+  "lastChecked": "2026-09-27T23:00:00Z",
+  "analyzers": [
+    {
+      "technology": ".NET",
+      "analyzer": "Roslyn AST & Symbol APIs",
+      "requiredForDeepAnalysis": true,
+      "installed": true,
+      "status": "AVAILABLE",
+      "version": "4.8.0",
+      "capabilities": ["TYPE_SYMBOLS", "INVOCATIONS", "OVERRIDES"]
+    }
+  ]
+}

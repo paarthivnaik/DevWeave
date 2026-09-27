@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/v1/domain-delta.schema.json",
+  "title": "DevWeave Domain Knowledge Delta Schema",
+  "description": "Schema for story/work-item level domain knowledge mutations, updates, and evidence deltas produced during implementation.",
+  "type": "object",
+  "required": ["$schema", "schemaVersion", "workItemId", "changes"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "enum": ["1.0", "1.0.0", "1.4.0"]
+    },
+    "workItemId": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "author": {
+      "type": "string"
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["operation", "entityId", "type", "status"],
+        "properties": {
+          "operation": {
+            "type": "string",
+            "enum": ["ADD", "MODIFY", "DEPRECATE", "REMOVE"]
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONCEPT",
+              "BUSINESS_RULE",
+              "PROCESS",
+              "CAPABILITY",
+              "TERMINOLOGY",
+              "DOMAIN_EVENT",
+              "CONSTRAINT",
+              "MAPPING"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OBSERVED",
+              "DERIVED",
+              "AI_INFERRED",
+              "HUMAN_CONFIRMED",
+              "CONFLICTING",
+              "UNKNOWN",
+              "NEEDS_REVALIDATION"
+            ]
+          },
+          "entity": {
+            "type": "object"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source": { "type": "string" },
+                "path": { "type": "string" },
+                "symbol": { "type": "string" },
+                "commit": { "type": "string" }
+              }
+            }
+          },
+          "previousEntityId": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

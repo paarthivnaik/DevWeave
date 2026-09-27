@@ -1,40 +1,50 @@
-﻿---
-name: document-domain
-description: [Knowledge - Domain Documentation] Captures durable, subsystem-level domain knowledge and scorecards with YAML frontmatter into .devweave/domains/<name>.md.
+---
+name: devweave-document-domain
+description: "[Knowledge - Domain Documentation] Captures and synthesizes durable domain knowledge, ubiquitous language, business rules, processes, and mappings into .devweave/domain/knowledge.json and .devweave/domains/<name>.md."
 ---
 
 # DevWeave Document Domain Skill (`devweave-document-domain`)
 
 ## Purpose
-Curates domain-driven knowledge scorecards under `.devweave/domains/<name>.md` with structured YAML frontmatter. Downstream AI-DLC phases consume these scorecards to enforce domain-driven compliance (WCAG, HIPAA, SOC2, PII handling) without requiring global config flags.
+Synthesizes and maintains the canonical business domain intelligence layer under `.devweave/domain/knowledge.json` and human-readable scorecards under `.devweave/domains/<name>.md`. Captures ubiquitous language, domain concepts, business rules, processes, capabilities, terminology, domain events, constraints, and mappings to repository entities with evidence-backed provenance.
 
 ---
 
-## Frontmatter Schema
-```yaml
+## Inputs & Parameters
+- `--domain <name>`: Optional target domain identifier (e.g. `domain:billing`, `domain:prescriptions`).
+- `--reconcile`: Reconciles domain knowledge against current codebase and Knowledge Graph.
+
 ---
-type: domain
-name: <domain-name>
-product: <product-name>
-criticality: tier-1 # [tier-0, tier-1, tier-2, tier-3]
-pii_phi: true
-compliance: ["WCAG 2.1 AA", "HIPAA", "SOC2"]
-owners:
-  - team: <team-name>
-    primary: <email>
-on_call:
-  pagerduty: <service>
-  slack: "#<channel>"
-tech_stack: <technologies>
-component_library: <library>
----
+
+## Canonical Domain Model (`.devweave/domain/knowledge.json`)
+```json
+{
+  "$schema": "https://devweave.org/schemas/v1/domain-knowledge.schema.json",
+  "schemaVersion": "1.4.0",
+  "domainId": "domain:<name>",
+  "name": "<Human Readable Domain Name>",
+  "status": "OBSERVED",
+  "concepts": [],
+  "businessRules": [],
+  "processes": [],
+  "capabilities": [],
+  "terminology": [],
+  "domainEvents": [],
+  "constraints": [],
+  "mappings": {
+    "domainToCode": [],
+    "domainToApi": [],
+    "domainToData": []
+  }
+}
 ```
 
 ---
 
 ## Step-by-Step Instructions
-1. Prompt developer for domain name and subsystem boundaries.
-2. Structure frontmatter metadata (criticality, compliance regimes, team ownership).
-3. Document domain rules, data models, error codes, and testing patterns.
-4. Save to `.devweave/domains/<name>.md`.
-5. Register domain entry in `.devweave/knowledge/registry.yaml`.
+1. Prompt developer for domain boundary, scope, or target capability.
+2. Inspect repository manifests, source files, and Knowledge Graph to identify domain entities and evidence.
+3. Extract ubiquitous terms, business rules, validations, and workflows.
+4. Structure concepts with stable IDs (`domain:<name>:concept:<item>`) and status (`OBSERVED`, `DERIVED`, `HUMAN_CONFIRMED`).
+5. Persist canonical domain knowledge to `.devweave/domain/knowledge.json` and `.devweave/domains/<name>.md`.
+6. Output summary and **STOP IMMEDIATELY**.
