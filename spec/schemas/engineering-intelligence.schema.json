@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/engineering-intelligence.schema.json",
+  "title": "EngineeringIntelligence",
+  "description": "Declarative Engineering Intelligence model representing architectural standards, policies, skills, patterns, anti-patterns, and snapshots.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "type",
+    "scope",
+    "status",
+    "technology",
+    "source",
+    "description",
+    "updated_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^EI-[A-Z0-9_-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "TECHNOLOGY_INTELLIGENCE",
+        "SKILL",
+        "STANDARD",
+        "POLICY",
+        "PATTERN",
+        "ANTI_PATTERN",
+        "CONVENTION",
+        "LEGACY_INTELLIGENCE",
+        "MODERNIZATION_INTELLIGENCE",
+        "EXCEPTION",
+        "SNAPSHOT",
+        "PROFILE"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "ORGANIZATION",
+        "PROJECT",
+        "REPOSITORY",
+        "MODULE",
+        "WORK_ITEM"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE",
+        "NEEDS_REVALIDATION",
+        "DEPRECATED",
+        "DISABLED",
+        "CONFLICTED"
+      ]
+    },
+    "technology": {
+      "type": "string"
+    },
+    "technologyVersion": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "ORGANIZATION_DEFINED",
+        "PROJECT_DEFINED",
+        "REPOSITORY_DEFINED",
+        "DEVELOPER_DEFINED",
+        "TECHNOLOGY_OFFICIAL",
+        "DEVWEAVE_RECOMMENDED",
+        "OBSERVED",
+        "GENERATED"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ruleId", "severity", "statement"],
+        "properties": {
+          "ruleId": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["MANDATORY", "RECOMMENDED", "ADVISORY", "ANTI_PATTERN"]
+          },
+          "statement": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string",
+            "enum": ["ENFORCE", "WARN", "SUGGEST", "PRESERVE", "BLOCK"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "reason"],
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["exceptionId", "ruleId", "scope", "reason", "decision", "status"],
+        "properties": {
+          "exceptionId": {
+            "type": "string"
+          },
+          "ruleId": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string",
+            "enum": ["APPROVED", "REJECTED", "PENDING"]
+          },
+          "approvedBy": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["ACTIVE", "EXPIRED", "REVOKED"]
+          },
+          "expiresAt": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["snapshotId", "workItemId", "timestamp"],
+        "properties": {
+          "snapshotId": {
+            "type": "string"
+          },
+          "workItemId": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rulesApplied": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "rulesAvailable": {
+          "type": "integer"
+        },
+        "rulesMatched": {
+          "type": "integer"
+        },
+        "rulesProvidedToModel": {
+          "type": "integer"
+        },
+        "skillsUsed": {
+          "type": "integer"
+        },
+        "policiesApplied": {
+          "type": "integer"
+        },
+        "standardsApplied": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

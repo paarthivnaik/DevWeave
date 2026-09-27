@@ -1,0 +1,15 @@
+{
+  "modernizationId": "MOD-001",
+  "technologies": [
+    {
+      "id": "tech-001",
+      "name": "ASP.NET Core",
+      "category": "INVALID_CATEGORY",
+      "source": "INVALID_SOURCE",
+      "status": "INVALID_STATUS",
+      "lastVerified": "2026-09-27T10:00:00Z"
+    }
+  ],
+  "practices": {},
+  "updated_at": "2026-09-27T10:00:00Z"
+}

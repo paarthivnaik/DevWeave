@@ -5,6 +5,19 @@ All notable changes to DevWeave will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-09-27
+### Added
+- **Engineering Intelligence Subsystem**: Technology-neutral, stack-aware architectural intelligence engine for DevWeave, bridging current development and modernization.
+- **11-Dimension Technology Detection & Evidence Citation**: Progressive detection of languages, frameworks, libraries, databases, cloud, messaging, testing, build, deployment, architecture, and legacy technologies with concrete file citations.
+- **Current vs. Legacy EI Partitioning**: Generates separate Current Engineering Intelligence (`current.json`) and Legacy Engineering Intelligence (`legacy.json`), ensuring observed legacy practices remain `OBSERVED` invariants and are never promoted to recommended best practices.
+- **Tripartite Modernization Architecture**: Modernization seamlessly orchestrates Legacy EI + Modernization EI (`modernization-intelligence.json` with `MIGRATED_TO`, `TRANSFORMED_TO`, `SPLIT_INTO`, `RETIRED` relationships) + Target Technology EI.
+- **Contextual Resolver (`EngineeringIntelligenceResolver`)**: Surgical 6-stage filtering (technology, version, workflow, phase, changed area, exceptions) enforcing a < 1,500 token intelligence budget with telemetry metrics (`rulesAvailable`, `rulesMatched`, `rulesProvidedToModel`).
+- **Natural-Language Rule Creation & Versioning**: Allows developers to define or update rules via natural language prompts, producing schema-validated proposals with mandatory human approval gates and immutable historical version archiving (`.devweave/intelligence/history/`).
+- **Multi-Scope Conflict Detection & Expirable Exceptions**: Enforces 7-tier precedence hierarchy (`ORGANIZATION` > `PROJECT` > `REPOSITORY` > `DEVELOPER` > `OFFICIAL` > `RECOMMENDED` > `OBSERVED`) and governed, expirable exception reliefs.
+- **Knowledge Graph Integration**: Extended schema with `technology`, `standard`, `policy`, `skill`, `convention`, `exception` nodes and `USES`, `HAS_STANDARD`, `HAS_SKILL`, `HAS_POLICY`, `HAS_VERSION`, `MIGRATES_TO`, `APPLIES_TO`, `USES_INTELLIGENCE` edges.
+- **Incremental Refresh & Downstream Staleness Guard**: Granular file hash fingerprinting refreshing only modified components during 24h TTL checks, and flagging downstream artifacts (`NEEDS_REVALIDATION`) upon rule changes without silent overwrites.
+- **V1.3 Conformance Suite**: Added `validate_engineering_intelligence.ps1`, expanding master test suite to 13 passing suites (100% conformance).
+
 ## [1.2.1] - 2026-09-25
 ### Added
 - **Intelligent PR Review Orchestration**: `devweave-pr` and `devweave-modernization-pr` automatically run Phase 6 Dual-Model Review (Architect + Senior DBA + Security) inline if `review.md` is missing or outdated, while keeping standalone `devweave-pr-review` fully operable.

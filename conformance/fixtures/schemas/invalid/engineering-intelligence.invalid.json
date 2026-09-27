@@ -1,0 +1,12 @@
+{
+  "id": "INVALID_ID_FORMAT",
+  "name": "Invalid EI",
+  "version": "1.0.0",
+  "type": "UNKNOWN_TYPE",
+  "scope": "INVALID_SCOPE",
+  "status": "INVALID_STATUS",
+  "technology": "ASP.NET Core",
+  "source": "INVALID_SOURCE",
+  "description": "Invalid test fixture",
+  "updated_at": "2026-09-27T10:00:00Z"
+}
