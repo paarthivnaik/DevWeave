@@ -23,8 +23,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    BINIT["<b>Base Init (Prerequisite)</b><br><code>devweave-init</code>"] --> MINIT["<b>Phase 0: Mod Init</b><br><code>devweave-modernization-init</code>"]
-    MINIT --> M1["<b>Phase 1: Context</b><br><code>devweave-modernization-context &lt;ID&gt;</code>"]
+    MINIT["<b>Phase 0: Mod Init</b><br><code>devweave-modernization-init</code>"] --> M1["<b>Phase 1: Context</b><br><code>devweave-modernization-context &lt;ID&gt;</code>"]
     M1 --> M2["<b>Phase 2: Analyze</b><br><code>devweave-modernization-analyze &lt;ID&gt;</code><br><b>[Hard Gate #1]</b>"]
     M2 --> M3["<b>Phase 3: Plan</b><br><code>devweave-modernization-plan &lt;ID&gt;</code><br><b>[Hard Gate #2]</b>"]
     M3 --> M4["<b>Phase 4: Branch</b><br><code>devweave-modernization-branch &lt;ID&gt;</code>"]
@@ -80,7 +79,7 @@ flowchart LR
 
 ## 3. Modernization Lifecycle Phase Contracts
 
-1. **Phase 0: Modernization Init (`devweave-modernization-init`)**: Verifies base `devweave-init`, captures architecture intent, inspects target repo, establishes `source-memory.json` (READ_ONLY).
+1. **Phase 0: Modernization Init (`devweave-modernization-init`)**: Autonomously initializes target repository metadata inline (or uses existing), captures architecture intent, inspects target solutions, links legacy source and knowledge graph, and establishes `source-memory.json` (READ_ONLY).
 2. **Phase 1: Modernization Context (`devweave-modernization-context <ID>`)**: Ingests story, extracts attachment text & OCR, models claims, extracts bounded migration slice (`migration-slice.json` < 12k tokens).
 3. **Phase 2: Modernization Analyze (`devweave-modernization-analyze <ID>`)**: Deeply understands legacy business rules and behavior (**Hard Gate #1**).
 4. **Phase 3: Modernization Plan (`devweave-modernization-plan <ID>`)**: Maps source-to-target relationships (`MIGRATED_TO`, `REPLACED_BY`, etc.) and DB migrations (**Hard Gate #2**).

@@ -1,30 +1,23 @@
 ---
 name: devweave-modernization-init
-description: "[Modernization Phase 0: Init] Initialize the Modernization lifecycle by validating base devweave-init, loading Legacy EI, capturing architecture intent, inspecting target repository without questionnaires, generating Modernization & Target Technology Engineering Intelligence, and establishing modernization workspace."
+description: "[Modernization Phase 0: Init] Autonomously initialize the Modernization lifecycle in the target workspace, linking legacy source and knowledge graph, capturing architecture intent, inspecting target solutions without questionnaires, generating Modernization & Target Technology Engineering Intelligence, and establishing modernization workspace."
 ---
 
 # Gemini CLI Modernization Initialization Command (`gemini devweave-modernization-init`)
 
 ## Purpose
-Initialize a new modernization lifecycle for a legacy or target codebase by verifying base repository initialization, loading Legacy Engineering Intelligence, capturing natural language architecture declarations, inspecting existing target repositories for observed facts, generating tripartite Engineering Intelligence (Legacy EI + Modernization EI + Target Technology EI) with transformation relationships (`MIGRATED_TO`, `TRANSFORMED_TO`, `SPLIT_INTO`), and persisting durable modernization workspace configuration.
+Initialize a new modernization lifecycle for a legacy or target codebase by autonomously initializing target repository metadata inline (or utilizing existing), loading or linking Legacy Engineering Intelligence, capturing natural language architecture declarations, inspecting existing target solutions for observed facts without questionnaires, generating tripartite Engineering Intelligence (Legacy EI + Modernization EI + Target Technology EI) with transformation relationships (`MIGRATED_TO`, `TRANSFORMED_TO`, `SPLIT_INTO`), and persisting durable modernization workspace configuration.
 
 ---
 
 ## Execution Invariants
-1. **Base Init Prerequisite Guard (BLOCKING)**: `devweave-modernization-init` MUST verify that base `devweave-init` has completed (`.devweave/repository/` or `.devweave/graph/knowledge-graph.json` exists). If not initialized:
-   ```text
-   DevWeave base initialization is required.
-
-   Run:
-
-   gemini devweave-init
-   ```
-   **STOP IMMEDIATELY**. Do not automatically invoke `devweave-init`.
+1. **Autonomous Target Workspace Initialization (Inline)**: `devweave-modernization-init` is fully self-contained and does NOT require running `gemini devweave-init` beforehand. If base target repository metadata (`.devweave/repository/` or `.devweave/graph/knowledge-graph.json`) is not yet present in the current target workspace, `devweave-modernization-init` autonomously inspects the target directory inline (detecting target solutions, projects, package manifests, and initializing base knowledge graph and topology). If already initialized, it utilizes the existing target metadata directly.
 2. **Mandatory Legacy Source Gate (BLOCKING)**: If `--source <path>` is NOT explicitly provided in the command invocation, the agent **MUST NOT** proceed to inspect repositories or generate artifacts. The agent **MUST IMMEDIATELY ASK THE USER AND STOP** to wait for the user's response:
    ```text
    Please specify the path to your legacy source repository / codebase (or press Enter if modernizing code in-place within the current directory):
    ```
    Never default to the current directory without the user's explicit confirmation.
+   - When `--source <path>` is provided, check if the legacy repository contains `.devweave/graph/knowledge-graph.json` or `.devweave/intelligence/legacy.json`. If present, link it directly in `source-memory.json` (`"knowledgeGraphAvailable": true`, `"knowledgeGraphPath": "<path>/.devweave/graph/knowledge-graph.json"`). If not present, inspect the legacy directory structure directly.
 3. **Tripartite Engineering Intelligence Architecture**:
    Modernization orchestrates three separate intelligence domains:
    - **Legacy Engineering Intelligence**: How the legacy system currently works (read-only invariant).
@@ -42,17 +35,21 @@ Initialize a new modernization lifecycle for a legacy or target codebase by veri
 ---
 
 ## Preconditions
-- Base repository initialization completed (`devweave-init`).
+- None (can be executed on empty, newly created, or existing multi-project target repositories).
 
 ---
 
 ## Allowed Actions
-1. **Verify Base Init**: Confirm `.devweave/repository/` and `.devweave/graph/knowledge-graph.json` exist. If missing, halt with required remediation message.
+1. **Autonomous Target Inspection & Inline Init**: Inspect the target repository directory. If base repository metadata (`.devweave/repository/` or `.devweave/graph/knowledge-graph.json`) does not exist, initialize target topology and base knowledge graph inline from detected target solutions, manifests, or empty target state.
 2. **Parse Intent**: Parse natural language intent into structured components (`frontend`, `backend`, `database`, `implementationPolicy`).
-3. **Mandatory Legacy Source Checkpoint (BLOCKING)**: If `--source` was not provided, prompt the user and wait for their input before proceeding.
-4. **Load Legacy Engineering Intelligence**: Load `.devweave/intelligence/legacy.json` or inspect legacy repository structure.
+3. **Mandatory Legacy Source Checkpoint (BLOCKING)**: If `--source` was not provided, prompt the user and wait for their input before proceeding:
+   `"Please specify the path to your legacy source repository / knowledge base (or press Enter if modernizing code in-place within the current repository):"`
+   - If a path is provided, validate its existence and record in `source-memory.json` with strict `READ_ONLY` access mode.
+   - If legacy repository has `.devweave/graph/knowledge-graph.json`, link it in `source-memory.json` (`"knowledgeGraphAvailable": true`, `"knowledgeGraphPath": "<path>/.devweave/graph/knowledge-graph.json"`).
+   - If empty/skipped, confirm and record the current directory as the legacy source location.
+4. **Load Legacy Engineering Intelligence**: Load `.devweave/intelligence/legacy.json` or legacy knowledge graph from the linked legacy source path, or inspect legacy repository structure.
 5. **Mandatory Description Prompting (Optional Input)**: Ask the developer if they have any additional architecture intent or specific instructions before processing (per Rule #7).
-6. **Inspect Target Repository**: If target repository has existing files, detect languages, frameworks, ORMs, build tools.
+6. **Inspect Target Solutions & Projects**: Detect target languages, frameworks, ORMs, build tools, solution files, and project boundaries across the target workspace.
 7. **Zero Fact Fabrication**: If target repository is empty or has insufficient code, record target architecture intent directly while marking unspecified details as `AI_DETERMINED` and unobserved facts as `UNKNOWN`. Never fabricate facts.
 8. **Synthesize Modernization Engineering Intelligence (`modernization-intelligence.json`)**:
    Establish component transformation mappings supporting:
@@ -103,7 +100,7 @@ gemini devweave-modernization-context <ID>
 ---
 
 ## Failure Behavior
-- If legacy source path is invalid or inaccessible, record error in `state.json`, warn user, and stop without modifying files.
+- If legacy source path is invalid or inaccessible, record error, warn user, and stop without modifying files.
 
 ---
 

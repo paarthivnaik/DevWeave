@@ -148,8 +148,8 @@ function Assert-BaseInitPrerequisite {
     if (-not $IsBaseInitialized) {
         return @{
             Blocked = $true
-            ErrorMessage = if ($TargetCommand -eq "devweave-modernization-init") {
-                "DevWeave base initialization is required. Run: devweave-init"
+            ErrorMessage = if ($TargetCommand -eq "devweave-modernization-context") {
+                "Modernization has not been initialized. Run: devweave-modernization-init before continuing."
             } else {
                 "DevWeave has not been initialized for this repository. Run: devweave-init before continuing."
             }
@@ -171,14 +171,14 @@ foreach ($cmd in $normalCommands) {
     }
 }
 
-# Base init prerequisite for devweave-modernization-init
+# Modernization context prerequisite check (requires modernization init)
 $totalTests++
-$modInitGate = Assert-BaseInitPrerequisite -IsBaseInitialized $false -TargetCommand "devweave-modernization-init"
-if ($modInitGate.Blocked -and $modInitGate.ErrorMessage -eq "DevWeave base initialization is required. Run: devweave-init") {
-    Write-Host "  [PASS] Correctly blocked 'devweave-modernization-init' prior to base devweave-init" -ForegroundColor Green
+$modContextGate = Assert-BaseInitPrerequisite -IsBaseInitialized $false -TargetCommand "devweave-modernization-context"
+if ($modContextGate.Blocked -and $modContextGate.ErrorMessage -match "Modernization has not been initialized") {
+    Write-Host "  [PASS] Correctly blocked 'devweave-modernization-context' prior to devweave-modernization-init" -ForegroundColor Green
     $passedCount++
 } else {
-    Write-Host "  [FAIL] Failed to block 'devweave-modernization-init' when base uninitialized" -ForegroundColor Red
+    Write-Host "  [FAIL] Failed to block 'devweave-modernization-context' when uninitialized" -ForegroundColor Red
     $failedCount++
 }
 

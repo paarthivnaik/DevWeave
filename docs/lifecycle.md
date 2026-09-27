@@ -19,12 +19,11 @@ flowchart LR
     P6 --> P7["7. PR<br><code>devweave-pr &lt;ID&gt;</code><br><b>[HARD GATE]</b>"]
 ```
 
-### 1.2 Modernization Lifecycle (7 Phases + Base Init Prerequisite)
+### 1.2 Modernization Lifecycle (7 Phases + Autonomous Target Init)
 
 ```mermaid
 flowchart LR
-    BINIT["<b>Base Init (Prerequisite)</b><br><code>devweave-init</code>"] --> MINIT["<b>0. M-INIT</b><br><code>devweave-modernization-init</code>"]
-    MINIT --> M1["<b>1. M-CONTEXT</b><br><code>devweave-modernization-context &lt;ID&gt;</code>"]
+    MINIT["<b>0. M-INIT</b><br><code>devweave-modernization-init</code>"] --> M1["<b>1. M-CONTEXT</b><br><code>devweave-modernization-context &lt;ID&gt;</code>"]
     M1 --> M2["<b>2. M-ANALYZE</b><br><code>devweave-modernization-analyze &lt;ID&gt;</code><br><b>[HARD GATE #1]</b>"]
     M2 --> M3["<b>3. M-PLAN</b><br><code>devweave-modernization-plan &lt;ID&gt;</code><br><b>[HARD GATE #2]</b>"]
     M3 --> M4["<b>4. M-BRANCH</b><br><code>devweave-modernization-branch &lt;ID&gt;</code>"]
@@ -37,9 +36,10 @@ flowchart LR
 
 ## 2. Universal Interaction & Prerequisite Standards
 
-1. **Mandatory Base Initialization (`devweave-init`)**:
-   No normal-development command or modernization initialization may run before base `devweave-init` is completed. If uninitialized, execution halts with:
+1. **Mandatory Base Initialization (`devweave-init`) for Normal Development**:
+   No normal-development work-item command may run before base `devweave-init` is completed. If uninitialized, execution halts with:
    *"DevWeave has not been initialized for this repository. Run: devweave-init before continuing."*
+   Modernization initialization (`devweave-modernization-init`) is autonomous and initializes target repository metadata inline.
 2. **Mandatory Description Prompting (Optional Input)**:
    For every phase, the agent asks the developer for optional instructions or constraints.
 3. **Pre-Processing Transparency**:
