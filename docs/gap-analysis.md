@@ -5,7 +5,7 @@ This document provides the formal architectural inspection and gap analysis comp
 
 ### Guiding Principles:
 1. **Unified AI-DLC Core**: Modernization is not a second independent framework; it is a specialized workflow profile running on top of shared state, Git, graph, provider, policy, and artifact infrastructure.
-2. **Mandatory Base Initialization (`devweave-init`)**: All normal development commands and `devweave-modernization-init` strictly require completed base repository initialization.
+2. **Autonomous Initialization**: Normal development work items require base `devweave-init`. Modernization (`devweave-modernization-init`) autonomously initializes target repository metadata inline (or uses existing) while linking legacy source repositories.
 3. **Deterministic Progression & Gates**: Every phase depends on the previous phase's approved deliverables.
 
 ---
@@ -13,7 +13,7 @@ This document provides the formal architectural inspection and gap analysis comp
 ## 2. Canonical Dual-Workflow Architecture
 
 ```text
-                               DEVWEAVE CORE
+                              DEVWEAVE CORE
                                      |
                 +--------------------+--------------------+
                 |                                         |
@@ -27,11 +27,9 @@ This document provides the formal architectural inspection and gap analysis comp
                                /            \
         DEVELOPMENT PROFILE                      MODERNIZATION PROFILE
                  |                                         |
-         devweave-init                             devweave-init (Prerequisite)
+         devweave-init                             devweave-modernization-init
                  |                                         |
-        devweave-context <ID>                     devweave-modernization-init
-                 |                                         |
-        devweave-analyze <ID>                     devweave-modernization-context <ID>
+        devweave-context <ID>                     devweave-modernization-context <ID>
                  |                                         |
         devweave-plan <ID>                        devweave-modernization-analyze <ID> [Gate #1]
                  |                                         |
@@ -52,9 +50,9 @@ This document provides the formal architectural inspection and gap analysis comp
 
 | Capability / Requirement | Normal Existing | Normal Partial | Modernization Existing | Modernization Partial | Missing | Reconciliation Action |
 |---|:---:|:---:|:---:|:---:|:---:|---|
-| **Base Init (`devweave-init`)** | **Yes** | | | | | Preserved; enforced as mandatory prerequisite before all work-item and modernization phases. |
-| **Modernization Init (`devweave-modernization-init`)** | | | **Yes** | | Base-init prerequisite check | Add explicit blocking prerequisite check requiring `devweave-init` before `devweave-modernization-init`. |
-| **Init Prerequisite Gates** | | **Partial** | | **Partial** | Strict CLI blocking gate message | Enforce exact error message: *"DevWeave has not been initialized for this repository. Run: devweave-init before continuing."* |
+| **Base Init (`devweave-init`)** | **Yes** | | | | | Preserved; enforced as mandatory prerequisite before normal development work-item phases. |
+| **Modernization Init (`devweave-modernization-init`)** | | | **Yes** | | Autonomous inline target init | Autonomously initializes target workspace inline without requiring a separate `devweave-init` step. |
+| **Init Prerequisite Gates** | | **Partial** | | **Partial** | Strict CLI blocking gate message | Enforce exact error message for work items: *"DevWeave has not been initialized for this repository. Run: devweave-init before continuing."* |
 | **Context Acquisition** | **Yes** | | **Yes** | | | Connect shared `WorkItemProvider` (Jira, ADO, GitHub, Custom), attachment extraction, image OCR, and privacy gate. |
 | **Work-Item Provider Infrastructure** | **Yes** | | **Yes** | | | Shared provider adapters without vendor lock-in. |
 | **Setup & Authentication (`devweave-setup`)** | **Yes** | | **Yes** | | | Central tool detection and OS credential verification with zero secret storage. |
