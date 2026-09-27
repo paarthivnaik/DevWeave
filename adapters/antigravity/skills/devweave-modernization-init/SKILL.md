@@ -24,6 +24,17 @@ Initialize a new modernization lifecycle for a legacy or target codebase by auto
    - **Modernization Engineering Intelligence**: Transformation rules and behavioral preservation mappings.
    - **Target Technology Intelligence**: Modern architectural patterns and standards for target stack.
 4. **Zero state.json in INIT**: `devweave-modernization-init` establishes static, declarative project configuration only. Lifecycle `state.json` is created strictly per-story inside `.devweave/modernization/stories/<ID>/state.json`.
+5. **Mandatory Description Checkpoint (BLOCKING)**: Prior to executing target solution inspections, project scanning, or writing configuration files, state pre-processing transparency and ask the developer if they have any additional architecture intent, context, or specific instructions:
+   ```text
+   Pre-execution transparency: I'm about to:
+   1. Inspect target workspace projects and solution structure
+   2. Load legacy knowledge graph and source memory
+   3. Synthesize Modernization and Target Technology Engineering Intelligence
+   4. Write declarative configuration to .devweave/modernization/
+
+   Do you have any additional description, context, or specific instructions for this initialization? (Optional — confirm to proceed with defaults.)
+   ```
+   The agent **MUST IMMEDIATELY STOP CALLING TOOLS AND YIELD THE TURN** (or invoke `ask_question`). The agent **MUST NOT** proceed with inspection tools in the same turn. Wait for developer confirmation or custom instructions before proceeding.
 
 ---
 
@@ -48,7 +59,7 @@ Initialize a new modernization lifecycle for a legacy or target codebase by auto
    - If legacy repository has `.devweave/graph/knowledge-graph.json`, link it in `source-memory.json` (`"knowledgeGraphAvailable": true`, `"knowledgeGraphPath": "<path>/.devweave/graph/knowledge-graph.json"`).
    - If empty/skipped, confirm and record the current directory as the legacy source location.
 4. **Load Legacy Engineering Intelligence**: Load `.devweave/intelligence/legacy.json` or legacy knowledge graph from the linked legacy source path, or inspect legacy repository structure.
-5. **Mandatory Description Prompting (Optional Input)**: Ask the developer if they have any additional architecture intent or specific instructions before processing (per Rule #7).
+5. **Mandatory Description Checkpoint (BLOCKING)**: State pre-processing transparency and ask the developer for additional architecture intent, constraints, or instructions. The agent **MUST IMMEDIATELY STOP CALLING TOOLS AND YIELD THE TURN** (or invoke `ask_question`). Do NOT execute inspection tools in the same turn. Proceed only after the developer responds or confirms defaults.
 6. **Inspect Target Solutions & Projects**: Detect target languages, frameworks, ORMs, build tools, solution files, and project boundaries across the target workspace (e.g. `PharmAPI`, `PharmaUI`).
 7. **Zero Fact Fabrication**: If target repository is empty or has insufficient code, record target architecture intent directly while marking unspecified details as `AI_DETERMINED` and unobserved facts as `UNKNOWN`. Never fabricate facts.
 8. **Synthesize Modernization Engineering Intelligence (`modernization-intelligence.json`)**:

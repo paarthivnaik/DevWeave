@@ -26,3 +26,8 @@
 - LLM-generated mandatory rules require human approval before activation; rules are versioned (`v1` -> `v2`) with immutable history in `.devweave/intelligence/history/`.
 - Precedence hierarchy resolves conflicts (`ORGANIZATION` > `PROJECT` > `REPOSITORY` > `DEVELOPER` > `OFFICIAL` > `RECOMMENDED` > `OBSERVED`); expired exceptions are automatically invalidated.
 - Flag downstream artifacts as `NEEDS_REVALIDATION` when bound rules change; never silently rewrite approved artifacts.
+
+## 6. Pre-Processing Transparency & Mandatory Description Checkpoint (Blocking)
+- For every phase (including `devweave-init` and `devweave-modernization-init`), prior to executing any inspections, file modifications, or tool calls, the agent MUST state pre-processing transparency and ask the developer if they have any additional description, context, or specific instructions.
+- The agent MUST IMMEDIATELY STOP CALLING TOOLS AND YIELD THE TURN. The agent MUST NOT call any tools or proceed in the same turn.
+- Only after the developer responds (either providing custom instructions or confirming to proceed with defaults) may the agent begin phase execution.
