@@ -11,7 +11,7 @@ Initialize a new modernization lifecycle for a legacy or target codebase by auto
 ---
 
 ## Execution Invariants
-1. **Autonomous Target Workspace Initialization (Inline)**: `devweave-modernization-init` is fully self-contained and does NOT require running `gemini devweave-init` beforehand. If base target repository metadata (`.devweave/repository/` or `.devweave/graph/knowledge-graph.json`) is not yet present in the current target workspace, `devweave-modernization-init` autonomously inspects the target directory inline (detecting target solutions, projects, package manifests, and initializing base knowledge graph and topology). If already initialized, it utilizes the existing target metadata directly.
+1. **Autonomous Target Workspace Initialization (Inline)**: `devweave-modernization-init` is fully self-contained and does NOT require running `gemini devweave-init` beforehand. If base target repository metadata (`.devweave/repository/`, `.devweave/intelligence/`, or `.devweave/graph/knowledge-graph.json`) is not yet present in the current target workspace, `devweave-modernization-init` autonomously inspects the target directory inline across 11 technology dimensions (detecting target solutions, projects, package manifests, and initializing base knowledge graph and topology). Crucially, it MUST inline generate the complete Engineering Intelligence suite (`.devweave/intelligence/current.json`, `legacy.json`, `conventions.json`) and the 11 repository profile artifacts (`.devweave/repository/*.md`) alongside modernization artifacts. If already initialized, it utilizes the existing target metadata directly.
 2. **Mandatory Legacy Source Gate (BLOCKING)**: If `--source <path>` is NOT explicitly provided in the command invocation, the agent **MUST NOT** proceed to inspect repositories or generate artifacts. The agent **MUST IMMEDIATELY ASK THE USER AND STOP** to wait for the user's response:
    ```text
    Please specify the path to your legacy source repository / codebase (or press Enter if modernizing code in-place within the current directory):
@@ -76,17 +76,43 @@ Initialize a new modernization lifecycle for a legacy or target codebase by auto
 9. **Synthesize Technology Practice Profile (`technology-profile.json`)**:
    Generate practices across: Best Practices, Design Patterns, SOLID, Clean Code, Security, API, Database, Testing, Performance, and Anti-Patterns.
 10. **Register in Knowledge Graph**: Add `LEGACY_TECHNOLOGY --MIGRATES_TO--> TARGET_TECHNOLOGY` directed edges.
+11. **Generate Generic Engineering Intelligence (`.devweave/intelligence/`)**:
+    - `current.json`: Generically synthesize active target Engineering Intelligence (standards, policies, skills, patterns, anti-patterns) based on detected target technologies and declared architecture intent.
+    - `legacy.json`: Link or import legacy inventory and invariants from the linked legacy repository.
+    - `conventions.json`: Extract repository conventions, naming patterns, and lint rules.
+12. **Generate Target Repository Profile (`.devweave/repository/`)**:
+    - Emit all 11 architectural markdown files: `profile.md`, `technologies.md`, `frameworks.md`, `dependencies.md`, `build.md`, `testing.md`, `architecture.md`, `layers.md`, `request-flow.md`, `integrations.md`, `practices.md`.
 
 ---
 
 ## Artifacts Generated
 ```text
-.devweave/modernization/
-├── workspace.json                  <-- Target solution metadata & PM tool preference
-├── architecture-intent.json        <-- Declared target architecture
-├── technology-profile.json         <-- Technology & engineering practice profiles
-├── modernization-intelligence.json <-- Legacy-to-target transformation rules & mappings
-└── source-memory.json              <-- Legacy source path & READ_ONLY access mode
+.devweave/
+├── intelligence/
+│   ├── current.json                    <-- Target Engineering Intelligence (active rules & standards)
+│   ├── legacy.json                     <-- Legacy system inventory & OBSERVED invariants
+│   ├── conventions.json                <-- Repository conventions & linting
+│   └── history/                        <-- Versioned rule history
+├── repository/
+│   ├── profile.md                      <-- 5-Layer classification & solution overview
+│   ├── technologies.md                 <-- Target languages & runtimes with citations
+│   ├── frameworks.md                   <-- Detected target frameworks & ORMs
+│   ├── dependencies.md                 <-- Package manifests & lockfile status
+│   ├── build.md                        <-- Deterministic build commands
+│   ├── testing.md                      <-- Test runners & single-test commands
+│   ├── architecture.md                 <-- System topology & component layout
+│   ├── layers.md                       <-- Pin-to-pin physical-to-logical layer mapping
+│   ├── request-flow.md                 <-- End-to-end request trace & sequence diagram
+│   ├── integrations.md                 <-- External APIs & database connections
+│   └── practices.md                    <-- Stack-aware coding conventions & anti-patterns
+├── modernization/
+│   ├── workspace.json                  <-- Target solution metadata & PM tool preference
+│   ├── architecture-intent.json        <-- Declared target architecture
+│   ├── technology-profile.json         <-- Technology & engineering practice profiles
+│   ├── modernization-intelligence.json <-- Legacy-to-target transformation rules & mappings
+│   └── source-memory.json              <-- Legacy source path & READ_ONLY access mode
+└── graph/
+    └── knowledge-graph.json            <-- Bidirectional knowledge graph
 ```
 
 ---
