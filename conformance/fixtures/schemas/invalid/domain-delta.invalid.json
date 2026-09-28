@@ -1,0 +1,13 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/domain-delta.schema.json",
+  "schemaVersion": "1.4.0",
+  "workItemId": "",
+  "changes": [
+    {
+      "operation": "INVALID_OPERATION_TYPE",
+      "entityId": "",
+      "type": "UNKNOWN_TYPE",
+      "status": "INVALID_STATUS"
+    }
+  ]
+}

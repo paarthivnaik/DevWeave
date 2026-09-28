@@ -26,7 +26,8 @@ $tests = @(
     @{ Name = "V1.2 Work Item Context Acquisition Suite"; Script = "conformance/tests/validate_context_acquisition.ps1" },
     @{ Name = "V1.2 Update & 24h TTL Sync Suite"; Script = "conformance/tests/validate_update_ttl.ps1" },
     @{ Name = "V1.3 Engineering Intelligence Suite"; Script = "conformance/tests/validate_engineering_intelligence.ps1" },
-    @{ Name = "Multi-Host Adapter & Plugin Parity Suite"; Script = "conformance/tests/validate_host_adapters_parity.ps1" }
+    @{ Name = "Multi-Host Adapter & Plugin Parity Suite"; Script = "conformance/tests/validate_host_adapters_parity.ps1" },
+    @{ Name = "Domain Knowledge & Deep Analyzer Suite"; Script = "conformance/tests/validate_domain_knowledge.ps1" }
 )
 
 $suiteResults = @()

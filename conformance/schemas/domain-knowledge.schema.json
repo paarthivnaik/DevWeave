@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/v1/domain-knowledge.schema.json",
+  "title": "DevWeave Domain Knowledge Schema",
+  "description": "Declarative, Git-native JSON representation of business domain concepts, business rules, processes, capabilities, terminology, domain events, constraints, and mappings to repository entities.",
+  "type": "object",
+  "required": ["$schema", "schemaVersion", "domainId", "name", "status"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "enum": ["1.0", "1.0.0", "1.4.0"]
+    },
+    "domainId": {
+      "type": "string",
+      "pattern": "^domain:[a-z0-9-_]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "DERIVED",
+        "AI_INFERRED",
+        "HUMAN_CONFIRMED",
+        "CONFLICTING",
+        "UNKNOWN",
+        "NEEDS_REVALIDATION"
+      ]
+    },
+    "analyzedCommit": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "concepts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["CONCEPT"] },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["OBSERVED", "DERIVED", "AI_INFERRED", "HUMAN_CONFIRMED", "CONFLICTING", "UNKNOWN", "NEEDS_REVALIDATION"]
+          },
+          "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["source", "path"],
+              "properties": {
+                "source": { "type": "string" },
+                "path": { "type": "string" },
+                "symbol": { "type": "string" },
+                "commit": { "type": "string" }
+              }
+            }
+          },
+          "relatedGraphEntities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "analyzedCommit": { "type": "string" }
+        }
+      }
+    },
+    "businessRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "statement", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["BUSINESS_RULE"] },
+          "name": { "type": "string" },
+          "statement": { "type": "string" },
+          "description": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["OBSERVED", "DERIVED", "AI_INFERRED", "HUMAN_CONFIRMED", "CONFLICTING", "UNKNOWN", "NEEDS_REVALIDATION"]
+          },
+          "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["source", "path"],
+              "properties": {
+                "source": { "type": "string" },
+                "path": { "type": "string" },
+                "symbol": { "type": "string" },
+                "commit": { "type": "string" }
+              }
+            }
+          },
+          "relatedGraphEntities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "analyzedCommit": { "type": "string" }
+        }
+      }
+    },
+    "processes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["PROCESS"] },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "steps": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["OBSERVED", "DERIVED", "AI_INFERRED", "HUMAN_CONFIRMED", "CONFLICTING", "UNKNOWN", "NEEDS_REVALIDATION"]
+          },
+          "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source": { "type": "string" },
+                "path": { "type": "string" },
+                "symbol": { "type": "string" },
+                "commit": { "type": "string" }
+              }
+            }
+          },
+          "relatedGraphEntities": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["OBSERVED", "DERIVED", "AI_INFERRED", "HUMAN_CONFIRMED", "CONFLICTING", "UNKNOWN", "NEEDS_REVALIDATION"]
+          },
+          "confidence": { "type": "number" },
+          "evidence": { "type": "array" },
+          "relatedGraphEntities": { "type": "array" }
+        }
+      }
+    },
+    "terminology": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["term", "definition"],
+        "properties": {
+          "term": { "type": "string" },
+          "definition": { "type": "string" },
+          "synonyms": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "domainId": { "type": "string" }
+        }
+      }
+    },
+    "domainEvents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "payloadSchema": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["OBSERVED", "DERIVED", "AI_INFERRED", "HUMAN_CONFIRMED", "CONFLICTING", "UNKNOWN", "NEEDS_REVALIDATION"]
+          },
+          "evidence": { "type": "array" },
+          "relatedGraphEntities": { "type": "array" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "type": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["OBSERVED", "DERIVED", "AI_INFERRED", "HUMAN_CONFIRMED", "CONFLICTING", "UNKNOWN", "NEEDS_REVALIDATION"]
+          },
+          "evidence": { "type": "array" },
+          "relatedGraphEntities": { "type": "array" }
+        }
+      }
+    },
+    "mappings": {
+      "type": "object",
+      "properties": {
+        "domainToCode": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["domainEntityId", "symbol", "file"],
+            "properties": {
+              "domainEntityId": { "type": "string" },
+              "symbol": { "type": "string" },
+              "file": { "type": "string" },
+              "relationship": { "type": "string" }
+            }
+          }
+        },
+        "domainToApi": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["domainEntityId", "endpoint", "method"],
+            "properties": {
+              "domainEntityId": { "type": "string" },
+              "endpoint": { "type": "string" },
+              "method": { "type": "string" }
+            }
+          }
+        },
+        "domainToData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["domainEntityId", "table"],
+            "properties": {
+              "domainEntityId": { "type": "string" },
+              "table": { "type": "string" },
+              "columns": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

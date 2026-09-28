@@ -1,0 +1,13 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/analyzer-capability.schema.json",
+  "schemaVersion": "1.4.0",
+  "lastChecked": "",
+  "analyzers": [
+    {
+      "technology": ".NET",
+      "analyzer": "Roslyn",
+      "requiredForDeepAnalysis": "NOT_A_BOOLEAN",
+      "status": "INVALID_STATUS"
+    }
+  ]
+}

@@ -12,6 +12,26 @@ Autonomously inspect the target workspace repository, detect its complete techno
 
 ## Execution Workflow
 
+### Step 0: Pre-Processing Transparency & Mandatory Description Checkpoint (BLOCKING)
+Before executing any inspections, file modifications, or tool calls:
+1. Clearly state what you are about to do (inspections across 11 dimensions, directory layout, zero code modifications).
+2. Interactively ask the developer:
+   ```text
+   Pre-execution transparency: I'm about to:
+   1. Inspect repository manifests, project files, directory layout across 11 technology dimensions
+   2. Classify technologies (CURRENT vs LEGACY)
+   3. Generate pin-to-pin layer map, request flow, and knowledge graph
+   4. Write all artifacts to .devweave/ — zero application code modification
+
+   Do you have any additional description, context, or specific instructions for this initialization? (Optional — confirm to proceed with defaults.)
+   ```
+3. **CRITICAL EXECUTION GUARD (BLOCKING)**:
+   - The agent **MUST IMMEDIATELY STOP CALLING TOOLS AND YIELD THE TURN**.
+   - The agent **MUST NOT** proceed to tool calls or autonomous inspection in the same turn.
+   - Wait for the developer's explicit response or confirmation before proceeding to Step 1.
+
+---
+
 ### Step 1: 11-Dimension Technology Detection & Evidence Citation
 Execute targeted inspection of repository manifests, project files, lockfiles, directory layouts, and configuration across 11 dimensions:
 1. **Programming Languages & Versions**: Detect languages present with evidence citations (`file`, `reason`) and confidence scores (`HIGH`, `MEDIUM`, `LOW`).

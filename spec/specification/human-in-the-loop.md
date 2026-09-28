@@ -10,7 +10,7 @@ This document defines the normative requirements for human checkpoints, phase is
 2. **Phase Isolation**: Every phase command must execute **only its own phase**, generate its artifact, present a structured summary, and terminate.
 3. **Zero Automatic Chaining**: No phase may automatically invoke the next phase. The next command is suggested, but must be explicitly invoked by the developer.
 4. **Durable Decision Audit**: Human decisions must be permanently recorded in `.devweave/work-items/<ID>/state.md` and `audit.md`.
-5. **Mandatory Description Prompting (Optional Input)**: For **every phase**, it is **mandatory** for DevWeave to ask the user/developer if they have any additional description, custom requirements, or constraints. Providing input is **optional**; if no additional description is provided, DevWeave continues with standard defaults.
+5. **Mandatory Description Checkpoint (Blocking)**: For **every phase**, prior to executing any inspections, file modifications, or tool calls, DevWeave **MUST** present pre-processing transparency, ask the developer for optional instructions or constraints, and **IMMEDIATELY STOP (call zero tools and yield the turn)**. DevWeave **MUST NOT** proceed to tool execution in the same turn. Providing custom instructions is optional for the developer, but the pause/checkpoint is mandatory for DevWeave; only after the developer responds does phase execution begin.
 6. **Pre-Processing Transparency**: Before performing any processing, inspections, or mutations in any phase, DevWeave must explicitly explain what it is about to do, which files/areas it will inspect or edit, and its specific objective.
 
 ---

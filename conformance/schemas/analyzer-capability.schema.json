@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devweave.org/schemas/v1/analyzer-capability.schema.json",
+  "title": "DevWeave Deep Analyzer Capability Schema",
+  "description": "Schema for technology-aware Deep Analyzer detection, availability, checkpoint/resume status, and coverage metrics.",
+  "type": "object",
+  "required": ["$schema", "schemaVersion", "analyzers", "lastChecked"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "enum": ["1.0", "1.0.0", "1.4.0"]
+    },
+    "lastChecked": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "analyzers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["technology", "analyzer", "requiredForDeepAnalysis", "installed", "status"],
+        "properties": {
+          "technology": { "type": "string" },
+          "analyzer": { "type": "string" },
+          "requiredForDeepAnalysis": { "type": "boolean" },
+          "installed": { "type": "boolean" },
+          "status": {
+            "type": "string",
+            "enum": ["AVAILABLE", "MISSING", "NOT_REQUIRED", "DECLINED", "INSTALLING", "FAILED"]
+          },
+          "version": { "type": "string" },
+          "capabilities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "installationGuide": { "type": "string" }
+        }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "properties": {
+        "operation": { "type": "string" },
+        "technology": { "type": "string" },
+        "analyzer": { "type": "string" },
+        "status": { "type": "string" },
+        "checkpoint": { "type": "string" },
+        "resumeOperation": { "type": "string" }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["COMPLETE", "PARTIAL", "FAILED", "UNSUPPORTED"]
+        },
+        "analyzedFiles": { "type": "integer" },
+        "failedFiles": { "type": "integer" },
+        "unsupportedFiles": { "type": "integer" }
+      }
+    }
+  }
+}

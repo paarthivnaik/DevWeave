@@ -18,7 +18,7 @@ Welcome to the **DevWeave Complete Product Document**. This guide is written in 
 9. [The 6 AI Helpers Supported](#9-the-6-ai-helpers-supported)
 10. [1-Minute Installation (Copy & Paste)](#10-1-minute-installation-copy--paste)
 11. [Automatic Daily Updates: Always Fresh with Zero Effort](#11-automatic-daily-updates)
-12. [The Complete 31 Commands & Skills Catalog](#12-the-complete-31-commands--skills-catalog)
+12. [The Complete 32 Commands & Skills Catalog](#12-the-complete-32-commands--skills-catalog)
 13. [A Day in the Life: A Real Story of Using DevWeave](#13-a-day-in-the-life-a-real-story)
 14. [Frequently Asked Questions (FAQ)](#14-frequently-asked-questions-faq)
 
@@ -262,7 +262,7 @@ You never have to worry about updating DevWeave manually:
 
 ---
 
-## 12. The Complete 31 Commands & Skills Catalog
+## 12. The Complete 32 Commands & Skills Catalog
 
 ### Canonical Feature Lifecycle (8 Commands)
 | Command | Phase | What it Does (Plain English) |
@@ -299,9 +299,10 @@ You never have to worry about updating DevWeave manually:
 | `devweave-modernize <ID>` | **Modernize (V1.0)** | Upgrades single dependencies or frameworks (e.g. .NET 8 &rarr; 9). |
 | `devweave-express <ID>` | **Express Lane** | Fast 1-step track for tiny changes like typos and documentation updates. |
 
-### System, Utility & Knowledge Commands (8 Commands)
+### System, Utility & Knowledge Commands (9 Commands)
 | Command | Category | What it Does (Plain English) |
 | :--- | :--- | :--- |
+| `devweave-setup` | **Setup** | Detects and configures PM tools, Deep Analyzers, Git identities, and credentials. |
 | `devweave-update` | **System** | In-place plugin updater with daily auto-sync. |
 | `devweave-status` | **Utility** | Shows current phase, token usage, and open tickets. |
 | `devweave-handoff` | **Utility** | Generates a clean summary so another developer can take over your task. |
@@ -309,7 +310,7 @@ You never have to worry about updating DevWeave manually:
 | `devweave-report` | **Utility** | Generates an executive metrics report on token savings and quality. |
 | `devweave-improve` | **Utility** | Records friction points to continuously improve AI performance. |
 | `devweave-document-product` | **Knowledge** | Documents product features and domain maps. |
-| `devweave-document-domain` | **Knowledge** | Documents business rules and compliance scorecards. |
+| `devweave-document-domain` | **Knowledge** | Documents business rules, ubiquitous language, and domain knowledge scorecards. |
 
 ---
 

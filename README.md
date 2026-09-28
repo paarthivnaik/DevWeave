@@ -237,15 +237,19 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 ### 🤖 Host Platform Guides
 | Platform | Guide | Installation Target | Validated Skills |
 | :--- | :--- | :--- | :--- |
-| **Google Antigravity** | **[Antigravity Guide](docs/antigravity.md)** | `plugins/antigravity/` | 31 Validated Skills |
-| **Anthropic Claude Code** | **[Claude Code Guide](docs/claude-code.md)** | `plugins/claude/` | 31 Slash Commands |
-| **GitHub Copilot** | **[GitHub Copilot Guide](docs/github-copilot.md)** | `plugins/copilot/` | 31 Prompt Files |
-| **Google Gemini CLI** | **[Gemini CLI Guide](docs/gemini-cli.md)** | `plugins/gemini/` | 31 Command Definitions |
-| **OpenAI Codex** | **[OpenAI Codex Guide](docs/codex.md)** | `plugins/codex/` | 31 System Commands |
-| **Cognition Devin** | **[Cognition Devin Guide](docs/devin.md)** | `plugins/devin/` | 31 Playbook Actions |
+| **Google Antigravity** | **[Antigravity Guide](docs/antigravity.md)** | `plugins/antigravity/` | 32 Validated Skills |
+| **Anthropic Claude Code** | **[Claude Code Guide](docs/claude-code.md)** | `plugins/claude/` | 32 Slash Commands |
+| **GitHub Copilot** | **[GitHub Copilot Guide](docs/github-copilot.md)** | `plugins/copilot/` | 32 Prompt Files |
+| **Google Gemini CLI** | **[Gemini CLI Guide](docs/gemini-cli.md)** | `plugins/gemini/` | 32 Command Definitions |
+| **OpenAI Codex** | **[OpenAI Codex Guide](docs/codex.md)** | `plugins/codex/` | 32 System Commands |
+| **Cognition Devin** | **[Cognition Devin Guide](docs/devin.md)** | `plugins/devin/` | 32 Playbook Actions |
 
 ### 📜 Formal Specifications & Schemas
 - **[Lifecycle State Machine Spec](spec/specification/lifecycle.md)**
+- **[Domain Knowledge Intelligence Spec](spec/specification/domain-knowledge.md)**
+- **[Deep Analyzer & Bounded Graph Context Spec](spec/specification/deep-analyzer.md)**
+- **[Work Item Context & Setup Spec](spec/specification/work-item-context.md)**
+- **[Engineering Intelligence Spec](spec/specification/engineering-intelligence.md)**
 - **[Modernization Command Contract Spec](spec/specification/modernization-commands.md)**
 - **[Knowledge Graph & Graph Delta Spec](spec/specification/knowledge-graph.md)**
 - **[Human-in-the-Loop Governance Spec](spec/specification/human-in-the-loop.md)**
@@ -258,7 +262,7 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 
 ---
 
-## 🧪 Master Conformance Verification (100% PASS)
+## 🧪 Master Conformance Verification (100% PASS across 15 Suites)
 
 ```powershell
 .\conformance\tests\run_all_tests.ps1
@@ -268,16 +272,21 @@ DevWeave provides deep documentation across architecture, developer guides, plat
 =================================================================
                      SUITE EXECUTION SUMMARY                    
 =================================================================
-  [PASSED] JSON Schema Validation Suite                  (2.15s)
-  [PASSED] AI-DLC State Machine Transition Suite         (1.14s)
-  [PASSED] 18 Conformance Scenarios Suite                (1.16s)
-  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.44s)
-  [PASSED] Multi-Repository .devweave Initialization Suite (1.95s)
-  [PASSED] Token & Cost Efficiency Benchmark Suite       (0.78s)
-  [PASSED] V1.1 Modernization CLI Contract Suite         (1.28s)
-  [PASSED] V1.1 Modernization State Machine Suite        (1.54s)
-  [PASSED] V1.1 Modernization Modules & E2E Suite        (1.07s)
-  [PASSED] V1.0/V1.1 Test Intelligence Suite             (1.30s)
+  [PASSED] JSON Schema Validation Suite                  (3.87s)
+  [PASSED] AI-DLC State Machine Transition Suite         (1.18s)
+  [PASSED] 18 Conformance Scenarios Suite                (1.23s)
+  [PASSED] 12-Ecosystem Technology Neutrality Suite      (1.50s)
+  [PASSED] Multi-Repository .devweave Initialization Suite (2.04s)
+  [PASSED] Token & Cost Efficiency Benchmark Suite       (1.15s)
+  [PASSED] V1.1 Modernization CLI Contract Suite         (2.48s)
+  [PASSED] V1.1 Modernization State Machine Suite        (1.31s)
+  [PASSED] V1.1 Modernization Modules & E2E Suite        (1.04s)
+  [PASSED] V1.0/V1.1 Test Intelligence Suite             (1.18s)
+  [PASSED] V1.2 Work Item Context Acquisition Suite      (1.79s)
+  [PASSED] V1.2 Update & 24h TTL Sync Suite              (1.20s)
+  [PASSED] V1.3 Engineering Intelligence Suite           (1.86s)
+  [PASSED] Multi-Host Adapter & Plugin Parity Suite      (3.80s)
+  [PASSED] Domain Knowledge & Deep Analyzer Suite        (1.66s)
 -----------------------------------------------------------------
 RELEASE CANDIDATE STATUS: 100% CONFORMANCE VERIFIED (ALL SUITES PASSED)
 =================================================================

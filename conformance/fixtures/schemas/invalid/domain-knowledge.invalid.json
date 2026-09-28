@@ -1,0 +1,7 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/domain-knowledge.schema.json",
+  "schemaVersion": "1.4.0",
+  "domainId": "INVALID_FORMAT_NOT_MATCHING_DOMAIN_PREFIX",
+  "name": "",
+  "status": "NON_EXISTENT_STATUS"
+}

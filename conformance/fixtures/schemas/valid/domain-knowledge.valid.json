@@ -1,0 +1,42 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/domain-knowledge.schema.json",
+  "schemaVersion": "1.4.0",
+  "domainId": "domain:pharmacy",
+  "name": "Pharmacy Dispensing",
+  "description": "Core pharmacy prescription dispensing domain.",
+  "status": "OBSERVED",
+  "analyzedCommit": "a1b2c3d4",
+  "updatedAt": "2026-09-27T23:00:00Z",
+  "concepts": [
+    {
+      "id": "domain:pharmacy:concept:prescription",
+      "type": "CONCEPT",
+      "name": "Prescription",
+      "description": "Medical prescription order.",
+      "status": "OBSERVED",
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "source": "repository",
+          "path": "PharmAPI/Domain/Entities/Prescription.cs"
+        }
+      ]
+    }
+  ],
+  "businessRules": [
+    {
+      "id": "domain:pharmacy:rule:dual-signoff",
+      "type": "BUSINESS_RULE",
+      "name": "Dual Signoff",
+      "statement": "Schedule II drugs require dual signoff.",
+      "status": "OBSERVED",
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "source": "repository",
+          "path": "PharmAPI/Services/PrescriptionService.cs"
+        }
+      ]
+    }
+  ]
+}

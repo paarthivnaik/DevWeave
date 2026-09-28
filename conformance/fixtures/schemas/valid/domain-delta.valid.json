@@ -1,0 +1,24 @@
+{
+  "$schema": "https://devweave.org/schemas/v1/domain-delta.schema.json",
+  "schemaVersion": "1.4.0",
+  "workItemId": "TASK-101",
+  "timestamp": "2026-09-27T23:00:00Z",
+  "author": "Balaji Naik <b.naik@example.com>",
+  "changes": [
+    {
+      "operation": "ADD",
+      "entityId": "domain:pharmacy:rule:expiry-check",
+      "type": "BUSINESS_RULE",
+      "status": "DERIVED",
+      "entity": {
+        "statement": "Expired prescriptions cannot be dispensed."
+      },
+      "evidence": [
+        {
+          "source": "repository",
+          "path": "PharmAPI/Validators/PrescriptionValidator.cs"
+        }
+      ]
+    }
+  ]
+}
